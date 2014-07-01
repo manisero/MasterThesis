@@ -11,7 +11,8 @@ namespace CodeGeneration.Presentation
             var kernel = new StandardKernel();
             new NinjectBootstrapper().RegisterModules(kernel);
 
-            kernel.Get<ICodeGenerationFacade>().GenerateFromFile(null);
+            var codeGenerationFacade = kernel.Get<ICodeGenerationFacade>();
+            codeGenerationFacade.GenerateFromFile(@"c:\dev\MasterThesis\impl\SampleProject\Domain\Model\Person.json");
         }
     }
 }
