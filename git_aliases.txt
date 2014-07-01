@@ -1,0 +1,15 @@
+[alias]
+	s = status -u .
+	a = add -A .
+	c = commit -m
+	p = push origin master
+	b = branch
+
+	master = checkout master
+	back = checkout -
+	create = checkout -b
+	delete = branch -d
+
+	ignore = update-index --assume-unchanged
+	unignore = update-index --no-assume-unchanged
+	ignored = !git ls-files -v | grep "^[[:lower:]]"
