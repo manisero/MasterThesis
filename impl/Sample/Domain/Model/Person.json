@@ -1,0 +1,12 @@
+{
+	"Fields": [
+		{
+			"Name": "FirstName",
+			"Type": "string"
+		},
+		{
+			"Name": "LastName",
+			"Type": "string"
+		}
+	]
+}
