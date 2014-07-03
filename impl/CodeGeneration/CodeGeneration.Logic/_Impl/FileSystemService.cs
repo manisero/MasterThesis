@@ -8,5 +8,10 @@ namespace CodeGeneration.Logic._Impl
         {
             return File.ReadAllText(filePath);
         }
+
+        public void SetFileContent(string filePath, string content)
+        {
+            File.WriteAllText(filePath, content);
+        }
     }
 }

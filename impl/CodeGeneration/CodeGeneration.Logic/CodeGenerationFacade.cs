@@ -27,7 +27,9 @@ namespace CodeGeneration.Logic
             var templateType = typeof(TTemplate);
             templateType.GetProperty("Session").SetValue(template, templatingSession);
             templateType.GetMethod("Initialize").Invoke(template, new object[0]);
-            var result = templateType.GetMethod("TransformText").Invoke(template, new object[0]);
+            var result = (string)templateType.GetMethod("TransformText").Invoke(template, new object[0]);
+
+            _fileSystemService.SetFileContent(destinationPath, result);
         }
     }
 }
