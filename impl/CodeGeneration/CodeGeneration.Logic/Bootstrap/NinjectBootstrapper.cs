@@ -5,7 +5,7 @@ namespace CodeGeneration.Logic.Bootstrap
 {
     public class NinjectBootstrapper
     {
-        public void RegisterModules(IKernel kernel)
+        public void Bootstarp(IKernel kernel)
         {
             kernel.Bind(x => x.FromThisAssembly()
                               .SelectAllClasses()

@@ -1,16 +1,36 @@
+using CodeGeneration.Logic.Bootstrap;
+using Ninject;
+
 namespace CodeGeneration.Logic
 {
     public class CodeGenerationFacade
     {
+        private static CodeGenerationFacade _instance;
+
+        public static CodeGenerationFacade GetInstance()
+        {
+            if (_instance == null)
+            {
+                var kernel = new StandardKernel();
+                new NinjectBootstrapper().Bootstarp(kernel);
+
+                _instance = kernel.Get<CodeGenerationFacade>();
+            }
+
+            return _instance;
+        }
+
         private readonly IFileSystemService _fileSystemService;
         private readonly IJsonDeserializer _jsonDeserializer;
         private readonly ICodeGenerator _codeGenerator;
 
-        public CodeGenerationFacade()
+        public CodeGenerationFacade(IFileSystemService fileSystemService,
+                                    IJsonDeserializer jsonDeserializer,
+                                    ICodeGenerator codeGenerator)
         {
-            _fileSystemService = DependencyResolver.Resolve<IFileSystemService>();
-            _jsonDeserializer = DependencyResolver.Resolve<IJsonDeserializer>();
-            _codeGenerator = DependencyResolver.Resolve<ICodeGenerator>();
+            _fileSystemService = fileSystemService;
+            _jsonDeserializer = jsonDeserializer;
+            _codeGenerator = codeGenerator;
         }
 
         public void GenerateFromFile<TMetadata, TTemplate>(string metadataPath, string destinationPath)

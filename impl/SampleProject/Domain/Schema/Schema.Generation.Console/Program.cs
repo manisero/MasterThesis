@@ -8,7 +8,7 @@ namespace Schema.Generation.Console
     {
         static void Main(string[] args)
         {
-            var generationFacade = new CodeGenerationFacade();
+            var generationFacade = CodeGenerationFacade.GetInstance();
 
             var metadataPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Model\Person.json";
             var destinationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\Sample.Presentation\Domain\Person.cs";
