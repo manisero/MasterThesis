@@ -41,6 +41,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject.Extensions.Conventions">
+      <HintPath>..\packages\Ninject.Extensions.Conventions.3.2.0.0\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,13 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrap\Modules\LogicModule.cs" />
     <Compile Include="Bootstrap\NinjectBootstrapper.cs" />
     <Compile Include="DependencyResolver.cs" />
+    <Compile Include="ICodeGenerator.cs" />
     <Compile Include="IFileSystemService.cs" />
     <Compile Include="IJsonDeserializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CodeGenerationFacade.cs" />
+    <Compile Include="_Impl\CodeGenerator.cs" />
     <Compile Include="_Impl\FileSystemService.cs" />
     <Compile Include="_Impl\JsonDeserializer.cs" />
   </ItemGroup>

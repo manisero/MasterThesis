@@ -1,16 +1,16 @@
-using Microsoft.VisualStudio.TextTemplating;
-
 namespace CodeGeneration.Logic
 {
     public class CodeGenerationFacade
     {
         private readonly IFileSystemService _fileSystemService;
         private readonly IJsonDeserializer _jsonDeserializer;
+        private readonly ICodeGenerator _codeGenerator;
 
         public CodeGenerationFacade()
         {
             _fileSystemService = DependencyResolver.Resolve<IFileSystemService>();
             _jsonDeserializer = DependencyResolver.Resolve<IJsonDeserializer>();
+            _codeGenerator = DependencyResolver.Resolve<ICodeGenerator>();
         }
 
         public void GenerateFromFile<TMetadata, TTemplate>(string metadataPath, string destinationPath)
@@ -18,18 +18,9 @@ namespace CodeGeneration.Logic
         {
             var fileContent = _fileSystemService.GetFileContent(metadataPath);
             var metadata = _jsonDeserializer.Deserialize<TMetadata>(fileContent);
+            var code = _codeGenerator.Generate<TMetadata, TTemplate>(metadata);
 
-            var template = new TTemplate();
-
-            var templatingSession = new TextTemplatingSession();
-            templatingSession["Metadata"] = metadata;
-
-            var templateType = typeof(TTemplate);
-            templateType.GetProperty("Session").SetValue(template, templatingSession);
-            templateType.GetMethod("Initialize").Invoke(template, new object[0]);
-            var result = (string)templateType.GetMethod("TransformText").Invoke(template, new object[0]);
-
-            _fileSystemService.SetFileContent(destinationPath, result);
+            _fileSystemService.SetFileContent(destinationPath, code);
         }
     }
 }

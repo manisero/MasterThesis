@@ -1,5 +1,5 @@
-﻿using CodeGeneration.Logic.Bootstrap.Modules;
-using Ninject;
+﻿using Ninject;
+using Ninject.Extensions.Conventions;
 
 namespace CodeGeneration.Logic.Bootstrap
 {
@@ -7,7 +7,9 @@ namespace CodeGeneration.Logic.Bootstrap
     {
         public void RegisterModules(IKernel kernel)
         {
-            kernel.Load(new LogicModule());
+            kernel.Bind(x => x.FromThisAssembly()
+                              .SelectAllClasses()
+                              .BindDefaultInterface());
         }
     }
 }
