@@ -1,7 +1,7 @@
-﻿using CodeGeneration.Presentation.Bootstrap.Modules;
+﻿using CodeGeneration.Logic.Bootstrap.Modules;
 using Ninject;
 
-namespace CodeGeneration.Presentation.Bootstrap
+namespace CodeGeneration.Logic.Bootstrap
 {
     public class NinjectBootstrapper
     {

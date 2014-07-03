@@ -1,8 +1,7 @@
-﻿using CodeGeneration.Logic;
-using CodeGeneration.Logic._Impl;
+﻿using CodeGeneration.Logic._Impl;
 using Ninject.Modules;
 
-namespace CodeGeneration.Presentation.Bootstrap.Modules
+namespace CodeGeneration.Logic.Bootstrap.Modules
 {
     public class LogicModule : NinjectModule
     {
