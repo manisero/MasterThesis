@@ -1,6 +1,6 @@
 namespace CodeGeneration.Logic
 {
-    public class CodeGenerationFacade : ICodeGenerationFacade
+    public class CodeGenerationFacade
     {
         private readonly IFileSystemService _fileSystemService;
         private readonly IJsonDeserializer _jsonDeserializer;
@@ -11,10 +11,10 @@ namespace CodeGeneration.Logic
             _jsonDeserializer = DependencyResolver.Resolve<IJsonDeserializer>();
         }
 
-        public void GenerateFromFile(string filePath)
+        public void GenerateFromFile<TMetadata>(string metadataPath, string destinationPath)
         {
-            var fileContent = _fileSystemService.GetFileContent(filePath);
-            var metadata = _jsonDeserializer.Deserialize<dynamic>(fileContent);
+            var fileContent = _fileSystemService.GetFileContent(metadataPath);
+            var metadata = _jsonDeserializer.Deserialize<TMetadata>(fileContent);
         }
     }
 }

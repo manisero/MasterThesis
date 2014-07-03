@@ -51,7 +51,6 @@
     <Compile Include="Bootstrap\Modules\LogicModule.cs" />
     <Compile Include="Bootstrap\NinjectBootstrapper.cs" />
     <Compile Include="DependencyResolver.cs" />
-    <Compile Include="ICodeGenerationFacade.cs" />
     <Compile Include="IFileSystemService.cs" />
     <Compile Include="IJsonDeserializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

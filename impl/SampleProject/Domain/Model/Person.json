@@ -1,4 +1,5 @@
 {
+	"Name": "Person",
 	"Fields": [
 		{
 			"Name": "FirstName",

@@ -7,7 +7,6 @@ namespace CodeGeneration.Logic.Bootstrap.Modules
     {
         public override void Load()
         {
-            Bind<ICodeGenerationFacade>().To<CodeGenerationFacade>();
             Bind<IFileSystemService>().To<FileSystemService>();
             Bind<IJsonDeserializer>().To<JsonDeserializer>();
         }
