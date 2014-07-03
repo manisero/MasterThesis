@@ -1,4 +1,5 @@
 using CodeGeneration.Logic.Bootstrap;
+using CodeGeneration.Logic.GenericTemplating;
 using Ninject;
 
 namespace CodeGeneration.Logic
@@ -34,7 +35,7 @@ namespace CodeGeneration.Logic
         }
 
         public void GenerateFromFile<TMetadata, TTemplate>(string metadataPath, string destinationPath)
-            where TTemplate : new()
+            where TTemplate : ICodeTemplate, new()
         {
             var fileContent = _fileSystemService.GetFileContent(metadataPath);
             var metadata = _jsonDeserializer.Deserialize<TMetadata>(fileContent);

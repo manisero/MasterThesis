@@ -1,3 +1,4 @@
+using CodeGeneration.Logic.GenericTemplating;
 using Microsoft.VisualStudio.TextTemplating;
 
 namespace CodeGeneration.Logic._Impl
@@ -5,7 +6,7 @@ namespace CodeGeneration.Logic._Impl
     public class CodeGenerator : ICodeGenerator
     {
         public string Generate<TMetadata, TTemplate>(TMetadata metadata)
-            where TTemplate : new()
+            where TTemplate : ICodeTemplate, new()
         {
             var templateType = typeof(TTemplate);
             var template = new TTemplate();

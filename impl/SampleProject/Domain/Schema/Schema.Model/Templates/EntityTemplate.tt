@@ -1,6 +1,5 @@
-﻿<#@ template language="C#" #>
+﻿<#@ template language="C#" inherits="CodeGeneration.Logic.GenericTemplating.CodeTemplate<Schema.Model.Entity>" #>
 <#@ import namespace="Schema.Model" #>
-<#@ parameter type="Schema.Model.Entity" name="Metadata" #>
 using System;
 
 namespace Sample.Presentation.Domain
