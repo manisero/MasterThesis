@@ -1,5 +1,6 @@
 ﻿using CodeGeneration.Logic;
 using Schema.Model;
+using Schema.Model.Templates;
 
 namespace Schema.Generation.Console
 {
@@ -9,8 +10,10 @@ namespace Schema.Generation.Console
         {
             var generationFacade = new CodeGenerationFacade();
 
-            generationFacade.GenerateFromFile<Entity>(@"c:\dev\MasterThesis\impl\SampleProject\Domain\Model\Person.json",
-                                                      @"c:\dev\MasterThesis\impl\SampleProject\Sample\Sample.Presentation\Domain\Person.cs");
+            var metadataPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Model\Person.json";
+            var destinationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\Sample.Presentation\Domain\Person.cs";
+
+            generationFacade.GenerateFromFile<Entity, EntityTemplate>(metadataPath, destinationPath);
         }
     }
 }

@@ -1,0 +1,7 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+
+<#@ parameter type="System.Type" name="type" #>
+
+test
