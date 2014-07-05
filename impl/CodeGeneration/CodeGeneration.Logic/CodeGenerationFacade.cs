@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using CodeGeneration.Logic.Bootstrap;
 using Ninject;
 

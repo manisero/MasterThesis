@@ -33,51 +33,37 @@ namespace Schema.Model.Templates
             
             #line default
             #line hidden
-            this.Write("\r\n");
+            this.Write(" ");
             
-            #line 10 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
- if (Metadata.Derives != null) { 
+            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(FormatBaseClass()));
             
             #line default
             #line hidden
-            this.Write(" \r\n\t\t: ");
+            this.Write("\r\n\t{\r\n");
             
             #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Derives));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t{\r\n");
-            
-            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
  foreach (var field in Metadata.Fields) { 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 15 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Type));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 15 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 16 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
  } 
             
             #line default
@@ -85,6 +71,19 @@ namespace Schema.Model.Templates
             this.Write("\t}\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
+        
+        #line 16 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+
+
+    private string FormatBaseClass()
+    {
+        return Metadata.Derives != null ? ": " + Metadata.Derives : string.Empty;
+    }
+
+
+        
+        #line default
+        #line hidden
         
         #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
 
