@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using CodeGeneration.Logic.Bootstrap;
 using Ninject;
 
@@ -33,13 +35,27 @@ namespace CodeGeneration.Logic
             _codeGenerator = codeGenerator;
         }
 
-        public void GenerateFromFile<TMetadata>(string metadataPath, object template, string destinationPath)
+        public void GenerateFromFile<TMetadata>(string metadataFilePath, object template, string destinationFilePath)
         {
-            var fileContent = _fileSystemService.GetFileContent(metadataPath);
-            var metadata = _jsonDeserializer.Deserialize<TMetadata>(fileContent);
+            var metadataFileContent = _fileSystemService.GetFileContent(metadataFilePath);
+            var metadata = _jsonDeserializer.Deserialize<TMetadata>(metadataFileContent);
             var code = _codeGenerator.Generate(metadata, template);
 
-            _fileSystemService.SetFileContent(destinationPath, code);
+            _fileSystemService.SetFileContent(destinationFilePath, code);
+        }
+
+        public void GenerateFromDirectory<TMetadata>(string metadataDirectoryPath, Func<object> templateGetter, string destinationDirectoryPath, string destinationFileExtension)
+        {
+            var metadataPaths = _fileSystemService.GetFilesInDirectory(metadataDirectoryPath);
+
+            foreach (var metadataPath in metadataPaths)
+            {
+                var relativePath = _fileSystemService.GetRelativePath(metadataDirectoryPath, metadataPath);
+                var relativeDestinationPath = _fileSystemService.ChangeFileExtension(relativePath, destinationFileExtension);
+                var destinationPath = _fileSystemService.CombinePaths(destinationDirectoryPath, relativeDestinationPath);
+
+                GenerateFromFile<TMetadata>(metadataPath, templateGetter(), destinationPath);
+            }
         }
     }
 }

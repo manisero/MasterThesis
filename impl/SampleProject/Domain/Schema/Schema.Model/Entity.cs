@@ -6,6 +6,8 @@ namespace Schema.Model
     {
         public string Name { get; set; }
 
+        public string Derives { get; set; }
+
         public IEnumerable<Field> Fields { get; set; }
     }
 }

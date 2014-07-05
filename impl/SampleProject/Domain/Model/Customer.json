@@ -1,0 +1,10 @@
+{
+	"Name": "Customer",
+	"Derives": "Person",
+	"Fields": [
+		{
+			"Name": "Orders",
+			"Type": "IEnumerable<Order>"
+		}
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"Name": "Order",
+	"Fields": [
+		{
+			"Name": "Owner",
+			"Type": "Customer"
+		},
+		{
+			"Name": "ID",
+			"Type": "int"
+		}
+	]
+}

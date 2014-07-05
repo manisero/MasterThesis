@@ -2,18 +2,17 @@
 <#@ import namespace="Schema.Model" #>
 <#@ parameter type="Schema.Model.Entity" name="Metadata" #>
 using System;
+using System.Collections.Generic;
 
 namespace Sample.Presentation.Domain
 {
 	public class <#= Metadata.Name #>
+<# if (Metadata.Derives != null) { #> 
+		: <#= Metadata.Derives #>
+<# } #>
 	{
-<#
-	foreach (var field in Metadata.Fields)
-	{
-#>
+<# foreach (var field in Metadata.Fields) { #>
 		public <#= field.Type #> <#= field.Name #> { get; set; }
-<#
-	}
-#>
+<# } #>
 	}
 }

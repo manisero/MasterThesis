@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Sample.Presentation.Domain
 {
-	public class Person
+	public class Order
 	{
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
+		public Customer Owner { get; set; }
+		public int ID { get; set; }
 	}
 }

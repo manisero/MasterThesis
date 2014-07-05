@@ -25,43 +25,60 @@ namespace Schema.Model.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\n\r\nnamespace Sample.Presentation.Domain\r\n{\r\n\tpublic class ");
+            this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace Sample.Presentation" +
+                    ".Domain\r\n{\r\n\tpublic class ");
             
-            #line 8 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
             
             #line default
             #line hidden
-            this.Write("\r\n\t{\r\n");
+            this.Write("\r\n");
             
             #line 10 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
-
-	foreach (var field in Metadata.Fields)
-	{
-
+ if (Metadata.Derives != null) { 
+            
+            #line default
+            #line hidden
+            this.Write(" \r\n\t\t: ");
+            
+            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Derives));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
+            
+            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t{\r\n");
+            
+            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+ foreach (var field in Metadata.Fields) { 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 15 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Type));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 15 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 15 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
-
-	}
-
+            #line 16 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+ } 
             
             #line default
             #line hidden

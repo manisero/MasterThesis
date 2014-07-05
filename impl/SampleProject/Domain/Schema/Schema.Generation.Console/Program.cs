@@ -8,12 +8,11 @@ namespace Schema.Generation.Console
     {
         static void Main(string[] args)
         {
+            var metadataPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Model";
+            var destinationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\Sample.Presentation\Domain\";
+
             var generationFacade = CodeGenerationFacade.GetInstance();
-
-            var metadataPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Model\Person.json";
-            var destinationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\Sample.Presentation\Domain\Person.cs";
-
-            generationFacade.GenerateFromFile<Entity>(metadataPath, new EntityTemplate(), destinationPath);
+            generationFacade.GenerateFromDirectory<Entity>(metadataPath, () => new EntityTemplate(), destinationPath, "cs");
         }
     }
 }
