@@ -9,27 +9,58 @@ namespace Sample.Manual.WebSite.Modules.Posts
         public PostsModule()
         {
             Get["/"] = Index;
+            Get["/PostDetails/{postId}"] = PostDetails;
         }
 
         public dynamic Index(dynamic parameters)
         {
-            var model = new List<Post>
+            var model = new IndexModel
                 {
-                    new Post
+                    Posts = new List<PostModel>
                         {
-                            Title = "My master's thesis subject",
-                            Content = "Actually this is my master's thesis subject.",
-                            CommentsNumber = 5
-                        },
-                    new Post
-                        {
-                            Title = "Hello World!",
-                            Content = "First post.",
-                            CommentsNumber = 3
+                            new PostModel
+                                {
+                                    PostID = 2,
+                                    Title = "My master's thesis subject",
+                                    Content = "Actually this is my master's thesis subject.",
+                                    CommentsNumber = 2
+                                },
+                            new PostModel
+                                {
+                                    PostID = 1,
+                                    Title = "Hello World!",
+                                    Content = "First post.",
+                                    CommentsNumber = 3
+                                }
                         }
                 };
 
-            return View["Index", model];
+            return View[model];
+        }
+
+        public dynamic PostDetails(dynamic parameters)
+        {
+            var model = new PostDetailsModel
+                {
+                    PostID = 2,
+                    Title = "My master's thesis subject",
+                    Content = "Actually this is my master's thesis subject.",
+                    Comments = new List<CommentModel>
+                        {
+                            new CommentModel
+                                {
+                                    Author = "Your mom",
+                                    Content = "Good luck with your thesis!"
+                                },
+                            new CommentModel
+                                {
+                                    Author = "Saudi Arabia prince",
+                                    Content = "Spam, spam, spam..."
+                                }
+                        }
+                };
+
+            return View[model];
         }
     }
 }

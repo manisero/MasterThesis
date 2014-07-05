@@ -57,14 +57,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conventions\ViewLocationConventions.cs" />
+    <Compile Include="Modules\Posts\Models\IndexModel.cs" />
+    <Compile Include="Modules\Posts\Models\PostDetailsModel.cs" />
     <Compile Include="Modules\Posts\PostsModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Modules\Posts\Models\Post.cs" />
+    <Compile Include="Modules\Posts\Models\PostModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Views\Posts\PostDetails.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
     <None Include="Views\Layout.cshtml" />
     <None Include="Views\Posts\Index.cshtml" />

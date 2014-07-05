@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Post";
+}
+
+<div style="font-weight: bold">@Model.Title</div>
+<div>@Model.Content</div>
+<hr/>
+
+<div>Comments:</div>
+<hr/>
+
+@foreach (var comment in Model.Comments)
+{
+    <div>
+        <div>@comment.Content</div>
+        <div style="font-style: italic">Author: @comment.Author</div>
+    </div>
+    <hr/>
+}
