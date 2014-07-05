@@ -1,15 +1,8 @@
-﻿@{
-    var title = (string)ViewBag.Title;
-    var pageTitle = title != null
-                        ? title + " - Sample"
-                        : "Sample";
-}
-
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@pageTitle</title>
+        <title>@ViewBag.PageTitle</title>
     </head>
     <body>
         @RenderBody()

@@ -1,4 +1,13 @@
 ﻿@{
-    Layout = "Layout";
     ViewBag.Title = "Home";
+}
+
+@foreach (var post in Model)
+{
+    <div>
+        <div style="font-weight: bold">@post.Title</div>
+        <div>@post.Content</div>
+        <div style="font-style: italic">Comments: @post.CommentsNumber</div>
+    </div>
+    <hr/>
 }
