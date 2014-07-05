@@ -19,6 +19,8 @@ namespace Sample.Manual.WebSite
             using (var host = new NancyHost(configuration, uri))
             {
                 host.Start();
+
+                Console.WriteLine("Nancy host started at: {0}", uri);
                 Console.ReadLine();
             }
         }
