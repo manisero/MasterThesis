@@ -13,7 +13,7 @@ namespace Schema.Generation.Console
             var metadataPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Model\Person.json";
             var destinationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\Sample.Presentation\Domain\Person.cs";
 
-            generationFacade.GenerateFromFile<Entity, EntityTemplate>(metadataPath, destinationPath);
+            generationFacade.GenerateFromFile<Entity>(metadataPath, new EntityTemplate(), destinationPath);
         }
     }
 }

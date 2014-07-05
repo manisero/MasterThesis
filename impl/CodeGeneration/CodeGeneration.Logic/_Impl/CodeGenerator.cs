@@ -1,22 +1,38 @@
+using System;
 using Microsoft.VisualStudio.TextTemplating;
 
 namespace CodeGeneration.Logic._Impl
 {
     public class CodeGenerator : ICodeGenerator
     {
-        public string Generate<TMetadata, TTemplate>(TMetadata metadata)
-            where TTemplate : new()
+        public string Generate<TMetadata>(TMetadata metadata, object template)
         {
-            var templateType = typeof(TTemplate);
-            var template = new TTemplate();
+            var templateType = template.GetType();
 
-            var templatingSession = new TextTemplatingSession();
+            var templatingSession = GetTemplateSession(template, templateType);
             templatingSession["Metadata"] = metadata;
-
-            templateType.GetProperty("Session").SetValue(template, templatingSession);
+            
             templateType.GetMethod("Initialize").Invoke(template, new object[0]);
 
             return (string)templateType.GetMethod("TransformText").Invoke(template, new object[0]);
+        }
+
+        private TextTemplatingSession GetTemplateSession(object template, Type templateType)
+        {
+            var sessionProperty = templateType.GetProperty("Session");
+            var existingSession = (TextTemplatingSession)sessionProperty.GetValue(template);
+
+            if (existingSession != null)
+            {
+                return existingSession;
+            }
+            else
+            {
+                var newSession = new TextTemplatingSession();
+                sessionProperty.SetValue(template, newSession);
+
+                return newSession;
+            }
         }
     }
 }

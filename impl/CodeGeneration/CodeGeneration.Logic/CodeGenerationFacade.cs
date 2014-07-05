@@ -33,12 +33,11 @@ namespace CodeGeneration.Logic
             _codeGenerator = codeGenerator;
         }
 
-        public void GenerateFromFile<TMetadata, TTemplate>(string metadataPath, string destinationPath)
-            where TTemplate : new()
+        public void GenerateFromFile<TMetadata>(string metadataPath, object template, string destinationPath)
         {
             var fileContent = _fileSystemService.GetFileContent(metadataPath);
             var metadata = _jsonDeserializer.Deserialize<TMetadata>(fileContent);
-            var code = _codeGenerator.Generate<TMetadata, TTemplate>(metadata);
+            var code = _codeGenerator.Generate(metadata, template);
 
             _fileSystemService.SetFileContent(destinationPath, code);
         }
