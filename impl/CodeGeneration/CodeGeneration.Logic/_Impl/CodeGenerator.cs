@@ -5,11 +5,12 @@ namespace CodeGeneration.Logic._Impl
 {
     public class CodeGenerator : ICodeGenerator
     {
-        public string Generate<TMetadata>(TMetadata metadata, object template)
+        public string Generate<TMetadata>(TMetadata metadata, object template, IGenerationContext context)
         {
             var templateType = template.GetType();
 
             var templatingSession = GetTemplateSession(template, templateType);
+            templatingSession["Context"] = context;
             templatingSession["Metadata"] = metadata;
             
             templateType.GetMethod("Initialize").Invoke(template, new object[0]);

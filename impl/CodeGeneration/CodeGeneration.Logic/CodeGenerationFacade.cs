@@ -23,14 +23,17 @@ namespace CodeGeneration.Logic
 
         private readonly IFileSystemService _fileSystemService;
         private readonly IJsonDeserializer _jsonDeserializer;
+        private readonly IGenerationContextFactory _contextFactory;
         private readonly ICodeGenerator _codeGenerator;
 
         public CodeGenerationFacade(IFileSystemService fileSystemService,
                                     IJsonDeserializer jsonDeserializer,
+                                    IGenerationContextFactory contextFactory,
                                     ICodeGenerator codeGenerator)
         {
             _fileSystemService = fileSystemService;
             _jsonDeserializer = jsonDeserializer;
+            _contextFactory = contextFactory;
             _codeGenerator = codeGenerator;
         }
 
@@ -38,7 +41,9 @@ namespace CodeGeneration.Logic
         {
             var metadataFileContent = _fileSystemService.GetFileContent(metadataFilePath);
             var metadata = _jsonDeserializer.Deserialize<TMetadata>(metadataFileContent);
-            var code = _codeGenerator.Generate(metadata, template);
+            var context = _contextFactory.Create(metadataFilePath);
+
+            var code = _codeGenerator.Generate(metadata, template, context);
 
             _fileSystemService.SetFileContent(destinationFilePath, code);
         }

@@ -9,6 +9,7 @@
 // ------------------------------------------------------------------------------
 namespace Schema.Model.Templates
 {
+    using CodeGeneration.Logic;
     using Schema.Model;
     using System;
     
@@ -28,42 +29,42 @@ namespace Schema.Model.Templates
             this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace Sample.Presentation" +
                     ".Domain\r\n{\r\n\tpublic class ");
             
-            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
+            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Context.MetadataFileName));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FormatBaseClass()));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n");
             
-            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
  foreach (var field in Metadata.Fields) { 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Type));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 15 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
  } 
             
             #line default
@@ -72,7 +73,7 @@ namespace Schema.Model.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 16 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+        #line 18 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
 
 
     private string FormatBaseClass()
@@ -86,6 +87,19 @@ namespace Schema.Model.Templates
         #line hidden
         
         #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+
+private global::CodeGeneration.Logic.IGenerationContext _ContextField;
+
+/// <summary>
+/// Access the Context parameter of the template.
+/// </summary>
+private global::CodeGeneration.Logic.IGenerationContext Context
+{
+    get
+    {
+        return this._ContextField;
+    }
+}
 
 private global::Schema.Model.Entity _MetadataField;
 
@@ -108,6 +122,36 @@ public virtual void Initialize()
 {
     if ((this.Errors.HasErrors == false))
     {
+bool ContextValueAcquired = false;
+if (this.Session.ContainsKey("Context"))
+{
+    if ((typeof(global::CodeGeneration.Logic.IGenerationContext).IsAssignableFrom(this.Session["Context"].GetType()) == false))
+    {
+        this.Error("The type \'CodeGeneration.Logic.IGenerationContext\' of the parameter \'Context\' did" +
+                " not match the type of the data passed to the template.");
+    }
+    else
+    {
+        this._ContextField = ((global::CodeGeneration.Logic.IGenerationContext)(this.Session["Context"]));
+        ContextValueAcquired = true;
+    }
+}
+if ((ContextValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Context");
+    if ((data != null))
+    {
+        if ((typeof(global::CodeGeneration.Logic.IGenerationContext).IsAssignableFrom(data.GetType()) == false))
+        {
+            this.Error("The type \'CodeGeneration.Logic.IGenerationContext\' of the parameter \'Context\' did" +
+                    " not match the type of the data passed to the template.");
+        }
+        else
+        {
+            this._ContextField = ((global::CodeGeneration.Logic.IGenerationContext)(data));
+        }
+    }
+}
 bool MetadataValueAcquired = false;
 if (this.Session.ContainsKey("Metadata"))
 {

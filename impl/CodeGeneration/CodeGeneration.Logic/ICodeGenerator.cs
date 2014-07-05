@@ -2,6 +2,6 @@
 {
     public interface ICodeGenerator
     {
-        string Generate<TMetadata>(TMetadata metadata, object template);
+        string Generate<TMetadata>(TMetadata metadata, object template, IGenerationContext context);
     }
 }

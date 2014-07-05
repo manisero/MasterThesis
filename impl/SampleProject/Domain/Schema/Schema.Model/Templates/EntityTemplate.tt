@@ -1,12 +1,14 @@
 ﻿<#@ template language="C#" #>
+<#@ import namespace="CodeGeneration.Logic" #>
 <#@ import namespace="Schema.Model" #>
+<#@ parameter type="CodeGeneration.Logic.IGenerationContext" name="Context" #>
 <#@ parameter type="Schema.Model.Entity" name="Metadata" #>
 using System;
 using System.Collections.Generic;
 
 namespace Sample.Presentation.Domain
 {
-	public class <#= Metadata.Name #> <#= FormatBaseClass() #>
+	public class <#= Context.MetadataFileName #> <#= FormatBaseClass() #>
 	{
 <# foreach (var field in Metadata.Fields) { #>
 		public <#= field.Type #> <#= field.Name #> { get; set; }
