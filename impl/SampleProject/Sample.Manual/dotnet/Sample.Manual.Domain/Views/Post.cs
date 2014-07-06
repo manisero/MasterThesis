@@ -1,6 +1,6 @@
-﻿namespace Sample.Manual.Domain
+namespace Sample.Manual.Domain.Views
 {
-    public class Post
+    public class Post : IView
     {
         public int PostID { get; set; }
 

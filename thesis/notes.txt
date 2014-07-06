@@ -1,12 +1,22 @@
-1. dlaczego użytkownik musi definiować schemat? (projekt Schema) alternatywa: podejście no-schema
+1. Problem: gdzie w CQRS zdefiniowana jest dziedzina (encje) aplikacji? Model do odczytywania nie zawiera przecież encji.
+Rozwiązanie: niech będzie w JSONie.
+
+===================
+
+2. Problem: model "read" i model "write" częściowo na siebie zachodzą (lub nawet "read" zawiera "write"). Jak uniknąć duplikacji metadanych?
+Rozwiązanie: niech będzie jeden model w JSONie.
+
+===================
+
+2. dlaczego użytkownik musi definiować schemat jsona poddawanego generacji? (projekt Schema) alternatywa: podejście no-schema
 
 no-schema sql: http://www.cs.uiuc.edu/class/fa06/cs511/nssql.pdf
 
 ===================
 
-2. wybór silnika do generacji kodu (templating engine) (dlaczego t4?) (np. razor nie, bo razora tez mozemy chciec generowac - generowanie razora razorem mogloby byc utrudnione)
+3. wybór silnika do generacji kodu (templating engine) (dlaczego t4?) (np. razor nie, bo razora tez mozemy chciec generowac - generowanie razora razorem mogloby byc utrudnione)
 
 ===================
 
-3. wybrór klienta Cassandry
+4. wybrór klienta Cassandry
 - żaden z nich nie wspiera generownia klas na podstawie schematu (lub odwrotnie, więc tym bardziej warto używać generatora kodu i schematu)

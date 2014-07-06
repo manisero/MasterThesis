@@ -2,7 +2,7 @@
 using Cassandra;
 using System.Linq;
 using Cassandra.Data.Linq;
-using Sample.Manual.Domain;
+using Sample.Manual.Domain.Views;
 
 namespace Sample.Manual.DataAccess
 {
