@@ -77,7 +77,12 @@
     <None Include="Views\Layout.cshtml" />
     <None Include="Views\Posts\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Sample.Manual.DataAccess\Sample.Manual.DataAccess.csproj">
+      <Project>{27274d51-f036-4c3c-85c1-e0177eabb20b}</Project>
+      <Name>Sample.Manual.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
