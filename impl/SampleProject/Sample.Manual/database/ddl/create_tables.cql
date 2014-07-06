@@ -1,4 +1,4 @@
-USE sample_manual;
+USE "Sample_Manual";
 
 CREATE TABLE IF NOT EXISTS "Posts" (
 	"PostID" int,

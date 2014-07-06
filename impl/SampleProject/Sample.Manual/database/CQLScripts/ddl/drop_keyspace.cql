@@ -1,1 +1,0 @@
-DROP KEYSPACE IF EXISTS sample_manual;

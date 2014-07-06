@@ -1,3 +1,3 @@
-USE sample_manual;
+USE "Sample_Manual";
 
 SELECT * FROM "Users";

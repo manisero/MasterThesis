@@ -1,4 +1,4 @@
-USE sample_manual;
+USE "Sample_Manual";
 
 INSERT INTO "Posts" ("PostID", "Title", "Content", "Author", "CommentsNumer")
 VALUES (1, 'Hello World!', 'First post.', 'manisero', 3);
