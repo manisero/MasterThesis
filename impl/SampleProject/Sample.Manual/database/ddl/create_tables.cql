@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS "Posts" (
 	"Title" text,
 	"Content" text,
 	"Author" text,
-	"CommentsNumer" int,
+	"CommentsNumber" int,
 	PRIMARY KEY ("PostID")
 );
 
