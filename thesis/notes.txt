@@ -9,3 +9,4 @@ no-schema sql: http://www.cs.uiuc.edu/class/fa06/cs511/nssql.pdf
 ===================
 
 3. wybrór klienta Cassandry
+- żaden z nich nie wspiera generownia klas na podstawie schematu (lub odwrotnie, więc tym bardziej warto używać generatora kodu i schematu)
