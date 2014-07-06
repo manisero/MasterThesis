@@ -10,8 +10,8 @@ namespace Sample.Manual.WebSite.Modules.Posts
         public PostsModule()
         {
             Get["/"] = Index;
-            Get["/PostDetails/{postId}"] = PostDetails;
-            Post["/PostDetails/{postId}/Comment"] = Comment;
+            Get["/{postId}"] = PostDetails;
+            Post["/{postId}/Comment"] = Comment;
         }
 
         public dynamic Index(dynamic parameters)
@@ -25,6 +25,7 @@ namespace Sample.Manual.WebSite.Modules.Posts
                                     PostID = 2,
                                     Title = "My master's thesis subject",
                                     Content = "Actually this is my master's thesis subject.",
+                                    Author = "manisero",
                                     CommentsNumber = 2
                                 },
                             new PostModel
@@ -32,6 +33,7 @@ namespace Sample.Manual.WebSite.Modules.Posts
                                     PostID = 1,
                                     Title = "Hello World!",
                                     Content = "First post.",
+                                    Author = "manisero",
                                     CommentsNumber = 3
                                 }
                         }
@@ -47,6 +49,7 @@ namespace Sample.Manual.WebSite.Modules.Posts
                     PostID = 2,
                     Title = "My master's thesis subject",
                     Content = "Actually this is my master's thesis subject.",
+                    Author = "manisero",
                     Comments = new List<CommentModel>
                         {
                             new CommentModel

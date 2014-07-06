@@ -4,6 +4,7 @@
 
 <div style="font-weight: bold">@Model.Title</div>
 <div>@Model.Content</div>
+<div style="font-style: italic">Author: <a href="/Users/@Model.Author">@Model.Author</a></div>
 <hr/>
 
 <div>Comments:</div>
@@ -13,12 +14,12 @@
 {
     <div>
         <div>@comment.Content</div>
-        <div style="font-style: italic">Author: @comment.Author</div>
+        <div style="font-style: italic">Author: <a href="/Users/@comment.Author">@comment.Author</a></div>
     </div>
     <hr/>
 }
 
-<form action="/PostDetails/@Model.PostID/Comment" method="POST">
+<form action="/@Model.PostID/Comment" method="POST">
     <input type="text" name="Content" />
     <input type="text" name="Author" />
     <input type="submit"/>
