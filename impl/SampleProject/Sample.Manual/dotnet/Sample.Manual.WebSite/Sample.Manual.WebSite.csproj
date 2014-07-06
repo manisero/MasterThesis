@@ -78,7 +78,6 @@
     <Compile Include="Modules\Users\UsersModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Modules\Posts\Models\PostModel.cs" />
     <Compile Include="Configuration\RazorConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Nancy;
 using Sample.Manual.DataAccess;
+using Sample.Manual.Domain.Entities;
 using Sample.Manual.Domain.Views;
 using Sample.Manual.WebSite.Modules.Posts.Models;
 using Nancy.ModelBinding;
@@ -87,7 +88,7 @@ namespace Sample.Manual.WebSite.Modules.Posts
 
         public dynamic Comment(dynamic parameters)
         {
-            var comment = this.Bind<CommentModel>();
+            var comment = this.Bind<Comment>();
 
             var model = new PostDetailsModel
                 {
@@ -106,7 +107,11 @@ namespace Sample.Manual.WebSite.Modules.Posts
                                     Author = "Saudi Arabia prince",
                                     Content = "Spam, spam, spam..."
                                 },
-                            comment
+                            new CommentModel
+                                {
+                                    Author = comment.Author,
+                                    Content = comment.Content
+                                }
                         }
                 };
 
