@@ -18,18 +18,24 @@ namespace Sample.Manual.WebSite.Modules.Posts
             _postRepository = postRepository;
 
             Get["/"] = Index;
-            Get["/{PostId}"] = PostDetails;
             Get["/of/{UserName}"] = OfUser;
+            Get["/{PostId}"] = PostDetails;
             Post["/{postId}/Comment"] = Comment;
         }
 
         public dynamic Index(dynamic parameters)
         {
             var posts = _postRepository.GetAll().OrderByDescending(x => x.PostID);
-            var model = new IndexModel
-                {
-                    Posts = posts
-                };
+            var model = new IndexModel { Posts = posts };
+
+            return View[model];
+        }
+
+        public dynamic OfUser(dynamic parameters)
+        {
+            var userName = (string)parameters.UserName;
+            var posts = _postRepository.Filter(x => x.Author == userName).OrderByDescending(x => x.PostID);
+            var model = new IndexModel { Posts = posts };
 
             return View[model];
         }
@@ -81,11 +87,6 @@ namespace Sample.Manual.WebSite.Modules.Posts
             return View[model];
         }
 
-        public dynamic OfUser(dynamic parameters)
-        {
-            return Index(parameters);
-        }
-
         public dynamic Comment(dynamic parameters)
         {
             var comment = this.Bind<Comment>();
@@ -95,6 +96,7 @@ namespace Sample.Manual.WebSite.Modules.Posts
                     PostID = 2,
                     Title = "My master's thesis subject",
                     Content = "Actually this is my master's thesis subject.",
+                    Author = "manisero",
                     Comments = new List<CommentModel>
                         {
                             new CommentModel
