@@ -10,7 +10,8 @@ namespace Sample.Manual.WebSite.Modules.Posts
         public PostsModule()
         {
             Get["/"] = Index;
-            Get["/{postId}"] = PostDetails;
+            Get["/{PostId}"] = PostDetails;
+            Get["/of/{UserName}"] = OfUser;
             Post["/{postId}/Comment"] = Comment;
         }
 
@@ -66,6 +67,11 @@ namespace Sample.Manual.WebSite.Modules.Posts
                 };
 
             return View[model];
+        }
+
+        public dynamic OfUser(dynamic parameters)
+        {
+            return Index(parameters);
         }
 
         public dynamic Comment(dynamic parameters)
