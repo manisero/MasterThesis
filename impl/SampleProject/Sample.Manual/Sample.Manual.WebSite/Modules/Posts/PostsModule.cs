@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Nancy;
 using Sample.Manual.WebSite.Modules.Posts.Models;
+using Nancy.ModelBinding;
 
 namespace Sample.Manual.WebSite.Modules.Posts
 {
@@ -10,6 +11,7 @@ namespace Sample.Manual.WebSite.Modules.Posts
         {
             Get["/"] = Index;
             Get["/PostDetails/{postId}"] = PostDetails;
+            Post["/PostDetails/{postId}/Comment"] = Comment;
         }
 
         public dynamic Index(dynamic parameters)
@@ -57,6 +59,34 @@ namespace Sample.Manual.WebSite.Modules.Posts
                                     Author = "Saudi Arabia prince",
                                     Content = "Spam, spam, spam..."
                                 }
+                        }
+                };
+
+            return View[model];
+        }
+
+        public dynamic Comment(dynamic parameters)
+        {
+            var comment = this.Bind<CommentModel>();
+
+            var model = new PostDetailsModel
+                {
+                    PostID = 2,
+                    Title = "My master's thesis subject",
+                    Content = "Actually this is my master's thesis subject.",
+                    Comments = new List<CommentModel>
+                        {
+                            new CommentModel
+                                {
+                                    Author = "Your mom",
+                                    Content = "Good luck with your thesis!"
+                                },
+                            new CommentModel
+                                {
+                                    Author = "Saudi Arabia prince",
+                                    Content = "Spam, spam, spam..."
+                                },
+                            comment
                         }
                 };
 

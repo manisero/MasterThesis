@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conventions\ViewLocationConventions.cs" />
+    <Compile Include="Modules\Posts\Models\CommentModel.cs" />
     <Compile Include="Modules\Posts\Models\IndexModel.cs" />
     <Compile Include="Modules\Posts\Models\PostDetailsModel.cs" />
     <Compile Include="Modules\Posts\PostsModule.cs" />

@@ -12,11 +12,4 @@ namespace Sample.Manual.WebSite.Modules.Posts.Models
 
         public IEnumerable<CommentModel> Comments { get; set; }
     }
-
-    public class CommentModel
-    {
-        public string Author { get; set; }
-
-        public string Content { get; set; }
-    }
 }

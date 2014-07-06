@@ -1,3 +1,11 @@
 1. dlaczego użytkownik musi definiować schemat? (projekt Schema) alternatywa: podejście no-schema
 
+no-schema sql: http://www.cs.uiuc.edu/class/fa06/cs511/nssql.pdf
+
+===================
+
 2. wybór silnika do generacji kodu (templating engine) (dlaczego t4?) (np. razor nie, bo razora tez mozemy chciec generowac - generowanie razora razorem mogloby byc utrudnione)
+
+===================
+
+3. wybrór klienta Cassandry

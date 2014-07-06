@@ -21,7 +21,7 @@ namespace Sample.Manual.WebSite
                 host.Start();
 
                 Console.WriteLine("Nancy host started at: {0}", uri);
-                Console.ReadLine();
+                Console.ReadKey();
             }
         }
     }
