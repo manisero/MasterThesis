@@ -10,6 +10,8 @@
 	create = checkout -b
 	delete = branch -d
 
+	remaster = rebase master
+
 	ignore = update-index --assume-unchanged
 	unignore = update-index --no-assume-unchanged
 	ignored = !git ls-files -v | grep "^[[:lower:]]"
