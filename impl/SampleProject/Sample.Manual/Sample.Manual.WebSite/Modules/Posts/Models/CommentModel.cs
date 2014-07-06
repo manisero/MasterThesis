@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Sample.Manual.WebSite.Modules.Posts.Models
 {
     public class CommentModel
@@ -5,5 +7,7 @@ namespace Sample.Manual.WebSite.Modules.Posts.Models
         public string Author { get; set; }
 
         public string Content { get; set; }
+
+        public IEnumerable<CommentModel> Replies { get; set; }
     }
 }
