@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Nancy;
-using Sample.Manual.DataAccess;
 using Sample.Manual.DataAccess._Impl;
 using Sample.Manual.Domain.Views;
 using Sample.Manual.WebSite.Modules.Posts.Models;
 using Nancy.ModelBinding;
+using System.Linq;
 
 namespace Sample.Manual.WebSite.Modules.Posts
 {
@@ -20,29 +20,10 @@ namespace Sample.Manual.WebSite.Modules.Posts
 
         public dynamic Index(dynamic parameters)
         {
-            var posts = new Repository<Post>(new SessionProvider()).GetAll();
-
+            var posts = new Repository<Post>(new SessionProvider()).GetAll().OrderByDescending(x => x.PostID);
             var model = new IndexModel
                 {
-                    Posts = new List<PostModel>
-                        {
-                            new PostModel
-                                {
-                                    PostID = 2,
-                                    Title = "My master's thesis subject",
-                                    Content = "Actually this is my master's thesis subject.",
-                                    Author = "manisero",
-                                    CommentsNumber = 2
-                                },
-                            new PostModel
-                                {
-                                    PostID = 1,
-                                    Title = "Hello World!",
-                                    Content = "First post.",
-                                    Author = "manisero",
-                                    CommentsNumber = 3
-                                }
-                        }
+                    Posts = posts
                 };
 
             return View[model];
