@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Nancy;
 using Sample.Manual.DataAccess;
+using Sample.Manual.DataAccess._Impl;
+using Sample.Manual.Domain.Views;
 using Sample.Manual.WebSite.Modules.Posts.Models;
 using Nancy.ModelBinding;
 
@@ -18,7 +20,7 @@ namespace Sample.Manual.WebSite.Modules.Posts
 
         public dynamic Index(dynamic parameters)
         {
-            var posts = new PostsProvider().GetAll();
+            var posts = new Repository<Post>(new SessionProvider()).GetAll();
 
             var model = new IndexModel
                 {
