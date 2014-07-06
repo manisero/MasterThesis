@@ -1,3 +1,3 @@
 USE "Sample_Manual";
 
-SELECT * FROM "Posts";
+SELECT * FROM "Post";

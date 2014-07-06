@@ -1,6 +1,6 @@
 USE "Sample_Manual";
 
-CREATE TABLE IF NOT EXISTS "Posts" (
+CREATE TABLE IF NOT EXISTS "Post" (
 	"PostID" int,
 	"Title" text,
 	"Content" text,
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS "Posts" (
 	PRIMARY KEY ("PostID")
 );
 
-CREATE TABLE IF NOT EXISTS "Users" (
+CREATE TABLE IF NOT EXISTS "User" (
 	"UserName" text,
 	"FirstName" text,
 	"LastName" text,
