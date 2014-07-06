@@ -70,6 +70,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Views\Posts\Comments.cshtml" />
     <None Include="Views\Posts\PostDetails.cshtml" />
     <None Include="Views\Users\User.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />

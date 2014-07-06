@@ -62,7 +62,20 @@ namespace Sample.Manual.WebSite.Modules.Posts
                                             new CommentModel
                                                 {
                                                     Author = "manisero",
-                                                    Content = "Thanks, mom!"
+                                                    Content = "Thanks, mom",
+                                                    Replies = new List<CommentModel>
+                                                        {
+                                                            new CommentModel
+                                                                {
+                                                                    Author = "Your mom",
+                                                                    Content = "Yrw."
+                                                                }
+                                                        }
+                                                },
+                                            new CommentModel
+                                                {
+                                                    Author = "Your mom",
+                                                    Content = "Ah, and eat your dinner"
                                                 }
                                         }
                                 },

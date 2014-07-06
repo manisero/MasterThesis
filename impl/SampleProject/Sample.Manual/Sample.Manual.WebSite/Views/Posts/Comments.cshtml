@@ -1,0 +1,16 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.IEnumerable<Sample.Manual.WebSite.Modules.Posts.Models.CommentModel>>
+<ul>
+    @foreach (var comment in Model)
+    {
+        <li>
+            <div>
+                <div>@comment.Content</div>
+                <div style="font-style: italic">Author: <a href="/Users/@comment.Author">@comment.Author</a></div>
+                @if (comment.Replies != null)
+                {
+                    @Html.Partial("Comments", comment.Replies)
+                }
+            </div>
+        </li>
+    }
+</ul>

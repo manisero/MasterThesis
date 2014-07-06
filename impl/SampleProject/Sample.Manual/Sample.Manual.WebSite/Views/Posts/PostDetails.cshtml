@@ -9,17 +9,7 @@
 <hr/>
 
 <div>Comments:</div>
-<ul>
-    @foreach (var comment in Model.Comments)
-    {
-        <li>
-            <div>
-                <div>@comment.Content</div>
-                <div style="font-style: italic">Author: <a href="/Users/@comment.Author">@comment.Author</a></div>
-            </div>
-        </li>
-    }
-</ul>
+@Html.Partial("Comments", Model.Comments)
 
 <form action="/@Model.PostID/Comment" method="POST">
     <div style="font-weight: bold">
