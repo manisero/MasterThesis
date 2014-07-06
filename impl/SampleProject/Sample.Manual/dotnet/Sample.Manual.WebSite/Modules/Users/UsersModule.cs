@@ -1,25 +1,27 @@
 ﻿using Nancy;
-using Sample.Manual.WebSite.Modules.Users.Models;
+using Sample.Manual.DataAccess;
+using Sample.Manual.Domain.Views;
+using System.Linq;
 
 namespace Sample.Manual.WebSite.Modules.Users
 {
     public class UsersModule : NancyModule
     {
-        public UsersModule() : base("/Users")
+        private readonly IRepository<User> _userRepository;
+
+        public UsersModule(IRepository<User> userRepository) : base("/Users")
         {
+            _userRepository = userRepository;
+
             Get["/{UserName}"] = Details;
         }
 
         public dynamic Details(dynamic parameters)
         {
-            var model = new UserModel
-                {
-                    UserName = parameters.UserName,
-                    FirstName = "Joe",
-                    LastName = "Doe"
-                };
+            var userName = (string)parameters.UserName;
+            var user = _userRepository.Filter(x => x.UserName == userName).Single();
 
-            return View[model];
+            return View[user];
         }
     }
 }

@@ -75,7 +75,6 @@
     <Compile Include="Modules\Posts\Models\IndexModel.cs" />
     <Compile Include="Modules\Posts\Models\PostDetailsModel.cs" />
     <Compile Include="Modules\Posts\PostsModule.cs" />
-    <Compile Include="Modules\Users\Models\UserModel.cs" />
     <Compile Include="Modules\Users\UsersModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

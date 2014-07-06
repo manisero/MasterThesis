@@ -1,6 +1,6 @@
-﻿namespace Sample.Manual.WebSite.Modules.Users.Models
+﻿namespace Sample.Manual.Domain.Views
 {
-    public class UserModel
+    public class User : IView
     {
         public string UserName { get; set; }
 
