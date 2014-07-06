@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Nancy.ViewEngines.Razor;
 
-namespace Sample.Manual.WebSite
+namespace Sample.Manual.WebSite.Configuration
 {
     public class RazorConfiguration : IRazorConfiguration
     {

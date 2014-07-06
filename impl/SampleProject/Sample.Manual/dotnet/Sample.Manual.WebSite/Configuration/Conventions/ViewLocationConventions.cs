@@ -1,7 +1,7 @@
 ﻿using System;
 using Nancy.Conventions;
 
-namespace Sample.Manual.WebSite.Conventions
+namespace Sample.Manual.WebSite.Configuration.Conventions
 {
     public class ViewLocationConventions : IConvention
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Nancy;
-using Sample.Manual.DataAccess._Impl;
+using Sample.Manual.DataAccess;
 using Sample.Manual.Domain.Views;
 using Sample.Manual.WebSite.Modules.Posts.Models;
 using Nancy.ModelBinding;
@@ -10,8 +10,12 @@ namespace Sample.Manual.WebSite.Modules.Posts
 {
     public class PostsModule : NancyModule
     {
-        public PostsModule()
+        private readonly IRepository<Post> _postRepository;
+
+        public PostsModule(IRepository<Post> postRepository)
         {
+            _postRepository = postRepository;
+
             Get["/"] = Index;
             Get["/{PostId}"] = PostDetails;
             Get["/of/{UserName}"] = OfUser;
@@ -20,7 +24,7 @@ namespace Sample.Manual.WebSite.Modules.Posts
 
         public dynamic Index(dynamic parameters)
         {
-            var posts = new Repository<Post>(new SessionProvider()).GetAll().OrderByDescending(x => x.PostID);
+            var posts = _postRepository.GetAll().OrderByDescending(x => x.PostID);
             var model = new IndexModel
                 {
                     Posts = posts
