@@ -15,7 +15,7 @@ namespace Sample.Manual.DataAccess.Repositories._Impl
 
         public IEnumerable<CommentTreeNode> GetCommentTreeForPost(Guid postId)
         {
-            var comments = Filter(x => x.PostID == postId).Reverse().ToList();
+            var comments = Filter(x => x.PostID == postId);
             var result = new List<CommentTreeNode>();
 
             foreach (var rootComment in comments.Where(x => x.ParentCommentID == null))
@@ -26,7 +26,7 @@ namespace Sample.Manual.DataAccess.Repositories._Impl
             return result;
         }
 
-        private CommentTreeNode CreateHierarchyItem(Comment comment, ICollection<Comment> allComments)
+        private CommentTreeNode CreateHierarchyItem(Comment comment, IReadOnlyCollection<Comment> allComments)
         {
             return new CommentTreeNode
                 {
