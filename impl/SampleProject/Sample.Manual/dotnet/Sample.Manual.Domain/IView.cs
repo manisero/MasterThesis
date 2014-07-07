@@ -1,4 +1,4 @@
-﻿namespace Sample.Manual.Domain.Views
+﻿namespace Sample.Manual.Domain
 {
     public interface IView
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Sample.Manual.Domain.Views;
+using Sample.Manual.Domain;
 using Cassandra.Data.Linq;
 using System.Linq;
 
@@ -26,6 +26,11 @@ namespace Sample.Manual.DataAccess._Impl
         public IReadOnlyCollection<TView> GetAll()
         {
             return ViewTable.Execute().ToList();
+        }
+
+        public TView SingleOrDefault(Expression<Func<TView, bool>> predicate)
+        {
+            return Filter(predicate).SingleOrDefault();
         }
 
         public IReadOnlyCollection<TView> Filter(Expression<Func<TView, bool>> predicate)

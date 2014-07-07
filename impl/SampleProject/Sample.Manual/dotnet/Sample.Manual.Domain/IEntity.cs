@@ -1,4 +1,4 @@
-﻿namespace Sample.Manual.Domain.Entities
+﻿namespace Sample.Manual.Domain
 {
     public interface IEntity
     {
