@@ -28,5 +28,5 @@ CREATE TABLE "Comment" (
 	"Content" text,
 	"Author" text,
 	"ParentCommentID" timeuuid,
-	PRIMARY KEY ("CommentID")
+	PRIMARY KEY ("PostID", "CommentID")
 );

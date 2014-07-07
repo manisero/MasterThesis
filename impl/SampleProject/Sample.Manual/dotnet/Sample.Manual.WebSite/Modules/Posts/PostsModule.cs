@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Nancy;
 using Sample.Manual.DataAccess;
-using Sample.Manual.Domain.Entities;
+using Sample.Manual.DataAccess.Repositories;
 using Sample.Manual.Domain.Views;
 using Sample.Manual.WebSite.Modules.Posts.Models;
 using Nancy.ModelBinding;
@@ -12,10 +13,12 @@ namespace Sample.Manual.WebSite.Modules.Posts
     public class PostsModule : NancyModule
     {
         private readonly IRepository<Post> _postRepository;
+        private readonly ICommentRepository _commentRepository;
 
-        public PostsModule(IRepository<Post> postRepository)
+        public PostsModule(IRepository<Post> postRepository, ICommentRepository commentRepository)
         {
             _postRepository = postRepository;
+            _commentRepository = commentRepository;
 
             Get["/"] = Index;
             Get["/of/{UserName}"] = OfUser;
@@ -42,6 +45,10 @@ namespace Sample.Manual.WebSite.Modules.Posts
 
         public dynamic PostDetails(dynamic parameters)
         {
+            var postId = (Guid)parameters.PostID;
+            var post = _postRepository.SingleOrDefault(x => x.PostID == postId);
+            var comments = _commentRepository.GetCommentTreeForPost(postId);
+
             var model = new PostDetailsModel
                 {
                     PostID = 2,
@@ -89,7 +96,7 @@ namespace Sample.Manual.WebSite.Modules.Posts
 
         public dynamic Comment(dynamic parameters)
         {
-            var comment = this.Bind<Comment>();
+            var comment = this.Bind<Domain.Entities.Comment>();
 
             var model = new PostDetailsModel
                 {
