@@ -10,9 +10,9 @@ namespace Sample.Manual.WebSite.Modules.Users
     public class UsersModule : NancyModule
     {
         private readonly IRepository<User> _userRepository;
-        private readonly UserUpdatedEventHandler _handler;
+        private readonly IEventHandler<UserUpdatedEvent> _handler;
 
-        public UsersModule(IRepository<User> userRepository, UserUpdatedEventHandler handler) : base("/Users")
+        public UsersModule(IRepository<User> userRepository, IEventHandler<UserUpdatedEvent> handler) : base("/Users")
         {
             _userRepository = userRepository;
             _handler = handler;

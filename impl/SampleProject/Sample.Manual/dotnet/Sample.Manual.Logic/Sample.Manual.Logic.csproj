@@ -39,7 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserUpdatedEventHandler.cs" />
+    <Compile Include="IEventHandler.cs" />
+    <Compile Include="EventHandlers\UserUpdatedEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,9 +2,9 @@
 using Sample.Manual.Domain.Events;
 using Sample.Manual.Domain.Views;
 
-namespace Sample.Manual.Logic
+namespace Sample.Manual.Logic.EventHandlers
 {
-    public class UserUpdatedEventHandler
+    public class UserUpdatedEventHandler : IEventHandler<UserUpdatedEvent>
     {
         private readonly IRepository<User> _userRepository;
 
