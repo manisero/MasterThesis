@@ -31,7 +31,7 @@ namespace Sample.Manual.DataAccess.Repositories._Impl
             return new CommentTreeNode
                 {
                     Comment = comment,
-                    Chilren = allComments.Where(x => x.ParentCommentID == comment.CommentID).Select(x => CreateHierarchyItem(x, allComments))
+                    Children = allComments.Where(x => x.ParentCommentID == comment.CommentID).Select(x => CreateHierarchyItem(x, allComments))
                 };
         }
     }

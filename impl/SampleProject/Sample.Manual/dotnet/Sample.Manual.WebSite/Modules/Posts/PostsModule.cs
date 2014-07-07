@@ -46,49 +46,10 @@ namespace Sample.Manual.WebSite.Modules.Posts
         public dynamic PostDetails(dynamic parameters)
         {
             var postId = (Guid)parameters.PostID;
-            var post = _postRepository.SingleOrDefault(x => x.PostID == postId);
-            var comments = _commentRepository.GetCommentTreeForPost(postId);
-
             var model = new PostDetailsModel
                 {
-                    PostID = 2,
-                    Title = "My master's thesis subject",
-                    Content = "Actually this is my master's thesis subject.",
-                    Author = "manisero",
-                    Comments = new List<CommentModel>
-                        {
-                            new CommentModel
-                                {
-                                    Author = "Your mom",
-                                    Content = "Good luck with your thesis!",
-                                    Replies = new List<CommentModel>
-                                        {
-                                            new CommentModel
-                                                {
-                                                    Author = "manisero",
-                                                    Content = "Thanks, mom",
-                                                    Replies = new List<CommentModel>
-                                                        {
-                                                            new CommentModel
-                                                                {
-                                                                    Author = "Your mom",
-                                                                    Content = "Yrw."
-                                                                }
-                                                        }
-                                                },
-                                            new CommentModel
-                                                {
-                                                    Author = "Your mom",
-                                                    Content = "Ah, and eat your dinner"
-                                                }
-                                        }
-                                },
-                            new CommentModel
-                                {
-                                    Author = "Saudi Arabia prince",
-                                    Content = "Spam, spam, spam..."
-                                }
-                        }
+                    Post = _postRepository.SingleOrDefault(x => x.PostID == postId),
+                    Comments = _commentRepository.GetCommentTreeForPost(postId)
                 };
 
             return View[model];
@@ -100,28 +61,28 @@ namespace Sample.Manual.WebSite.Modules.Posts
 
             var model = new PostDetailsModel
                 {
-                    PostID = 2,
-                    Title = "My master's thesis subject",
-                    Content = "Actually this is my master's thesis subject.",
-                    Author = "manisero",
-                    Comments = new List<CommentModel>
-                        {
-                            new CommentModel
-                                {
-                                    Author = "Your mom",
-                                    Content = "Good luck with your thesis!"
-                                },
-                            new CommentModel
-                                {
-                                    Author = "Saudi Arabia prince",
-                                    Content = "Spam, spam, spam..."
-                                },
-                            new CommentModel
-                                {
-                                    Author = comment.Author,
-                                    Content = comment.Content
-                                }
-                        }
+                    //PostID = 2,
+                    //Title = "My master's thesis subject",
+                    //Content = "Actually this is my master's thesis subject.",
+                    //Author = "manisero",
+                    //Comments = new List<CommentModel>
+                    //    {
+                    //        new CommentModel
+                    //            {
+                    //                Author = "Your mom",
+                    //                Content = "Good luck with your thesis!"
+                    //            },
+                    //        new CommentModel
+                    //            {
+                    //                Author = "Saudi Arabia prince",
+                    //                Content = "Spam, spam, spam..."
+                    //            },
+                    //        new CommentModel
+                    //            {
+                    //                Author = comment.Author,
+                    //                Content = comment.Content
+                    //            }
+                    //    }
                 };
 
             return View[model];

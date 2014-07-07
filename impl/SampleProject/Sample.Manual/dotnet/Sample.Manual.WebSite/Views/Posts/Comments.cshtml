@@ -1,14 +1,18 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.IEnumerable<Sample.Manual.WebSite.Modules.Posts.Models.CommentModel>>
+﻿@using System.Linq
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.IEnumerable<Sample.Manual.Domain.Views.CommentTreeNode>>
 <ul>
-    @foreach (var comment in Model)
+    @foreach (var node in Model)
     {
         <li>
             <div>
-                <div>@comment.Content</div>
-                <div style="font-style: italic">Author: <a href="/Users/@comment.Author">@comment.Author</a></div>
-                @if (comment.Replies != null)
+                <div>@node.Comment.Content</div>
+                <div style="font-style: italic">
+                    Author:
+                    <a href="/Users/@node.Comment.Author">@node.Comment.Author</a>
+                </div>
+                @if (node.Children.Any())
                 {
-                    @Html.Partial("Comments", comment.Replies)
+                    @Html.Partial("Comments", node.Children)
                 }
             </div>
         </li>

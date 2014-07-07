@@ -8,11 +8,4 @@ namespace Sample.Manual.DataAccess.Repositories
     {
         IEnumerable<CommentTreeNode> GetCommentTreeForPost(Guid postId);
     }
-
-    public class CommentTreeNode
-    {
-        public Comment Comment { get; set; }
-
-        public IEnumerable<CommentTreeNode> Chilren { get; set; }
-    }
 }
