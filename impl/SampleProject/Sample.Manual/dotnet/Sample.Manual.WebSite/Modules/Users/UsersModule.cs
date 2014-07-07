@@ -10,12 +10,13 @@ namespace Sample.Manual.WebSite.Modules.Users
     public class UsersModule : NancyModule
     {
         private readonly IRepository<User> _userRepository;
-        private readonly IEventHandler<UserUpdatedEvent> _handler;
+        private readonly IEventQueue _eventQueue;
 
-        public UsersModule(IRepository<User> userRepository, IEventHandler<UserUpdatedEvent> handler) : base("/Users")
+        public UsersModule(IRepository<User> userRepository, IEventQueue eventQueue)
+            : base("/Users")
         {
             _userRepository = userRepository;
-            _handler = handler;
+            _eventQueue = eventQueue;
 
             Get["/{UserName}"] = Details;
             Post["/{UserName}"] = Update;
@@ -37,7 +38,7 @@ namespace Sample.Manual.WebSite.Modules.Users
                     User = user
                 };
 
-            _handler.HandleEvent(@event);
+            _eventQueue.PutEvent(@event);
 
             return Details(parameters);
         }

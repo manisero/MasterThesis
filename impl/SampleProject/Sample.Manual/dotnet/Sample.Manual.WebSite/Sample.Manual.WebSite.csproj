@@ -79,6 +79,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\RazorConfiguration.cs" />
+    <Compile Include="NinjectServiceResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -91,6 +92,10 @@
     <None Include="Views\Posts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sample.Manual.Core\Sample.Manual.Core.csproj">
+      <Project>{A9FCB9AE-21D2-44F8-B4F4-65C7889F01B3}</Project>
+      <Name>Sample.Manual.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sample.Manual.DataAccess\Sample.Manual.DataAccess.csproj">
       <Project>{27274d51-f036-4c3c-85c1-e0177eabb20b}</Project>
       <Name>Sample.Manual.DataAccess</Name>

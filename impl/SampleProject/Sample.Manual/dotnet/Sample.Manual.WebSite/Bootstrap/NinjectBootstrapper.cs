@@ -10,7 +10,7 @@ namespace Sample.Manual.WebSite.Bootstrap
             kernel.Bind(x => x.FromAssembliesMatching("Sample.Manual.*")
                               .SelectAllClasses()
                               .NotInNamespaces("Sample.Manual.WebSite.Configuration")
-                              .BindDefaultInterface());
+                              .BindDefaultInterfaces());
         }
     }
 }
