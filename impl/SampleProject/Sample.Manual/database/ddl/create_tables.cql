@@ -1,6 +1,8 @@
 USE "Sample_Manual";
 
-CREATE TABLE IF NOT EXISTS "Post" (
+
+
+CREATE TABLE "Post" (
 	"PostID" int,
 	"Title" text,
 	"Content" text,
@@ -9,7 +11,11 @@ CREATE TABLE IF NOT EXISTS "Post" (
 	PRIMARY KEY ("PostID")
 );
 
-CREATE TABLE IF NOT EXISTS "User" (
+CREATE INDEX ON "Post"("Author");
+
+
+
+CREATE TABLE "User" (
 	"UserName" text,
 	"FirstName" text,
 	"LastName" text,
