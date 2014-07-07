@@ -3,7 +3,7 @@ USE "Sample_Manual";
 
 
 CREATE TABLE "Post" (
-	"PostID" int,
+	"PostID" timeuuid,
 	"Title" text,
 	"Content" text,
 	"Author" text,
