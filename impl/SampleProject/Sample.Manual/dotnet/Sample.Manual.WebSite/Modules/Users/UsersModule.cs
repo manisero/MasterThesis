@@ -1,7 +1,6 @@
 ﻿using Nancy;
 using Sample.Manual.DataAccess;
 using Sample.Manual.Domain.Views;
-using System.Linq;
 
 namespace Sample.Manual.WebSite.Modules.Users
 {
@@ -19,7 +18,7 @@ namespace Sample.Manual.WebSite.Modules.Users
         public dynamic Details(dynamic parameters)
         {
             var userName = (string)parameters.UserName;
-            var user = _userRepository.Filter(x => x.UserName == userName).Single();
+            var user = _userRepository.SingleOrDefault(x => x.UserName == userName);
 
             return View[user];
         }

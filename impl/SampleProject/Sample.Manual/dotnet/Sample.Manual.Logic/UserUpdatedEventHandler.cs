@@ -15,7 +15,12 @@ namespace Sample.Manual.Logic
 
         public void HandleEvent(UserUpdatedEvent @event)
         {
-            var user = _userRepository.SingleOrDefault(x => x.UserName == @event.User.UserName);
+            var userView = _userRepository.SingleOrDefault(x => x.UserName == @event.User.UserName);
+
+            userView.FirstName = @event.User.FirstName;
+            userView.LastName = @event.User.LastName;
+
+            _userRepository.AddOrUpdate(userView);
         }
     }
 }

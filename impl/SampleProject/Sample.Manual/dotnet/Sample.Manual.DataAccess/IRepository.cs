@@ -13,5 +13,7 @@ namespace Sample.Manual.DataAccess
         TView SingleOrDefault(Expression<Func<TView, bool>> predicate);
 
         IReadOnlyCollection<TView> Filter(Expression<Func<TView, bool>> predicate);
+
+        void AddOrUpdate(TView item);
     }
 }

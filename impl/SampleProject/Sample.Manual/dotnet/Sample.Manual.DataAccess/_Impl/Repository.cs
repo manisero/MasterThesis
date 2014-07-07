@@ -37,5 +37,10 @@ namespace Sample.Manual.DataAccess._Impl
         {
             return ViewTable.Where(predicate).Execute().ToList();
         }
+
+        public void AddOrUpdate(TView item)
+        {
+            ViewTable.Insert(item).Execute();
+        }
     }
 }
