@@ -21,3 +21,14 @@ CREATE TABLE "User" (
 	"LastName" text,
 	PRIMARY KEY ("UserName")
 );
+
+
+
+CREATE TABLE "Comment" (
+	"CommentID" timeuuid,
+	"PostID" timeuuid,
+	"Content" text,
+	"Author" text,
+	"ParentCommentID" timeuuid,
+	PRIMARY KEY ("CommentID")
+);
