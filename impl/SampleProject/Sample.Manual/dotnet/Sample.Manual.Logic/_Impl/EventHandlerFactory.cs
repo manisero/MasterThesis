@@ -34,6 +34,7 @@ namespace Sample.Manual.Logic._Impl
             _handlers = new Dictionary<Type, Type>();
 
             _handlers[typeof(UserUpdatedEvent)] = typeof(UserUpdatedEventHandler);
+            _handlers[typeof(PostCommentedEvent)] = typeof(PostCommentedEventHandler);
         }
     }
 }

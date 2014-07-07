@@ -32,10 +32,9 @@ namespace Sample.Manual.WebSite.Modules.Users
 
         public dynamic Update(dynamic parameters)
         {
-            var user = this.Bind<Domain.Entities.User>();
             var @event = new UserUpdatedEvent
                 {
-                    User = user
+                    User = this.Bind<Domain.Entities.User>()
                 };
 
             _eventQueue.PutEvent(@event);

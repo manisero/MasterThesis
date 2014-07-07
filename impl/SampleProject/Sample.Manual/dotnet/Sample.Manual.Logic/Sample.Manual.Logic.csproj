@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventHandlers\PostCommentedEventHandler.cs" />
     <Compile Include="IEventHandler.cs" />
     <Compile Include="EventHandlers\UserUpdatedEventHandler.cs" />
     <Compile Include="IEventHandlerFactory.cs" />

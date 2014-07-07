@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using Nancy;
 using Sample.Manual.DataAccess;
 using Sample.Manual.DataAccess.Repositories;
+using Sample.Manual.Domain.Events;
 using Sample.Manual.Domain.Views;
+using Sample.Manual.Logic;
 using Sample.Manual.WebSite.Modules.Posts.Models;
 using Nancy.ModelBinding;
 using System.Linq;
@@ -14,11 +15,13 @@ namespace Sample.Manual.WebSite.Modules.Posts
     {
         private readonly IRepository<Post> _postRepository;
         private readonly ICommentRepository _commentRepository;
+        private readonly IEventQueue _eventQueue;
 
-        public PostsModule(IRepository<Post> postRepository, ICommentRepository commentRepository)
+        public PostsModule(IRepository<Post> postRepository, ICommentRepository commentRepository, IEventQueue eventQueue)
         {
             _postRepository = postRepository;
             _commentRepository = commentRepository;
+            _eventQueue = eventQueue;
 
             Get["/"] = Index;
             Get["/of/{UserName}"] = OfUser;
@@ -57,35 +60,15 @@ namespace Sample.Manual.WebSite.Modules.Posts
 
         public dynamic Comment(dynamic parameters)
         {
-            var comment = this.Bind<Domain.Entities.Comment>();
-
-            var model = new PostDetailsModel
+            var @event = new PostCommentedEvent
                 {
-                    //PostID = 2,
-                    //Title = "My master's thesis subject",
-                    //Content = "Actually this is my master's thesis subject.",
-                    //Author = "manisero",
-                    //Comments = new List<CommentModel>
-                    //    {
-                    //        new CommentModel
-                    //            {
-                    //                Author = "Your mom",
-                    //                Content = "Good luck with your thesis!"
-                    //            },
-                    //        new CommentModel
-                    //            {
-                    //                Author = "Saudi Arabia prince",
-                    //                Content = "Spam, spam, spam..."
-                    //            },
-                    //        new CommentModel
-                    //            {
-                    //                Author = comment.Author,
-                    //                Content = comment.Content
-                    //            }
-                    //    }
+                    PostID = parameters.PostID,
+                    Comment = this.Bind<Domain.Entities.Comment>()
                 };
 
-            return View[model];
+            _eventQueue.PutEvent(@event);
+
+            return PostDetails(parameters);
         }
     }
 }

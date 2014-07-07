@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Events\PostCommentedEvent.cs" />
     <Compile Include="Events\UserUpdatedEvent.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEvent.cs" />
