@@ -1,5 +1,12 @@
 USE "Sample_Manual";
 
+CREATE TABLE "User" (
+	"UserName" text,
+	"FirstName" text,
+	"LastName" text,
+	PRIMARY KEY ("UserName")
+);
+
 
 
 CREATE TABLE "Post" (
@@ -12,15 +19,6 @@ CREATE TABLE "Post" (
 );
 
 CREATE INDEX ON "Post"("Author");
-
-
-
-CREATE TABLE "User" (
-	"UserName" text,
-	"FirstName" text,
-	"LastName" text,
-	PRIMARY KEY ("UserName")
-);
 
 
 
