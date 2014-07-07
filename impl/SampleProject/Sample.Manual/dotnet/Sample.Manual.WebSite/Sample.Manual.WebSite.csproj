@@ -99,6 +99,10 @@
       <Project>{157920a5-5eb4-492c-b258-7f7cba616491}</Project>
       <Name>Sample.Manual.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sample.Manual.Logic\Sample.Manual.Logic.csproj">
+      <Project>{1D66FB74-ADB3-4245-8C3B-A3BA7DCB02AC}</Project>
+      <Name>Sample.Manual.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

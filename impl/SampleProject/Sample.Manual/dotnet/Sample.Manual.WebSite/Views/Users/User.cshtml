@@ -4,6 +4,21 @@
 }
 
 <div>Nick: @Model.UserName</div>
-<div>First name: @Model.FirstName</div>
-<div>Last name: @Model.LastName</div>
+
+<form action="/Users/@Model.UserName" method="POST">
+    <div>
+        First name:
+        @Model.FirstName
+        <input type="text" name="FirstName" value="@Model.FirstName" />
+    </div>
+    <div>
+        Last name:
+        @Model.LastName
+        <input type="text" name="LastName" value="@Model.LastName" />
+    </div>
+    <div>
+        <input type="submit" value="Update" />
+    </div>
+</form>
+
 <div style="font-style: italic"><a href="/of/@Model.UserName">See @Model.UserName's posts</a></div>
