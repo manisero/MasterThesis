@@ -8,7 +8,9 @@ namespace CodeGeneration.Logic
 
         void SetFileContent(string filePath, string content);
 
-        IEnumerable<string> GetFilesInDirectory(string directoryPath, bool recursive = true);
+        IReadOnlyList<string> GetFilesInDirectory(string directoryPath, bool recursive = true);
+
+        IReadOnlyList<string> GetDirectoriresInDirectory(string directoryPath);
 
         string GetRelativePath(string parentPath, string childPath);
 

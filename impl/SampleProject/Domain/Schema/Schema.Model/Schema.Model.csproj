@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Entity.cs" />
     <Compile Include="Field.cs" />
+    <Compile Include="Domain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

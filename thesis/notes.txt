@@ -25,3 +25,4 @@ Wybór silnika do generacji kodu (templating engine) (dlaczego t4?) (np. razor n
 
 Wybrór klienta Cassandry
 - żaden z nich nie wspiera generownia klas na podstawie schematu (lub odwrotnie, więc tym bardziej warto używać generatora kodu i schematu)
+^ UPDATE: datastax chyba wspiera :(

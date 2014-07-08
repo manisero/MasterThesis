@@ -1,5 +1,6 @@
 ﻿using CodeGeneration.Logic;
-using Schema.Model;using Schema.Templates;
+using Schema.Model;
+using Schema.Templates;
 
 namespace Schema.Generation.Console
 {
@@ -11,7 +12,9 @@ namespace Schema.Generation.Console
             var destinationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\Sample.Presentation\Domain\";
 
             var generationFacade = CodeGenerationFacade.GetInstance();
-            generationFacade.GenerateFromDirectory<Entity>(metadataPath, () => new EntityTemplate(), destinationPath, "cs");
+            var domain = generationFacade.DeserializeDomain<Domain>(metadataPath);
+
+            //generationFacade.GenerateFromDirectory<Entity>(metadataPath, () => new EntityTemplate(), null, "cs");
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using CodeGeneration.Logic.Bootstrap;
+using CodeGeneration.Logic.DomainDeserialization;
 using Ninject;
 
 namespace CodeGeneration.Logic
@@ -25,16 +26,19 @@ namespace CodeGeneration.Logic
         private readonly IJsonDeserializer _jsonDeserializer;
         private readonly IGenerationContextFactory _contextFactory;
         private readonly ICodeGenerator _codeGenerator;
+        private readonly IDomainDeserializer _domainDeserializer;
 
         public CodeGenerationFacade(IFileSystemService fileSystemService,
                                     IJsonDeserializer jsonDeserializer,
                                     IGenerationContextFactory contextFactory,
-                                    ICodeGenerator codeGenerator)
+                                    ICodeGenerator codeGenerator,
+                                    IDomainDeserializer domainDeserializer)
         {
             _fileSystemService = fileSystemService;
             _jsonDeserializer = jsonDeserializer;
             _contextFactory = contextFactory;
             _codeGenerator = codeGenerator;
+            _domainDeserializer = domainDeserializer;
         }
 
         public void GenerateFromFile<TMetadata>(string metadataFilePath, object template, string destinationFilePath)
@@ -45,7 +49,10 @@ namespace CodeGeneration.Logic
 
             var code = _codeGenerator.Generate(metadata, template, context);
 
-            _fileSystemService.SetFileContent(destinationFilePath, code);
+            if (destinationFilePath != null)
+            {
+                _fileSystemService.SetFileContent(destinationFilePath, code);
+            }
         }
 
         public void GenerateFromDirectory<TMetadata>(string metadataDirectoryPath, Func<object> templateGetter, string destinationDirectoryPath, string destinationFileExtension)
@@ -60,6 +67,12 @@ namespace CodeGeneration.Logic
 
                 GenerateFromFile<TMetadata>(metadataPath, templateGetter(), destinationPath);
             }
+        }
+
+        public TDomain DeserializeDomain<TDomain>(string rootFolderPath)
+            where TDomain : new()
+        {
+            return _domainDeserializer.Deserialize<TDomain>(rootFolderPath);
         }
     }
 }

@@ -15,9 +15,14 @@ namespace CodeGeneration.Logic._Impl
             File.WriteAllText(filePath, content);
         }
 
-        public IEnumerable<string> GetFilesInDirectory(string directoryPath, bool recursive)
+        public IReadOnlyList<string> GetFilesInDirectory(string directoryPath, bool recursive)
         {
             return Directory.GetFiles(directoryPath, "*", recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+        }
+
+        public IReadOnlyList<string> GetDirectoriresInDirectory(string directoryPath)
+        {
+            return Directory.GetDirectories(directoryPath);
         }
 
         public string GetRelativePath(string parentPath, string childPath)
@@ -30,7 +35,9 @@ namespace CodeGeneration.Logic._Impl
 
         public string CombinePaths(params string[] paths)
         {
-            return Path.Combine(paths);
+            return paths[0] != null
+                       ? Path.Combine(paths)
+                       : null;
         }
 
         public string ChangeFileExtension(string filePath, string newExtension)
