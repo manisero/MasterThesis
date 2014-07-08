@@ -1,9 +1,0 @@
-{
-	"Derives": "Person",
-	"Fields": [
-		{
-			"Name": "Orders",
-			"Type": "IEnumerable<Order>"
-		}
-	]
-}

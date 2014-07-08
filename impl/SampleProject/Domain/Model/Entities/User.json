@@ -1,0 +1,17 @@
+{
+	"Name": "User",
+	"Fields": [
+		{
+			"Name": "UserName",
+			"Type": "text"
+		},
+		{
+			"Name": "FirstName",
+			"Type": "text"
+		}
+		{
+			"Name": "LastName",
+			"Type": "text"
+		}
+	]
+}

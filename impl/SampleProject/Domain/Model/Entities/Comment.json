@@ -1,0 +1,13 @@
+{
+	"Name": "Comment",
+	"Fields": [
+		{
+			"Name": "CommentID",
+			"Type": "timeuuid"
+		}
+		{
+			"Name": "Content",
+			"Type": "text"
+		}
+	]
+}

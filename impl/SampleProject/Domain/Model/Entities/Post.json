@@ -1,0 +1,21 @@
+{
+	"Name": "Post",
+	"Fields": [
+		{
+			"Name": "PostID",
+			"Type": "timeuuid"
+		},
+		{
+			"Name": "Title",
+			"Type": "text"
+		}
+		{
+			"Name": "Content",
+			"Type": "text"
+		},
+		{
+			"Name": "CommentsNumber",
+			"Type": "int"
+		}
+	]
+}
