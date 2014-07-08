@@ -7,6 +7,8 @@ namespace Sample.Manual.Domain.Events
     {
         public Guid PostID { get; set; }
 
+        public Guid? ParentCommentID { get; set; }
+
         public Comment Comment { get; set; }
     }
 }

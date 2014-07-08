@@ -10,6 +10,9 @@
                     Author:
                     <a href="/Users/@node.Comment.Author">@node.Comment.Author</a>
                 </div>
+                <div>
+                    <a href="/Comments/@node.Comment.CommentID">Reply</a>
+                </div>
                 @if (node.Children.Any())
                 {
                     @Html.Partial("Comments", node.Children)

@@ -24,7 +24,8 @@ namespace Sample.Manual.Logic.EventHandlers
                     CommentID = _uuidService.CreateUUID(),
                     PostID = @event.PostID,
                     Author = @event.Comment.Author,
-                    Content = @event.Comment.Content
+                    Content = @event.Comment.Content,
+                    ParentCommentID = @event.ParentCommentID
                 };
 
             _commentRepository.AddOrUpdate(comment);

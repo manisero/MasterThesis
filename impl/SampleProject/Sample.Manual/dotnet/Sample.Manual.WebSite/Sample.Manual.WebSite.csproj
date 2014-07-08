@@ -71,6 +71,7 @@
     <Compile Include="Bootstrap\NancyBootstrapper.cs" />
     <Compile Include="Bootstrap\NinjectBootstrapper.cs" />
     <Compile Include="Configuration\Conventions\ViewLocationConventions.cs" />
+    <Compile Include="Modules\Comments\CommentsModule.cs" />
     <Compile Include="Modules\Posts\Models\CommentModel.cs" />
     <Compile Include="Modules\Posts\Models\IndexModel.cs" />
     <Compile Include="Modules\Posts\Models\PostDetailsModel.cs" />
@@ -84,6 +85,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Views\Comments\Comment.cshtml" />
     <None Include="Views\Posts\Comments.cshtml" />
     <None Include="Views\Posts\PostDetails.cshtml" />
     <None Include="Views\Users\User.cshtml" />

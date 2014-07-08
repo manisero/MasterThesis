@@ -23,10 +23,12 @@ CREATE INDEX ON "Post"("Author");
 
 
 CREATE TABLE "Comment" (
-	"CommentID" timeuuid,
 	"PostID" timeuuid,
+	"CommentID" timeuuid,
 	"Content" text,
 	"Author" text,
 	"ParentCommentID" timeuuid,
 	PRIMARY KEY ("PostID", "CommentID")
 );
+
+CREATE INDEX ON "Comment"("CommentID");
