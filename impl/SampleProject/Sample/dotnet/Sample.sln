@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Core", "Sample.Core\Sample.Core.csproj", "{B79DF028-48C3-4FD3-BCB5-95A64B6C13BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Domain", "Sample.Domain\Sample.Domain.csproj", "{D04C0542-A9A8-4876-8D76-6CA6FB8B2367}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.DataAccess", "Sample.DataAccess\Sample.DataAccess.csproj", "{A915A34C-3FAF-40B7-896C-5AD19785D0D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Logic", "Sample.Logic\Sample.Logic.csproj", "{A5D32BD9-4E06-46F7-8E8E-0DA4F8FCB0B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.WebSite", "Sample.WebSite\Sample.WebSite.csproj", "{3B8C9BC9-7903-4BD3-883B-071DF35A7A04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Core", "0. Core", "{4039FFB1-4C94-4C0A-A081-1B3A636A0E97}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Domain", "1. Domain", "{7347312B-9AFD-4600-BB7E-F87B1F3590CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. DataAccess", "2. DataAccess", "{352DFA49-1540-468A-B81B-5ACE7D76BEF3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Logic", "3. Logic", "{BDDC7370-9C54-48BA-8E1D-16B6B709A3AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Presentation", "4. Presentation", "{67D0636E-550C-4E0F-AAAC-F0E8A07BFAC4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{794C87B8-F288-4E11-86A2-A6A2C302E036}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B79DF028-48C3-4FD3-BCB5-95A64B6C13BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B79DF028-48C3-4FD3-BCB5-95A64B6C13BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B79DF028-48C3-4FD3-BCB5-95A64B6C13BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B79DF028-48C3-4FD3-BCB5-95A64B6C13BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D04C0542-A9A8-4876-8D76-6CA6FB8B2367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D04C0542-A9A8-4876-8D76-6CA6FB8B2367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D04C0542-A9A8-4876-8D76-6CA6FB8B2367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D04C0542-A9A8-4876-8D76-6CA6FB8B2367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A915A34C-3FAF-40B7-896C-5AD19785D0D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A915A34C-3FAF-40B7-896C-5AD19785D0D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A915A34C-3FAF-40B7-896C-5AD19785D0D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A915A34C-3FAF-40B7-896C-5AD19785D0D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5D32BD9-4E06-46F7-8E8E-0DA4F8FCB0B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5D32BD9-4E06-46F7-8E8E-0DA4F8FCB0B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5D32BD9-4E06-46F7-8E8E-0DA4F8FCB0B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5D32BD9-4E06-46F7-8E8E-0DA4F8FCB0B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B8C9BC9-7903-4BD3-883B-071DF35A7A04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B8C9BC9-7903-4BD3-883B-071DF35A7A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B8C9BC9-7903-4BD3-883B-071DF35A7A04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B8C9BC9-7903-4BD3-883B-071DF35A7A04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B79DF028-48C3-4FD3-BCB5-95A64B6C13BE} = {4039FFB1-4C94-4C0A-A081-1B3A636A0E97}
+		{D04C0542-A9A8-4876-8D76-6CA6FB8B2367} = {7347312B-9AFD-4600-BB7E-F87B1F3590CD}
+		{A915A34C-3FAF-40B7-896C-5AD19785D0D1} = {352DFA49-1540-468A-B81B-5ACE7D76BEF3}
+		{A5D32BD9-4E06-46F7-8E8E-0DA4F8FCB0B6} = {BDDC7370-9C54-48BA-8E1D-16B6B709A3AF}
+		{3B8C9BC9-7903-4BD3-883B-071DF35A7A04} = {67D0636E-550C-4E0F-AAAC-F0E8A07BFAC4}
+	EndGlobalSection
+EndGlobal
