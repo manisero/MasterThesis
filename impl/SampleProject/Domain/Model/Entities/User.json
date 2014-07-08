@@ -3,7 +3,19 @@
 	"Fields": [
 		{
 			"Name": "UserName",
-			"Type": "text"
+			"Type": "text",
+			"IsKeyInModel": true,
+			"PresentIn": [
+				{
+					"View": "Post",
+					"As": "Author",
+					"IsSearchable": true
+				},
+				{
+					"View": "Comment",
+					"As": "Author"
+				}
+			]
 		},
 		{
 			"Name": "FirstName",
@@ -13,5 +25,6 @@
 			"Name": "LastName",
 			"Type": "text"
 		}
-	]
+	],
+	"IsPresentInModel": true
 }

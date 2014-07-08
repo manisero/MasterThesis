@@ -78,7 +78,8 @@ namespace Schema.Templates
 
     private string FormatBaseClass()
     {
-        return Metadata.Derives != null ? ": " + Metadata.Derives : string.Empty;
+        //return Metadata.Derives != null ? ": " + Metadata.Derives : string.Empty;
+        return null;
     }
 
 

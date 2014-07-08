@@ -3,11 +3,15 @@
 	"Fields": [
 		{
 			"Name": "CommentID",
-			"Type": "timeuuid"
-		}
+			"Type": "timeuuid",
+			"IsKeyInModel": true,
+			"OnKeyPostion": 1,
+			"IsSearchableInModel": true
+		},
 		{
 			"Name": "Content",
 			"Type": "text"
 		}
-	]
+	],
+	"IsPresentInModel": true
 }
