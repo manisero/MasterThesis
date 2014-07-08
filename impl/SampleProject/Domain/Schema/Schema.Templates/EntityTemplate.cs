@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Schema.Model.Templates
+namespace Schema.Templates
 {
     using CodeGeneration.Logic;
     using Schema.Model;
@@ -17,7 +17,7 @@ namespace Schema.Model.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
     public partial class EntityTemplate : EntityTemplateBase
     {
@@ -29,42 +29,42 @@ namespace Schema.Model.Templates
             this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace Sample.Presentation" +
                     ".Domain\r\n{\r\n\tpublic class ");
             
-            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Context.MetadataFileName));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FormatBaseClass()));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n");
             
-            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
  foreach (var field in Metadata.Fields) { 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Type));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 15 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+            #line 15 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
  } 
             
             #line default
@@ -73,7 +73,7 @@ namespace Schema.Model.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 18 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+        #line 18 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
 
 
     private string FormatBaseClass()
@@ -86,7 +86,7 @@ namespace Schema.Model.Templates
         #line default
         #line hidden
         
-        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Model\Templates\EntityTemplate.tt"
+        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
 
 private global::CodeGeneration.Logic.IGenerationContext _ContextField;
 

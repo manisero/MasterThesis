@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema.Model", "Schema.Model\Schema.Model.csproj", "{4031CE2D-F3EE-4A44-898C-FCD21F18C4CC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definitions", "Definitions", "{8E10833D-E374-4CC1-86C5-242CB17072FD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Definitions", "1. Definitions", "{8E10833D-E374-4CC1-86C5-242CB17072FD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generation", "Generation", "{93AF4FD0-1EB8-4A0F-8DBC-1FAA8F0B4E81}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Generation", "3. Generation", "{93AF4FD0-1EB8-4A0F-8DBC-1FAA8F0B4E81}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema.Generation.Console", "Schema.Generation.Console\Schema.Generation.Console.csproj", "{51CEE4E2-D9D1-4ADD-96B3-02B0A54B04AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Templates", "2. Templates", "{1A8F12D2-408D-4D39-9016-5756D987B3D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schema.Templates", "Schema.Templates\Schema.Templates.csproj", "{9391E01A-BEF9-4816-8972-A9ED8D73CEC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +27,10 @@ Global
 		{51CEE4E2-D9D1-4ADD-96B3-02B0A54B04AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51CEE4E2-D9D1-4ADD-96B3-02B0A54B04AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51CEE4E2-D9D1-4ADD-96B3-02B0A54B04AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9391E01A-BEF9-4816-8972-A9ED8D73CEC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9391E01A-BEF9-4816-8972-A9ED8D73CEC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9391E01A-BEF9-4816-8972-A9ED8D73CEC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9391E01A-BEF9-4816-8972-A9ED8D73CEC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +38,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4031CE2D-F3EE-4A44-898C-FCD21F18C4CC} = {8E10833D-E374-4CC1-86C5-242CB17072FD}
 		{51CEE4E2-D9D1-4ADD-96B3-02B0A54B04AF} = {93AF4FD0-1EB8-4A0F-8DBC-1FAA8F0B4E81}
+		{9391E01A-BEF9-4816-8972-A9ED8D73CEC3} = {1A8F12D2-408D-4D39-9016-5756D987B3D6}
 	EndGlobalSection
 EndGlobal

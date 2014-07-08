@@ -1,6 +1,5 @@
 ﻿using CodeGeneration.Logic;
-using Schema.Model;
-using Schema.Model.Templates;
+using Schema.Model;using Schema.Templates;
 
 namespace Schema.Generation.Console
 {
