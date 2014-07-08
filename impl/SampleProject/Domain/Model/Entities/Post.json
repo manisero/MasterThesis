@@ -16,7 +16,7 @@
 		{
 			"Name": "Title",
 			"Type": "text"
-		}
+		},
 		{
 			"Name": "Content",
 			"Type": "text"
