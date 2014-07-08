@@ -2,11 +2,8 @@
 using Nancy;
 using Sample.Manual.DataAccess;
 using Sample.Manual.DataAccess.Repositories;
-using Sample.Manual.Domain.Events;
 using Sample.Manual.Domain.Views;
-using Sample.Manual.Logic;
 using Sample.Manual.WebSite.Modules.Posts.Models;
-using Nancy.ModelBinding;
 using System.Linq;
 
 namespace Sample.Manual.WebSite.Modules.Posts
@@ -15,18 +12,15 @@ namespace Sample.Manual.WebSite.Modules.Posts
     {
         private readonly IRepository<Post> _postRepository;
         private readonly ICommentRepository _commentRepository;
-        private readonly IEventQueue _eventQueue;
 
-        public PostsModule(IRepository<Post> postRepository, ICommentRepository commentRepository, IEventQueue eventQueue)
+        public PostsModule(IRepository<Post> postRepository, ICommentRepository commentRepository)
         {
             _postRepository = postRepository;
             _commentRepository = commentRepository;
-            _eventQueue = eventQueue;
 
             Get["/"] = Index;
             Get["/of/{UserName}"] = OfUser;
-            Get["/{PostId}"] = PostDetails;
-            Post["/{postId}/Comment"] = Comment;
+            Get["/{PostId}"] = Details;
         }
 
         public dynamic Index(dynamic parameters)
@@ -46,7 +40,7 @@ namespace Sample.Manual.WebSite.Modules.Posts
             return View[model];
         }
 
-        public dynamic PostDetails(dynamic parameters)
+        public dynamic Details(dynamic parameters)
         {
             var postId = (Guid)parameters.PostID;
             var model = new PostDetailsModel
@@ -56,19 +50,6 @@ namespace Sample.Manual.WebSite.Modules.Posts
                 };
 
             return View[model];
-        }
-
-        public dynamic Comment(dynamic parameters)
-        {
-            var @event = new PostCommentedEvent
-                {
-                    PostID = parameters.PostID,
-                    Comment = this.Bind<Domain.Entities.Comment>()
-                };
-
-            _eventQueue.PutEvent(@event);
-
-            return PostDetails(parameters);
         }
     }
 }

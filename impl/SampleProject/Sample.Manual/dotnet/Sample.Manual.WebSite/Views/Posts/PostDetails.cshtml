@@ -14,7 +14,7 @@
 <div>Comments:</div>
 @Html.Partial("Comments", Model.Comments)
 
-<form action="/@Model.Post.PostID/Comment" method="POST">
+<form action="/Comments/replyTo/@Model.Post.PostID" method="POST">
     <div style="font-weight: bold">
         Add a comment:
     </div>

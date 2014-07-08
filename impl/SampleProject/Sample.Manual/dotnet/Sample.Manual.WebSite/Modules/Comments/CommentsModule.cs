@@ -19,8 +19,10 @@ namespace Sample.Manual.WebSite.Modules.Comments
         {
             _commentRepository = commentRepository;
             _eventQueue = eventQueue;
+
             Get["/{CommentID}"] = Details;
-            Post["/replyTo/{PostID}/{CommentID}"] = Reply;
+            Post["/replyTo/{PostID}"] = ReplyToPost;
+            Post["/replyTo/{PostID}/{CommentID}"] = ReplyToComment;
         }
 
         public dynamic Details(dynamic parameters)
@@ -31,15 +33,24 @@ namespace Sample.Manual.WebSite.Modules.Comments
             return View[comment];
         }
 
-        public dynamic Reply(dynamic parameters)
+        public dynamic ReplyToPost(dynamic parameters)
         {
-            var postId = parameters.PostID;
-            var comment = this.Bind<Domain.Entities.Comment>();
+            return Reply(parameters.PostID, null, this.Bind<Domain.Entities.Comment>());
+        }
 
+        public dynamic ReplyToComment(dynamic parameters)
+        {
+            return Reply(parameters.PostID, parameters.CommentID, this.Bind<Domain.Entities.Comment>());
+        }
+
+        private RedirectResponse Reply(Guid postId, Guid? postParentId, Domain.Entities.Comment comment)
+        {
             var @event = new PostCommentedEvent
-                {
-                    PostID = postId, ParentCommentID = parameters.CommentID, Comment = comment
-                };
+            {
+                PostID = postId,
+                ParentCommentID = postParentId,
+                Comment = comment
+            };
 
             _eventQueue.PutEvent(@event);
 

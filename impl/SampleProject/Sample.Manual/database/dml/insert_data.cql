@@ -7,7 +7,7 @@ INSERT INTO "User" ("UserName", "FirstName", "LastName")
 VALUES ('Your mom', 'Your', 'Mom');
 
 INSERT INTO "User" ("UserName", "FirstName", "LastName")
-VALUES ('Saudi arabia prince', 'Saudi', 'Prince');
+VALUES ('Saudi Arabia prince', 'Saudi', 'Prince');
 
 
 
