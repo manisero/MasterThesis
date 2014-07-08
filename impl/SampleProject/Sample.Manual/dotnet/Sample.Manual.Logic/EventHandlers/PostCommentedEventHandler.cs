@@ -8,11 +8,13 @@ namespace Sample.Manual.Logic.EventHandlers
     {
         private readonly IUUIDService _uuidService;
         private readonly IRepository<Comment> _commentRepository;
+        private readonly IRepository<Post> _postRepository;
 
-        public PostCommentedEventHandler(IUUIDService uuidService, IRepository<Comment> commentRepository)
+        public PostCommentedEventHandler(IUUIDService uuidService, IRepository<Comment> commentRepository, IRepository<Post> postRepository)
         {
             _uuidService = uuidService;
             _commentRepository = commentRepository;
+            _postRepository = postRepository;
         }
 
         public void HandleEvent(PostCommentedEvent @event)
@@ -25,9 +27,12 @@ namespace Sample.Manual.Logic.EventHandlers
                     Content = @event.Comment.Content
                 };
 
-            // TODO: Update Post.NumberOfComments
-
             _commentRepository.AddOrUpdate(comment);
+
+            var post = _postRepository.SingleOrDefault(x => x.PostID == @event.PostID);
+            post.CommentsNumber++;
+
+            _postRepository.AddOrUpdate(post);
         }
     }
 }
