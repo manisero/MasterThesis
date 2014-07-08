@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeGeneration.Logic
+namespace CodeGeneration.Logic.Infrastructure
 {
     public interface IJsonDeserializer
     {

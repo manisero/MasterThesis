@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace CodeGeneration.Logic._Impl
+namespace CodeGeneration.Logic.Infrastructure._Impl
 {
     public class JsonDeserializer : IJsonDeserializer
     {

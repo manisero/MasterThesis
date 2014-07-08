@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CodeGeneration.Logic
+namespace CodeGeneration.Logic.Infrastructure
 {
     public interface IFileSystemService
     {

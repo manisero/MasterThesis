@@ -1,7 +1,7 @@
 using System;
 using Microsoft.VisualStudio.TextTemplating;
 
-namespace CodeGeneration.Logic._Impl
+namespace CodeGeneration.Logic.Generation._Impl
 {
     public class CodeGenerator : ICodeGenerator
     {

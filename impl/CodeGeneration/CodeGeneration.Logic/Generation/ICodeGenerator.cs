@@ -1,4 +1,4 @@
-﻿namespace CodeGeneration.Logic
+﻿namespace CodeGeneration.Logic.Generation
 {
     public interface ICodeGenerator
     {

@@ -1,6 +1,8 @@
 using System;
 using CodeGeneration.Logic.Bootstrap;
 using CodeGeneration.Logic.DomainDeserialization;
+using CodeGeneration.Logic.Generation;
+using CodeGeneration.Logic.Infrastructure;
 using Ninject;
 
 namespace CodeGeneration.Logic

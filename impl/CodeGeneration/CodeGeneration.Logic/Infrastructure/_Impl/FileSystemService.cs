@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace CodeGeneration.Logic._Impl
+namespace CodeGeneration.Logic.Infrastructure._Impl
 {
     public class FileSystemService : IFileSystemService
     {

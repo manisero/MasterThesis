@@ -57,16 +57,16 @@
     <Compile Include="DomainDeserialization\IDomainDeserializer.cs" />
     <Compile Include="DomainDeserialization\_Impl\DomainDeserializer.cs" />
     <Compile Include="GenerationContext.cs" />
-    <Compile Include="ICodeGenerator.cs" />
-    <Compile Include="IFileSystemService.cs" />
+    <Compile Include="Generation\ICodeGenerator.cs" />
+    <Compile Include="Infrastructure\IFileSystemService.cs" />
     <Compile Include="IGenerationContextFactory.cs" />
-    <Compile Include="IJsonDeserializer.cs" />
+    <Compile Include="Infrastructure\IJsonDeserializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CodeGenerationFacade.cs" />
-    <Compile Include="_Impl\CodeGenerator.cs" />
-    <Compile Include="_Impl\FileSystemService.cs" />
+    <Compile Include="Generation\_Impl\CodeGenerator.cs" />
+    <Compile Include="Infrastructure\_Impl\FileSystemService.cs" />
     <Compile Include="_Impl\GenerationContextFactory.cs" />
-    <Compile Include="_Impl\JsonDeserializer.cs" />
+    <Compile Include="Infrastructure\_Impl\JsonDeserializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
