@@ -28,13 +28,15 @@ namespace Schema.Generation.Console
         }
 
         public static IEnumerable<CodeGenerationUnit<TMetadata>> ToCodeGenerationUnits<TMetadata>(this IEnumerable<TMetadata> metadata,
-                                                                                                  string outputFileExtension)
+                                                                                                  string outputFileExtension,
+                                                                                                  string outputFileNamePrefix = null,
+                                                                                                  string outputFileNameSuffix = null)
             where TMetadata : INamed
         {
             return metadata.Select(x => new CodeGenerationUnit<TMetadata>
                 {
                     Metadata = x,
-                    OutputFileName = x.Name + "." + outputFileExtension
+                    OutputFileName = string.Format("{0}{1}{2}.{3}", outputFileNamePrefix, x.Name, outputFileNameSuffix, outputFileExtension)
                 });
         }
     }

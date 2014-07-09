@@ -1,0 +1,8 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Schema.Templates.Utilities" #>
+<#@ parameter type="Schema.Model.View" name="Metadata" #>
+<#@ parameter type="System.String" name="KeySpace" #>
+USE "<#= KeySpace #>";
+
+SELECT * FROM "<#= Metadata.Name #>";

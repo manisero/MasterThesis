@@ -42,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\ViewSelectTemplate.cs">
+      <DependentUpon>ViewSelectTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Database\KeySpaceDropTemplate.cs">
       <DependentUpon>KeySpaceDropTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -58,8 +63,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Utilities\CqlHelper.cs" />
-    <Compile Include="Database\ViewTableTemplate.cs">
-      <DependentUpon>ViewTableTemplate.tt</DependentUpon>
+    <Compile Include="Database\ViewCreationTemplate.cs">
+      <DependentUpon>ViewCreationTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -77,6 +82,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Database\ViewSelectTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ViewSelectTemplate.cs</LastGenOutput>
+    </None>
     <None Include="Database\KeySpaceDropTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>KeySpaceDropTemplate.cs</LastGenOutput>
@@ -89,9 +98,9 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>TablesCreationTemplate.cs</LastGenOutput>
     </None>
-    <None Include="Database\ViewTableTemplate.tt">
+    <None Include="Database\ViewCreationTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ViewTableTemplate.cs</LastGenOutput>
+      <LastGenOutput>ViewCreationTemplate.cs</LastGenOutput>
     </None>
     <None Include="DotNet\EntityTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

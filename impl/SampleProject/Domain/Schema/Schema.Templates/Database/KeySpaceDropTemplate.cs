@@ -27,7 +27,7 @@ namespace Schema.Templates.Database
             this.Write("DROP KEYSPACE IF EXISTS \"");
             
             #line 3 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\KeySpaceDropTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Metadata));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
             
             #line default
             #line hidden
@@ -37,12 +37,12 @@ namespace Schema.Templates.Database
         
         #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\KeySpaceDropTemplate.tt"
 
-private string _MetadataField;
+private global::Schema.Model.KeySpace _MetadataField;
 
 /// <summary>
 /// Access the Metadata parameter of the template.
 /// </summary>
-private string Metadata
+private global::Schema.Model.KeySpace Metadata
 {
     get
     {
@@ -61,14 +61,14 @@ public virtual void Initialize()
 bool MetadataValueAcquired = false;
 if (this.Session.ContainsKey("Metadata"))
 {
-    if ((typeof(string).IsAssignableFrom(this.Session["Metadata"].GetType()) == false))
+    if ((typeof(global::Schema.Model.KeySpace).IsAssignableFrom(this.Session["Metadata"].GetType()) == false))
     {
-        this.Error("The type \'System.String\' of the parameter \'Metadata\' did not match the type of th" +
-                "e data passed to the template.");
+        this.Error("The type \'Schema.Model.KeySpace\' of the parameter \'Metadata\' did not match the ty" +
+                "pe of the data passed to the template.");
     }
     else
     {
-        this._MetadataField = ((string)(this.Session["Metadata"]));
+        this._MetadataField = ((global::Schema.Model.KeySpace)(this.Session["Metadata"]));
         MetadataValueAcquired = true;
     }
 }
@@ -77,14 +77,14 @@ if ((MetadataValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Metadata");
     if ((data != null))
     {
-        if ((typeof(string).IsAssignableFrom(data.GetType()) == false))
+        if ((typeof(global::Schema.Model.KeySpace).IsAssignableFrom(data.GetType()) == false))
         {
-            this.Error("The type \'System.String\' of the parameter \'Metadata\' did not match the type of th" +
-                    "e data passed to the template.");
+            this.Error("The type \'Schema.Model.KeySpace\' of the parameter \'Metadata\' did not match the ty" +
+                    "pe of the data passed to the template.");
         }
         else
         {
-            this._MetadataField = ((string)(data));
+            this._MetadataField = ((global::Schema.Model.KeySpace)(data));
         }
     }
 }

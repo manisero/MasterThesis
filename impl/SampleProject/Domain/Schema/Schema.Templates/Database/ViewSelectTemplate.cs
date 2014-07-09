@@ -17,9 +17,9 @@ namespace Schema.Templates.Database
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
+    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewSelectTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public partial class ViewTableTemplate : ViewTableTemplateBase
+    public partial class ViewSelectTemplate : ViewSelectTemplateBase
     {
         /// <summary>
         /// Create the template output
@@ -28,85 +28,23 @@ namespace Schema.Templates.Database
         {
             this.Write("USE \"");
             
-            #line 6 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
+            #line 6 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewSelectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(KeySpace));
             
             #line default
             #line hidden
-            this.Write("\";\r\n\r\nCREATE TABLE \"");
+            this.Write("\";\r\n\r\nSELECT * FROM \"");
             
-            #line 8 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
+            #line 8 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewSelectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
             
             #line default
             #line hidden
-            this.Write("\" (\r\n");
-            
-            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
- foreach (var field in Metadata.Fields) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\"");
-            
-            #line 10 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\" ");
-            
-            #line 10 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Type));
-            
-            #line default
-            #line hidden
-            this.Write(",\r\n");
-            
-            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t");
-            
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(CqlHelper.FormatPrimaryKey(Metadata)));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n);\r\n\r\n");
-            
-            #line 15 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
- foreach (var field in Metadata.Fields.Where(x => x.IsSearchable)) { 
-            
-            #line default
-            #line hidden
-            this.Write("CREATE INDEX ON \"");
-            
-            #line 16 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\" (\"");
-            
-            #line 16 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\");\r\n");
-            
-            #line 17 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
+            this.Write("\";\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewTableTemplate.tt"
+        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\ViewSelectTemplate.tt"
 
 private global::Schema.Model.View _MetadataField;
 
@@ -220,7 +158,7 @@ if ((KeySpaceValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public class ViewTableTemplateBase
+    public class ViewSelectTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

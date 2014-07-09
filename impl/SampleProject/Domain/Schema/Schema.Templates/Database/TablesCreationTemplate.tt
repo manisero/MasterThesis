@@ -1,5 +1,5 @@
 ﻿<#@ template language="C#" #>
 <#@ parameter type="System.Collections.Generic.IEnumerable<Schema.Model.View>" name="Metadata" #>
 <# foreach (var view in Metadata) { #>
-SOURCE 'tables/<#= view.Name #>.cql';
+SOURCE 'ddl/tables/<#= view.Name #>.cql';
 <# } #>
