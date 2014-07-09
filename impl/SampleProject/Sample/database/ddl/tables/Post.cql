@@ -1,4 +1,4 @@
-USE "TODO";
+USE "Sample";
 
 CREATE TABLE "Post" (
 	"PostID" timeuuid,

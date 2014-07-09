@@ -2,11 +2,19 @@
 {
     public interface IGenerationContext
     {
-        string MetadataFileName { get; }
+    }
+
+    public interface IGenerationContext<TCustomContext> : IGenerationContext
+    {
+        TCustomContext Custom { get; }
     }
 
     public class GenerationContext : IGenerationContext
     {
-        public string MetadataFileName { get; set; }
+    }
+
+    public class GenerationContext<TCustomContext> : GenerationContext, IGenerationContext<TCustomContext>
+    {
+        public TCustomContext Custom { get; set; }
     }
 }

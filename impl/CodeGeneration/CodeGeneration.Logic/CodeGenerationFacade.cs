@@ -45,5 +45,10 @@ namespace CodeGeneration.Logic
         {
             GetDependencies().CodeGenerator.Generate(metadata, templateGetter, destinationDirectoryPath);
         }
+
+        public static void GenerateCode<TMetadata, TContext>(IEnumerable<CodeGenerationUnit<TMetadata>> metadata, Func<object> templateGetter, string destinationDirectoryPath, TContext context)
+        {
+            GetDependencies().CodeGenerator.Generate(metadata, templateGetter, destinationDirectoryPath, context);
+        }
     }
 }

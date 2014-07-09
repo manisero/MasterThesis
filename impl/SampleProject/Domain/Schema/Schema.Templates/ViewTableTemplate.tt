@@ -2,8 +2,9 @@
 <#@ import namespace="Schema.Model" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="Schema.Templates.Utilities" #>
+<#@ parameter type="CodeGeneration.Logic.IGenerationContext<string>" name="Context" #>
 <#@ parameter type="Schema.Model.View" name="Metadata" #>
-USE "TODO";
+USE "<#= Context.Custom #>";
 
 CREATE TABLE "<#= Metadata.Name #>" (
 <# foreach (var field in Metadata.Fields) { #>

@@ -16,7 +16,7 @@ namespace Schema.Generation.Console
 
             // Generate code
             var tablesPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\ddl\tables";
-            CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cql"), () => new ViewTableTemplate(), tablesPath);
+            CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cql"), () => new ViewTableTemplate(), tablesPath, domain.KeySpace);
 
             var entitiesPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Entities";
             CodeGenerationFacade.GenerateCode(domain.Entities.ToCodeGenerationUnits("cs"), () => new EntityTemplate(), entitiesPath);

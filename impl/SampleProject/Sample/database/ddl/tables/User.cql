@@ -1,4 +1,4 @@
-USE "TODO";
+USE "Sample";
 
 CREATE TABLE "User" (
 	"UserName" text,
