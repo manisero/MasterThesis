@@ -6,7 +6,13 @@
 			"Type": "timeuuid",
 			"IsKeyInModel": true,
 			"OnKeyPostion": 1,
-			"IsSearchableInModel": true
+			"IsSearchableInModel": true,
+			"PresentIn": [
+				{
+					"View": "Comment",
+					"As": "ParentCommentID"
+				}
+			]
 		},
 		{
 			"Name": "Content",
