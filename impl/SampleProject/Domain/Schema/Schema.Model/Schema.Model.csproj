@@ -43,6 +43,8 @@
     <Compile Include="EntityField.cs" />
     <Compile Include="Domain.cs" />
     <Compile Include="EntityFieldPresence.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="EventField.cs" />
     <Compile Include="INamed.cs" />
     <Compile Include="KeySpace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

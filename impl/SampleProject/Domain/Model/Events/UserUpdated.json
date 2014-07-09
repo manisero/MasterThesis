@@ -1,0 +1,9 @@
+{
+	"Name": "UserUpdatedEvent",
+	"Fields": [
+		{
+			"Name": "User",
+			"Type": "User"
+		}
+	]
+}

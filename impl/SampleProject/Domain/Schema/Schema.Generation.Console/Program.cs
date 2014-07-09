@@ -49,6 +49,11 @@ namespace Schema.Generation.Console
                                               () => new EntityTemplate(),
                                               entitiesPath);
 
+            var eventsPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Events";
+            CodeGenerationFacade.GenerateCode(domain.Events.ToCodeGenerationUnits("cs"),
+                                              () => new EventTemplate(),
+                                              eventsPath);
+
             var viewsPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Views";
             CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cs"),
                                               () => new ViewClassTemplate(),

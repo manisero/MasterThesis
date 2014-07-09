@@ -7,5 +7,7 @@ namespace Schema.Model
         public KeySpace KeySpace { get; set; }
 
         public IEnumerable<Entity> Entities { get; set; }
+
+        public IEnumerable<Event> Events { get; set; }
     }
 }

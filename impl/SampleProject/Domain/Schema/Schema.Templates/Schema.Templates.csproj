@@ -62,6 +62,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="DotNet\EventTemplate.cs">
+      <DependentUpon>EventTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Utilities\CqlHelper.cs" />
     <Compile Include="Database\ViewCreationTemplate.cs">
       <DependentUpon>ViewCreationTemplate.tt</DependentUpon>
@@ -101,6 +106,10 @@
     <None Include="Database\ViewCreationTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ViewCreationTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="DotNet\EventTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EventTemplate.cs</LastGenOutput>
     </None>
     <None Include="DotNet\EntityTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

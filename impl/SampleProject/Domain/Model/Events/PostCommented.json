@@ -1,0 +1,17 @@
+{
+	"Name": "PostCommentedEvent",
+	"Fields": [
+		{
+			"Name": "PostID",
+			"Type": "Guid"
+		},
+		{
+			"Name": "ParentCommentID",
+			"Type": "Guid?"
+		},
+		{
+			"Name": "Comment",
+			"Type": "Comment"
+		}
+	]
+}

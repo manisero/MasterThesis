@@ -1,0 +1,16 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="Schema.Templates.Utilities" #>
+<#@ parameter type="Schema.Model.Event" name="Metadata" #>
+using System;
+using System.Collections.Generic;
+using Sample.Domain.Entities;
+
+namespace Sample.Domain.Events
+{
+	public class <#= Metadata.Name #> : IEvent
+	{
+<# foreach (var field in Metadata.Fields) { #>
+		public <#= field.Type #> <#= field.Name #> { get; set; }
+<# } #>
+	}
+}
