@@ -57,6 +57,7 @@
     <Compile Include="DomainDeserialization\IDomainDeserializer.cs" />
     <Compile Include="DomainDeserialization\_Impl\DomainDeserializer.cs" />
     <Compile Include="GenerationContext.cs" />
+    <Compile Include="CodeGenerationUnit.cs" />
     <Compile Include="Generation\ICodeGenerator.cs" />
     <Compile Include="Infrastructure\IFileSystemService.cs" />
     <Compile Include="IGenerationContextFactory.cs" />

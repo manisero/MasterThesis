@@ -2,7 +2,7 @@
 
 namespace Schema.Model
 {
-    public class View
+    public class View : INamed
     {
         public string Name { get; set; }
 

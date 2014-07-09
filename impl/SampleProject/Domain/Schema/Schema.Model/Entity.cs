@@ -2,7 +2,7 @@
 
 namespace Schema.Model
 {
-    public class Entity
+    public class Entity : INamed
     {
         public string Name { get; set; }
 

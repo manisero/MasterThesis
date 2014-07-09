@@ -42,9 +42,7 @@ namespace CodeGeneration.Logic.Infrastructure._Impl
 
         public string CombinePaths(params string[] paths)
         {
-            return paths[0] != null
-                       ? Path.Combine(paths)
-                       : null;
+            return Path.Combine(paths);
         }
 
         public string ChangeFileExtension(string filePath, string newExtension)

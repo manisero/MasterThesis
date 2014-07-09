@@ -1,6 +1,6 @@
 ﻿namespace Schema.Model
 {
-    public class ViewField
+    public class ViewField : INamed
     {
         public string Name { get; set; }
 
