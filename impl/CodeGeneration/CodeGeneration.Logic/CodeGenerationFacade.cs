@@ -9,53 +9,41 @@ namespace CodeGeneration.Logic
 {
     public class CodeGenerationFacade
     {
-        private static Facade _instance;
-
-        private static Facade GetInstance()
+        private class Dependencies
         {
-            if (_instance == null)
+            public IDomainDeserializer DomainDeserializer { get; private set; }
+            public ICodeGenerator CodeGenerator { get; private set; }
+
+            public Dependencies(IDomainDeserializer domainDeserializer, ICodeGenerator codeGenerator)
+            {
+                DomainDeserializer = domainDeserializer;
+                CodeGenerator = codeGenerator;
+            }
+        }
+
+        private static Dependencies _dependencies;
+        private static Dependencies GetDependencies()
+        {
+            if (_dependencies == null)
             {
                 var kernel = new StandardKernel();
                 new NinjectBootstrapper().Bootstarp(kernel);
 
-                _instance = kernel.Get<Facade>();
+                _dependencies = kernel.Get<Dependencies>();
             }
 
-            return _instance;
+            return _dependencies;
         }
 
         public static TDomain DeserializeDomain<TDomain>(string rootFolderPath)
             where TDomain : new()
         {
-            return GetInstance().DeserializeDomain<TDomain>(rootFolderPath);
+            return GetDependencies().DomainDeserializer.Deserialize<TDomain>(rootFolderPath);
         }
 
         public static void GenerateCode<TMetadata>(IEnumerable<CodeGenerationUnit<TMetadata>> metadata, Func<object> templateGetter, string destinationDirectoryPath)
         {
-            GetInstance().GenerateCode(metadata, templateGetter, destinationDirectoryPath);
-        }
-    }
-
-    internal class Facade
-    {
-        private readonly IDomainDeserializer _domainDeserializer;
-        private readonly ICodeGenerator _codeGenerator;
-
-        public Facade(IDomainDeserializer domainDeserializer, ICodeGenerator codeGenerator)
-        {
-            _domainDeserializer = domainDeserializer;
-            _codeGenerator = codeGenerator;
-        }
-
-        public TDomain DeserializeDomain<TDomain>(string rootFolderPath)
-            where TDomain : new()
-        {
-            return _domainDeserializer.Deserialize<TDomain>(rootFolderPath);
-        }
-
-        public void GenerateCode<TMetadata>(IEnumerable<CodeGenerationUnit<TMetadata>> metadata, Func<object> templateGetter, string destinationDirectoryPath)
-        {
-            _codeGenerator.Generate(metadata, templateGetter, destinationDirectoryPath);
+            GetDependencies().CodeGenerator.Generate(metadata, templateGetter, destinationDirectoryPath);
         }
     }
 }
