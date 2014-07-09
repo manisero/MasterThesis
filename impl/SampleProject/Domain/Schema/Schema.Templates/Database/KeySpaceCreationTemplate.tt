@@ -1,0 +1,8 @@
+﻿<#@ template language="C#" #>
+<#@ parameter type="Schema.Model.KeySpace" name="Metadata" #>
+CREATE KEYSPACE "<#= Metadata.Name #>"
+WITH REPLICATION = 
+	{
+		'class': '<#= Metadata.ReplicationClass #>',
+		'replication_factor' : <#= Metadata.ReplicationFactor #>
+	};

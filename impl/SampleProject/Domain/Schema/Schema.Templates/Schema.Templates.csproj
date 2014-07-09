@@ -42,19 +42,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\KeySpaceDropTemplate.cs">
+      <DependentUpon>KeySpaceDropTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Database\KeySpaceCreationTemplate.cs">
+      <DependentUpon>KeySpaceCreationTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Database\TablesCreationTemplate.cs">
+      <DependentUpon>TablesCreationTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Utilities\CqlHelper.cs" />
-    <Compile Include="ViewTableTemplate.cs">
+    <Compile Include="Database\ViewTableTemplate.cs">
       <DependentUpon>ViewTableTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="EntityTemplate.cs">
+    <Compile Include="DotNet\EntityTemplate.cs">
       <DependentUpon>EntityTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Utilities\TypesMap.cs" />
-    <Compile Include="ViewClassTemplate.cs">
+    <Compile Include="DotNet\ViewClassTemplate.cs">
       <DependentUpon>ViewClassTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -62,15 +77,27 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ViewTableTemplate.tt">
+    <None Include="Database\KeySpaceDropTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>KeySpaceDropTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="Database\KeySpaceCreationTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>KeySpaceCreationTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="Database\TablesCreationTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TablesCreationTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="Database\ViewTableTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ViewTableTemplate.cs</LastGenOutput>
     </None>
-    <None Include="EntityTemplate.tt">
+    <None Include="DotNet\EntityTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>EntityTemplate.cs</LastGenOutput>
     </None>
-    <None Include="ViewClassTemplate.tt">
+    <None Include="DotNet\ViewClassTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ViewClassTemplate.cs</LastGenOutput>
     </None>

@@ -1,3 +1,7 @@
 {
-	"KeySpace": "Sample"
+	"KeySpace": {
+		"Name": "Sample",
+		"ReplicationClass": "SimpleStrategy",
+		"ReplicationFactor": 1
+	}
 }

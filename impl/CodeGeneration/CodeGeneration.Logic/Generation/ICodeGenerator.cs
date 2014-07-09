@@ -5,9 +5,9 @@ namespace CodeGeneration.Logic.Generation
 {
     public interface ICodeGenerator
     {
-        void Generate<TMetadata>(IEnumerable<CodeGenerationUnit<TMetadata>> metadata,
+        void Generate<TMetadata>(IEnumerable<CodeGenerationUnit<TMetadata>> generationUnits,
                                  Func<object> templateGetter,
-                                 string destinationDirectoryPath,
+                                 string outputDirectoryPath,
                                  params TemplateArgument[] templateArguments);
     }
 }

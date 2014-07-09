@@ -7,72 +7,56 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Schema.Templates
+namespace Schema.Templates.Database
 {
-    using Schema.Templates.Utilities;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
+    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\KeySpaceCreationTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public partial class ViewClassTemplate : ViewClassTemplateBase
+    public partial class KeySpaceCreationTemplate : KeySpaceCreationTemplateBase
     {
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace Sample.Domain.Views" +
-                    "\r\n{\r\n\tpublic class ");
+            this.Write("CREATE KEYSPACE \"");
             
-            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
+            #line 3 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\KeySpaceCreationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
             
             #line default
             #line hidden
-            this.Write(" : IView\r\n\t{\r\n");
+            this.Write("\"\r\nWITH REPLICATION = \r\n\t{\r\n\t\t\'class\': \'");
             
-            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
- foreach (var field in Metadata.Fields) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\tpublic ");
-            
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypesMap.GetDotNetType(field.Type)));
+            #line 6 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\KeySpaceCreationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.ReplicationClass));
             
             #line default
             #line hidden
-            this.Write(" ");
+            this.Write("\',\r\n\t\t\'replication_factor\' : ");
             
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" { get; set; }\r\n");
-            
-            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
- } 
+            #line 7 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\KeySpaceCreationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.ReplicationFactor));
             
             #line default
             #line hidden
-            this.Write("\t}\r\n}\r\n");
+            this.Write("\r\n\t};\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
+        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\KeySpaceCreationTemplate.tt"
 
-private global::Schema.Model.View _MetadataField;
+private global::Schema.Model.KeySpace _MetadataField;
 
 /// <summary>
 /// Access the Metadata parameter of the template.
 /// </summary>
-private global::Schema.Model.View Metadata
+private global::Schema.Model.KeySpace Metadata
 {
     get
     {
@@ -91,14 +75,14 @@ public virtual void Initialize()
 bool MetadataValueAcquired = false;
 if (this.Session.ContainsKey("Metadata"))
 {
-    if ((typeof(global::Schema.Model.View).IsAssignableFrom(this.Session["Metadata"].GetType()) == false))
+    if ((typeof(global::Schema.Model.KeySpace).IsAssignableFrom(this.Session["Metadata"].GetType()) == false))
     {
-        this.Error("The type \'Schema.Model.View\' of the parameter \'Metadata\' did not match the type o" +
-                "f the data passed to the template.");
+        this.Error("The type \'Schema.Model.KeySpace\' of the parameter \'Metadata\' did not match the ty" +
+                "pe of the data passed to the template.");
     }
     else
     {
-        this._MetadataField = ((global::Schema.Model.View)(this.Session["Metadata"]));
+        this._MetadataField = ((global::Schema.Model.KeySpace)(this.Session["Metadata"]));
         MetadataValueAcquired = true;
     }
 }
@@ -107,14 +91,14 @@ if ((MetadataValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Metadata");
     if ((data != null))
     {
-        if ((typeof(global::Schema.Model.View).IsAssignableFrom(data.GetType()) == false))
+        if ((typeof(global::Schema.Model.KeySpace).IsAssignableFrom(data.GetType()) == false))
         {
-            this.Error("The type \'Schema.Model.View\' of the parameter \'Metadata\' did not match the type o" +
-                    "f the data passed to the template.");
+            this.Error("The type \'Schema.Model.KeySpace\' of the parameter \'Metadata\' did not match the ty" +
+                    "pe of the data passed to the template.");
         }
         else
         {
-            this._MetadataField = ((global::Schema.Model.View)(data));
+            this._MetadataField = ((global::Schema.Model.KeySpace)(data));
         }
     }
 }
@@ -136,7 +120,7 @@ if ((MetadataValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public class ViewClassTemplateBase
+    public class KeySpaceCreationTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

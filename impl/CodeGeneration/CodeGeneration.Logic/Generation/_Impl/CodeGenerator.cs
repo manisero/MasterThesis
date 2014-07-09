@@ -15,17 +15,17 @@ namespace CodeGeneration.Logic.Generation._Impl
             _fileSystemService = fileSystemService;
         }
 
-        public void Generate<TMetadata>(IEnumerable<CodeGenerationUnit<TMetadata>> metadata,
+        public void Generate<TMetadata>(IEnumerable<CodeGenerationUnit<TMetadata>> generationUnits,
                                         Func<object> templateGetter,
-                                        string destinationDirectoryPath,
+                                        string outputDirectoryPath,
                                         params TemplateArgument[] templateArguments)
         {
-            foreach (var item in metadata)
+            foreach (var unit in generationUnits)
             {
-                var code = _templateExecutor.Execute(templateGetter(), item.Metadata, templateArguments);
-                var destinationFilePath = _fileSystemService.CombinePaths(destinationDirectoryPath, item.OutputFileName);
+                var code = _templateExecutor.Execute(templateGetter(), unit.Metadata, templateArguments);
+                var outputFilePath = _fileSystemService.CombinePaths(outputDirectoryPath, unit.OutputFileName);
 
-                _fileSystemService.SetFileContent(destinationFilePath, code);
+                _fileSystemService.SetFileContent(outputFilePath, code);
             }
         }
     }

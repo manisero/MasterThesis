@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using CodeGeneration.Logic.Bootstrap;
 using CodeGeneration.Logic.DomainDeserialization;
 using CodeGeneration.Logic.Generation;
@@ -45,12 +46,26 @@ namespace CodeGeneration.Logic
             return GetDependencies().DomainDeserializer.Deserialize<TDomain>(rootFolderPath);
         }
 
-        public static void GenerateCode<TMetadata>(IEnumerable<CodeGenerationUnit<TMetadata>> metadata,
-                                                   Func<object> templateGetter,
-                                                   string destinationDirectoryPath,
+        public static void GenerateCode<TMetadata>(TMetadata metadata,
+                                                   object template,
+                                                   string outputFilePath,
                                                    params TemplateArgument[] templateArguments)
         {
-            GetDependencies().CodeGenerator.Generate(metadata, templateGetter, destinationDirectoryPath, templateArguments);
+            var generationUnit = new CodeGenerationUnit<TMetadata>
+                {
+                    Metadata = metadata,
+                    OutputFileName = Path.GetFileName(outputFilePath)
+                };
+
+            GenerateCode(new[] { generationUnit }, () => template, Path.GetDirectoryName(outputFilePath), templateArguments);
+        }
+
+        public static void GenerateCode<TMetadata>(IEnumerable<CodeGenerationUnit<TMetadata>> generationUnits,
+                                                   Func<object> templateGetter,
+                                                   string outputDirectoryPath,
+                                                   params TemplateArgument[] templateArguments)
+        {
+            GetDependencies().CodeGenerator.Generate(generationUnits, templateGetter, outputDirectoryPath, templateArguments);
         }
     }
 }

@@ -1,0 +1,3 @@
+SOURCE 'tables/Comment.cql';
+SOURCE 'tables/Post.cql';
+SOURCE 'tables/User.cql';

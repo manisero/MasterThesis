@@ -7,72 +7,42 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Schema.Templates
+namespace Schema.Templates.Database
 {
-    using Schema.Templates.Utilities;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\KeySpaceDropTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public partial class EntityTemplate : EntityTemplateBase
+    public partial class KeySpaceDropTemplate : KeySpaceDropTemplateBase
     {
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace Sample.Domain.Entit" +
-                    "ies\r\n{\r\n\tpublic class ");
+            this.Write("DROP KEYSPACE IF EXISTS \"");
             
-            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" : IEntity\r\n\t{\r\n");
-            
-            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
- foreach (var field in Metadata.Fields) { 
+            #line 3 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\KeySpaceDropTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Metadata));
             
             #line default
             #line hidden
-            this.Write("\t\tpublic ");
-            
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypesMap.GetDotNetType(field.Type)));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" { get; set; }\r\n");
-            
-            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t}\r\n}\r\n");
+            this.Write("\";\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\KeySpaceDropTemplate.tt"
 
-private global::Schema.Model.Entity _MetadataField;
+private string _MetadataField;
 
 /// <summary>
 /// Access the Metadata parameter of the template.
 /// </summary>
-private global::Schema.Model.Entity Metadata
+private string Metadata
 {
     get
     {
@@ -91,14 +61,14 @@ public virtual void Initialize()
 bool MetadataValueAcquired = false;
 if (this.Session.ContainsKey("Metadata"))
 {
-    if ((typeof(global::Schema.Model.Entity).IsAssignableFrom(this.Session["Metadata"].GetType()) == false))
+    if ((typeof(string).IsAssignableFrom(this.Session["Metadata"].GetType()) == false))
     {
-        this.Error("The type \'Schema.Model.Entity\' of the parameter \'Metadata\' did not match the type" +
-                " of the data passed to the template.");
+        this.Error("The type \'System.String\' of the parameter \'Metadata\' did not match the type of th" +
+                "e data passed to the template.");
     }
     else
     {
-        this._MetadataField = ((global::Schema.Model.Entity)(this.Session["Metadata"]));
+        this._MetadataField = ((string)(this.Session["Metadata"]));
         MetadataValueAcquired = true;
     }
 }
@@ -107,14 +77,14 @@ if ((MetadataValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Metadata");
     if ((data != null))
     {
-        if ((typeof(global::Schema.Model.Entity).IsAssignableFrom(data.GetType()) == false))
+        if ((typeof(string).IsAssignableFrom(data.GetType()) == false))
         {
-            this.Error("The type \'Schema.Model.Entity\' of the parameter \'Metadata\' did not match the type" +
-                    " of the data passed to the template.");
+            this.Error("The type \'System.String\' of the parameter \'Metadata\' did not match the type of th" +
+                    "e data passed to the template.");
         }
         else
         {
-            this._MetadataField = ((global::Schema.Model.Entity)(data));
+            this._MetadataField = ((string)(data));
         }
     }
 }
@@ -136,7 +106,7 @@ if ((MetadataValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public class EntityTemplateBase
+    public class KeySpaceDropTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
