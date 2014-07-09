@@ -12,6 +12,13 @@ namespace CodeGeneration.Logic.Infrastructure._Impl
 
         public void SetFileContent(string filePath, string content)
         {
+            var directory = Path.GetDirectoryName(filePath);
+
+            if (directory != null && !Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
             File.WriteAllText(filePath, content);
         }
 

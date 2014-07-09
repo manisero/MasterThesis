@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CodeGeneration.Logic.Bootstrap;
 using CodeGeneration.Logic.DomainDeserialization;
 using CodeGeneration.Logic.Generation;
@@ -41,6 +42,26 @@ namespace CodeGeneration.Logic
             _contextFactory = contextFactory;
             _codeGenerator = codeGenerator;
             _domainDeserializer = domainDeserializer;
+        }
+
+        public void GenerateFromMetadata<TMetadata>(TMetadata metadata, object template, string destinationFilePath)
+        {
+            var code = _codeGenerator.Generate(metadata, template, null);
+
+            if (destinationFilePath != null)
+            {
+                _fileSystemService.SetFileContent(destinationFilePath, code);
+            }
+        }
+
+        public void GenerateFromMetadata<TMetadata>(IDictionary<TMetadata, string> metadata, Func<object> templateGetter, string destinationDirectoryPath)
+        {
+            foreach (var item in metadata)
+            {
+                var destinationPath = _fileSystemService.CombinePaths(destinationDirectoryPath, item.Value);
+
+                GenerateFromMetadata(item.Key, templateGetter(), destinationPath);
+            }
         }
 
         public void GenerateFromFile<TMetadata>(string metadataFilePath, object template, string destinationFilePath)

@@ -9,7 +9,6 @@
 // ------------------------------------------------------------------------------
 namespace Schema.Templates
 {
-    using CodeGeneration.Logic;
     using Schema.Model;
     using System;
     
@@ -17,54 +16,47 @@ namespace Schema.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public partial class EntityTemplate : EntityTemplateBase
+    public partial class ViewTemplate : ViewTemplateBase
     {
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace Sample.Presentation" +
-                    ".Domain\r\n{\r\n\tpublic class ");
+            this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace Sample.Domain.Views" +
+                    "\r\n{\r\n\tpublic class ");
             
-            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Context.MetadataFileName));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(FormatBaseClass()));
+            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
             
             #line default
             #line hidden
-            this.Write("\r\n\t{\r\n");
+            this.Write(" : IView\r\n\t{\r\n");
             
-            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
  foreach (var field in Metadata.Fields) { 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Type));
+            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(TypesMap.GetDotNetType(field.Type)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 15 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
  } 
             
             #line default
@@ -73,41 +65,14 @@ namespace Schema.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 18 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
 
-
-    private string FormatBaseClass()
-    {
-        //return Metadata.Derives != null ? ": " + Metadata.Derives : string.Empty;
-        return null;
-    }
-
-
-        
-        #line default
-        #line hidden
-        
-        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
-
-private global::CodeGeneration.Logic.IGenerationContext _ContextField;
-
-/// <summary>
-/// Access the Context parameter of the template.
-/// </summary>
-private global::CodeGeneration.Logic.IGenerationContext Context
-{
-    get
-    {
-        return this._ContextField;
-    }
-}
-
-private global::Schema.Model.Entity _MetadataField;
+private global::Schema.Model.View _MetadataField;
 
 /// <summary>
 /// Access the Metadata parameter of the template.
 /// </summary>
-private global::Schema.Model.Entity Metadata
+private global::Schema.Model.View Metadata
 {
     get
     {
@@ -123,47 +88,17 @@ public virtual void Initialize()
 {
     if ((this.Errors.HasErrors == false))
     {
-bool ContextValueAcquired = false;
-if (this.Session.ContainsKey("Context"))
-{
-    if ((typeof(global::CodeGeneration.Logic.IGenerationContext).IsAssignableFrom(this.Session["Context"].GetType()) == false))
-    {
-        this.Error("The type \'CodeGeneration.Logic.IGenerationContext\' of the parameter \'Context\' did" +
-                " not match the type of the data passed to the template.");
-    }
-    else
-    {
-        this._ContextField = ((global::CodeGeneration.Logic.IGenerationContext)(this.Session["Context"]));
-        ContextValueAcquired = true;
-    }
-}
-if ((ContextValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Context");
-    if ((data != null))
-    {
-        if ((typeof(global::CodeGeneration.Logic.IGenerationContext).IsAssignableFrom(data.GetType()) == false))
-        {
-            this.Error("The type \'CodeGeneration.Logic.IGenerationContext\' of the parameter \'Context\' did" +
-                    " not match the type of the data passed to the template.");
-        }
-        else
-        {
-            this._ContextField = ((global::CodeGeneration.Logic.IGenerationContext)(data));
-        }
-    }
-}
 bool MetadataValueAcquired = false;
 if (this.Session.ContainsKey("Metadata"))
 {
-    if ((typeof(global::Schema.Model.Entity).IsAssignableFrom(this.Session["Metadata"].GetType()) == false))
+    if ((typeof(global::Schema.Model.View).IsAssignableFrom(this.Session["Metadata"].GetType()) == false))
     {
-        this.Error("The type \'Schema.Model.Entity\' of the parameter \'Metadata\' did not match the type" +
-                " of the data passed to the template.");
+        this.Error("The type \'Schema.Model.View\' of the parameter \'Metadata\' did not match the type o" +
+                "f the data passed to the template.");
     }
     else
     {
-        this._MetadataField = ((global::Schema.Model.Entity)(this.Session["Metadata"]));
+        this._MetadataField = ((global::Schema.Model.View)(this.Session["Metadata"]));
         MetadataValueAcquired = true;
     }
 }
@@ -172,14 +107,14 @@ if ((MetadataValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Metadata");
     if ((data != null))
     {
-        if ((typeof(global::Schema.Model.Entity).IsAssignableFrom(data.GetType()) == false))
+        if ((typeof(global::Schema.Model.View).IsAssignableFrom(data.GetType()) == false))
         {
-            this.Error("The type \'Schema.Model.Entity\' of the parameter \'Metadata\' did not match the type" +
-                    " of the data passed to the template.");
+            this.Error("The type \'Schema.Model.View\' of the parameter \'Metadata\' did not match the type o" +
+                    "f the data passed to the template.");
         }
         else
         {
-            this._MetadataField = ((global::Schema.Model.Entity)(data));
+            this._MetadataField = ((global::Schema.Model.View)(data));
         }
     }
 }
@@ -201,7 +136,7 @@ if ((MetadataValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public class EntityTemplateBase
+    public class ViewTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
