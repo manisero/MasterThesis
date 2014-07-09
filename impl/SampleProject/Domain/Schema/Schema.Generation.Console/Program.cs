@@ -10,20 +10,19 @@ namespace Schema.Generation.Console
         {
             // Obtain metadata
             var metadataPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Model";
-            var generationFacade = CodeGenerationFacade.GetInstance();
 
-            var domain = generationFacade.DeserializeDomain<Domain>(metadataPath);
+            var domain = CodeGenerationFacade.DeserializeDomain<Domain>(metadataPath);
             var views = new DomainProcessor().GetViews(domain);
 
             // Generate code
             var tablesPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\ddl\tables";
-            generationFacade.GenerateCode(views.ToCodeGenerationUnits("cql"), () => new ViewTableTemplate(), tablesPath);
+            CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cql"), () => new ViewTableTemplate(), tablesPath);
 
             var entitiesPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Entities";
-            generationFacade.GenerateCode(domain.Entities.ToCodeGenerationUnits("cs"), () => new EntityTemplate(), entitiesPath);
+            CodeGenerationFacade.GenerateCode(domain.Entities.ToCodeGenerationUnits("cs"), () => new EntityTemplate(), entitiesPath);
 
             var viewsPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Views";
-            generationFacade.GenerateCode(views.ToCodeGenerationUnits("cs"), () => new ViewClassTemplate(), viewsPath);
+            CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cs"), () => new ViewClassTemplate(), viewsPath);
         }
     }
 }

@@ -9,25 +9,39 @@ namespace CodeGeneration.Logic
 {
     public class CodeGenerationFacade
     {
-        private static CodeGenerationFacade _instance;
+        private static Facade _instance;
 
-        public static CodeGenerationFacade GetInstance()
+        private static Facade GetInstance()
         {
             if (_instance == null)
             {
                 var kernel = new StandardKernel();
                 new NinjectBootstrapper().Bootstarp(kernel);
 
-                _instance = kernel.Get<CodeGenerationFacade>();
+                _instance = kernel.Get<Facade>();
             }
 
             return _instance;
         }
 
+        public static TDomain DeserializeDomain<TDomain>(string rootFolderPath)
+            where TDomain : new()
+        {
+            return GetInstance().DeserializeDomain<TDomain>(rootFolderPath);
+        }
+
+        public static void GenerateCode<TMetadata>(IEnumerable<CodeGenerationUnit<TMetadata>> metadata, Func<object> templateGetter, string destinationDirectoryPath)
+        {
+            GetInstance().GenerateCode(metadata, templateGetter, destinationDirectoryPath);
+        }
+    }
+
+    internal class Facade
+    {
         private readonly IDomainDeserializer _domainDeserializer;
         private readonly ICodeGenerator _codeGenerator;
 
-        public CodeGenerationFacade(IDomainDeserializer domainDeserializer, ICodeGenerator codeGenerator)
+        public Facade(IDomainDeserializer domainDeserializer, ICodeGenerator codeGenerator)
         {
             _domainDeserializer = domainDeserializer;
             _codeGenerator = codeGenerator;
