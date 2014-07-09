@@ -9,7 +9,6 @@
 // ------------------------------------------------------------------------------
 namespace Schema.Templates
 {
-    using Schema.Model;
     using Schema.Templates.Utilities;
     using System;
     
@@ -29,35 +28,35 @@ namespace Schema.Templates
             this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace Sample.Domain.Views" +
                     "\r\n{\r\n\tpublic class ");
             
-            #line 10 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
+            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
             
             #line default
             #line hidden
             this.Write(" : IView\r\n\t{\r\n");
             
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
+            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
  foreach (var field in Metadata.Fields) { 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
+            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TypesMap.GetDotNetType(field.Type)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
+            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
+            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
  } 
             
             #line default

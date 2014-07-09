@@ -9,7 +9,6 @@
 // ------------------------------------------------------------------------------
 namespace Schema.Templates
 {
-    using Schema.Model;
     using System.Linq;
     using Schema.Templates.Utilities;
     using System;
@@ -29,77 +28,77 @@ namespace Schema.Templates
         {
             this.Write("USE \"");
             
-            #line 7 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Context.Custom));
+            #line 6 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(KeySpace));
             
             #line default
             #line hidden
             this.Write("\";\r\n\r\nCREATE TABLE \"");
             
-            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            #line 8 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
             
             #line default
             #line hidden
             this.Write("\" (\r\n");
             
-            #line 10 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
  foreach (var field in Metadata.Fields) { 
             
             #line default
             #line hidden
             this.Write("\t\"");
             
-            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            #line 10 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write("\" ");
             
-            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            #line 10 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Type));
             
             #line default
             #line hidden
             this.Write(",\r\n");
             
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t");
             
-            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CqlHelper.FormatPrimaryKey(Metadata)));
             
             #line default
             #line hidden
             this.Write("\r\n);\r\n\r\n");
             
-            #line 16 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            #line 15 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
  foreach (var field in Metadata.Fields.Where(x => x.IsSearchable)) { 
             
             #line default
             #line hidden
             this.Write("CREATE INDEX ON \"");
             
-            #line 17 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            #line 16 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
             
             #line default
             #line hidden
             this.Write("\" (\"");
             
-            #line 17 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            #line 16 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write("\");\r\n");
             
-            #line 18 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            #line 17 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
  } 
             
             #line default
@@ -108,19 +107,6 @@ namespace Schema.Templates
         }
         
         #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
-
-private global::CodeGeneration.Logic.IGenerationContext<string> _ContextField;
-
-/// <summary>
-/// Access the Context parameter of the template.
-/// </summary>
-private global::CodeGeneration.Logic.IGenerationContext<string> Context
-{
-    get
-    {
-        return this._ContextField;
-    }
-}
 
 private global::Schema.Model.View _MetadataField;
 
@@ -135,6 +121,19 @@ private global::Schema.Model.View Metadata
     }
 }
 
+private string _KeySpaceField;
+
+/// <summary>
+/// Access the KeySpace parameter of the template.
+/// </summary>
+private string KeySpace
+{
+    get
+    {
+        return this._KeySpaceField;
+    }
+}
+
 
 /// <summary>
 /// Initialize the template
@@ -143,36 +142,6 @@ public virtual void Initialize()
 {
     if ((this.Errors.HasErrors == false))
     {
-bool ContextValueAcquired = false;
-if (this.Session.ContainsKey("Context"))
-{
-    if ((typeof(global::CodeGeneration.Logic.IGenerationContext<string>).IsAssignableFrom(this.Session["Context"].GetType()) == false))
-    {
-        this.Error("The type \'CodeGeneration.Logic.IGenerationContext<string>\' of the parameter \'Cont" +
-                "ext\' did not match the type of the data passed to the template.");
-    }
-    else
-    {
-        this._ContextField = ((global::CodeGeneration.Logic.IGenerationContext<string>)(this.Session["Context"]));
-        ContextValueAcquired = true;
-    }
-}
-if ((ContextValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Context");
-    if ((data != null))
-    {
-        if ((typeof(global::CodeGeneration.Logic.IGenerationContext<string>).IsAssignableFrom(data.GetType()) == false))
-        {
-            this.Error("The type \'CodeGeneration.Logic.IGenerationContext<string>\' of the parameter \'Cont" +
-                    "ext\' did not match the type of the data passed to the template.");
-        }
-        else
-        {
-            this._ContextField = ((global::CodeGeneration.Logic.IGenerationContext<string>)(data));
-        }
-    }
-}
 bool MetadataValueAcquired = false;
 if (this.Session.ContainsKey("Metadata"))
 {
@@ -200,6 +169,36 @@ if ((MetadataValueAcquired == false))
         else
         {
             this._MetadataField = ((global::Schema.Model.View)(data));
+        }
+    }
+}
+bool KeySpaceValueAcquired = false;
+if (this.Session.ContainsKey("KeySpace"))
+{
+    if ((typeof(string).IsAssignableFrom(this.Session["KeySpace"].GetType()) == false))
+    {
+        this.Error("The type \'System.String\' of the parameter \'KeySpace\' did not match the type of th" +
+                "e data passed to the template.");
+    }
+    else
+    {
+        this._KeySpaceField = ((string)(this.Session["KeySpace"]));
+        KeySpaceValueAcquired = true;
+    }
+}
+if ((KeySpaceValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("KeySpace");
+    if ((data != null))
+    {
+        if ((typeof(string).IsAssignableFrom(data.GetType()) == false))
+        {
+            this.Error("The type \'System.String\' of the parameter \'KeySpace\' did not match the type of th" +
+                    "e data passed to the template.");
+        }
+        else
+        {
+            this._KeySpaceField = ((string)(data));
         }
     }
 }

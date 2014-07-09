@@ -9,6 +9,8 @@ namespace CodeGeneration.Logic
 {
     public class CodeGenerationFacade
     {
+        #region Dependencies resolution
+
         private class Dependencies
         {
             public IDomainDeserializer DomainDeserializer { get; private set; }
@@ -35,20 +37,20 @@ namespace CodeGeneration.Logic
             return _dependencies;
         }
 
+        #endregion
+
         public static TDomain DeserializeDomain<TDomain>(string rootFolderPath)
             where TDomain : new()
         {
             return GetDependencies().DomainDeserializer.Deserialize<TDomain>(rootFolderPath);
         }
 
-        public static void GenerateCode<TMetadata>(IEnumerable<CodeGenerationUnit<TMetadata>> metadata, Func<object> templateGetter, string destinationDirectoryPath)
+        public static void GenerateCode<TMetadata>(IEnumerable<CodeGenerationUnit<TMetadata>> metadata,
+                                                   Func<object> templateGetter,
+                                                   string destinationDirectoryPath,
+                                                   params TemplateArgument[] templateArguments)
         {
-            GetDependencies().CodeGenerator.Generate(metadata, templateGetter, destinationDirectoryPath);
-        }
-
-        public static void GenerateCode<TMetadata, TContext>(IEnumerable<CodeGenerationUnit<TMetadata>> metadata, Func<object> templateGetter, string destinationDirectoryPath, TContext context)
-        {
-            GetDependencies().CodeGenerator.Generate(metadata, templateGetter, destinationDirectoryPath, context);
+            GetDependencies().CodeGenerator.Generate(metadata, templateGetter, destinationDirectoryPath, templateArguments);
         }
     }
 }

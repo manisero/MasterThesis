@@ -56,19 +56,17 @@
     <Compile Include="Bootstrap\NinjectBootstrapper.cs" />
     <Compile Include="DomainDeserialization\IDomainDeserializer.cs" />
     <Compile Include="DomainDeserialization\_Impl\DomainDeserializer.cs" />
-    <Compile Include="GenerationContext.cs" />
     <Compile Include="CodeGenerationUnit.cs" />
+    <Compile Include="TemplateArgument.cs" />
     <Compile Include="Generation\ICodeGenerator.cs" />
     <Compile Include="Generation\ITemplateExecutor.cs" />
     <Compile Include="Generation\_Impl\CodeGenerator.cs" />
     <Compile Include="Infrastructure\IFileSystemService.cs" />
-    <Compile Include="Generation\IGenerationContextFactory.cs" />
     <Compile Include="Infrastructure\IJsonDeserializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CodeGenerationFacade.cs" />
     <Compile Include="Generation\_Impl\TemplateExecutor.cs" />
     <Compile Include="Infrastructure\_Impl\FileSystemService.cs" />
-    <Compile Include="Generation\_Impl\GenerationContextFactory.cs" />
     <Compile Include="Infrastructure\_Impl\JsonDeserializer.cs" />
   </ItemGroup>
   <ItemGroup>

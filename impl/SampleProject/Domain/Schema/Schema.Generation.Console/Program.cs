@@ -16,13 +16,20 @@ namespace Schema.Generation.Console
 
             // Generate code
             var tablesPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\ddl\tables";
-            CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cql"), () => new ViewTableTemplate(), tablesPath, domain.KeySpace);
+            CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cql"),
+                                              () => new ViewTableTemplate(),
+                                              tablesPath,
+                                              new TemplateArgument { Name = "KeySpace", Value = domain.KeySpace });
 
             var entitiesPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Entities";
-            CodeGenerationFacade.GenerateCode(domain.Entities.ToCodeGenerationUnits("cs"), () => new EntityTemplate(), entitiesPath);
+            CodeGenerationFacade.GenerateCode(domain.Entities.ToCodeGenerationUnits("cs"),
+                                              () => new EntityTemplate(),
+                                              entitiesPath);
 
             var viewsPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Views";
-            CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cs"), () => new ViewClassTemplate(), viewsPath);
+            CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cs"),
+                                              () => new ViewClassTemplate(),
+                                              viewsPath);
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface ITemplateExecutor
     {
-        string Execute<TMetadata>(object template, TMetadata metadata, IGenerationContext context);
+        string Execute<TMetadata>(object template, TMetadata metadata, params TemplateArgument[] arguments);
     }
 }
