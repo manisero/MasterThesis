@@ -26,15 +26,15 @@ namespace CodeGeneration.Logic
         }
 
         private readonly IFileSystemService _fileSystemService;
-        private readonly ICodeGenerator _codeGenerator;
+        private readonly ITemplateExecutor _templateExecutor;
         private readonly IDomainDeserializer _domainDeserializer;
 
         public CodeGenerationFacade(IFileSystemService fileSystemService,
-                                    ICodeGenerator codeGenerator,
+                                    ITemplateExecutor templateExecutor,
                                     IDomainDeserializer domainDeserializer)
         {
             _fileSystemService = fileSystemService;
-            _codeGenerator = codeGenerator;
+            _templateExecutor = templateExecutor;
             _domainDeserializer = domainDeserializer;
         }
 
@@ -48,7 +48,7 @@ namespace CodeGeneration.Logic
         {
             foreach (var item in metadata)
             {
-                var code = _codeGenerator.Generate(item.Metadata, templateGetter(), null);
+                var code = _templateExecutor.Execute(templateGetter(), item.Metadata, null);
                 var destinationFilePath = _fileSystemService.CombinePaths(destinationDirectoryPath, item.OutputFileName);
 
                 _fileSystemService.SetFileContent(destinationFilePath, code);

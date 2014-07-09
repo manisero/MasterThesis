@@ -3,9 +3,9 @@ using Microsoft.VisualStudio.TextTemplating;
 
 namespace CodeGeneration.Logic.Generation._Impl
 {
-    public class CodeGenerator : ICodeGenerator
+    public class TemplateExecutor : ITemplateExecutor
     {
-        public string Generate<TMetadata>(TMetadata metadata, object template, IGenerationContext context)
+        public string Execute<TMetadata>(object template, TMetadata metadata, IGenerationContext context)
         {
             var templateType = template.GetType();
 
