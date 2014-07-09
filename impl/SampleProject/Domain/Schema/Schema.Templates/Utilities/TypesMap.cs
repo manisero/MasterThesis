@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Schema.Templates
+namespace Schema.Templates.Utilities
 {
     public static class TypesMap
     {

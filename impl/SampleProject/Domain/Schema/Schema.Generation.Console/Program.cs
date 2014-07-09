@@ -10,6 +10,7 @@ namespace Schema.Generation.Console
         static void Main(string[] args)
         {
             var metadataPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Model";
+            var tablesPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\ddl\tables";
             var entitiesPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Entities";
             var viewsPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Views";
 
@@ -18,8 +19,9 @@ namespace Schema.Generation.Console
 
             var views = new DomainProcessor().GetViews(domain);
 
+            generationFacade.GenerateFromMetadata(views.ToDictionary(x => x, x => x.Name + ".cql"), () => new ViewTableTemplate(), tablesPath);
             generationFacade.GenerateFromMetadata(domain.Entities.ToDictionary(x => x, x => x.Name + ".cs"), () => new EntityTemplate(), entitiesPath);
-            generationFacade.GenerateFromMetadata(views.ToDictionary(x => x, x => x.Name + ".cs"), () => new ViewTemplate(), viewsPath);
+            generationFacade.GenerateFromMetadata(views.ToDictionary(x => x, x => x.Name + ".cs"), () => new ViewClassTemplate(), viewsPath);
         }
     }
 }

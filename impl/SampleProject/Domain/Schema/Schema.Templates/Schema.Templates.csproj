@@ -42,27 +42,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utilities\CqlHelper.cs" />
+    <Compile Include="ViewTableTemplate.cs">
+      <DependentUpon>ViewTableTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="EntityTemplate.cs">
       <DependentUpon>EntityTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="TypesMap.cs" />
-    <Compile Include="ViewTemplate.cs">
-      <DependentUpon>ViewTemplate.tt</DependentUpon>
+    <Compile Include="Utilities\TypesMap.cs" />
+    <Compile Include="ViewClassTemplate.cs">
+      <DependentUpon>ViewClassTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ViewTableTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ViewTableTemplate.cs</LastGenOutput>
+    </None>
     <None Include="EntityTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>EntityTemplate.cs</LastGenOutput>
     </None>
-    <None Include="ViewTemplate.tt">
+    <None Include="ViewClassTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ViewTemplate.cs</LastGenOutput>
+      <LastGenOutput>ViewClassTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,17 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="Schema.Model" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Schema.Templates.Utilities" #>
+<#@ parameter type="Schema.Model.View" name="Metadata" #>
+USE "TODO";
+
+CREATE TABLE "<#= Metadata.Name #>" (
+<# foreach (var field in Metadata.Fields) { #>
+	"<#= field.Name #>" <#= field.Type #>,
+<# } #>
+	<#= CqlHelper.FormatPrimaryKey(Metadata) #>
+);
+
+<# foreach (var field in Metadata.Fields.Where(x => x.IsSearchable)) { #>
+CREATE INDEX ON "<#= Metadata.Name #>" ("<#= field.Name #>");
+<# } #>

@@ -6,7 +6,7 @@ namespace Schema.Generation.Console
 {
     public class DomainProcessor
     {
-        public IEnumerable<View> GetViews(Domain domain)
+        public IList<View> GetViews(Domain domain)
         {
             var views = new Dictionary<string, View>();
 
@@ -21,7 +21,7 @@ namespace Schema.Generation.Console
                 }
             }
 
-            return views.Values;
+            return views.Values.ToList();
         }
 
         private void ProcessEntityField(EntityField field, Entity entity, IDictionary<string, View> views)

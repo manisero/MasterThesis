@@ -10,6 +10,7 @@
 namespace Schema.Templates
 {
     using Schema.Model;
+    using System.Linq;
     using Schema.Templates.Utilities;
     using System;
     
@@ -17,63 +18,96 @@ namespace Schema.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public partial class EntityTemplate : EntityTemplateBase
+    public partial class ViewTableTemplate : ViewTableTemplateBase
     {
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace Sample.Domain.Entit" +
-                    "ies\r\n{\r\n\tpublic class ");
+            this.Write("USE \"TODO\";\r\n\r\nCREATE TABLE \"");
             
-            #line 10 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+            #line 8 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
             
             #line default
             #line hidden
-            this.Write(" : IEntity\r\n\t{\r\n");
+            this.Write("\" (\r\n");
             
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
  foreach (var field in Metadata.Fields) { 
             
             #line default
             #line hidden
-            this.Write("\t\tpublic ");
+            this.Write("\t\"");
             
-            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypesMap.GetDotNetType(field.Type)));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+            #line 10 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
-            this.Write(" { get; set; }\r\n");
+            this.Write("\" ");
             
-            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+            #line 10 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Type));
+            
+            #line default
+            #line hidden
+            this.Write(",\r\n");
+            
+            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t}\r\n}\r\n");
+            this.Write("\t");
+            
+            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(CqlHelper.FormatPrimaryKey(Metadata)));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n);\r\n\r\n");
+            
+            #line 15 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+ foreach (var field in Metadata.Fields.Where(x => x.IsSearchable)) { 
+            
+            #line default
+            #line hidden
+            this.Write("CREATE INDEX ON \"");
+            
+            #line 16 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\" (\"");
+            
+            #line 16 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\");\r\n");
+            
+            #line 17 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\EntityTemplate.tt"
+        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTableTemplate.tt"
 
-private global::Schema.Model.Entity _MetadataField;
+private global::Schema.Model.View _MetadataField;
 
 /// <summary>
 /// Access the Metadata parameter of the template.
 /// </summary>
-private global::Schema.Model.Entity Metadata
+private global::Schema.Model.View Metadata
 {
     get
     {
@@ -92,14 +126,14 @@ public virtual void Initialize()
 bool MetadataValueAcquired = false;
 if (this.Session.ContainsKey("Metadata"))
 {
-    if ((typeof(global::Schema.Model.Entity).IsAssignableFrom(this.Session["Metadata"].GetType()) == false))
+    if ((typeof(global::Schema.Model.View).IsAssignableFrom(this.Session["Metadata"].GetType()) == false))
     {
-        this.Error("The type \'Schema.Model.Entity\' of the parameter \'Metadata\' did not match the type" +
-                " of the data passed to the template.");
+        this.Error("The type \'Schema.Model.View\' of the parameter \'Metadata\' did not match the type o" +
+                "f the data passed to the template.");
     }
     else
     {
-        this._MetadataField = ((global::Schema.Model.Entity)(this.Session["Metadata"]));
+        this._MetadataField = ((global::Schema.Model.View)(this.Session["Metadata"]));
         MetadataValueAcquired = true;
     }
 }
@@ -108,14 +142,14 @@ if ((MetadataValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Metadata");
     if ((data != null))
     {
-        if ((typeof(global::Schema.Model.Entity).IsAssignableFrom(data.GetType()) == false))
+        if ((typeof(global::Schema.Model.View).IsAssignableFrom(data.GetType()) == false))
         {
-            this.Error("The type \'Schema.Model.Entity\' of the parameter \'Metadata\' did not match the type" +
-                    " of the data passed to the template.");
+            this.Error("The type \'Schema.Model.View\' of the parameter \'Metadata\' did not match the type o" +
+                    "f the data passed to the template.");
         }
         else
         {
-            this._MetadataField = ((global::Schema.Model.Entity)(data));
+            this._MetadataField = ((global::Schema.Model.View)(data));
         }
     }
 }
@@ -137,7 +171,7 @@ if ((MetadataValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public class EntityTemplateBase
+    public class ViewTableTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

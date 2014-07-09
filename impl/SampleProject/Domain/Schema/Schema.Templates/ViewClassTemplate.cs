@@ -10,15 +10,16 @@
 namespace Schema.Templates
 {
     using Schema.Model;
+    using Schema.Templates.Utilities;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
+    #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public partial class ViewTemplate : ViewTemplateBase
+    public partial class ViewClassTemplate : ViewClassTemplateBase
     {
         /// <summary>
         /// Create the template output
@@ -28,35 +29,35 @@ namespace Schema.Templates
             this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace Sample.Domain.Views" +
                     "\r\n{\r\n\tpublic class ");
             
-            #line 9 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
+            #line 10 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Metadata.Name));
             
             #line default
             #line hidden
             this.Write(" : IView\r\n\t{\r\n");
             
-            #line 11 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
+            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
  foreach (var field in Metadata.Fields) { 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
+            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TypesMap.GetDotNetType(field.Type)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
+            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
+            #line 14 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
  } 
             
             #line default
@@ -65,7 +66,7 @@ namespace Schema.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewTemplate.tt"
+        #line 1 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\ViewClassTemplate.tt"
 
 private global::Schema.Model.View _MetadataField;
 
@@ -136,7 +137,7 @@ if ((MetadataValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public class ViewTemplateBase
+    public class ViewClassTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

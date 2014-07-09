@@ -1,5 +1,6 @@
 ﻿<#@ template language="C#" #>
 <#@ import namespace="Schema.Model" #>
+<#@ import namespace="Schema.Templates.Utilities" #>
 <#@ parameter type="Schema.Model.Entity" name="Metadata" #>
 using System;
 using System.Collections.Generic;
