@@ -1,6 +1,6 @@
 ﻿namespace Schema.Model
 {
-    public class FieldPresence
+    public class EntityFieldPresence
     {
         public string View { get; set; }
 

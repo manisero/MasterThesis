@@ -2,7 +2,7 @@
 
 namespace Schema.Model
 {
-    public class Field
+    public class EntityField
     {
         public string Name { get; set; }
 
@@ -14,6 +14,6 @@ namespace Schema.Model
 
         public bool IsSearchableInModel { get; set; }
 
-        public IEnumerable<FieldPresence> PresentIn { get; set; }
+        public IEnumerable<EntityFieldPresence> PresentIn { get; set; }
     }
 }

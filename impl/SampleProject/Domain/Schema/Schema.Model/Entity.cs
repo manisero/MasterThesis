@@ -6,7 +6,7 @@ namespace Schema.Model
     {
         public string Name { get; set; }
 
-        public IEnumerable<Field> Fields { get; set; }
+        public IEnumerable<EntityField> Fields { get; set; }
 
         public bool IsPresentInModel { get; set; }
     }

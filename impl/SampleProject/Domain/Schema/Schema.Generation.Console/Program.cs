@@ -14,6 +14,8 @@ namespace Schema.Generation.Console
             var generationFacade = CodeGenerationFacade.GetInstance();
             var domain = generationFacade.DeserializeDomain<Domain>(metadataPath);
 
+            var views = new DomainProcessor().GetViews(domain);
+
             //generationFacade.GenerateFromDirectory<Entity>(metadataPath, () => new EntityTemplate(), null, "cs");
         }
     }
