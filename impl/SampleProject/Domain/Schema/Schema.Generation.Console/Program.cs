@@ -10,14 +10,16 @@ namespace Schema.Generation.Console
         static void Main(string[] args)
         {
             var metadataPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Model";
-            var destinationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Views";
+            var entitiesPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Entities";
+            var viewsPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Views";
 
             var generationFacade = CodeGenerationFacade.GetInstance();
             var domain = generationFacade.DeserializeDomain<Domain>(metadataPath);
 
             var views = new DomainProcessor().GetViews(domain);
 
-            generationFacade.GenerateFromMetadata(views.ToDictionary(x => x, x => x.Name + ".cs"), () => new ViewTemplate(), destinationPath);
+            generationFacade.GenerateFromMetadata(domain.Entities.ToDictionary(x => x, x => x.Name + ".cs"), () => new EntityTemplate(), entitiesPath);
+            generationFacade.GenerateFromMetadata(views.ToDictionary(x => x, x => x.Name + ".cs"), () => new ViewTemplate(), viewsPath);
         }
     }
 }
