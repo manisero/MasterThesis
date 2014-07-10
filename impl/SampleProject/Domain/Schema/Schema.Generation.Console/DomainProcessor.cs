@@ -6,25 +6,36 @@ namespace Schema.Generation.Console
 {
     public class DomainProcessor
     {
-        public IList<View> GetViews(Domain domain)
+        public void Process(Domain domain, out IList<View> views, out IList<Event> events)
         {
-            var views = new Dictionary<string, View>();
+            var viewsDictionary = new Dictionary<string, View>();
+            var eventsDictionary = new Dictionary<string, Event>();
 
             foreach (var entity in domain.Entities)
             {
+                foreach (var presence in entity.PresentInEvents ?? Enumerable.Empty<EntityPresenceInEvent>())
+                {
+                    eventsDictionary.GetEvent(presence.Event).Fields.Add(new EventField
+                    {
+                        Name = entity.Name,
+                        Type = entity.Name
+                    });
+                }
+
                 if (entity.IsPresentInModel)
                 {
                     foreach (var field in entity.Fields)
                     {
-                        ProcessEntityField(field, entity, views);
+                        ProcessEntityField(field, entity, viewsDictionary, eventsDictionary);
                     }
                 }
             }
 
-            return views.Values.ToList();
+            views = viewsDictionary.Values.ToList();
+            events = eventsDictionary.Values.ToList();
         }
 
-        private void ProcessEntityField(EntityField field, Entity entity, IDictionary<string, View> views)
+        private void ProcessEntityField(EntityField field, Entity entity, IDictionary<string, View> views, IDictionary<string, Event> events)
         {
             if (entity.IsPresentInModel)
             {
@@ -38,17 +49,27 @@ namespace Schema.Generation.Console
                     });
             }
 
-            foreach (var fieldPresence in field.PresentIn ?? Enumerable.Empty<EntityFieldPresence>())
+            foreach (var presence in field.PresentInViews ?? Enumerable.Empty<EntityFieldPresenceInView>())
             {
-                views.GetView(fieldPresence.View).Fields.Add(new ViewField
+                views.GetView(presence.View).Fields.Add(new ViewField
                     {
-                        Name = fieldPresence.As ?? field.Name,
+                        Name = presence.As ?? field.Name,
                         Type = field.Type,
-                        IsKey = fieldPresence.IsKey,
-                        OnKeyPostion = fieldPresence.OnKeyPosition,
-                        IsNullable = fieldPresence.IsNullable,
-                        IsSearchable = fieldPresence.IsSearchable
+                        IsKey = presence.IsKey,
+                        OnKeyPostion = presence.OnKeyPosition,
+                        IsNullable = presence.IsNullable,
+                        IsSearchable = presence.IsSearchable
                     });
+            }
+
+            foreach (var presence in field.PresentInEvents ?? Enumerable.Empty<EntityFieldPresenceInEvent>())
+            {
+                events.GetEvent(presence.Event).Fields.Add(new EventField
+                {
+                    Name = presence.As ?? field.Name,
+                    Type = field.Type,
+                    IsNullable = presence.IsNullable,
+                });
             }
         }
     }

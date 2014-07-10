@@ -27,6 +27,26 @@ namespace Schema.Generation.Console
             return view;
         }
 
+        public static Event GetEvent(this IDictionary<string, Event> events, string eventName)
+        {
+            Event @event;
+
+            if (events.TryGetValue(eventName, out @event))
+            {
+                return @event;
+            }
+
+            @event = new Event
+            {
+                Name = eventName,
+                Fields = new List<EventField>()
+            };
+
+            events.Add(eventName, @event);
+
+            return @event;
+        }
+
         public static IEnumerable<CodeGenerationUnit<TMetadata>> ToCodeGenerationUnits<TMetadata>(this IEnumerable<TMetadata> metadata,
                                                                                                   string outputFileExtension,
                                                                                                   string outputFileNamePrefix = null,

@@ -6,6 +6,6 @@ namespace Schema.Model
     {
         public string Name { get; set; }
 
-        public IEnumerable<EntityField> Fields { get; set; }
+        public IList<EventField> Fields { get; set; }
     }
 }

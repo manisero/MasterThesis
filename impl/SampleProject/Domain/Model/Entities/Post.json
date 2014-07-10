@@ -5,11 +5,16 @@
 			"Name": "PostID",
 			"Type": "timeuuid",
 			"IsKeyInModel": true,
-			"PresentIn": [
+			"PresentInViews": [
 				{
 					"View": "Comment",
 					"IsKey": true,
 					"OnKeyPosition": 0
+				}
+			],
+			"PresentInEvents": [
+				{
+					"Event": "PostCommentedEvent"
 				}
 			]
 		},

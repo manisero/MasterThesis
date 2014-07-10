@@ -9,5 +9,7 @@ namespace Schema.Model
         public IEnumerable<EntityField> Fields { get; set; }
 
         public bool IsPresentInModel { get; set; }
+
+        public IEnumerable<EntityPresenceInEvent> PresentInEvents { get; set; }
     }
 }

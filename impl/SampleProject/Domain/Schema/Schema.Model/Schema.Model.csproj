@@ -39,10 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityFieldPresenceInEvent.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityField.cs" />
     <Compile Include="Domain.cs" />
-    <Compile Include="EntityFieldPresence.cs" />
+    <Compile Include="EntityFieldPresenceInView.cs" />
+    <Compile Include="EntityPresenceInEvent.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="EventField.cs" />
     <Compile Include="INamed.cs" />

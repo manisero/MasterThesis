@@ -43,7 +43,7 @@ namespace Schema.Templates.DotNet
             this.Write("\t\tpublic ");
             
             #line 13 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\DotNet\EventTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Type));
+            this.Write(this.ToStringHelper.ToStringWithCulture(TypesMap.GetDotNetType(field.Type, field.IsNullable)));
             
             #line default
             #line hidden

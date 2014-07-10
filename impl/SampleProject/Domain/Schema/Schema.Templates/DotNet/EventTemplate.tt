@@ -10,7 +10,7 @@ namespace Sample.Domain.Events
 	public class <#= Metadata.Name #> : IEvent
 	{
 <# foreach (var field in Metadata.Fields) { #>
-		public <#= field.Type #> <#= field.Name #> { get; set; }
+		public <#= TypesMap.GetDotNetType(field.Type, field.IsNullable) #> <#= field.Name #> { get; set; }
 <# } #>
 	}
 }

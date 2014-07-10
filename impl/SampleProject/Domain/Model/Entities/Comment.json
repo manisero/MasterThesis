@@ -7,9 +7,16 @@
 			"IsKeyInModel": true,
 			"OnKeyPostion": 1,
 			"IsSearchableInModel": true,
-			"PresentIn": [
+			"PresentInViews": [
 				{
 					"View": "Comment",
+					"As": "ParentCommentID",
+					"IsNullable": true
+				}
+			],
+			"PresentInEvents": [
+				{
+					"Event": "PostCommentedEvent",
 					"As": "ParentCommentID",
 					"IsNullable": true
 				}
@@ -20,5 +27,10 @@
 			"Type": "text"
 		}
 	],
-	"IsPresentInModel": true
+	"IsPresentInModel": true,
+	"PresentInEvents": [
+		{
+			"Event": "PostCommentedEvent"
+		}
+	]
 }

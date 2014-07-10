@@ -1,4 +1,5 @@
-﻿using CodeGeneration.Logic;
+﻿using System.Collections.Generic;
+using CodeGeneration.Logic;
 using Schema.Model;
 using Schema.Templates.Database;
 using Schema.Templates.DotNet;
@@ -13,7 +14,10 @@ namespace Schema.Generation.Console
             var metadataPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Model";
 
             var domain = CodeGenerationFacade.DeserializeDomain<Domain>(metadataPath);
-            var views = new DomainProcessor().GetViews(domain);
+
+            IList<View> views;
+            IList<Event> events;
+            new DomainProcessor().Process(domain, out views, out events);
 
             // Generate database code
             var keySpaceGenerationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\ddl\create_keyspace.cql";
@@ -50,7 +54,7 @@ namespace Schema.Generation.Console
                                               entitiesPath);
 
             var eventsPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Events";
-            CodeGenerationFacade.GenerateCode(domain.Events.ToCodeGenerationUnits("cs"),
+            CodeGenerationFacade.GenerateCode(events.ToCodeGenerationUnits("cs"),
                                               () => new EventTemplate(),
                                               eventsPath);
 

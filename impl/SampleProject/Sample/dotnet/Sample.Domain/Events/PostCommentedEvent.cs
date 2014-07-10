@@ -6,9 +6,9 @@ namespace Sample.Domain.Events
 {
 	public class PostCommentedEvent : IEvent
 	{
-		public Guid PostID { get; set; }
-		public Guid? ParentCommentID { get; set; }
-		public string CommentAuthor { get; set; }
 		public Comment Comment { get; set; }
+		public Guid? ParentCommentID { get; set; }
+		public Guid PostID { get; set; }
+		public string CommentAuthor { get; set; }
 	}
 }

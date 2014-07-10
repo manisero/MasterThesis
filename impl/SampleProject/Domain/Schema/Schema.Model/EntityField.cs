@@ -16,6 +16,8 @@ namespace Schema.Model
 
         public bool IsSearchableInModel { get; set; }
 
-        public IEnumerable<EntityFieldPresence> PresentIn { get; set; }
+        public IEnumerable<EntityFieldPresenceInView> PresentInViews { get; set; }
+
+        public IEnumerable<EntityFieldPresenceInEvent> PresentInEvents { get; set; }
     }
 }
