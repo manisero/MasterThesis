@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.WebSite", "Sample.WebSite\Sample.WebSite.csproj", "{6FC40794-B0A3-434F-9149-47DDDDCBD8F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6C5057AB-A806-497E-8C48-4C5A0CE5CA5B}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.DataAccess", "Sample.DataAccess\Sample.DataAccess.csproj", "{27274D51-F036-4C3C-85C1-E0177EABB20B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Domain", "Sample.Domain\Sample.Domain.csproj", "{157920A5-5EB4-492C-B258-7F7CBA616491}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Domain", "1. Domain", "{A06BCAC5-6307-4851-BE85-01E9D4D267CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. DataAccess", "2. DataAccess", "{B296AE4A-71D3-4886-BC03-280F43C09C7F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Presentation", "4. Presentation", "{B51F33C1-C509-445C-8628-D89D3923E4B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Logic", "3. Logic", "{175078B1-2320-437B-AD1F-996F615B610B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Logic", "Sample.Logic\Sample.Logic.csproj", "{1D66FB74-ADB3-4245-8C3B-A3BA7DCB02AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Core", "Sample.Core\Sample.Core.csproj", "{A9FCB9AE-21D2-44F8-B4F4-65C7889F01B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Core", "0. Core", "{4FA2F146-9203-4DFC-A7E8-342BBA1C5EF3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FC40794-B0A3-434F-9149-47DDDDCBD8F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FC40794-B0A3-434F-9149-47DDDDCBD8F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FC40794-B0A3-434F-9149-47DDDDCBD8F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FC40794-B0A3-434F-9149-47DDDDCBD8F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27274D51-F036-4C3C-85C1-E0177EABB20B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27274D51-F036-4C3C-85C1-E0177EABB20B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27274D51-F036-4C3C-85C1-E0177EABB20B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27274D51-F036-4C3C-85C1-E0177EABB20B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{157920A5-5EB4-492C-B258-7F7CBA616491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{157920A5-5EB4-492C-B258-7F7CBA616491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{157920A5-5EB4-492C-B258-7F7CBA616491}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{157920A5-5EB4-492C-B258-7F7CBA616491}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D66FB74-ADB3-4245-8C3B-A3BA7DCB02AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D66FB74-ADB3-4245-8C3B-A3BA7DCB02AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D66FB74-ADB3-4245-8C3B-A3BA7DCB02AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D66FB74-ADB3-4245-8C3B-A3BA7DCB02AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9FCB9AE-21D2-44F8-B4F4-65C7889F01B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9FCB9AE-21D2-44F8-B4F4-65C7889F01B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9FCB9AE-21D2-44F8-B4F4-65C7889F01B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9FCB9AE-21D2-44F8-B4F4-65C7889F01B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6FC40794-B0A3-434F-9149-47DDDDCBD8F5} = {B51F33C1-C509-445C-8628-D89D3923E4B0}
+		{27274D51-F036-4C3C-85C1-E0177EABB20B} = {B296AE4A-71D3-4886-BC03-280F43C09C7F}
+		{157920A5-5EB4-492C-B258-7F7CBA616491} = {A06BCAC5-6307-4851-BE85-01E9D4D267CD}
+		{1D66FB74-ADB3-4245-8C3B-A3BA7DCB02AC} = {175078B1-2320-437B-AD1F-996F615B610B}
+		{A9FCB9AE-21D2-44F8-B4F4-65C7889F01B3} = {4FA2F146-9203-4DFC-A7E8-342BBA1C5EF3}
+	EndGlobalSection
+EndGlobal
