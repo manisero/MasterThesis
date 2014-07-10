@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A5D32BD9-4E06-46F7-8E8E-0DA4F8FCB0B6}</ProjectGuid>
+    <ProjectGuid>{1D66FB74-ADB3-4245-8C3B-A3BA7DCB02AC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sample.Logic</RootNamespace>
@@ -39,7 +39,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventHandlers\PostCommentedEventHandler.cs" />
+    <Compile Include="IEventHandler.cs" />
+    <Compile Include="EventHandlers\UserUpdatedEventHandler.cs" />
+    <Compile Include="IEventHandlerFactory.cs" />
+    <Compile Include="IEventQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Impl\EventHandlerFactory.cs" />
+    <Compile Include="_Impl\EventQueue.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sample.Core\Sample.Core.csproj">
+      <Project>{A9FCB9AE-21D2-44F8-B4F4-65C7889F01B3}</Project>
+      <Name>Sample.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sample.DataAccess\Sample.DataAccess.csproj">
+      <Project>{27274D51-F036-4C3C-85C1-E0177EABB20B}</Project>
+      <Name>Sample.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sample.Domain\Sample.Domain.csproj">
+      <Project>{157920A5-5EB4-492C-B258-7F7CBA616491}</Project>
+      <Name>Sample.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

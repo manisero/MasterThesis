@@ -1,0 +1,9 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase
+@{
+    Layout = "Layout";
+    
+    var title = (string)ViewBag.Title;
+    ViewBag.PageTitle = title != null
+                            ? title + " - Sample"
+                            : "Sample";
+}

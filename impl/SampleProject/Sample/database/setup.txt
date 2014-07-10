@@ -1,3 +1,5 @@
 SOURCE 'ddl/drop_keyspace.cql';
 SOURCE 'ddl/create_keyspace.cql';
 SOURCE 'ddl/create_tables.txt';
+
+SOURCE 'dml/insert_data.cql';
