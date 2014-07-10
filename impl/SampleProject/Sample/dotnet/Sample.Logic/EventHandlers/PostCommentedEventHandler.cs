@@ -23,7 +23,7 @@ namespace Sample.Logic.EventHandlers
                 {
                     CommentID = _uuidService.CreateUUID(),
                     PostID = @event.PostID,
-                    Author = @event.Comment.Author,
+                    Author = @event.CommentAuthor,
                     Content = @event.Comment.Content,
                     ParentCommentID = @event.ParentCommentID
                 };

@@ -9,6 +9,8 @@ namespace Sample.Domain.Events
 
         public Guid? ParentCommentID { get; set; }
 
+        public string CommentAuthor { get; set; }
+
         public Comment Comment { get; set; }
     }
 }
