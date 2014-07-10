@@ -1,5 +1,0 @@
-SOURCE 'ddl/drop_keyspace.cql';
-SOURCE 'ddl/create_keyspace.cql';
-SOURCE 'ddl/create_tables.cql';
-
-SOURCE 'dml/insert_data.cql';
