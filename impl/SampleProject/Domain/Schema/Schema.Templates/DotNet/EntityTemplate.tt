@@ -9,7 +9,7 @@ namespace Sample.Domain.Entities
 	public class <#= Metadata.Name #> : IEntity
 	{
 <# foreach (var field in Metadata.Fields) { #>
-		public <#= TypesMap.GetDotNetType(field.Type) #> <#= field.Name #> { get; set; }
+		public <#= TypesMap.GetDotNetType(field.Type, field.IsNullable) #> <#= field.Name #> { get; set; }
 <# } #>
 	}
 }

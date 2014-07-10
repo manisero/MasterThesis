@@ -11,7 +11,7 @@
 				{
 					"View": "Comment",
 					"As": "ParentCommentID",
-					"HasType": "Guid?"
+					"IsNullable": true
 				}
 			]
 		},

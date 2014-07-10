@@ -43,7 +43,7 @@ namespace Schema.Templates.DotNet
             this.Write("\t\tpublic ");
             
             #line 12 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\DotNet\EntityTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypesMap.GetDotNetType(field.Type)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(TypesMap.GetDotNetType(field.Type, field.IsNullable)));
             
             #line default
             #line hidden

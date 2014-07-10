@@ -8,6 +8,8 @@ namespace Schema.Model
 
         public string Type { get; set; }
 
+        public bool IsNullable { get; set; }
+
         public bool IsKeyInModel { get; set; }
 
         public int? OnKeyPostion { get; set; }

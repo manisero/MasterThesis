@@ -10,6 +10,8 @@
 
         public int? OnKeyPostion { get; set; }
 
+        public bool IsNullable { get; set; }
+
         public bool IsSearchable { get; set; }
     }
 }

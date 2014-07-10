@@ -43,9 +43,10 @@ namespace Schema.Generation.Console
                 views.GetView(fieldPresence.View).Fields.Add(new ViewField
                     {
                         Name = fieldPresence.As ?? field.Name,
-                        Type = fieldPresence.HasType ?? field.Type,
+                        Type = field.Type,
                         IsKey = fieldPresence.IsKey,
                         OnKeyPostion = fieldPresence.OnKeyPosition,
+                        IsNullable = fieldPresence.IsNullable,
                         IsSearchable = fieldPresence.IsSearchable
                     });
             }
