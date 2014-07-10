@@ -10,6 +10,10 @@
 			"Type": "Guid?"
 		},
 		{
+			"Name": "CommentAuthor",
+			"Type": "string"
+		},
+		{
 			"Name": "Comment",
 			"Type": "Comment"
 		}

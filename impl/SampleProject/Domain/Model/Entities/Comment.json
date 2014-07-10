@@ -10,7 +10,8 @@
 			"PresentIn": [
 				{
 					"View": "Comment",
-					"As": "ParentCommentID"
+					"As": "ParentCommentID",
+					"HasType": "Guid?"
 				}
 			]
 		},

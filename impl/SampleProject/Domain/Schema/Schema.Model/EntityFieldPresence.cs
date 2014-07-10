@@ -6,6 +6,8 @@
 
         public string As { get; set; }
 
+        public string HasType { get; set; }
+
         public bool IsKey { get; set; }
 
         public int? OnKeyPosition { get; set; }
