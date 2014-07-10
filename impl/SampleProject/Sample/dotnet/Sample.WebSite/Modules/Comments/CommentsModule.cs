@@ -35,12 +35,12 @@ namespace Sample.WebSite.Modules.Comments
 
         public dynamic ReplyToPost(dynamic parameters)
         {
-            return Reply(parameters.PostID, null, parameters.Author, this.Bind<Domain.Entities.Comment>());
+            return Reply(parameters.PostID, null, Context.Request.Form["Author"], this.Bind<Domain.Entities.Comment>());
         }
 
         public dynamic ReplyToComment(dynamic parameters)
         {
-            return Reply(parameters.PostID, parameters.CommentID, parameters.Author, this.Bind<Domain.Entities.Comment>());
+            return Reply(parameters.PostID, parameters.CommentID, Context.Request.Form["Author"], this.Bind<Domain.Entities.Comment>());
         }
 
         private RedirectResponse Reply(Guid postId, Guid? parentCommentId, string commentAuthor, Domain.Entities.Comment comment)
