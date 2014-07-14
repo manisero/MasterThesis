@@ -1,0 +1,30 @@
+\chapter{Generacja kodu} \label{chap:code_generation}
+
+W~każdej aplikacji obiektowej korzystającej z bazy danych występuje duplikacja opisu dziedziny aplikacji.
+Występuje ona w~co najmniej dwóch miejsach:
+
+\begin{enumerate}
+ \item schemacie bazy danych (DDL),
+ \item definicjach klas w~kodzie źródłowym aplikacji.
+\end{enumerate}
+
+W~miarę jak rozrasta się projekt informatyczny, pojawia się tendencja do duplikowania fragmentów dziedziny poruszanego przez niego problemu.
+Duplikacja ta rozprzestrzenia się pomiędzy modułami aplikacji, których zadaniem obróbka tych samych danych, ale w~różny sposób.
+Przykładowo, aplikacja może udostępniać przechowywane dane na następujące sposoby:
+
+\begin{itemize}
+ \item wyświetlać je na stronie WWW,
+ \item wystawiać jako API,
+ \item eksportować do arkusza kalkulacyjnego.
+\end{itemize}
+
+Jeśli moduły te posiadają osobne implementacje dziedziny aplikacji, to każda zmiana dziedziny wymaga zmodyfikowania implementacji dziedziny w~każdym z~modułów - co wiąże się z~dużymi kosztami.
+
+Z~drugiej strony, identyczność zestawu danych udostępnianego przez różne moduły może nie być pożądana.
+Przykładowo, na stronie WWW wyświetlane mogą być jedynie podstawowe dane danej encji, podczas gdy pełne dane dostępne są po wyeksportowaniu arkusza kalkulacyjnego.
+Takie wymaganie wymusza duplikację części dziedziny aplikacji pomiędzy różnymi implementacjami tej dziedziny.
+
+Rozwiązaniem problemu może być osiągnięcie implementacji, w~której pełna dziedzina aplikacji definiowana jest w jednym miejscu, a~jej implementacje są generowane automatycznie w~odpowiednich modułach.
+Taka sytuacja sprawia, że duplikacja pomiędzy modułami przestaje być problemem - aby wprowadzić zmiany we wszystkich implementacjach, wystarczy wprowadzic pojedynczą modyfikację w~definicji dziedziny aplikacji.
+
+Najprostszym przykładem realizującym to rozwiązanie jest użycie generatora definicji klas na podstawie schematu bazy danych (tzw. podejście database-first) lub generatora schematu bazy danych na podstawie definicji klas (tzw. podejście code-first).
