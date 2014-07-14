@@ -1,3 +1,7 @@
+generacja kodu: kiedy to się opłaca, a kiedy może powodować problemy
+
+===================
+
 Problem: gdzie w CQRS zdefiniowana jest dziedzina (encje) aplikacji? Model do odczytywania nie zawiera przecież encji.
 Rozwiązanie: niech będzie w JSONie.
 
