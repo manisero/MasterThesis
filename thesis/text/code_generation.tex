@@ -1,5 +1,8 @@
 \chapter{Generacja kodu} \label{chap:code_generation}
 
+\emph{TODO: Opisać co jest duplikacją, a co nie (użycie odnośnika (np. nazwy tabeli) w wielu miejscach nie jest). Odniesinie do Pragmatic Programmer.}
+\emph{TODO: Sformułować konkretny przykład aplikacji.}
+
 W~każdej aplikacji obiektowej korzystającej z bazy danych występuje duplikacja opisu dziedziny aplikacji.
 Występuje ona w~co najmniej dwóch miejsach:
 
@@ -7,6 +10,8 @@ Występuje ona w~co najmniej dwóch miejsach:
  \item schemacie bazy danych (DDL),
  \item definicjach klas w~kodzie źródłowym aplikacji.
 \end{enumerate}
+
+Kolejnym typowym miejscem, w~którym umieszcza się informacje o~dziedzinie aplikacji jest jej dokumentacja.
 
 W~miarę jak rozrasta się projekt informatyczny, pojawia się tendencja do duplikowania fragmentów dziedziny poruszanego przez niego problemu.
 Duplikacja ta rozprzestrzenia się pomiędzy modułami aplikacji, których zadaniem obróbka tych samych danych, ale w~różny sposób.
@@ -28,3 +33,54 @@ Rozwiązaniem problemu może być osiągnięcie implementacji, w~której pełna 
 Taka sytuacja sprawia, że duplikacja pomiędzy modułami przestaje być problemem - aby wprowadzić zmiany we wszystkich implementacjach, wystarczy wprowadzic pojedynczą modyfikację w~definicji dziedziny aplikacji.
 
 Najprostszym przykładem realizującym to rozwiązanie jest użycie generatora definicji klas na podstawie schematu bazy danych (tzw. podejście database-first) lub generatora schematu bazy danych na podstawie definicji klas (tzw. podejście code-first).
+Przykładami takich generatorów są:
+
+\begin{itemize}
+ \item Hibernate,
+ \item EntityFramework,
+ \item LinqToSQL.
+\end{itemize}
+
+\emph{TODO: Wymienić więcej, dla różnych technolgii, dać przypisy.}
+
+Jednakże takie generatory eliminują tylko jeden rodzaj duplikacji, wymieniony na początku rozdziału.
+
+Duplikacji w~dokumentacji aplikacji można uniknąć poprzez zastosowanie narzędzi generujących tę dokumentację na podstawie kodu źródłowego aplikacji.
+Narzędzia takie pozwalają na wygenerowanie dokumentacji w~kilku formatach, takich jak PDF czy HTML.
+Ich przykłady to:
+
+\begin{itemize}
+ \item JavaDoc,
+ \item ...
+\end{itemize}
+
+\emph{TODO: Wymienić więcej, dla różnych technolgii, dać przypisy.}
+
+W~przypadku tych narzędzi występuje ten sam problem, co w~przypadku generatorów schematu bazy danych lub definicji klas - eliminują one tylko jeden rodzaj duplikacji.
+
+Aby uniknąć pozostałych rodzajów duplikacji:
+
+\begin{itemize}
+ \item duplikowania nazw i~typów kolumn tabel w~definicjach widoków bazy danych,
+ \item duplikowania nazw i~typów pól klas pomiędzy implementacjami dziedziny aplikacji w~różnych jej modułach,
+\end{itemize}
+
+należałoby skorzystać z~kolejnych generatorów.
+
+Warto zauważyć, że różne typy generatorów za źródło danych obierają sobie różne definicje dziedziny: np. generator database-first bazuje na języku DDL, a~generator dokumentacji - na kodzie źródłowym aplikacji.
+Używanie wielu różnych generatorów usuwających pojedyncze rozdzaje duplikacji w końcu doprowadziłoby do powstania ``łańcucha'' generatów, w~którym wynik działania jedngo generatora byłby źródłem danych dla innego.
+Takie rozwiązanie może być bardzo trudne w~utrzymaniu.
+
+Odpowiednim rozwiązaniem wydaje się być zastosowanie pojedynczego generatora potrafiącego wygenerować wszystkie potrzebne artefakty.
+Powstanie takiego generatora dającego się zastosować w~każdym projekcie jest jednak bardzo mało prawdopodobne:
+
+\begin{itemize}
+ \item każdy projekt ma inne wymagania odnośnie wygenerowanych artefaktów,
+ \item prawdopodobne nie istnieje format, który pozwalałby zdefiniować każdą dziedzinę w~najlepszy (najbardziej naturalny) dla niej sposób.
+\end{itemize}
+
+
+
+
+
+\emph{TODO: Czy generatory to jedyne rozwiązanie? Duplikacji pozwala też uniknąć refleksja.}
