@@ -1,18 +1,47 @@
 \chapter{Duplikacja} \label{chap:duplication}
 
+Zasada ``DRY'' (ang. \emph{``Don't Repeat Yourself''}), sformułowana przez Andrew Hunt'a i~David'a Thomas'a, mówi: ``Każda porcja wiedzy powinna mieć pojedynczą, jednoznaczną, autorytatywną reprezentację w~systemie''~\cite{prag:prog}.
+Poprawne jej stosowanie skutkuje osiągnięciem stanu, w~którym pojedyncza zmiana zachowania systemu wymaga modyfikacji tylko jednego fragmentu reprezentacji wiedzy.
+Należy podkreślić, że autorzy tej zasady przez ``reprezentację wiedzy'' rozumieją nie tylko kod źródłowy tworzony przez programistów systemu.
+Zaliczają do niej również dokumentację systemu, schemat bazy danych przez niego używanej, i~inne artefakty powstające w~procesie wytwarzania oprogramowania, takie jak scenariusze testów akceptacyjnych.
+
+Celem stosowania tej zasady jest unikanie duplikacji wiedzy zawartej w~systemie.
+
+
 %=======
-\section{Wprowadzenie}
+\section{Rodzaje duplikacji}
 %=======
 
 \emph{TODO: Opisać co jest duplikacją, a co nie (użycie odnośnika (np. nazwy tabeli) w wielu miejscach nie jest). Odniesinie do Pragmatic Programmer.}
 
-\emph{TODO: zasada DRY}
+Wyróżnia się cztery rodzaje duplikacji ze względu na przyczynę jej powstania~\cite{prag:prog}:
 
-\emph{TODO: gdzie występuje duplikacja, rodzaje duplikacji}
+\begin{itemize}
+ \item duplikacja wymuszona (ang. \emph{imposed duplication}) - pojawia się gdy programista świadomie duplikuje kod aplikacji uznając, że w~danej sytuacji jest to nie do uniknięcia;
+ \item duplikacja niezamierzona (ang. \emph{inadvertent duplication}) - występuje, gry programista nie jest świadomy, że doprowadza do duplikacji;
+ \item duplikacja niecierpliwa (ang. \emph{impatient duplication}) - jest wynikiem niedbalstwa programisty; ma miejsce w sytuacji, gdy programista świadomie wybierze rozwiązanie najprostsze w danej sytuacji;
+ \item duplikacja pomiędzy programistami (ang. \emph{interdeveloper duplication}) - pojawia się, gdy kilku programistów tworzących tę samą aplikację wzajemnie duplikuje tworzony kod.
+\end{itemize}
 
-\emph{TODO: Wszystko jest o dziedzinie abplikacji - a co z resztą? BLL etc.}
+Duplikacja może występować w~różnych postaciach:
 
-\emph{TODO: Sformułować konkretny przykład aplikacji.}
+\subsection{Duplikacja czynności wykonywanych przez programistów}
+\emph{TODO: Ręczny update bazy (odpalanie po kolei skryptów sql), deploy na staging lub produkcję (wrzucanie plików przez ftp).}
+
+
+\subsection{Duplikacja kodu źródłowego aplikacji}
+
+Duplikacje kodu źródłowego aplikacji można podzielić na następujące kategorie~\cite{soft:sol:dupl}:
+
+\begin{itemize}
+ \item duplikacja wyrażeń (ang. \emph{literal duplication}) - najprostszy rodzaj duplikacji; obejmuje fragmenty kodu, których treść jest identyczna bądź różni się jedynie typami danych, na których te fragmenty operują (przykład: dwie identyczne metody umiejscowione w~różnych modułach systemu); 
+ \item duplikacja strukturalna (ang. \emph{structural duplication}) - obejmuje fragmenty kodu, które mają ten sam schemat działania, ale różnią się pojedynczymi instrukcjami (przykład: dwie pętle iterurąjce po tej samej kolekcji z~tym samym warunkiem stopu, ale wykonujące różne operacje na elementach kolekcji);
+ \item duplikacja czasowa (ang. \emph{temporal duplication}) - określa fragment kodu, który jest niepotrzebnie wykonynway wiele razy (przykład: zliczenie elementów kolekcji podczas każdego sprawdzenia warunku stopu pętli iterurąjcej po tej kolekcji);
+ \item duplikacja intencji (ang. \emph{duplication of intent}) - występuje, gdy dwóch programistów umieści w~różnych modułach aplikacji dwa fragmenty, których wynik działania (ale niekoniecznie treść) jest identyczny.
+\end{itemize}
+
+
+\subsection{Duplikacja opisu dziedziny aplikacji}
 
 W~każdej aplikacji obiektowej korzystającej z bazy danych występuje duplikacja opisu dziedziny aplikacji.
 Występuje ona w~co najmniej dwóch miejsach:
@@ -41,9 +70,22 @@ Przykładowo, na stronie WWW wyświetlane mogą być jedynie podstawowe dane dan
 Takie wymaganie wymusza duplikację części dziedziny aplikacji pomiędzy różnymi implementacjami tej dziedziny.
 
 
+\emph{TODO: Sformułować konkretny przykład aplikacji.}
+
+
 
 %=======
-\section{Generyczna implementacja}
+\section{Skutki występowania duplikacji}
+%=======
+
+\emph{TODO: Wady / zagrożenia duplikacji.}
+
+\emph{TODO: Czemu skupiam się na dziedzinie aplikacji - wydaje się bardziej kosztowna niż duplikacja czynności, a łatwiejsza do usunięcia niż duplikacja kodu. Ale o tym może juz po rozwiązaniach..?}
+
+
+
+%=======
+\section{Rozwiązanie: generyczna implementacja}
 %=======
 
 \subsection{Refleksja}
@@ -56,6 +98,8 @@ TODO
 
 \subsection{Inne generyczne rozwiązania}
 TODO
+
+Zauważmy jednak, że przedstawione propozycje rozwiązują jedynie problem duplikacji w logice biznesowej, podczas gdy najwięcej rodzajów duplikacji dotyczy dziedziny aplikacji.
 
 
 
@@ -116,7 +160,7 @@ Takie rozwiązanie może być bardzo trudne w~utrzymaniu.
 
 
 %=======
-\section{Jeden generator wszystkiego}
+\section{Rozwiązanie: jeden generator wszystkiego}
 %=======
 
 Odpowiednim rozwiązaniem wydaje się być zastosowanie pojedynczego generatora potrafiącego wygenerować wszystkie potrzebne artefakty.
