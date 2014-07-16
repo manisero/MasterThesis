@@ -1,0 +1,27 @@
+\chapter{Implementacja} \label{chap:implementation}
+
+Celem niniejszej pracy jest próba stworzenia takiego generatora.
+Założenia funkcjonalne:
+
+\begin{itemize}
+ \item generator ma być na tyle elastyczny, aby móc obsłużyć wiele sposobów zdefiniowania dziedziny aplikacji,
+ \item generator powinien pozwalać na wygenerowanie dowolnych plików tekstowych (skryptów SQL, kodu źródłowego, dokumentancji HTML itd.),
+ \item generator nie musi generować logiki biznesowej aplikacji - wystarczy dziedzina
+\end{itemize}
+
+Założenia niefunkcjonalne:
+
+\begin{itemize}
+ \item generator zostanie stworzony w~technolgii .NET Framework,
+ \item ...
+\end{itemize}
+
+Szczególna uwaga zostanie poświęcona aplikacjom opartym o~architekturę CQRS i~wykorzystującym bazy danych typu NoSQL.
+Specyficzną cechą takich aplikacji jest to, że operują one na modelach o~wysokim stopniu denormalizacji, co wiąże się z~masowo występującą duplikacją danych.
+
+\emph{TODO: Opisać CQRS.}
+\emph{TODO: Opisać Event Sourcing.}
+\emph{TODO: Opisac NoSQL.}
+\emph{TODO: Opisać rodzaje baz NoSQL.}
+\emph{TODO: Wybrać bazę NoSQL i dlaczego Cassandra.}
+\emph{TODO: Opisać Cassandrę.}
