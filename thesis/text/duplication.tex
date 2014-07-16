@@ -25,13 +25,14 @@ Wyróżnia się cztery rodzaje duplikacji ze względu na przyczynę jej powstani
 
 Duplikacja może występować w~różnych postaciach:
 
+
 \subsection{Duplikacja czynności wykonywanych przez programistów}
 \emph{TODO: Ręczny update bazy (odpalanie po kolei skryptów sql), deploy na staging lub produkcję (wrzucanie plików przez ftp).}
 
 
 \subsection{Duplikacja kodu źródłowego aplikacji}
 
-Duplikacje kodu źródłowego aplikacji można podzielić na następujące kategorie~\cite{soft:sol:dupl}:
+Duplikację kodu źródłowego aplikacji można podzielić na następujące kategorie~\cite{soft:sol:dupl}:
 
 \begin{itemize}
  \item duplikacja wyrażeń (ang. \emph{literal duplication}) - najprostszy rodzaj duplikacji; obejmuje fragmenty kodu, których treść jest identyczna bądź różni się jedynie typami danych, na których te fragmenty operują (przykład: dwie identyczne metody umiejscowione w~różnych modułach systemu); 
@@ -78,10 +79,38 @@ Takie wymaganie wymusza duplikację części dziedziny aplikacji pomiędzy róż
 \section{Skutki występowania duplikacji}
 %=======
 
-\emph{TODO: Wady / zagrożenia duplikacji.}
+Pojawinie się duplikacji w~systemie ma zazwyczaj szkodliwe skutki.
+Rozprzestrzenia się ona tym szybciej, a wyrządzane szkody są tym dotkliwsze, im więszy jest rozmiar systemu.
+
+Najbardziej oczywistym skutkiem występowania duplikacji jest wydłużenie się czasu poświęcanego przez programistów na nieskomplikowane lub powtarzalne zadania.
+Przykładowo, nieznajomość kodu współdzielonego przez wszystkie moduły systemu (tzw. rdzenia, ang. \emph{core}) powoduje, że programiści niepotrzebnie spędzają czas na implementowaniu podstawowych funcji, które są już dostępne w rdzeniu systemu.
+Innym przykładem może być praktyka ręcznego wykonywania czynności, które mogą być łatwo zautomatyzowane.
+Procedura aktualizacji schematu bazy danych, na którą składa się wykonanie kilku skryptów DDL zajmnie dużo mniej czasu, jeśli wykona ją skrypt.
+Wrzucenie nowej wersji systemu na staging lub produkcje nie musi wiązać się z~ręcznym wrzucaniem plików na ftp zdalnej maszyny - może dziać się automatycznie (ref continous delivery).
+
+\emph{TODO: Nie podawać tu rozwiązań, skupić się na szkodach.}
+
+Po drugie, zmiana zachowania systemu wymaga modyfikacji wielu modułów systemu.
+Jeśli nie jest nigdzie zapisane, jakich - trzeba wszystkie miejsca zlokalizować ręcznie.
+Najbardziej jest to widoczne przy naprawie błędów: jeśli występuje duplikacja kodu, to programista naprawiający błąd powinien mieć swiadomość, że poprawiany przez niego fragment kodu może być powielony w~wielu miejscach w~systemie.
+Wszystkie te miejsca musi zlokalizować i~poprawić.
+
+Po trzecie, rozmiar systemu
+- czytelność kodu (jest rozwleczony)
+- rozmiar plików
+
+Po czwarte, pojawienie się jednej dupliakcji to przyzwolenie na wprowadzenie innej
+
 
 \emph{TODO: Czemu skupiam się na dziedzinie aplikacji - wydaje się bardziej kosztowna niż duplikacja czynności, a łatwiejsza do usunięcia niż duplikacja kodu. Ale o tym może juz po rozwiązaniach..?}
 
+
+
+%=======
+\section{Rozwiązanie: skrypty na wszystkie czynności}
+%=======
+
+na update bazy, na deploy na stg / prod
 
 
 %=======
