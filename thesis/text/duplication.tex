@@ -202,23 +202,33 @@ Powodem jest to, że jeśli na podstawie danego fragmentu kodu generowanych jest
 Za ``pojedynczą, jednoznaczną i autorytatywną'' reprezentację danej porcji wiedzy (patrz: Zasada ``DRY'') uznaje się w tym przypadku źródłowy fragment kodu.
 
 
-\subsection{Generator code-first / database-first}
+\subsection{Generator modelu dziedziny aplikacji na podstawie schematu bazy danych} \label{sec:database_first}
 
-Rozwiązaniem problemu może być osiągnięcie implementacji, w~której pełna dziedzina aplikacji definiowana jest w jednym miejscu, a~jej implementacje są generowane automatycznie w~odpowiednich modułach.
-Taka sytuacja sprawia, że duplikacja pomiędzy modułami przestaje być problemem - aby wprowadzić zmiany we wszystkich implementacjach, wystarczy wprowadzic pojedynczą modyfikację w~definicji dziedziny aplikacji.
+Najpowszechniejszym przykładem użycia generatorów kodu jest wykorzystanie generatora zestawu klas wchodzących w~skład modelu dziedziny aplikacji na podstawie schematu bazy danych używanego przez tą aplikację.
+Takie podejście nosi nazwę ``najpierw baza danych'' (ang. \emph{Database First}).
 
-Najprostszym przykładem realizującym to rozwiązanie jest użycie generatora definicji klas na podstawie schematu bazy danych (tzw. podejście database-first) lub generatora schematu bazy danych na podstawie definicji klas (tzw. podejście code-first).
-Przykładami takich generatorów są:
+Przykładami narzędzi umożliwiających taką generację kodu są:
 
 \begin{itemize}
- \item Hibernate,
- \item EntityFramework,
- \item LinqToSQL.
+ \item NHibernate~\cite{hibernate} - narzędzie ORM (ang. \emph{Object-Relational Mapping}) przeznaczone na platformę .Net;
+ \item EntityFramework~\cite{entity_framework} - narzędzie ORM dla platformy .Net;
+ \item SQLMetal~\cite{sqlmetal} - narzędzie dla platformy .Net, którego jedynym zadaniem jest generacja kodu źródłowego klas na podstawie schematu bazy danych;
+ \item Django~\cite{django} - platforma aplikacji webowych dla języka Python.
 \end{itemize}
 
-\emph{TODO: Wymienić więcej, dla różnych technolgii, dać przypisy.}
 
-Jednakże takie generatory eliminują tylko jeden rodzaj duplikacji, wymieniony na początku rozdziału.
+\subsection{Generator schematu bazy danych na podstawie modelu dziedziny aplikacji}
+
+Podejściem przeciwstawnym dla \emph{``Database First''} jest podejście ``najpierw kod'' (ang. \emph{Code Fist}.
+Jak sama nazwa wskazuje, generatory tego typu generują schemat bazy danych na podstawie klas należących do implementacji modelu w~kodzie źródłowym aplikacji.
+
+Przykłady generatorów \emph{``Code First''} to:
+
+\begin{itemize}
+ \item Hibernate~\cite{hibernate} - pierwowzór narzęcia NHibernate (patrz: sekcja~\ref{sec:database_first}), przeznaczony na platformę Java;
+ \item EntityFramework (patrz: sekcja~\ref{sec:database_first});
+ \item Django (patrz: sekcja~\ref{sec:database_first}).
+\end{itemize}
 
 
 \subsection{Generator dokumentacji}
