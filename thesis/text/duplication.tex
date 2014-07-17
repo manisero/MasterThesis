@@ -3,16 +3,17 @@
 Zasada ``DRY'' (ang. \emph{``Don't Repeat Yourself''}), sformułowana przez Andrew Hunt'a i~David'a Thomas'a, mówi: ``Każda porcja wiedzy powinna mieć pojedynczą, jednoznaczną, autorytatywną reprezentację w~systemie''~\cite{prag:prog}.
 Poprawne jej stosowanie skutkuje osiągnięciem stanu, w~którym pojedyncza zmiana zachowania systemu wymaga modyfikacji tylko jednego fragmentu reprezentacji wiedzy.
 Należy podkreślić, że autorzy tej zasady przez ``reprezentację wiedzy'' rozumieją nie tylko kod źródłowy tworzony przez programistów systemu.
-Zaliczają do niej również dokumentację systemu, schemat bazy danych przez niego używanej, i~inne artefakty powstające w~procesie wytwarzania oprogramowania, takie jak scenariusze testów akceptacyjnych.
+Zaliczają do niej również dokumentację systemu, schemat bazy danych przez niego używanej i~inne artefakty powstające w~procesie wytwarzania oprogramowania (takie jak np. scenariusze testów akceptacyjnych), a~nawet czynności wykonywane rutynowo przez programistów.
 
-Celem stosowania tej zasady jest unikanie duplikacji wiedzy zawartej w~systemie.
+Celem stosowania tej zasady ``DRY'' jest unikanie duplikacji wiedzy zawartej w~systemie.
+Duplikacją określa się fakt występowania w~systemie dwóch reprezentacji tej samej porcji wiedzy.
+Należy wyjaśnić, że wielokrotne występowanie nazw klas lub zmiennych (bądź innych identyfikatorów) w~kodzie programu nie jest duplikacją - identyfikatory są jedynie odnośnikami do wiedzy reprezentowanej przez artefakty, które identyfikują.
+
 
 
 %=======
 \section{Rodzaje duplikacji}
 %=======
-
-\emph{TODO: Opisać co jest duplikacją, a co nie (użycie odnośnika (np. nazwy tabeli) w wielu miejscach nie jest). Odniesinie do Pragmatic Programmer.}
 
 Wyróżnia się cztery rodzaje duplikacji ze względu na przyczynę jej powstania~\cite{prag:prog}:
 
@@ -27,12 +28,25 @@ Duplikacja może występować w~różnych postaciach:
 
 
 \subsection{Duplikacja czynności wykonywanych przez programistów}
-\emph{TODO: Ręczny update bazy (odpalanie po kolei skryptów sql), deploy na staging lub produkcję (wrzucanie plików przez ftp).}
+
+Do rutynowych czynności wykonywanych podczas pracy programisty należą wszelkiego rodzaju aktualizacje: schematu bazy danych rezydującej na maszynie programisty czy wersji tworzonego oprogramowania zainstalowanej w~środowisku testowym lub produkcyjnym.
+
+Czynności te zwykle składają się z~kilku kroków. Przykładowo, na aktualizację bazy danych może składać się:
+
+\begin{enumerate}
+ \item Usunięcie istniejącej bazy.
+ \item Stworzenie nowej bazy.
+ \item Zainicjalizowanie schematu nowej bazy przy pomocy skryptu DLL.
+ \item Wypełnienie nowej bazy danymi przy pomocy skryptu DML.
+\end{enumerate}
+
+Jeśli wszystkie z~tych kroków wykonywane są ręcznie, mamy do czynienia z~duplikacją - każdy programista w~zespole, zamiast tylko odwoływać się do wiedzy o~tym, jak zaktualizować bazę danych, musi posiadać tę więdzę i~wcielać ją w~życie krok po kroku.
 
 
 \subsection{Duplikacja kodu źródłowego aplikacji}
 
-Duplikację kodu źródłowego aplikacji można podzielić na następujące kategorie~\cite{soft:sol:dupl}:
+Programistom wielokrotnie zdarza się spowodować duplikację w~kodzie źródłowym tworzonych programów.
+Powielone fragmenty kodu są zazwyczaj niewielkie, a podzielić je można na następujące kategorie~\cite{soft:sol:dupl}:
 
 \begin{itemize}
  \item duplikacja wyrażeń (ang. \emph{literal duplication}) - najprostszy rodzaj duplikacji; obejmuje fragmenty kodu, których treść jest identyczna bądź różni się jedynie typami danych, na których te fragmenty operują (przykład: dwie identyczne metody umiejscowione w~różnych modułach systemu); 
@@ -93,16 +107,13 @@ Wrzucenie nowej wersji systemu na staging lub produkcje nie musi wiązać się z
 Po drugie, zmiana zachowania systemu wymaga modyfikacji wielu modułów systemu.
 Jeśli nie jest nigdzie zapisane, jakich - trzeba wszystkie miejsca zlokalizować ręcznie.
 Najbardziej jest to widoczne przy naprawie błędów: jeśli występuje duplikacja kodu, to programista naprawiający błąd powinien mieć swiadomość, że poprawiany przez niego fragment kodu może być powielony w~wielu miejscach w~systemie.
-Wszystkie te miejsca musi zlokalizować i~poprawić.
+Wszystkie te miejsca musi zlokalizować i~poprawić~\cite{repetition}.
 
 Po trzecie, rozmiar systemu
 - czytelność kodu (jest rozwleczony)
 - rozmiar plików
 
 Po czwarte, pojawienie się jednej dupliakcji to przyzwolenie na wprowadzenie innej
-
-
-\emph{TODO: Czemu skupiam się na dziedzinie aplikacji - wydaje się bardziej kosztowna niż duplikacja czynności, a łatwiejsza do usunięcia niż duplikacja kodu. Ale o tym może juz po rozwiązaniach..?}
 
 
 
@@ -199,3 +210,12 @@ Powstanie takiego generatora dającego się zastosować w~każdym projekcie jest
  \item każdy projekt ma inne wymagania odnośnie wygenerowanych artefaktów,
  \item prawdopodobne nie istnieje format, który pozwalałby zdefiniować każdą dziedzinę w~najlepszy (najbardziej naturalny) dla niej sposób.
 \end{itemize}
+
+
+
+Przedstawione rozwiązania eliminują tylko pojedyncze rodzaje duplikacji.
+Rozwiązanie potencjalnie optymalne to mix wszystkiego po trochu.
+
+\emph{TODO: Czemu skupiam się na dziedzinie aplikacji - wydaje się bardziej kosztowna niż duplikacja czynności, a łatwiejsza do usunięcia niż duplikacja kodu.}
+
+W dalszej części pracy najwięcej zostanie poświęcone rodzajom duplikacji, których usunięcie nie wymaga ciągłej dyscypliny od programistów (bo na to każde rozwiązanie może być zawodne).
