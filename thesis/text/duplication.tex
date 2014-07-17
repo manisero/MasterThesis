@@ -27,7 +27,7 @@ Wyróżnia się cztery rodzaje duplikacji ze względu na przyczynę jej powstani
 Duplikacja może występować w~różnych postaciach:
 
 
-\subsection{Duplikacja czynności wykonywanych przez programistów} \ref{sec:tasks_dupl}
+\subsection{Duplikacja czynności wykonywanych przez programistów} \label{sec:tasks_dupl}
 
 Do rutynowych czynności wykonywanych podczas pracy programisty należą wszelkiego rodzaju aktualizacje: schematu bazy danych rezydującej na maszynie programisty czy wersji tworzonego oprogramowania zainstalowanej w~środowisku testowym lub produkcyjnym.
 
@@ -43,13 +43,14 @@ Czynności te zwykle składają się z~kilku kroków. Przykładowo, na aktualiza
 Jeśli wszystkie z~tych kroków wykonywane są ręcznie, mamy do czynienia z~duplikacją - każdy programista w~zespole, zamiast tylko odwoływać się do wiedzy o~tym, jak zaktualizować bazę danych, musi posiadać tę więdzę i~wcielać ją w~życie krok po kroku.
 
 
-\subsection{Duplikacja kodu źródłowego aplikacji}
+\subsection{Duplikacja kodu źródłowego aplikacji} \label{sec:code_dupl_kinds}
 
 Programistom wielokrotnie zdarza się spowodować duplikację w~kodzie źródłowym tworzonych programów.
 Powielone fragmenty kodu są zazwyczaj niewielkie, a podzielić je można na następujące kategorie~\cite{soft_sol_dupl}:
 
 \begin{itemize}
- \item duplikacja wyrażeń (ang. \emph{literal duplication}) - najprostszy rodzaj duplikacji; obejmuje fragmenty kodu, których treść jest identyczna bądź różni się jedynie typami danych, na których te fragmenty operują (przykład: dwie identyczne metody umiejscowione w~różnych modułach systemu); 
+ \item prosta duplikacja wyrażeń (ang. \emph{basic literal duplication}) - najprostszy rodzaj duplikacji; obejmuje fragmenty kodu, których treść jest identyczna (przykład: dwie identyczne metody umiejscowione w~różnych modułach systemu);
+ \item parametryczna duplikacja wyrażeń (ang. \emph{parametric literal duplication}) - obejmuje fragmenty kodu, których treść różni się jedynie typami danych, na których te fragmenty operują;
  \item duplikacja strukturalna (ang. \emph{structural duplication}) - obejmuje fragmenty kodu, które mają ten sam schemat działania, ale różnią się pojedynczymi instrukcjami (przykład: dwie pętle iterurąjce po tej samej kolekcji z~tym samym warunkiem stopu, ale wykonujące różne operacje na elementach kolekcji);
  \item duplikacja czasowa (ang. \emph{temporal duplication}) - określa fragment kodu, który jest niepotrzebnie wykonynway wiele razy (przykład: zliczenie elementów kolekcji podczas każdego sprawdzenia warunku stopu pętli iterurąjcej po tej kolekcji);
  \item duplikacja intencji (ang. \emph{duplication of intent}) - występuje, gdy dwóch programistów umieści w~różnych modułach aplikacji dwa fragmenty, których wynik działania (ale niekoniecznie treść) jest identyczny.
@@ -147,7 +148,6 @@ Przykłady:
  \item operacja instalacji nowej wersji systemu na środowisku testowym lub produkcyjnym nie musi wiązać się z~ręcznym przesyłaniem plików systemu na serwer FPT zdalnej maszyny - może odbywać się automatycznie, po uruchomieniu odpowiedniego skryptu~\cite{cont_delivery}.
 \end{itemize}
 
-
 Zalety:
 
 \begin{itemize}
@@ -165,24 +165,37 @@ Pozostałe rodzaje duplikacji nie mogą być zniwelowanie w~ten sposób.
 \section{Rozwiązanie: generyczna implementacja}
 %=======
 
+Rozwiązaniem problemu duplikacji kodu źródłowego aplikacji może być generyczna implementacja aplikacji.
+W~językach obiektowych jest ona możliwa do osiągnięcia na kilka sposobów:
+
+
+\subsection{Dziedziczenie}
+
+Podstawowym sposobem na uniknięcie duplikacji w~kodzie aplikacji wykorzystujących języki obiektowe jest dziedziczene.
+Metody wspólne dla rodzin klas obiektów są umieszczane w~ich klasach bazowych.
+Pozwala to uniknąć podstawowej duplikacji wyrażeń (patrz: sekcja~\ref{sec:code_dupl_kinds}).
+
+
+\subsection{Typy szablonowe i~generyczne}
+
+Innych rodzajów duplikacji - parametrycznej duplikacji wyrażeń i~duplikacji strukturalnej - można uniknąć poprzez zastosowanie typów generycznych i~szablonów klas.
+Kod o~tej samej strukturze i~działaniu, ale operujący na danych innego typu, może być zamknięty w~pojedynczej klasie.
+
+
 \subsection{Refleksja}
-\emph{TODO: Czy generatory to jedyne rozwiązanie? Duplikacji pozwala też uniknąć refleksja.}
+
+W~sytuacjach, w~których występuje potrzeba zaimplementowania podobnej funkcjonalności dla kilku typów nienależących do jednej rodziny obiektów, można skorzystać z~mechanizmu refleksji.
+Pozwala on osiągnąć rezultaty podobne do tych oferowanych przez klasy bazowe i~typy generyczne.\\
 
 
-\subsection{Serializacja (do JSONA)}
-TODO
-
-
-\subsection{Inne generyczne rozwiązania}
-TODO
-
-Zauważmy jednak, że przedstawione propozycje rozwiązują jedynie problem duplikacji w logice biznesowej, podczas gdy najwięcej rodzajów duplikacji dotyczy dziedziny aplikacji.
-
+Należy zauważyć, że przedstawione propozycje rozwiązują jedynie problem duplikacji kodu źródłowego aplikacji.
 
 
 %=======
-\section{Rozwiązanie: użycie licznych generatorów}
+\section{Rozwiązanie: użycie generatorów}
 %=======
+
+
 
 \subsection{Generator code-first / database-first}
 
@@ -228,7 +241,8 @@ Aby uniknąć pozostałych rodzajów duplikacji:
  \item duplikowania nazw i~typów pól klas pomiędzy implementacjami dziedziny aplikacji w~różnych jej modułach,
 \end{itemize}
 
-należałoby skorzystać z~kolejnych generatorów.
+należałoby skorzystać z~kolejnych generatorów.\\
+
 
 Warto zauważyć, że różne typy generatorów za źródło danych obierają sobie różne definicje dziedziny: np. generator database-first bazuje na języku DDL, a~generator dokumentacji - na kodzie źródłowym aplikacji.
 Używanie wielu różnych generatorów usuwających pojedyncze rozdzaje duplikacji w końcu doprowadziłoby do powstania ``łańcucha'' generatów, w~którym wynik działania jedngo generatora byłby źródłem danych dla innego.
@@ -240,7 +254,11 @@ Takie rozwiązanie może być bardzo trudne w~utrzymaniu.
 \section{Rozwiązanie: jeden generator wszystkiego}
 %=======
 
-Odpowiednim rozwiązaniem wydaje się być zastosowanie pojedynczego generatora potrafiącego wygenerować wszystkie potrzebne artefakty.
+Należy zauważyć, że żadne z~przedstawionych wyżej rozwiązań nie jest rozwiązaniem prewencyjnym - nie zapobiega pojawianiu się nowych duplikacji.
+To, czy nowa rutynowa czynność zostanie zamknięta w~skrypcie powłoki, i~czy nowy moduł aplikacji zostanie zaimplementowany w~sposób generyczny, zależy jedynie od dyscypliny i~dbałości zespołu tworzącego system.
+Aby uniknąć takiej sytuacji, wydaje się, że mechanizmy niwelujące duplikację powinny leżeć u podstawy systemu - tak, aby programiści intuicyjnie korzystali z~nich, wprowadzając nowe czynności lub aktualizując dziedzinę aplikacji.
+
+Odpowiednim rozwiązaniem wydaje się być zastosowanie pojedynczego generatora potrafiącego wygenerować wszystkie potrzebne w~systemie artefakty.
 Powstanie takiego generatora dającego się zastosować w~każdym projekcie jest jednak bardzo mało prawdopodobne:
 
 \begin{itemize}
