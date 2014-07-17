@@ -1,6 +1,6 @@
 \chapter{Duplikacja} \label{chap:duplication}
 
-Zasada ``DRY'' (ang. \emph{``Don't Repeat Yourself''}), sformułowana przez Andrew Hunt'a i~David'a Thomas'a, mówi: ``Każda porcja wiedzy powinna mieć pojedynczą, jednoznaczną, autorytatywną reprezentację w~systemie''~\cite{prag:prog}.
+Zasada ``DRY'' (ang. \emph{``Don't Repeat Yourself''}), sformułowana przez Andrew Hunt'a i~David'a Thomas'a, mówi: ``Każda porcja wiedzy powinna mieć pojedynczą, jednoznaczną, autorytatywną reprezentację w~systemie''~\cite{prag_prog:dupl}.
 Poprawne jej stosowanie skutkuje osiągnięciem stanu, w~którym pojedyncza zmiana zachowania systemu wymaga modyfikacji tylko jednego fragmentu reprezentacji wiedzy.
 Należy podkreślić, że autorzy tej zasady przez ``reprezentację wiedzy'' rozumieją nie tylko kod źródłowy tworzony przez programistów systemu.
 Zaliczają do niej również dokumentację systemu, schemat bazy danych przez niego używanej i~inne artefakty powstające w~procesie wytwarzania oprogramowania (takie jak np. scenariusze testów akceptacyjnych), a~nawet czynności wykonywane rutynowo przez programistów.
@@ -15,7 +15,7 @@ Należy wyjaśnić, że wielokrotne występowanie nazw klas lub zmiennych (bąd�
 \section{Rodzaje duplikacji}
 %=======
 
-Wyróżnia się cztery rodzaje duplikacji ze względu na przyczynę jej powstania~\cite{prag:prog}:
+Wyróżnia się cztery rodzaje duplikacji ze względu na przyczynę jej powstania~\cite{prag_prog:dupl}:
 
 \begin{itemize}
  \item duplikacja wymuszona (ang. \emph{imposed duplication}) - pojawia się gdy programista świadomie duplikuje kod aplikacji uznając, że w~danej sytuacji jest to nie do uniknięcia;
@@ -27,7 +27,7 @@ Wyróżnia się cztery rodzaje duplikacji ze względu na przyczynę jej powstani
 Duplikacja może występować w~różnych postaciach:
 
 
-\subsection{Duplikacja czynności wykonywanych przez programistów}
+\subsection{Duplikacja czynności wykonywanych przez programistów} \ref{sec:tasks_dupl}
 
 Do rutynowych czynności wykonywanych podczas pracy programisty należą wszelkiego rodzaju aktualizacje: schematu bazy danych rezydującej na maszynie programisty czy wersji tworzonego oprogramowania zainstalowanej w~środowisku testowym lub produkcyjnym.
 
@@ -46,7 +46,7 @@ Jeśli wszystkie z~tych kroków wykonywane są ręcznie, mamy do czynienia z~dup
 \subsection{Duplikacja kodu źródłowego aplikacji}
 
 Programistom wielokrotnie zdarza się spowodować duplikację w~kodzie źródłowym tworzonych programów.
-Powielone fragmenty kodu są zazwyczaj niewielkie, a podzielić je można na następujące kategorie~\cite{soft:sol:dupl}:
+Powielone fragmenty kodu są zazwyczaj niewielkie, a podzielić je można na następujące kategorie~\cite{soft_sol_dupl}:
 
 \begin{itemize}
  \item duplikacja wyrażeń (ang. \emph{literal duplication}) - najprostszy rodzaj duplikacji; obejmuje fragmenty kodu, których treść jest identyczna bądź różni się jedynie typami danych, na których te fragmenty operują (przykład: dwie identyczne metody umiejscowione w~różnych modułach systemu); 
@@ -93,27 +93,45 @@ Takie wymaganie wymusza duplikację części dziedziny aplikacji pomiędzy róż
 \section{Skutki występowania duplikacji}
 %=======
 
-Pojawinie się duplikacji w~systemie ma zazwyczaj szkodliwe skutki.
+Pojawienie się duplikacji w~systemie ma zazwyczaj szkodliwe skutki.
 Rozprzestrzenia się ona tym szybciej, a wyrządzane szkody są tym dotkliwsze, im więszy jest rozmiar systemu.
 
 Najbardziej oczywistym skutkiem występowania duplikacji jest wydłużenie się czasu poświęcanego przez programistów na nieskomplikowane lub powtarzalne zadania.
-Przykładowo, nieznajomość kodu współdzielonego przez wszystkie moduły systemu (tzw. rdzenia, ang. \emph{core}) powoduje, że programiści niepotrzebnie spędzają czas na implementowaniu podstawowych funcji, które są już dostępne w rdzeniu systemu.
-Innym przykładem może być praktyka ręcznego wykonywania czynności, które mogą być łatwo zautomatyzowane.
-Procedura aktualizacji schematu bazy danych, na którą składa się wykonanie kilku skryptów DDL zajmnie dużo mniej czasu, jeśli wykona ją skrypt.
-Wrzucenie nowej wersji systemu na staging lub produkcje nie musi wiązać się z~ręcznym wrzucaniem plików na ftp zdalnej maszyny - może dziać się automatycznie (ref continous delivery).
+Przykładowo, nieznajomość kodu współdzielonego przez wszystkie moduły systemu (tzw. rdzenia, ang. \emph{core}) powoduje, że programiści niepotrzebnie spędzają czas na implementowaniu podstawowych funcji, które są już dostępne w~rdzeniu systemu.
+Innym przykładem może być praktyka ręcznego wykonywania czynności, które mogą wykonywanie automatycznie, w~tle.
 
-\emph{TODO: Nie podawać tu rozwiązań, skupić się na szkodach.}
-
-Po drugie, zmiana zachowania systemu wymaga modyfikacji wielu modułów systemu.
-Jeśli nie jest nigdzie zapisane, jakich - trzeba wszystkie miejsca zlokalizować ręcznie.
-Najbardziej jest to widoczne przy naprawie błędów: jeśli występuje duplikacja kodu, to programista naprawiający błąd powinien mieć swiadomość, że poprawiany przez niego fragment kodu może być powielony w~wielu miejscach w~systemie.
+Po drugie, pojedyncza porcja wiedzy jest reprezentowana w~wielu miejsach, a~więc zmiana pojedynczego zachowania systemu wymaga modyfikacji wielu jego modułów.
+Wprowadzając dowolną modyfikację, programista musi ręcznie zlokalizować wszystkie miejsca wymagające zaktualizowania.
+Problem ten jest najbardziej odczuwalny podczas naprawy zgłoszonych błędów: będąc świadomym występowania duplikacji kodu, programista naprawiający błąd musi pamiętać, że poprawiany przez niego fragment może być powielony w~wielu miejscach w~systemie.
 Wszystkie te miejsca musi zlokalizować i~poprawić~\cite{repetition}.
+Jeśli tego nie zrobi, w~systemie pozostaną sprzeczne ze sobą reprezentacje danej wiedzy, a~kolejni programiści nie będą świadomi, która reprezentacja jest poprawna.
+W dłuższej perspektywie taka sytuacja prowadzi do pojawienia się kolejnych błędów.
 
-Po trzecie, rozmiar systemu
-- czytelność kodu (jest rozwleczony)
-- rozmiar plików
+Po trzecie, duplikacja powoduje zbędne powiększenie rozmiarów systemu.
+Kod, w~którym występują zduplikowane fragmenty jest dłuższy, a przez to mniej czytelny.
+Co więcej, zwiększona ilość kodu powoduje niepożądane zwiększenie rozmiarów plików wchodzących w~skład systemu.
 
-Po czwarte, pojawienie się jednej dupliakcji to przyzwolenie na wprowadzenie innej
+Należy również zwrócić uwagę na zagrożenie, jakie niesie ze sobą wystąpienie pojedynczej duplikacji, której istnienie zostanie zaakceptowane przez programistów wchodzących w~skład zespołu tworzącego projekt.
+Może to spowodować osłabienie dyscypliny w~zespole, a~w~efekcie doprowadzić do pojawienia się kolejnych duplikacji, a~także innych złych praktyk programistycznych.
+Pojedyncze wystąpienie tego zjawiska może więc doprowadzić do rozprzestrzenia się innych niepożadanych zjawisk i~pogorszenia jakości całego systemu~\cite{prag_prog:entropy}.
+
+
+
+%=======
+\section{Rozwiązanie: zapisywanie wszystkich powiązanych i~zduplikowanych miejsc}
+%=======
+
+Najprostszym, a~zarazem najbardziej naiwnym sposobem na zniwelowanie skutków duplikacji może być utrzymywanie listy fragmentów systemu, w~których duplikacja występuje.
+Przykładowo, zespół może przygotować listę miejsc, które należy zmodyfikować, jeśli pojedyncza encja zostanie wzbogacona o~nowe pole.
+Na takiej liście znalazłby się schemat bazy danych, implementacja modelu danych w~kodzie źródłowym programu, dokumetacja systemu, itd.
+
+Takie podejście ma jednak istotne wady:
+
+\begin{itemize}
+ \item rozwiązanie to nie powstrzymuje programistów przed wprowadzaniem kolejnych duplikacji, a~wręcz na to przyzwala;
+ \item istnienie takiej listy samo w~sobie jest duplikacją - pojawienie się nowego miejsca występowania pól encji (np. alternatywnej implementacji modelu danych) wymaga zaktualizowania listy;
+ \item rozwiązanie to niweluje tylko drugi z~wymienionych skutków występowania duplikacji - programista nie musi samodzielnie szukać miejsc, w~których powinien wprowadzić modyfikacje.
+\end{itemize}
 
 
 
@@ -121,7 +139,26 @@ Po czwarte, pojawienie się jednej dupliakcji to przyzwolenie na wprowadzenie in
 \section{Rozwiązanie: skrypty na wszystkie czynności}
 %=======
 
-na update bazy, na deploy na stg / prod
+Wiele czynności wykonywanych przez programistów da się zautomatyzować, tworząc skrypty je wykonujące.
+Przykłady:
+
+\begin{itemize}
+ \item wszystkie kroki składające się na czynność aktualizacji shcematu bazy przedstawone w sekcji~\ref{sec:tasks_dupl} mogą być wykonywane przez pojedynczy skrypt powłoki korzystający z~kilku skryptów DDL i DML;
+ \item operacja instalacji nowej wersji systemu na środowisku testowym lub produkcyjnym nie musi wiązać się z~ręcznym przesyłaniem plików systemu na serwer FPT zdalnej maszyny - może odbywać się automatycznie, po uruchomieniu odpowiedniego skryptu~\cite{cont_delivery}.
+\end{itemize}
+
+
+Zalety:
+
+\begin{itemize}
+ \item w~trakcie działania skryptu w tle, programista może skupić się na innych zadaniach,
+ \item wiedza na temat kroków składających się na daną czynność jest reprezentowana w~jednym miejscu,
+ \item programiści lub inne skrypty odwołują się do tej wiedzy poprzez jej identyfikator (nazwę lub ścieżkę w~systemie plików).
+\end{itemize}
+
+Należy jednak zauważyć, że podejście to rozwiązuje jedynie problem duplikacji czynności wykonywanych przez programistów.
+Pozostałe rodzaje duplikacji nie mogą być zniwelowanie w~ten sposób.
+
 
 
 %=======
