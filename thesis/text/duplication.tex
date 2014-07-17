@@ -1,6 +1,6 @@
 \chapter{Duplikacja} \label{chap:duplication}
 
-Zasada ``DRY'' (ang. \emph{``Don't Repeat Yourself''}), sformułowana przez Andrew Hunt'a i~David'a Thomas'a, mówi: ``Każda porcja wiedzy powinna mieć pojedynczą, jednoznaczną, autorytatywną reprezentację w~systemie''~\cite{prag_prog:dupl}.
+Zasada ``DRY'' (ang. \emph{``Don't Repeat Yourself''}), sformułowana przez Andrew Hunt'a i~David'a Thomas'a, mówi: ``Każda porcja wiedzy powinna mieć pojedynczą, jednoznaczną i autorytatywną reprezentację w~systemie''~\cite{prag_prog:dupl}.
 Poprawne jej stosowanie skutkuje osiągnięciem stanu, w~którym pojedyncza zmiana zachowania systemu wymaga modyfikacji tylko jednego fragmentu reprezentacji wiedzy.
 Należy podkreślić, że autorzy tej zasady przez ``reprezentację wiedzy'' rozumieją nie tylko kod źródłowy tworzony przez programistów systemu.
 Zaliczają do niej również dokumentację systemu, schemat bazy danych przez niego używanej i~inne artefakty powstające w~procesie wytwarzania oprogramowania (takie jak np. scenariusze testów akceptacyjnych), a~nawet czynności wykonywane rutynowo przez programistów.
@@ -195,6 +195,11 @@ Należy zauważyć, że przedstawione propozycje rozwiązują jedynie problem du
 \section{Rozwiązanie: użycie generatorów}
 %=======
 
+Rozwiązaniem pozwalającym na uniknięcie duplikacji opisu dziedziny aplikacji jest zastosowanie różnego typu generatów.
+
+Należy wyjaśnić, że kodu źródłowego (bądź innych artefaktów) wygenerowanego na podstawie innego kodu nie uznaje się za duplikację.
+Powodem jest to, że jeśli na podstawie danego fragmentu kodu generowanych jest wiele artefaktów, to aby wprowadzić zmiany we wszystkich tych artefaktach, należy jedynie  zmodyfikować źródłowy fragment kodu i~uruchomić proces generacji.
+Za ``pojedynczą, jednoznaczną i autorytatywną'' reprezentację danej porcji wiedzy (patrz: Zasada ``DRY'') uznaje się w tym przypadku źródłowy fragment kodu.
 
 
 \subsection{Generator code-first / database-first}
