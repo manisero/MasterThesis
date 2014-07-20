@@ -12,7 +12,7 @@ Należy wyjaśnić, że wielokrotne występowanie nazw klas lub zmiennych (bąd�
 
 
 %=======
-\section{Rodzaje duplikacji}
+\section{Rodzaje duplikacji} \label{sec:dupl_kinds}
 %=======
 
 Wyróżnia się cztery rodzaje duplikacji ze względu na przyczynę jej powstania~\cite{prag_prog:dupl}:
@@ -231,35 +231,26 @@ Przykłady generatorów \emph{``Code First''} to:
 
 \subsection{Generator dokumentacji}
 
-Duplikacji w~dokumentacji aplikacji można uniknąć poprzez zastosowanie narzędzi generujących tę dokumentację na podstawie kodu źródłowego aplikacji.
-Narzędzia takie pozwalają na wygenerowanie dokumentacji w~kilku formatach, takich jak PDF czy HTML.
-Ich przykłady to:
+Duplikacji opisu dziedziny aplikacji w~jej dokumentacji można uniknąć poprzez zastosowanie narzędzi generujących tę dokumentację na podstawie kodu źródłowego aplikacji.
+Generatory tego rodzaju wymagają umieszczania w~kodzie źródłowym specjalnie sformatowanych komentarzy, na podstawie których są w~stanie wygenerować dokumentację w~kilku formatach, takich jak PDF czy HTML.
+Przykłady takich narzędzi to:
 
 \begin{itemize}
- \item JavaDoc,
- \item ...
+ \item Doxygen~\cite{doxygen} - popularne narzędzie obsługujące wiele języków programowania (w~tym C++, Java C\#), wspierające wiele formatów dokumentacji (w~tym HTML, PDF, LaTeX, XML);
+ \item JavaDoc~\cite{javadoc} - generator dedykowany językowi Java, dymyślnie wspiera jedynie format HTML;
+ \item C\# XML Documentation~\cite{msdn:xml_doc} - format tworzenia dokumentacji wbudowany w~język C\#, na podstawie którego generowana jest dokumentacja w~formacie XML;
+ \item pydoc~\cite{pydoc} - narzędzie będące częścią standardowego zestawu narzędzi deweloperskich języka Python; wspiera format tekstowy i~HTML.
 \end{itemize}
-
-\emph{TODO: Wymienić więcej, dla różnych technolgii, dać przypisy.}
-
-W~przypadku tych narzędzi występuje ten sam problem, co w~przypadku generatorów schematu bazy danych lub definicji klas - eliminują one tylko jeden rodzaj duplikacji.
 
 
 \subsection{Inne generatory}
 
-Aby uniknąć pozostałych rodzajów duplikacji:
+Istnieje wiele innych generatorów, należących do typu programowania nazywanego programowaniem automatycznym (ang. \emph{automatic programming})~\cite{auto_prog}.
+Jednakże większość z~nich, tak jak powyższe przykłady, eliminuje tylko pojedyncze rodzaje duplikacji.\\
 
-\begin{itemize}
- \item duplikowania nazw i~typów kolumn tabel w~definicjach widoków bazy danych,
- \item duplikowania nazw i~typów pól klas pomiędzy implementacjami dziedziny aplikacji w~różnych jej modułach,
-\end{itemize}
-
-należałoby skorzystać z~kolejnych generatorów.\\
-
-
-Warto zauważyć, że różne typy generatorów za źródło danych obierają sobie różne definicje dziedziny: np. generator database-first bazuje na języku DDL, a~generator dokumentacji - na kodzie źródłowym aplikacji.
+Warto zwrócić uwagę na fakt, że różne typy generatorów za źródło danych obierają sobie różne definicje dziedziny: np. generator \emph{Database First} bazuje na schemacie bazy danych, a~generator dokumentacji - na kodzie źródłowym aplikacji.
 Używanie wielu różnych generatorów usuwających pojedyncze rozdzaje duplikacji w końcu doprowadziłoby do powstania ``łańcucha'' generatów, w~którym wynik działania jedngo generatora byłby źródłem danych dla innego.
-Takie rozwiązanie może być bardzo trudne w~utrzymaniu.
+Takie rozwiązanie może być trudne w~utrzymaniu.
 
 
 
@@ -267,24 +258,22 @@ Takie rozwiązanie może być bardzo trudne w~utrzymaniu.
 \section{Rozwiązanie: jeden generator wszystkiego}
 %=======
 
-Należy zauważyć, że żadne z~przedstawionych wyżej rozwiązań nie jest rozwiązaniem prewencyjnym - nie zapobiega pojawianiu się nowych duplikacji.
-To, czy nowa rutynowa czynność zostanie zamknięta w~skrypcie powłoki, i~czy nowy moduł aplikacji zostanie zaimplementowany w~sposób generyczny, zależy jedynie od dyscypliny i~dbałości zespołu tworzącego system.
+Przedstawione rozwiązania mają pewne wspólne wady.
+Po pierwsze, wszystkie z~nich usuwają tylko pojedyczne rodzaje duplikacji.
+Aby całkowicie wyeliminować duplikację z~systemu, należałoby by użyć prawie wszystkich z~nich.
+
+Po drugie, rozwiązania zwalczające duplikację czynności wykonywanych przez programistów i~duplikacje kodu źródłowgo aplikacji nie są rozwiązaniami prewencyjnymi - nie zapobiegają pojawianiu się nowych duplikacji.
+To, czy nowa rutynowa czynność zostanie zautomatyzowana przy pomocy skryptu powłoki, i~czy nowy moduł aplikacji zostanie zaimplementowany w~sposób generyczny, zależy jedynie od dyscypliny i~dbałości zespołu tworzącego system.
 Aby uniknąć takiej sytuacji, wydaje się, że mechanizmy niwelujące duplikację powinny leżeć u podstawy systemu - tak, aby programiści intuicyjnie korzystali z~nich, wprowadzając nowe czynności lub aktualizując dziedzinę aplikacji.
 
 Odpowiednim rozwiązaniem wydaje się być zastosowanie pojedynczego generatora potrafiącego wygenerować wszystkie potrzebne w~systemie artefakty.
-Powstanie takiego generatora dającego się zastosować w~każdym projekcie jest jednak bardzo mało prawdopodobne:
+Powstanie takiego generatora dającego się zastosować w~każdym projekcie jest jednak bardzo mało prawdopodobne, ponieważ:
 
 \begin{itemize}
- \item każdy projekt ma inne wymagania odnośnie wygenerowanych artefaktów,
- \item prawdopodobne nie istnieje format, który pozwalałby zdefiniować każdą dziedzinę w~najlepszy (najbardziej naturalny) dla niej sposób.
+ \item każdy projekt ma inne wymagania odnośnie wygenerowanych artefaktów;
+ \item prawdopodobne nie istnieje format, który pozwalałby zdefiniować każdą dziedzinę w~najlepszy dla niej - tj. najbardziej naturalny, a~przy tym pozbawiony duplikacji - sposób.
 \end{itemize}
 
-
-
-Jak widać, istnieją rozwiązania pozwalające wyeliminować pojedyncze rodzaje duplikacji.
+Jak widać, łatwo dostępne są jedynie rozwiązania pozwalające wyeliminować pojedyncze rodzaje duplikacji.
 Nie jest jednak znane pojedyncze, spójne rozwiązanie eliminujące wszystkie rodzaje duplikacji.
-Rozwiązanie potencjalnie optymalne to mix wszystkiego po trochu.
-
-\emph{TODO: Czemu skupiam się na dziedzinie aplikacji - wydaje się bardziej kosztowna niż duplikacja czynności, a łatwiejsza do usunięcia niż duplikacja kodu.}
-
-W dalszej części pracy najwięcej zostanie poświęcone rodzajom duplikacji, których usunięcie nie wymaga ciągłej dyscypliny od programistów (bo na to każde rozwiązanie może być zawodne).
+W~dalszej części pracy podjęta zostanie próba stworzenia rozwiązania łączącego kilka z~powyższych rozwiązań w~taki sposób, aby pozwolić na usunięcie jak największej liczby rodzajów duplikacji patrząc zarówno z~perspektywy ich rodzajów, jak i~przyczyn powstawania~(patrz: sekcja~\ref{sec:dupl_kinds}).
