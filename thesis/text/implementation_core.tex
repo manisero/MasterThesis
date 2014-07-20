@@ -3,7 +3,10 @@
 Zanim przystąpimy do prac nad generatorem aplikacji konkretnego typu, zajmijmy się samym procesem generacji artefaktów systemu, nazwanym tutaj ``trzonem'' narzędzia.
 
 
-\subsection{Założenia dotyczące trzonu narzędzia}
+
+%=======
+\section{Podstawowe założenia dotyczące trzonu narzędzia}
+%=======
 
 O ile elastyczność generatora konkretnego typu aplikacji może być ograniczona, o~tyle trzon powinien być na tyle uniwersalny, by mógł być użyty w~celu wygenerowania wielu rodzajów plików tekstowych, w~tym kodu źródłowego w~dowolnym języku, skryptów DLL, skryptów powłoki, dokumentancji w~formacie HTML lub XML itd.
 Pliki te powinny być generowane w~ten sam sposób (np. na podstawie szablonów napisanych w~jednym języki, takim jak xslt), tak aby programista korzystający z~narzędzia nie musiał poznawać całej gamy języków lub narzędzi używanych do tworzenia szablonów generacji.
@@ -13,10 +16,15 @@ Co więcej, trzon narzędzia nie pownien narzucać sposobu formatowania danych w
 Dla wygody autora narzędzia zakłada się, że zarówno trzon narzędzia jak i~generator konkretnego typu aplikacji zostanie stworzony w~technolgii .NET Framework
 
 
-\subsection{Organizacja plików źródłowych oczekiwana przez trzon}
 
-Pierszą decyzją, którą należy podjąć w~trakcie implementacji, jest organizacja i~format plików źródłowych, na których pracował będzie trzon narzędzia.
-Jak wspomniano wyżej, od trzonu oczekuje się jak największej elastyczności - dlatego trzon powinien wspierać wszystkie z~poniższych scenariuszy:
+%=======
+\section{Organizacja plików wejściowych i~wyjściowych}
+%=======
+
+Pierszą decyzją, którą należy podjąć w~trakcie implementacji, jest organizacja i~format plików źródłowych, na których pracował będzie trzon narzędzia, także organizacja plików, które będzie w~stanie wygenerować.
+Jak wspomniano wyżej, od trzonu oczekuje się jak największej elastyczności - dlatego trzon powinien wspierać kilka scenariuszy.
+Za przykład niech posłuży internetowy portal informacyjny.
+
 
 \subsection{Pojedynczy plik źródłowy}
 
@@ -25,20 +33,57 @@ Przykładem zastosowania może pojedynczy skrypt SQL zawierający schemat bazy d
 Taki plik, oprócz swojego standardowego przeznaczenia, tj. konfigurowania bazy danych, pełniłby rolę źródła generatora \emph{Code First}.
 Na jego podstawie generowane byłyby pliki zawierające defnijcje klas będących częścią implementacji modelu dziedziny w~aplikacji.
 
+Przykład:
+
+\dirtree{%
+.1 database\_schema.
+ .2 schema.sql.
+}
+
+
+Wynik generacji:
+
+\dirtree{%
+.1 Model.
+ .2 user.cs.
+ .2 news.cs.
+ .2 comment.cs.
+ .2 ....
+}
+
 
 \subsection{Pojedynczy katalog z~wieloma plikami źródłowymi}
 
-Kontynuując przykład, w~miarę upływu czasu wspomniany skrypt SQL może rozrosnąć się na tyle, że wystąpi potrzeba podzielenia go na kilka plików - np. według nazw schematów (ang. \emph{scheme})), w~których znajdują się poszczególne tabele.
+Kontynuując przykład, w~miarę upływu czasu portal może rozrosnąć się na tyle, że wprowadzi możliwość prowadzenia blogów przez jego użytkowników.
+Wtedy może wystąpić potrzeba podzielenia schematu bazy danych na kilka plików - np. według nazw schematów (ang. \emph{scheme})), w~których znajdują się poszczególne tabele.
 Wszystkie te pliki w~dalszym ciągu byłyby źródłem dla generatora, a~wynikowe klasy mogłyby być umieszczone w~osobnych katalogach (podzielonych według nazw schematow, w~których znajdują się odpowiadające im tabele).
 
-Przykład (dbo - schemat domyślny, pozostałe - schematy właściwe dla krajów, w~których działa system):
+Przykład (dbo - schemat wspólny, pozostałe - schematy właściwe dla obszarów, którymi zajmuje się portal):
 
 \dirtree{%
 .1 database\_schema.
 .2 dbo.sql.
-.2 en.sql.
-.2 pl.sql.
+.2 news.sql.
+.2 blogs.sql.
 }
+
+Wynik generacji:
+
+\dirtree{%
+.1 Model.
+ .2 dbo.
+  .3 user.cs.
+  .3 ....
+ .2 news.
+  .3 news.cs.
+  .3 comment.cs.
+  .3 ....
+ .2 blogs.
+  .3 post.cs.
+  .3 comment.cs.
+  .3 ....
+}
+
 
 \subsection{Drzewo katalogów z~wielona plikami źródłowymi}
 
@@ -46,7 +91,7 @@ W~dłuższej perspektywie, w~opisywanym przykładzie może pojawić się potrzeb
 Pojedynczy podkatalog zawierałby osobne pliki zawierające definicje tabel, widoków i~procedur składowanych obecnych w~bazie danych.
 Trzon narzędzia generującego powinien być w~stanie dotrzeć do wszystkich tych plików.
 
-Przykład:
+Przykład (procedury składowane nie są podmiotem generacji):
 
 \dirtree{%
 .1 database\_schema.
@@ -54,12 +99,29 @@ Przykład:
   .3 tables.sql.
   .3 views.sql.
   .3 procedures.sql.
- .2 en.
+ .2 news.
   .3 tables.sql.
   .3 views.sql.
   .3 procedures.sql.
- .2 pl.
+ .2 blogs.
   .3 tables.sql.
   .3 views.sql.
   .3 procedures.sql.
+}
+
+Wynik generacji:
+
+\dirtree{%
+.1 Model.
+ .2 dbo.
+  .3 user.cs.
+  .3 ....
+ .2 news.
+  .3 news.cs.
+  .3 comment.cs.
+  .3 ....
+ .2 blogs.
+  .3 post.cs.
+  .3 comment.cs.
+  .3 ....
 }
