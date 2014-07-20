@@ -59,18 +59,18 @@ Powielone fragmenty kodu są zazwyczaj niewielkie, a podzielić je można na nas
 
 \subsection{Duplikacja opisu dziedziny aplikacji}
 
-W~każdej aplikacji obiektowej korzystającej z bazy danych występuje duplikacja opisu dziedziny aplikacji.
-Występuje ona w~co najmniej dwóch miejsach:
+W~każdej aplikacji obiektowej korzystającej z~bazy danych opis dziedziny aplikacji występuje w~co najmniej dwóch miejscach.
+Te miejsca to:
 
-\begin{enumerate}
- \item schemacie bazy danych (DDL),
- \item definicjach klas w~kodzie źródłowym aplikacji.
-\end{enumerate}
+\begin{itemize}
+ \item schemat bazy danych (DDL);
+ \item definicje klas w~kodzie źródłowym aplikacji.
+\end{itemize}
 
 Kolejnym typowym miejscem, w~którym umieszcza się informacje o~dziedzinie aplikacji jest jej dokumentacja.
 
-W~miarę jak rozrasta się projekt informatyczny, pojawia się tendencja do duplikowania fragmentów dziedziny poruszanego przez niego problemu.
-Duplikacja ta rozprzestrzenia się pomiędzy modułami aplikacji, których zadaniem obróbka tych samych danych, ale w~różny sposób.
+W~miarę rozrastania się systemu i~pojawiania się kolejnych funkcjonalności i~modułów, występuje tendencja do powielania całości bądź części definicji dziedziny w~różnych modułach.
+Dotyczy to modułów, których zadaniem jest obróbka tych samych danych, ale w~różny sposób.
 Przykładowo, aplikacja może udostępniać przechowywane dane na następujące sposoby:
 
 \begin{itemize}
@@ -79,14 +79,12 @@ Przykładowo, aplikacja może udostępniać przechowywane dane na następujące 
  \item eksportować do arkusza kalkulacyjnego.
 \end{itemize}
 
-Jeśli moduły te posiadają osobne implementacje dziedziny aplikacji, to każda zmiana dziedziny wymaga zmodyfikowania implementacji dziedziny w~każdym z~modułów - co wiąże się z~dużymi kosztami.
+Moduły te mogą korzystać z~pojedynczej implementacji dziedziny.
+Może to jednak nie być pożądane, szczególnie w~przypadku, gdy każdy ze sposobów udostępnia inny zestaw danych.
+Przykładowo, strona WWW może wyświetlać podstawowe dane każdej encji będącej częścią dziedziny, podczas gdy API udostępnia pełne dane wszystkich encji, a eksport do arkusza kalkulacyjnego udostępnia pełne dane niektórych encji.
 
-Z~drugiej strony, identyczność zestawu danych udostępnianego przez różne moduły może nie być pożądana.
-Przykładowo, na stronie WWW wyświetlane mogą być jedynie podstawowe dane danej encji, podczas gdy pełne dane dostępne są po wyeksportowaniu arkusza kalkulacyjnego.
-Takie wymaganie wymusza duplikację części dziedziny aplikacji pomiędzy różnymi implementacjami tej dziedziny.
-
-
-\emph{TODO: Sformułować konkretny przykład aplikacji.}
+W~takim przypadku moduł odpowiedzialny za API operuje na pełnej dziedzinie, a~moduły strony WWW i~eksportu do arkusza kalkulacyjnego  - na jej fragmentach.
+Jeśli każdy z~tych modułów posiada niezależną implementację dziedziny aplikacji, to mamy do czynienia z~duplikacją.
 
 
 
@@ -188,7 +186,7 @@ W~sytuacjach, w~których występuje potrzeba zaimplementowania podobnej funkcjon
 Pozwala on osiągnąć rezultaty podobne do tych oferowanych przez klasy bazowe i~typy generyczne.\\
 
 
-Należy zauważyć, że przedstawione propozycje rozwiązują jedynie problem duplikacji kodu źródłowego aplikacji.
+Należy podkreślić, że przedstawione propozycje rozwiązują jedynie problem duplikacji kodu źródłowego aplikacji.
 
 
 %=======
@@ -283,7 +281,8 @@ Powstanie takiego generatora dającego się zastosować w~każdym projekcie jest
 
 
 
-Przedstawione rozwiązania eliminują tylko pojedyncze rodzaje duplikacji.
+Jak widać, istnieją rozwiązania pozwalające wyeliminować pojedyncze rodzaje duplikacji.
+Nie jest jednak znane pojedyncze, spójne rozwiązanie eliminujące wszystkie rodzaje duplikacji.
 Rozwiązanie potencjalnie optymalne to mix wszystkiego po trochu.
 
 \emph{TODO: Czemu skupiam się na dziedzinie aplikacji - wydaje się bardziej kosztowna niż duplikacja czynności, a łatwiejsza do usunięcia niż duplikacja kodu.}
