@@ -1,0 +1,16 @@
+\chapter{Implementacja generatora aplikacji pojedynczego typu} \label{chap:implementation:single_type}
+
+Założenia dotyczące całości:
+
+\begin{itemize}
+ \item generator ma generować dziedzinę aplikacji CQRS wykorzystująej Cassandrę:
+  \begin{itemize}
+   \item schemat DLL
+   \item klasy C\#: model Read, model Write
+   \item dokumentancja HTML
+  \end{itemize}
+ \item ...
+\end{itemize}
+
+Szczególna uwaga zostanie poświęcona aplikacjom opartym o~architekturę CQRS i~wykorzystującym bazy danych typu NoSQL.
+Specyficzną cechą takich aplikacji jest to, że operują one na modelach o~wysokim stopniu denormalizacji, co wiąże się z~masowo występującą duplikacją metadanych.

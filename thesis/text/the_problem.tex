@@ -1,32 +1,14 @@
 \chapter{Sprecyzowanie problemu} \label{chap:the_problem}
 
-Założenia funkcjonalne dotyczące core generatora:
+Celem praktycznej części niniejszej pracy jest stworzenie narzędzia pozwalającego stworzyć aplikację, w~jak największym stopniu unikając duplikacji.
+Narzędzie to będzie oparte o~mechanizmy generacji kodu źródłowego oraz innych artefaktów systemu.
 
-\begin{itemize}
- \item generator ma być na tyle elastyczny, aby móc obsłużyć wiele sposobów zdefiniowania dziedziny aplikacji,
- \item generator powinien pozwalać na wygenerowanie dowolnych plików tekstowych (skryptów SQL, kodu źródłowego, dokumentancji HTML, skryptów powłoki itd.),
- \item generator nie musi generować logiki biznesowej aplikacji - wystarczy dziedzina
- \item wszystkie szablony generacji powinny być zdefiniowane w~ten sam sposób (w~tym samym języku)
-\end{itemize}
+Generacja została wybrała jako rozwiązanie problemu duplikacji dlatego, że pozwala zredukować duplikację nie tylko w~kodzie źródłowym aplikacji, a~w~obrębie całego systemu.
+Co więcej, zastosowanie generacji u~podstawy systemu może zapobiec pojawianiu się duplikacji w~przyszłości - gdy pojawi się potrzeba stworzenia nowej funkcjonalności, nowego modułu aplikacji bądź nowego artefaktu systemu, programiści prawdopodobnie najpierw spróbują zaimplementować tę nową część systemy tak, aby była generowana na podstawie już istniejącej bazy.
 
-Założenia niefunkcjonalne dotyczące core generatora:
-
-\begin{itemize}
- \item generator zostanie stworzony w~technolgii .NET Framework,
- \item ...
-\end{itemize}
-
-Założenia dotyczące całości:
-
-\begin{itemize}
- \item generator ma generować dziedzinę aplikacji CQRS wykorzystująej Cassandrę:
-  \begin{itemize}
-   \item schemat DLL
-   \item klasy C\#: model Read, model Write
-   \item dokumentancja HTML
-  \end{itemize}
- \item ...
-\end{itemize}
-
-Szczególna uwaga zostanie poświęcona aplikacjom opartym o~architekturę CQRS i~wykorzystującym bazy danych typu NoSQL.
-Specyficzną cechą takich aplikacji jest to, że operują one na modelach o~wysokim stopniu denormalizacji, co wiąże się z~masowo występującą duplikacją metadanych.
+Należy zaznaczyć, że od narzędzia będącego celem pracy nie jest wymagana możliwość całkowitej eliminacji duplikacji w~systemie.
+Głownym rodzajem duplikacji, który będzie przedmiotem działania narzędzia jest duplikacja dziedziny aplikacji.
+Wybór padł na ten właśnie rodzaj dlatego, że przejawia się on w~największym zakresie systemu.
+Co więcej, użycie mechanizmów generacji nie przekreśla eliminacji innych rodzajów duplikacji.
+Przykładowo, skrypty powłoki automatyzujące czynności wykonywane przez programistów również mogą być generowane lub mogą działać na wygenerowanych plikach - wtedy tym łatwiej będą się dostosowywać do zmian w~systemie.
+Niektóre fragmenty kodu źródłowego logiki biznesowej lub testów jednostkowych aplikacji również mogą być generowane, aczkolwiek uwaga poświęcona zostanie głównie definicji dziedziny aplikacji.
