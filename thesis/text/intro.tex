@@ -1,8 +1,57 @@
 \chapter{Wstęp} \label{chap:intro}
 
-TODO
-
-- problem
- - w projektach często występuje duplikacja w wielu miejscach
- - w CQRS to w ogóle
+\begin{itemize}
+ \item Wstęp
  
+ \item Duplikacja
+ 
+ \item Sprecyzowanie problemu
+  \begin{itemize}
+   \item że zajmę się głównie dziedziną aplikacji
+   \item że rozwiązanie będzie się składać z dwóch części:
+    \begin{itemize}
+     \item trzonu narzędzia do generacji:
+     \item generatora aplikacji CQRS
+    \end{itemize}
+  \end{itemize}
+  
+ \item Trzon narzędzia do generacji:
+  \begin{itemize}
+   \item kroki generacji:
+    \begin{itemize}
+     \item wczytanie definicji dziedziny aplikacji
+     \item zdeserializowanie jej
+     \item wyodrębnienie konkretnych jednostek generacji (np. encji) (tego core nie zrobi)
+     \item użycie zdefiniowanych (nie przez core) szablonów do wygenerowania plików na podstawie jednostek generacji
+    \end{itemize}
+   \item sposób zdefiniowania dziedziny aplikacji
+    \begin{itemize}
+     \item np. UML czy EMF (?) nie nadają się zbytnio bo działają na encjach, a chodzi o pojedyncze pola
+     \item podkreślić, że podstawową jednostką nie jest encja, tylko pole
+     \item format powinien być zupełnie dowolny
+     \item domyślnie będzie JSON, ale można to łatwo podmienić
+    \end{itemize}
+   \item czy wymagać stworzenia schematu definicji dziedziny aplikacji?
+    \begin{itemize}
+     \item są dwie opcje:
+      \begin{itemize}
+       \item definicję dziedziny deserializować do dynamic, szablonom przekazywać dynamic (jest dowolność, ale nie wyłapie się błędów podczas deserializacji)
+       \item definicję dziedziny deserializować do konkretnego typu, szablonom przekazywać konkretne typy
+      \end{itemize}
+     \item druga opcja wydaje się lepsza (opis dziedziny powinien być spójny)
+     \item ale mechanizm będzie generyczny, decyzja będzie należała do konkretnego generatora
+    \end{itemize}
+
+   
+   \item 
+  \end{itemize}
+
+\end{itemize}
+
+
+\emph{TODO: Opisać CQRS.}
+\emph{TODO: Opisać Event Sourcing.}
+\emph{TODO: Opisac NoSQL.}
+\emph{TODO: Opisać rodzaje baz NoSQL.}
+\emph{TODO: Wybrać bazę NoSQL i dlaczego Cassandra.}
+\emph{TODO: Opisać Cassandrę.}
