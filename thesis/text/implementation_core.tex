@@ -1,5 +1,43 @@
 \chapter{Implementacja trzonu narzędzia} \label{chap:implementation:core}
 
+\begin{itemize}
+ \item jakiej organizacji plików źródłowych oczekuje generator
+  \begin{itemize}
+   \item organizajca powinna być właściwie dowolna
+   \item plików źródłowych może być wiele
+   \item powinien być wspierany scenariusz, gdzie jeden plik docelowy jest generowany na podstawie kilku źródłowych i odwrotnie
+  \end{itemize}
+ \item kroki generacji:
+  \begin{itemize}
+   \item wczytanie definicji dziedziny aplikacji
+   \item zdeserializowanie jej
+   \item wyodrębnienie konkretnych jednostek generacji (np. encji) (tego core nie zrobi)
+   \item użycie zdefiniowanych (nie przez core) szablonów do wygenerowania plików na podstawie jednostek generacji
+  \end{itemize}
+ \item sposób zdefiniowania dziedziny aplikacji
+  \begin{itemize}
+   \item np. UML czy EMF (?) nie nadają się zbytnio bo działają na encjach, a chodzi o pojedyncze pola
+   \item podkreślić, że podstawową jednostką nie jest encja, tylko pole
+   \item format powinien być zupełnie dowolny
+   \item domyślnie będzie JSON, ale można to łatwo podmienić
+  \end{itemize}
+ \item czy wymagać stworzenia schematu definicji dziedziny aplikacji?
+  \begin{itemize}
+   \item są dwie opcje:
+    \begin{itemize}
+     \item (no schema) definicję dziedziny deserializować do dynamic, szablonom przekazywać dynamic (jest dowolność, ale nie wyłapie się błędów podczas deserializacji)
+     \item definicję dziedziny deserializować do konkretnego typu, szablonom przekazywać konkretne typy
+    \end{itemize}
+   \item druga opcja wydaje się lepsza (opis dziedziny powinien być spójny)
+   \item ale mechanizm będzie generyczny, decyzja będzie należała do konkretnego generatora
+  \end{itemize}
+ \item Wybór silnika do generacji kodu (templating engine)
+  \begin{itemize}
+   \item opisać dostępne w .NET
+   \item dlaczego t4? - np. razor nie, bo razora tez mozemy chciec generowac - generowanie razora razorem mogloby byc utrudnione
+  \end{itemize}
+\end{itemize}
+
 Zanim przystąpimy do prac nad generatorem aplikacji konkretnego typu, zajmijmy się samym procesem generacji artefaktów systemu, nazwanym tutaj ``trzonem'' narzędzia.
 
 
@@ -33,7 +71,7 @@ Przykładem zastosowania może pojedynczy skrypt SQL zawierający schemat bazy d
 Taki plik, oprócz swojego standardowego przeznaczenia, tj. konfigurowania bazy danych, pełniłby rolę źródła generatora \emph{Code First}.
 Na jego podstawie generowane byłyby pliki zawierające defnijcje klas będących częścią implementacji modelu dziedziny w~aplikacji.
 
-Przykład:
+Rysunek~\ref{fig:implementation_core:singleSourceFile} obrazuje przykład.
 
 \input{figures/implementation_core/singleSourceFile}
 
@@ -44,7 +82,7 @@ Kontynuując przykład, w~miarę upływu czasu portal może rozrosnąć się na 
 Wtedy może wystąpić potrzeba podzielenia schematu bazy danych na kilka plików - np. według nazw schematów (ang. \emph{scheme})), w~których znajdują się poszczególne tabele.
 Wszystkie te pliki w~dalszym ciągu byłyby źródłem dla generatora, a~wynikowe klasy mogłyby być umieszczone w~osobnych katalogach (podzielonych według nazw schematow, w~których znajdują się odpowiadające im tabele).
 
-Przykład:
+Rysunek~\ref{fig:implementation_core:multipleSourceFiles} obrazuje przykład.
 
 \input{figures/implementation_core/multipleSourceFiles}
 
@@ -55,12 +93,13 @@ W~dłuższej perspektywie, w~opisywanym przykładzie może pojawić się potrzeb
 Pojedynczy podkatalog zawierałby osobne pliki zawierające definicje tabel, widoków i~procedur składowanych obecnych w~bazie danych.
 Trzon narzędzia generującego powinien być w~stanie dotrzeć do wszystkich tych plików.
 
-Przykład:
+Rysunek~\ref{fig:implementation_core:multipleFolders} obrazuje przykład.
 
 \input{figures/implementation_core/multipleFolders}
 
 Innym przykładem wykorzystującym ten scenariusz scenariuszem jest sytuacja, w~której pojedynczy plik wynikowy generowany jest z~wielu plików źródłowych.
-Przykladem może być zorganizowanie opisu dziedziny aplikacji w~taki sposób, że informacje na temat każdego pola każdej encji umieszczone są w~osobnym pliku:
+Przykladem może być zorganizowanie opisu dziedziny aplikacji w~taki sposób, że informacje na temat każdego pola każdej encji umieszczone są w~osobnym pliku.
+Rysunek~\ref{fig:implementation_core:multipleFolders_multipleInputFiles} obrazuje przykład.
 
 \input{figures/implementation_core/multipleFolders_multipleInputFiles}
 
