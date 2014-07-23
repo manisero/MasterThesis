@@ -1,12 +1,7 @@
 \chapter{Implementacja trzonu narzędzia} \label{chap:implementation:core}
 
 \begin{itemize}
- \item jakiej organizacji plików źródłowych oczekuje generator
-  \begin{itemize}
-   \item organizajca powinna być właściwie dowolna
-   \item plików źródłowych może być wiele
-   \item powinien być wspierany scenariusz, gdzie jeden plik docelowy jest generowany na podstawie kilku źródłowych i odwrotnie
-  \end{itemize}
+ \item +jakiej organizacji plików źródłowych oczekuje generator
  \item kroki generacji:
   \begin{itemize}
    \item wczytanie definicji dziedziny aplikacji
@@ -105,3 +100,27 @@ Rysunek~\ref{fig:implementation_core:multipleFolders_multipleInputFiles} obrazuj
 
 Taka organizacja może mieć zastosowanie w~przypadku, gdy w~systemiie w~wielu miejscach występują jedynie fragmenty encji (np. w~widokach bazy danych).
 Wtedy każde pole może wymagać skonfigurowania dla niego miejsc, w~których występuje.
+
+
+
+%=======
+\section{Kroki generacji}
+%=======
+
+\subsection{Wczytanie definicji dziedziny aplikacji}
+
+
+\subsection{Zdeserializowanie definicji dziedziny aplkacji}
+
+
+\subsection{Wyodrębnienie jednostek generacji}
+
+- jednostek generacji - np. encji
+
+- tego core nie zrobi
+
+
+\subsection{Użycie szablonów do wygenerowania plików}
+
+- szablonów zdefiniowanych nie przez core
+- wygenerowania na podstawie jednostek generacji
