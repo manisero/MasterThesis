@@ -123,10 +123,67 @@ Wtedy każde pole może wymagać skonfigurowania dla niego miejsc, w~których wy
 \section{Sposób zdefiniowania dziedziny aplikacji} \label{sec:core:domain_definition}
 %=======
 
+O~ile założenie o~elastyczności generatora powinno dopuszczać zdefiniowanie dziedziny aplikacji w~dowolny sposób, używając dowolnego formatu plików zawierających opis poszczególnych elementów tej dziedziny, o~tyle generator powinien obsługiwać pewien domyślny sposób formatowania.
+Poniżej przestawiono kilka z~możliwych wyborów:
+
+\subsection{UML}
+
+Oczywistym wyborem sposobu opisu dziedziny aplikacji wydaje się być język UML, stworzony między innymi do tego właśnie celu.
+Do opisu przykładowej dziedziny posłużyć może diagram klas przestawiony na rysuku~\ref{fig:implementation_core:uml}.
+
+\input{figures/implementation_core/uml}
+
+Trzeba jednak zauważyć, ze taki opis nie jest wystarczająco elastyczny - posiada on zdefiniowany z~góry zestaw atrybutów, .
+Natomiast rzeczywiste scenariusze użycia generatora wymagać mogą atrybutów, których przewidzenie na etapie projektowania generatora jest niemożliwe.
+Przykładowo, do opisu encji mogą należeć takie atrybuty, jak:
+
 \begin{itemize}
- \item np. UML czy EMF (?) nie nadają się zbytnio bo działają na encjach, a chodzi o pojedyncze pola
- \item podkreślić, że podstawową jednostką nie jest encja, tylko pole
- \item format powinien być zupełnie dowolny
+ \item opis encji, który powinien znaleźć się w~dokumentancji systemu;
+ \item wersja systemu, w~której encja została wprowadzona;
+ \item widoki bazy danych, kórych źródłem jest encja.
+\end{itemize}
+
+Diagram klas nie przewiduje przechowywania żadej z~tych informacji.
+
+Co więcej, podstawową jednostką diagramu klas UML jest encja, co samo w~sobie jest ograniczeniem elastyczności.
+Opis dziedziny aplikacji tworzony przez użytkownika generatora może natomiast za postawową jednostkę obierać na przykład pojedyncze pole encji.
+Do opisu pojedynczego pola encji, oprócz jego nazy i~typu, mogą należeć takie atrybuty, jak:
+
+\begin{itemize}
+ \item opis pola, który powinien znaleźć się w~dokumentancji systemu;
+ \item wersja systemu, w~której pole zostało wprowadzone;
+ \item widoki bazy danych, w~których występuje pole.
+\end{itemize}
+
+Diagram klas nie przewiduje przechowywania żadej z~tych informacji.
+
+
+\subsection{XML}
+
+Język XML jest powszechnie używany do opisu dziedziny,
+Jest o niego oparty na przykład język WSDL (język definicji usług sieciowych, ang. \emph{Web Services Description Language})~\cite{wsdl} stosowany do opisu kontraktów (ang. \emph{contract}) realizowaych przez usługi sieciowe (ang. \emph{web service}).
+
+Język XML jest pozbawiony wad języka UML - można w~nim zamodelować dowolne atrybuty.
+Tę samą dziedzinę, która została przedstawiona na diagramie klas języka UML (rysunek~\ref{fig:implementation_core:uml}), ale wzbogaconą o~niedostępne na tym diagramie atrybuty, przedstawia rysunek~\ref{fig:implementation_core:xml}.
+
+\input{figures/implementation_core/xml}
+
+
+\subsection{JSON}
+
+Rysunek~\ref{fig:implementation_core:json}.
+
+\input{figures/implementation_core/json}
+
+
+\subsection{YAML}
+
+Rysunek~\ref{fig:implementation_core:yaml}.
+
+\input{figures/implementation_core/yaml}
+
+
+\begin{itemize}
  \item domyślnie będzie JSON, ale można to łatwo podmienić
 \end{itemize}
 
@@ -153,6 +210,6 @@ Wtedy każde pole może wymagać skonfigurowania dla niego miejsc, w~których wy
 %=======
 
 \begin{itemize}
- \item opisać dostępne w .NET
+ \item opisać dostępne (t4, razor, xslt)
  \item dlaczego t4? - np. razor nie, bo razora tez mozemy chciec generowac - generowanie razora razorem mogloby byc utrudnione
 \end{itemize}
