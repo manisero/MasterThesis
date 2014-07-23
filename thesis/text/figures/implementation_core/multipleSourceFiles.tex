@@ -1,0 +1,30 @@
+\begin{figure}[!ht]
+Źródło generacji:
+
+\dirtree{%
+.1 database\_schema.
+ .2 dbo.sql.
+ .2 news.sql.
+ .2 blogs.sql.
+}
+
+Wynik generacji:
+
+\dirtree{%
+.1 Model.
+ .2 dbo.
+  .3 User.cs.
+  .3 ....
+ .2 news.
+  .3 News.cs.
+  .3 Comment.cs.
+  .3 ....
+ .2 blogs.
+  .3 Post.cs.
+  .3 Comment.cs.
+  .3 ....
+}
+
+\caption{}
+\label{fig:implementation_core:multipleSourceFiles}
+\end{figure}

@@ -1,0 +1,39 @@
+\begin{figure}[!ht]
+Źródło generacji:
+
+\dirtree{%
+.1 database\_schema.
+ .2 dbo.
+  .3 tables.sql.
+  .3 views.sql.
+  .3 procedures.sql.
+ .2 news.
+  .3 tables.sql.
+  .3 views.sql.
+  .3 procedures.sql.
+ .2 blogs.
+  .3 tables.sql.
+  .3 views.sql.
+  .3 procedures.sql.
+}
+
+Wynik generacji:
+
+\dirtree{%
+.1 Model.
+ .2 dbo.
+  .3 User.cs.
+  .3 ....
+ .2 news.
+  .3 News.cs.
+  .3 Comment.cs.
+  .3 ....
+ .2 blogs.
+  .3 Post.cs.
+  .3 Comment.cs.
+  .3 ....
+}
+
+\caption{(procedury składowane nie są podmiotem generacji)}
+\label{fig:implementation_core:multipleFolders}
+\end{figure}

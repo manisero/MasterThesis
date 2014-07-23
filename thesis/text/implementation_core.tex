@@ -35,21 +35,7 @@ Na jego podstawie generowane byłyby pliki zawierające defnijcje klas będącyc
 
 Przykład:
 
-\dirtree{%
-.1 database\_schema.
- .2 schema.sql.
-}
-
-
-Wynik generacji:
-
-\dirtree{%
-.1 Model.
- .2 User.cs.
- .2 News.cs.
- .2 Comment.cs.
- .2 ....
-}
+\input{figures/implementation_core/singleSourceFile}
 
 
 \subsection{Pojedynczy katalog z~wieloma plikami źródłowymi}
@@ -58,31 +44,9 @@ Kontynuując przykład, w~miarę upływu czasu portal może rozrosnąć się na 
 Wtedy może wystąpić potrzeba podzielenia schematu bazy danych na kilka plików - np. według nazw schematów (ang. \emph{scheme})), w~których znajdują się poszczególne tabele.
 Wszystkie te pliki w~dalszym ciągu byłyby źródłem dla generatora, a~wynikowe klasy mogłyby być umieszczone w~osobnych katalogach (podzielonych według nazw schematow, w~których znajdują się odpowiadające im tabele).
 
-Przykład (dbo - schemat wspólny, pozostałe - schematy właściwe dla obszarów, którymi zajmuje się portal):
+Przykład:
 
-\dirtree{%
-.1 database\_schema.
-.2 dbo.sql.
-.2 news.sql.
-.2 blogs.sql.
-}
-
-Wynik generacji:
-
-\dirtree{%
-.1 Model.
- .2 dbo.
-  .3 User.cs.
-  .3 ....
- .2 news.
-  .3 News.cs.
-  .3 Comment.cs.
-  .3 ....
- .2 blogs.
-  .3 Post.cs.
-  .3 Comment.cs.
-  .3 ....
-}
+\input{figures/implementation_core/multipleSourceFiles}
 
 
 \subsection{Drzewo katalogów z~wielona plikami źródłowymi}
@@ -91,66 +55,14 @@ W~dłuższej perspektywie, w~opisywanym przykładzie może pojawić się potrzeb
 Pojedynczy podkatalog zawierałby osobne pliki zawierające definicje tabel, widoków i~procedur składowanych obecnych w~bazie danych.
 Trzon narzędzia generującego powinien być w~stanie dotrzeć do wszystkich tych plików.
 
-Przykład (procedury składowane nie są podmiotem generacji):
+Przykład:
 
-\dirtree{%
-.1 database\_schema.
- .2 dbo.
-  .3 tables.sql.
-  .3 views.sql.
-  .3 procedures.sql.
- .2 news.
-  .3 tables.sql.
-  .3 views.sql.
-  .3 procedures.sql.
- .2 blogs.
-  .3 tables.sql.
-  .3 views.sql.
-  .3 procedures.sql.
-}
-
-Wynik generacji:
-
-\dirtree{%
-.1 Model.
- .2 dbo.
-  .3 User.cs.
-  .3 ....
- .2 news.
-  .3 News.cs.
-  .3 Comment.cs.
-  .3 ....
- .2 blogs.
-  .3 Post.cs.
-  .3 Comment.cs.
-  .3 ....
-}
+\input{figures/implementation_core/multipleFolders}
 
 Innym przykładem wykorzystującym ten scenariusz scenariuszem jest sytuacja, w~której pojedynczy plik wynikowy generowany jest z~wielu plików źródłowych.
 Przykladem może być zorganizowanie opisu dziedziny aplikacji w~taki sposób, że informacje na temat każdego pola każdej encji umieszczone są w~osobnym pliku:
 
-\dirtree{%
-.1 domain.
- .2 user.json.
- .2 user\_fields.
-  .3 FirstName.json.
-  .3 LastName.json.
-  .3 ....
- .2 news.json.
- .2 news\_fields.
-  .3 Title.json.
-  .3 Content.json.
- .2 ....
-}
-
-Wynik generacji:
-
-\dirtree{%
-.1 Model.
- .2 User.cs.
- .2 News.cs.
- .2 ....
-}
+\input{figures/implementation_core/multipleFolders_multipleInputFiles}
 
 Taka organizacja może mieć zastosowanie w~przypadku, gdy w~systemiie w~wielu miejscach występują jedynie fragmenty encji (np. w~widokach bazy danych).
 Wtedy każde pole może wymagać skonfigurowania dla niego miejsc, w~których występuje.
