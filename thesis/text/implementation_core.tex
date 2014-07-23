@@ -45,9 +45,9 @@ Wynik generacji:
 
 \dirtree{%
 .1 Model.
- .2 user.cs.
- .2 news.cs.
- .2 comment.cs.
+ .2 User.cs.
+ .2 News.cs.
+ .2 Comment.cs.
  .2 ....
 }
 
@@ -72,15 +72,15 @@ Wynik generacji:
 \dirtree{%
 .1 Model.
  .2 dbo.
-  .3 user.cs.
+  .3 User.cs.
   .3 ....
  .2 news.
-  .3 news.cs.
-  .3 comment.cs.
+  .3 News.cs.
+  .3 Comment.cs.
   .3 ....
  .2 blogs.
-  .3 post.cs.
-  .3 comment.cs.
+  .3 Post.cs.
+  .3 Comment.cs.
   .3 ....
 }
 
@@ -114,14 +114,43 @@ Wynik generacji:
 \dirtree{%
 .1 Model.
  .2 dbo.
-  .3 user.cs.
+  .3 User.cs.
   .3 ....
  .2 news.
-  .3 news.cs.
-  .3 comment.cs.
+  .3 News.cs.
+  .3 Comment.cs.
   .3 ....
  .2 blogs.
-  .3 post.cs.
-  .3 comment.cs.
+  .3 Post.cs.
+  .3 Comment.cs.
   .3 ....
 }
+
+Innym przykładem wykorzystującym ten scenariusz scenariuszem jest sytuacja, w~której pojedynczy plik wynikowy generowany jest z~wielu plików źródłowych.
+Przykladem może być zorganizowanie opisu dziedziny aplikacji w~taki sposób, że informacje na temat każdego pola każdej encji umieszczone są w~osobnym pliku:
+
+\dirtree{%
+.1 domain.
+ .2 user.json.
+ .2 user\_fields.
+  .3 FirstName.json.
+  .3 LastName.json.
+  .3 ....
+ .2 news.json.
+ .2 news\_fields.
+  .3 Title.json.
+  .3 Content.json.
+ .2 ....
+}
+
+Wynik generacji:
+
+\dirtree{%
+.1 Model.
+ .2 User.cs.
+ .2 News.cs.
+ .2 ....
+}
+
+Taka organizacja może mieć zastosowanie w~przypadku, gdy w~systemiie w~wielu miejscach występują jedynie fragmenty encji (np. w~widokach bazy danych).
+Wtedy każde pole może wymagać skonfigurowania dla niego miejsc, w~których występuje.
