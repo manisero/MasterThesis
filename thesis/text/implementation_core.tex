@@ -1,26 +1,5 @@
 \chapter{Implementacja trzonu narzędzia} \label{chap:implementation:core}
 
-\begin{itemize}
- \item +kroki generacji
- \item +jakiej organizacji plików źródłowych oczekuje generator
- \item +sposób zdefiniowania dziedziny aplikacji
- \item czy wymagać stworzenia schematu definicji dziedziny aplikacji?
-  \begin{itemize}
-   \item są dwie opcje:
-    \begin{itemize}
-     \item (no schema) definicję dziedziny deserializować do dynamic, szablonom przekazywać dynamic (jest dowolność, ale nie wyłapie się błędów podczas deserializacji)
-     \item definicję dziedziny deserializować do konkretnego typu, szablonom przekazywać konkretne typy
-    \end{itemize}
-   \item druga opcja wydaje się lepsza (opis dziedziny powinien być spójny)
-   \item ale mechanizm będzie generyczny, decyzja będzie należała do konkretnego generatora
-  \end{itemize}
- \item Wybór silnika do generacji kodu (templating engine)
-  \begin{itemize}
-   \item opisać dostępne w .NET
-   \item dlaczego t4? - np. razor nie, bo razora tez mozemy chciec generowac - generowanie razora razorem mogloby byc utrudnione
-  \end{itemize}
-\end{itemize}
-
 Zanim przystąpimy do prac nad generatorem aplikacji konkretnego typu, zajmijmy się samym procesem generacji artefaktów systemu, nazwanym tutaj ``trzonem'' narzędzia.
 
 
@@ -77,9 +56,13 @@ Uzyskane jednostki generacji bezpośrednio posłużą do wygenerowania plików w
 
 \subsection{Użycie szablonów do wygenerowania plików}
 
-- szablonów zdefiniowanych nie przez core
-- wygenerowania na podstawie jednostek generacji
+Ostatnim krokiem generacji będzie użycie jednostek generacji do wygenerowania plików wynikowych.
+Domyślny mechanizm generacji pliku wynikowego oparty będzie o~wykorzystanie silnika generacji plików na postawie szablonu generacji (patrz: sekcja~\ref{sec:core:templating_engine}).
 
+Trzon generatora przekaże daną jednostkę generacji odpowiedniemu szablonowi, a~wygenerowana treśc zostanie umieszczona w~odpowiednim pliku.
+Zadaniem użytkownika generatora będzie dostarczenie zarówno szablonu generacji, jak i~ściezki, pod którą ma się znaleźć wygenerowany plik.
+
+Aby zachować elastyczność, wykorzystywany silnik, jak również cały mechanizm generacji będzie mógł zostać wymieniony na inny przez użytkonika generatora.
 
 
 
@@ -145,4 +128,31 @@ Wtedy każde pole może wymagać skonfigurowania dla niego miejsc, w~których wy
  \item podkreślić, że podstawową jednostką nie jest encja, tylko pole
  \item format powinien być zupełnie dowolny
  \item domyślnie będzie JSON, ale można to łatwo podmienić
+\end{itemize}
+
+
+
+%=======
+\section{Czy wymagać stworzenia schematu definicji dziedziny aplikacji?} \label{sec:core:domain_schema_requirement}
+%=======
+
+\begin{itemize}
+ \item są dwie opcje:
+  \begin{itemize}
+   \item (no schema) definicję dziedziny deserializować do dynamic, szablonom przekazywać dynamic (jest dowolność, ale nie wyłapie się błędów podczas deserializacji)
+   \item definicję dziedziny deserializować do konkretnego typu, szablonom przekazywać konkretne typy
+  \end{itemize}
+ \item druga opcja wydaje się lepsza (opis dziedziny powinien być spójny)
+ \item ale mechanizm będzie generyczny, decyzja będzie należała do konkretnego generatora
+\end{itemize}
+
+
+
+%=======
+\section{Wybór silnika do generacji kodu (templating engine)} \label{sec:core:templating_engine}
+%=======
+
+\begin{itemize}
+ \item opisać dostępne w .NET
+ \item dlaczego t4? - np. razor nie, bo razora tez mozemy chciec generowac - generowanie razora razorem mogloby byc utrudnione
 \end{itemize}
