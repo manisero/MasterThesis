@@ -1,6 +1,32 @@
 \begin{figure}[!ht]
-TODO
+\begin{center}
+ \begin{mpost}[use,mpsettings={input metauml; breadth=.667\mpdim{\linewidth};}]
+  Class.HoundsViewModel("HoundsViewModel");
+  Class.ConnectionManager("ConnectionManager")("+registerDataHandler()", "+unregisterDataHandler()", "+handleData()");
+  Class.ChannelHandler("ChannelHandler");
+  Class.IDataHandler("IDataHandler")("+handle()");
+  Class.DataHandler("CheckpointEnteredInfoHandler")("+handle()");
+  Class.CheckpointEnteredInfo("CheckpointEnteredInfo");
+  
+  classStereotypes.IDataHandler("<<interface>>");
+  
+  leftToRight(30)(ChannelHandler, ConnectionManager);
+  leftToRight(40)(ConnectionManager, IDataHandler);
+  leftToRight(40)(HoundsViewModel, DataHandler);
+  topToBottom(30)(IDataHandler, DataHandler);
+  topToBottom(30)(DataHandler, CheckpointEnteredInfo);
+  
+  drawObjects(HoundsViewModel, ConnectionManager, ChannelHandler, IDataHandler, DataHandler, CheckpointEnteredInfo);
+  
+  link(dependency)(ChannelHandler.e -- ConnectionManager.w);
+  link(dependency)(HoundsViewModel.n -- ConnectionManager.s);
+  link(aggregationUni)(IDataHandler.w -- ConnectionManager.e);
+  link(inheritance)(DataHandler.n -- IDataHandler.s);
+  link(associationUni)(HoundsViewModel.e -- DataHandler.w);
+  link(associationUni)(DataHandler.s -- CheckpointEnteredInfo.n);
+ \end{mpost}
+\end{center}
 
-\caption{Przykładowa dziedzina aplikacji przestawiona na diagramie klas będącym częścią jedyka UML.}
+\caption{Przykładowa dziedzina aplikacji przestawiona na diagramie klas będącym częścią języka UML.}
 \label{fig:implementation_core:uml}
 \end{figure}
