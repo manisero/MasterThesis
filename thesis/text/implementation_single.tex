@@ -1,5 +1,53 @@
 \chapter{Implementacja generatora aplikacji pojedynczego typu} \label{chap:implementation:single_type}
 
+
+Założenia co do generatora aplikacji pojedynczego typu
+ \begin{itemize}
+  \item wybrać typ aplikacji
+  \item dlaczego CQRS
+   \item bo zdenormalizowana dziedzina
+   \item gdzie w CQRS zdefiniowana jest dziedzina (encje) aplikacji? Model do odczytywania nie zawiera przecież encji, a tylko widoki.
+   \item model "read" i model "write" częściowo na siebie zachodzą (lub nawet "read" zawiera "write"). Jak uniknąć duplikacji metadanych?
+  \item opisać CQRS
+  \item że często idzie w parze z Event Sourcing
+  \item opisać Event Sourcing
+  \item że całość dobrze idzie w parze z NoSQL
+  \item opisać NoSQL
+   \begin{itemize}
+    \item opisać rodzaje baz NoSQL
+    \item wybrać bazę NoSQL i dlaczego Cassandra
+    \item opisać Cassandrę
+   \end{itemize}
+ \end{itemize}
+
+Implementacja generatora aplikacji pojedynczego typu
+ \begin{itemize}
+  \item Ogólnie nie chodzi o to, żeby w ogóle nie pisać nazw klas / właściwości - tylko o to, żeby nie trzeba było pamiętać o wszystkich miejscach, gdzie dana encja jest używana.
+  \item czy w ogóle generować schemat bazy danych (no schema) (?)
+  \item wybrać sposób definicji dedziny
+   \item że będzie schema
+   \item ale że schema powinna być w jednym miejsu - będzie jako klasa w kodzie
+   \item wybór formatu
+    \item uml, emf się nie nadają - operują na encjach, a nie na polach
+    \item xml albo json, bez różnicy - czytelniejszy i bardziej intuicyjny wydaje się JSON (xml ma atrybuty i węzły zagnieżdzone - nie wiadomo czego użyć)
+   \item zdefiniowanie schematu opisu dziedziny na potrzeby CQRS
+    \begin{itemize}
+     \item PresentIn
+    \end{itemize}
+  \item Wybrór klienta Cassandry (?)
+  \item Sformułowanie przykładu aplikacji
+  \item Zapisanie schemy w JSONie
+  \item Implementacja szablonów
+  \item Implementacja kolejnych modułów aplikacji
+   \begin{itemize}
+    \item DAL (repozytorium bazowe zahardkodowane, konkretnych nie da się wygenerować)
+    \item BLL (obsługa zdarzeń zahardkodowana, da się wygenerować EventHandlery)
+    \item WEB (Nancy, da się wygenerować ViewModele, formy)
+   \end{itemize}
+ \end{itemize}
+
+
+
 Założenia dotyczące całości:
 
 \begin{itemize}
