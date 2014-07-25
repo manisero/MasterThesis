@@ -243,7 +243,52 @@ Aby jednak zachować elastyczność, możliwa będzie deserializacja do typu dyn
 \section{Wybór silnika do generacji kodu (templating engine)} \label{sec:core:templating_engine}
 %=======
 
+\subsection{XSLT}
+
+XSLT (Xml Stylesheets Transformations) jest językiem generacji dowolnych plików tekstowych na podstawie plików XML.
+Jest to standard zaproponowany przez organizację W3C.
+Jego zaletą jest to, że szablony generacji tworzone są w~języku XML, co zwalnia programistę z~potrzeby poznawania kolejnego języka.
+Jest on jednak mało czytelny, a~wprowadzanie zmian w~szablonie jest niewygodne.
+
+
+\subsection{Code Smith}
+
+
+\subsection{Razor}
+
+Razor jest silnikiem generacji tekstu stworzonym na potrzeby platformy ASP.NET MVC.
+Służy głównie do generacji kodu HTML, jednak może być używany w~celu tworzenia dowolnych plików tekstowych.
+
+Wadą tego wyboru - niezależną od samego silnika - jest to, że szablony Razor są powszechnie używane w~typowych aplikacjach opartych o~platformę ASP.NET MVC, a~więc same mogą stanowić pliki wynikowe dla generatora.
+Stworzenie szablonu Razor generującego inny szablon Razor jest możliwe, ale taki szablon byłby bardzo nieczytelny - co dyskwalifikuje tę opcję.
+
+
+\subsection{T4}
+
+T4 to silnik generacji tekstu wbudowany w~środowisko programistyczne Microsoft Visual Studio.
+Jest on przeznaczony do generowania plików tekstowych dowolnego typu na podstawie danych przekazanych szablonowi.
+
+Szablon T4 nie jest interpretowany, a~kompilowany do kodu języka C\#, co daje następujące korzyści:
+
 \begin{itemize}
- \item opisać dostępne (t4, razor, xslt)
- \item dlaczego t4? - np. razor nie, bo razora tez mozemy chciec generowac - generowanie razora razorem mogloby byc utrudnione
+ \item szybkość generacji tekstu jest większa niż w~przypadku pozostałych silników;
+ \item szablon może odwoływać się do bibliotek zewnętrznych i~wywoływać ich metody (np. w~celu pobrania potrzebnych danych z~bazy danych);
+ \item szablon może wywoływać inne szablony lub dziedziczyć po innym szablonie.
 \end{itemize}
+
+Taka integracja ze środowiskiem programistycznym i~platformą .NET niesie za sobą dalsze konsekwencje:
+
+\begin{itemize}
+ \item tworzenie szablonów jest ułatwione ze względu na podświetalnie i~podpowiadanie składni (zarówno języka szablonu i~jak korzystającego z~niego kodu C\#),
+ \item silnik ten jest niedostępny dla programistów innych platform.
+\end{itemize}
+
+
+\subsection{Wybrany silnik}
+
+Ze względu na fakt, że zarówno trzon generatora jak i~generator konkretnego typu aplikacji stworzone zostaną w~oparciu o~platformę .NET, silnikiem generacji domyślnie wspieranym przez trzon generatora będzie T4.
+Powodem tego wyboru jest łatwość tworzenia jego szablonów w~środowisku Visual Studio.
+
+Przykładowy szablon został przestawiony na rysunku~\ref{fig:implementation_core:t4}.
+
+\input{figures/implementation_core/t4}
