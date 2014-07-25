@@ -240,8 +240,12 @@ Aby jednak zachować elastyczność, możliwa będzie deserializacja do typu dyn
 
 
 %=======
-\section{Wybór silnika do generacji kodu (templating engine)} \label{sec:core:templating_engine}
+\section{Wybór silnika do generacji kodu} \label{sec:core:templating_engine}
 %=======
+
+Ostatnią decyzją dotyczącą założeń dotyczących trzonu generatora jest wybór silnika generacji kodu (ang. \emph{templating engine}) przez niego używanego.
+Domyślnie używany silnik wybrano spośród następujących możliwości:
+
 
 \subsection{XSLT}
 
@@ -249,9 +253,6 @@ XSLT (Xml Stylesheets Transformations) jest językiem generacji dowolnych plikó
 Jest to standard zaproponowany przez organizację W3C.
 Jego zaletą jest to, że szablony generacji tworzone są w~języku XML, co zwalnia programistę z~potrzeby poznawania kolejnego języka.
 Jest on jednak mało czytelny, a~wprowadzanie zmian w~szablonie jest niewygodne.
-
-
-\subsection{Code Smith}
 
 
 \subsection{Razor}
@@ -292,3 +293,14 @@ Powodem tego wyboru jest łatwość tworzenia jego szablonów w~środowisku Visu
 Przykładowy szablon został przestawiony na rysunku~\ref{fig:implementation_core:t4}.
 
 \input{figures/implementation_core/t4}
+
+Podobnie jak w~przypadku pozostałych podjętych dezycji, używany przez generator silnik będzie mógł być zastąpiony przez inny.
+
+
+
+%=======
+\section{Podsumowanie}
+%=======
+
+Wymagania dotyczące trzonu generatora zostały skompletowane.
+Następnym krokiem jest sformułowanie założeń dotyczących generatora aplikacji konkretnego typu.
