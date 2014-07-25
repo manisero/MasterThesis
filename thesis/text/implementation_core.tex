@@ -182,14 +182,26 @@ Rysunek~\ref{fig:implementation_core:json} przedstawia przykładowy opis dziedzi
 
 \subsection{YAML}
 
-Rysunek~\ref{fig:implementation_core:yaml}.
+Język YAML jest pod względem użyteczności podobny do języków XML i~JSON.
+
+
+Przykładowy opis dziedziny zapisany w~tym języku został przedstawiony na rysunku~\ref{fig:implementation_core:json}.
 
 \input{figures/implementation_core/yaml}
 
 
+\subsection{Domyślny język opisu dziedziny}
+
+Jako że język UML nie spełnia wymagań trzonu generatora, domyślnie wspieranym językiem opisu dziedziny aplikacji będzie jeden z~pozostałych trzech opisanych wyżej.
+Będzie to język JSON, za kórym przemawiają nastepujące zalety:
+
 \begin{itemize}
- \item domyślnie będzie JSON, ale można to łatwo podmienić
+ \item ma najprostszą składnię za wszystkich trzech kandydatów;
+ \item jest bardziej czytelny dla człowieka niż XML;
+ \item jest szerzej znany i~stosowany niż YAML.
 \end{itemize}
+
+Aby zachować elastyczność, język opisu dziedziny będzie jednak można łatwo wymienić.
 
 
 
