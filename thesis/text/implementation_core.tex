@@ -1,4 +1,4 @@
-\chapter{Implementacja trzonu narzędzia} \label{chap:implementation:core}
+\chapter{Założenia dotyczące trzonu narzędzia} \label{chap:implementation:core}
 
 Zanim przystąpimy do prac nad generatorem aplikacji konkretnego typu, zajmijmy się samym procesem generacji artefaktów systemu, nazwanym tutaj ``trzonem'' narzędzia.
 
@@ -209,15 +209,33 @@ Aby zachować elastyczność, język opisu dziedziny będzie jednak można łatw
 \section{Czy wymagać stworzenia schematu definicji dziedziny aplikacji?} \label{sec:core:domain_schema_requirement}
 %=======
 
-\begin{itemize}
- \item są dwie opcje:
+Kolejną decyzją jest wybór typu danych, do którego deserializoway będzie opis dziedziny aplikacji.
+Wyboru należy dokonać pomiędzy dwoma przeciwstawnymi podejściami:
+
+\begin{enumerate}
+ \item Wymóg określenia schematu dziedziny aplikacji:
   \begin{itemize}
-   \item (no schema) definicję dziedziny deserializować do dynamic, szablonom przekazywać dynamic (jest dowolność, ale nie wyłapie się błędów podczas deserializacji)
-   \item definicję dziedziny deserializować do konkretnego typu, szablonom przekazywać konkretne typy
+   \item deserializacja definicji dziedziny aplikacji do obiektu konkretnego typu;
+   \item wystąpienie w~opisie pola nieobecnego w~schemacie dziedziny jest ignorowane lub powoduje błąd deserializacji.
   \end{itemize}
- \item druga opcja wydaje się lepsza (opis dziedziny powinien być spójny)
- \item ale mechanizm będzie generyczny, decyzja będzie należała do konkretnego generatora
+ \item Brak takiego wymogu
+  \begin{itemize}
+   \item deserializacja definicji dziedziny aplikacji do obiektu dynamicznego lub słownika;
+   \item wystąpienie w~opisie pola nieobecnego w~schemacie jest akceptowalne - pole takie znajdzie się w~obiekcie powstałym w~wyniku deserializacji.
+  \end{itemize}
+
+\end{enumerate}
+
+Pierwsza możliwość wydaje się lepsza, a~to za sprawą następujących zalet:
+
+\begin{itemize}
+ \item generator sprawdza spójność opisu dziedziny aplikacji;
+ \item ewentualne błędy (literówki) opisu zostaną wykryte na etapie deserializacji;
+ \item szablony generacji mogą pracować na danych silnie typizowanych.
 \end{itemize}
+
+Domyślnie wspieranym podejściem będzie więc deserializacja opisu dziedziny do obiektu silnego typu.
+Aby jednak zachować elastyczność, możliwa będzie deserializacja do typu dynamicznego.
 
 
 
