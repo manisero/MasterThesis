@@ -135,7 +135,7 @@ Takie podejście ma jednak istotne wady:
 
 
 %=======
-\section{Rozwiązanie: skrypty na wszystkie czynności}
+\section{Rozwiązanie: skrypty automatyzujące rutynowe czynności}
 %=======
 
 Wiele czynności wykonywanych przez programistów da się zautomatyzować, tworząc skrypty je wykonujące.
@@ -143,19 +143,19 @@ Przykłady:
 
 \begin{itemize}
  \item wszystkie kroki składające się na czynność aktualizacji shcematu bazy przedstawone w sekcji~\ref{sec:tasks_dupl} mogą być wykonywane przez pojedynczy skrypt powłoki korzystający z~kilku skryptów DDL i DML;
- \item operacja instalacji nowej wersji systemu na środowisku testowym lub produkcyjnym nie musi wiązać się z~ręcznym przesyłaniem plików systemu na serwer FPT zdalnej maszyny - może odbywać się automatycznie, po uruchomieniu odpowiedniego skryptu~\cite{cont_delivery}.
+ \item operacja instalacji nowej wersji systemu na środowisku testowym lub produkcyjnym nie musi wiązać się z~ręcznym przesyłaniem plików systemu na serwer FPT zdalnej maszyny - może odbywać się automatycznie, po uruchomieniu odpowiedniego skryptu lub zarejestrowaniu zmiany kodu źródłowego w~systemie kontroli wersji~\cite{cont_delivery}.
 \end{itemize}
 
-Zalety:
+Taka automatyzacja ma wiele zalet, w~tym:
 
 \begin{itemize}
  \item w~trakcie działania skryptu w tle, programista może skupić się na innych zadaniach,
- \item wiedza na temat kroków składających się na daną czynność jest reprezentowana w~jednym miejscu,
+ \item wiedza na temat kroków składających się na daną czynność jest reprezentowana w~jednym miejscu (skrypcie),
  \item programiści lub inne skrypty odwołują się do tej wiedzy poprzez jej identyfikator (nazwę lub ścieżkę w~systemie plików).
 \end{itemize}
 
 Należy jednak zauważyć, że podejście to rozwiązuje jedynie problem duplikacji czynności wykonywanych przez programistów.
-Pozostałe rodzaje duplikacji nie mogą być zniwelowanie w~ten sposób.
+Pozostałe postacie duplikacji nie mogą być zniwelowanie w~ten sposób.
 
 
 
@@ -177,12 +177,12 @@ Pozwala to uniknąć podstawowej duplikacji wyrażeń (patrz: sekcja~\ref{sec:co
 \subsection{Typy szablonowe i~generyczne}
 
 Innych rodzajów duplikacji - parametrycznej duplikacji wyrażeń i~duplikacji strukturalnej - można uniknąć poprzez zastosowanie typów generycznych i~szablonów klas.
-Kod o~tej samej strukturze i~działaniu, ale operujący na danych innego typu, może być zamknięty w~pojedynczej klasie.
+Kod o~tej samej strukturze i~działaniu, ale operujący na danych innego typu, może być zamknięty w~pojedynczej klasie generycznej.
 
 
 \subsection{Refleksja}
 
-W~sytuacjach, w~których występuje potrzeba zaimplementowania podobnej funkcjonalności dla kilku typów nienależących do jednej rodziny obiektów, można skorzystać z~mechanizmu refleksji.
+W~sytuacjach, w~których występuje potrzeba zaimplementowania podobnej funkcjonalności dla kilku typów obiektów, które nie należą do jednej rodziny, można skorzystać z~mechanizmu refleksji.
 Pozwala on osiągnąć rezultaty podobne do tych oferowanych przez klasy bazowe i~typy generyczne.\\
 
 
@@ -202,14 +202,13 @@ Za ``pojedynczą, jednoznaczną i autorytatywną'' reprezentację danej porcji w
 
 \subsection{Generator modelu dziedziny aplikacji na podstawie schematu bazy danych} \label{sec:database_first}
 
-Najpowszechniejszym przykładem użycia generatorów kodu jest wykorzystanie generatora zestawu klas wchodzących w~skład modelu dziedziny aplikacji na podstawie schematu bazy danych używanego przez tą aplikację.
+Najpowszechniejszym przykładem użycia generatorów kodu jest wykorzystanie generatora zestawu klas wchodzących w~skład modelu dziedziny aplikacji na podstawie schematu bazy danych używanego przez tę aplikację.
 Takie podejście nosi nazwę ``najpierw baza danych'' (ang. \emph{Database First}).
 
 Przykładami narzędzi umożliwiających taką generację kodu są:
 
 \begin{itemize}
- \item NHibernate~\cite{hibernate} - narzędzie ORM (ang. \emph{Object-Relational Mapping}) przeznaczone na platformę .Net;
- \item EntityFramework~\cite{entity_framework} - narzędzie ORM dla platformy .Net;
+ \item EntityFramework~\cite{entity_framework} - rozbudowane narzędzie ORM (ang. \emph{Object-Relational Mapping}) przeznaczone na platformę .Net;
  \item SQLMetal~\cite{sqlmetal} - narzędzie dla platformy .Net, którego jedynym zadaniem jest generacja kodu źródłowego klas na podstawie schematu bazy danych;
  \item Django~\cite{django} - platforma aplikacji webowych dla języka Python.
 \end{itemize}
@@ -223,7 +222,7 @@ Jak sama nazwa wskazuje, generatory tego typu generują schemat bazy danych na p
 Przykłady generatorów \emph{``Code First''} to:
 
 \begin{itemize}
- \item Hibernate~\cite{hibernate} - pierwowzór narzęcia NHibernate (patrz: sekcja~\ref{sec:database_first}), przeznaczony na platformę Java;
+ \item Hibernate~\cite{hibernate} - narzędzie ORM dla platform Java i~.Net;
  \item EntityFramework (patrz: sekcja~\ref{sec:database_first});
  \item Django (patrz: sekcja~\ref{sec:database_first}).
 \end{itemize}
@@ -250,12 +249,12 @@ Jednakże większość z~nich, tak jak powyższe przykłady, eliminuje tylko poj
 
 Warto zwrócić uwagę na fakt, że różne typy generatorów za źródło danych obierają sobie różne definicje dziedziny: np. generator \emph{Database First} bazuje na schemacie bazy danych, a~generator dokumentacji - na kodzie źródłowym aplikacji.
 Używanie wielu różnych generatorów usuwających pojedyncze rozdzaje duplikacji w końcu doprowadziłoby do powstania ``łańcucha'' generatów, w~którym wynik działania jedngo generatora byłby źródłem danych dla innego.
-Takie rozwiązanie może być trudne w~utrzymaniu.
+Takie rozwiązanie mogłoby być trudne w~utrzymaniu.
 
 
 
 %=======
-\section{Rozwiązanie: jeden generator wszystkiego}
+\section{Rozwiązanie: pojedynczy generator wszystkich artefaktów systemu}
 %=======
 
 Przedstawione rozwiązania mają pewne wspólne wady.
