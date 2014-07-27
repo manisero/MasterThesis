@@ -3,7 +3,7 @@
 Zasada ``DRY'' (ang. \emph{``Don't Repeat Yourself''}), sformułowana przez Andrew Hunt'a i~David'a Thomas'a, mówi: ``Każda porcja wiedzy powinna mieć pojedynczą, jednoznaczną i autorytatywną reprezentację w~systemie''~\cite{prag_prog:dupl}.
 Poprawne jej stosowanie skutkuje osiągnięciem stanu, w~którym pojedyncza zmiana zachowania systemu wymaga modyfikacji tylko jednego fragmentu reprezentacji wiedzy.
 Należy podkreślić, że autorzy tej zasady przez ``reprezentację wiedzy'' rozumieją nie tylko kod źródłowy tworzony przez programistów systemu.
-Zaliczają do niej również dokumentację systemu, schemat bazy danych przez niego używanej oraz inne artefakty powstające w~procesie wytwarzania oprogramowania (np. scenariusze testów akceptacyjnych), a~nawet czynności wykonywane rutynowo przez programistów.
+Zaliczają do niej również dokumentację systemu, strukturę bazy danych przez niego używanej oraz inne artefakty powstające w~procesie wytwarzania oprogramowania (np. scenariusze testów akceptacyjnych), a~nawet czynności wykonywane rutynowo przez programistów.
 
 Celem stosowania zasady ``DRY'' jest unikanie duplikacji wiedzy zawartej w~systemie.
 Duplikacją określa się fakt występowania w~systemie dwóch reprezentacji tej samej porcji wiedzy.
@@ -29,14 +29,14 @@ Duplikacja może występować w~różnych postaciach:
 
 \subsection{Duplikacja czynności wykonywanych przez programistów} \label{sec:tasks_dupl}
 
-Do rutynowych czynności wykonywanych podczas pracy programisty należą wszelkiego rodzaju aktualizacje: schematu bazy danych rezydującej na maszynie programisty czy wersji tworzonego oprogramowania zainstalowanej w~środowisku testowym lub produkcyjnym.
+Do rutynowych czynności wykonywanych podczas pracy programisty należą wszelkiego rodzaju aktualizacje: struktury bazy danych rezydującej na maszynie programisty czy wersji tworzonego oprogramowania zainstalowanej w~środowisku testowym lub produkcyjnym.
 
 Czynności te zwykle składają się z~kilku kroków. Przykładowo, na aktualizację bazy danych może składać się:
 
 \begin{enumerate}
  \item Usunięcie istniejącej bazy.
  \item Stworzenie nowej bazy.
- \item Zainicjalizowanie schematu nowej bazy przy pomocy zaktualizowanego skryptu DLL (\emph{Data Definition Language}).
+ \item Zainicjalizowanie struktury nowej bazy przy pomocy zaktualizowanego skryptu DLL (\emph{Data Definition Language}).
  \item Wypełnienie nowej bazy danymi przy pomocy zaktualizowanego skryptu DML (\emph{Data Manipulation Language}).
 \end{enumerate}
 
@@ -63,7 +63,7 @@ W~każdej aplikacji obiektowej korzystającej z~bazy danych opis dziedziny aplik
 Te miejsca to:
 
 \begin{itemize}
- \item schemat bazy danych (DDL);
+ \item struktura bazy danych (DDL);
  \item definicje klas w~kodzie źródłowym aplikacji.
 \end{itemize}
 
@@ -122,7 +122,7 @@ Pojedyncze wystąpienie tego zjawiska może więc doprowadzić do rozprzestrzeni
 
 Najprostszym, a~zarazem najbardziej naiwnym sposobem na zniwelowanie skutków duplikacji może być utrzymywanie listy fragmentów systemu, w~których duplikacja występuje.
 Przykładowo, zespół może przygotować listę miejsc, które należy zmodyfikować, jeśli pojedyncza encja zostanie wzbogacona o~nowe pole.
-Na takiej liście znalazłby się schemat bazy danych, implementacja modelu danych w~kodzie źródłowym programu, dokumetacja systemu, itd.
+Na takiej liście znalazłaby się struktura bazy danych, implementacja modelu danych w~kodzie źródłowym programu, dokumetacja systemu, itd.
 
 Takie podejście ma jednak istotne wady:
 
@@ -200,24 +200,24 @@ Powodem jest to, że jeśli na podstawie danego fragmentu kodu generowanych jest
 Za ``pojedynczą, jednoznaczną i autorytatywną'' reprezentację danej porcji wiedzy (patrz: Zasada ``DRY'') uznaje się w tym przypadku źródłowy fragment kodu.
 
 
-\subsection{Generator modelu dziedziny aplikacji na podstawie schematu bazy danych} \label{sec:database_first}
+\subsection{Generator modelu dziedziny aplikacji na podstawie struktury bazy danych} \label{sec:database_first}
 
-Najpowszechniejszym przykładem użycia generatorów kodu jest wykorzystanie generatora zestawu klas wchodzących w~skład modelu dziedziny aplikacji na podstawie schematu bazy danych używanego przez tę aplikację.
+Najpowszechniejszym przykładem użycia generatorów kodu jest wykorzystanie generatora zestawu klas wchodzących w~skład modelu dziedziny aplikacji na podstawie struktury bazy danych używanej przez tę aplikację.
 Takie podejście nosi nazwę ``najpierw baza danych'' (ang. \emph{Database First}).
 
 Przykładami narzędzi umożliwiających taką generację kodu są:
 
 \begin{itemize}
  \item EntityFramework~\cite{entity_framework} - rozbudowane narzędzie ORM (ang. \emph{Object-Relational Mapping}) przeznaczone na platformę .Net;
- \item SQLMetal~\cite{sqlmetal} - narzędzie dla platformy .Net, którego jedynym zadaniem jest generacja kodu źródłowego klas na podstawie schematu bazy danych;
+ \item SQLMetal~\cite{sqlmetal} - narzędzie dla platformy .Net, którego jedynym zadaniem jest generacja kodu źródłowego klas na podstawie struktury bazy danych;
  \item Django~\cite{django} - platforma aplikacji webowych dla języka Python.
 \end{itemize}
 
 
-\subsection{Generator schematu bazy danych na podstawie modelu dziedziny aplikacji}
+\subsection{Generator struktury bazy danych na podstawie modelu dziedziny aplikacji}
 
 Podejściem przeciwstawnym dla \emph{``Database First''} jest podejście ``najpierw kod'' (ang. \emph{Code First}).
-Jak sama nazwa wskazuje, generatory tego typu generują schemat bazy danych na podstawie klas należących do implementacji modelu w~kodzie źródłowym aplikacji.
+Jak sama nazwa wskazuje, generatory tego typu generują strukturę bazy danych na podstawie klas należących do implementacji modelu w~kodzie źródłowym aplikacji.
 
 Przykłady generatorów \emph{``Code First''} to:
 
@@ -247,7 +247,7 @@ Przykłady takich narzędzi to:
 Istnieje wiele innych generatorów, należących do typu programowania nazywanego programowaniem automatycznym (ang. \emph{automatic programming})~\cite{auto_prog}.
 Jednakże większość z~nich, tak jak powyższe przykłady, eliminuje tylko pojedyncze rodzaje duplikacji.\\
 
-Warto zwrócić uwagę na fakt, że różne typy generatorów za źródło danych obierają sobie różne definicje dziedziny: np. generator \emph{Database First} bazuje na schemacie bazy danych, a~generator dokumentacji - na kodzie źródłowym aplikacji.
+Warto zwrócić uwagę na fakt, że różne typy generatorów za źródło danych obierają sobie różne definicje dziedziny: np. generator \emph{Database First} bazuje na strukturze bazy danych, a~generator dokumentacji - na kodzie źródłowym aplikacji.
 Używanie wielu różnych generatorów usuwających pojedyncze rozdzaje duplikacji w końcu doprowadziłoby do powstania ``łańcucha'' generatów, w~którym wynik działania jedngo generatora byłby źródłem danych dla innego.
 Takie rozwiązanie mogłoby być trudne w~utrzymaniu.
 

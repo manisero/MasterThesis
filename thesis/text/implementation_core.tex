@@ -79,7 +79,7 @@ Za przykład niech posłuży internetowy portal informacyjny.
 \subsection{Pojedynczy plik źródłowy}
 
 W~tym scenariuszu całość dziedziny aplikacji (lub innych informacji o~systmie) zawarta jest pojedynczym pliku.
-Przykładem zastosowania może być pojedynczy skrypt SQL zawierający schemat bazy danych używanej przez aplkację.
+Przykładem zastosowania może być pojedynczy skrypt SQL zawierający strukturę bazy danych używanej przez aplkację.
 Taki plik, oprócz swojego standardowego przeznaczenia, tj. konfigurowania bazy danych, pełniłby rolę źródła generatora \emph{Code First}.
 Na jego podstawie generowane byłyby pliki zawierające defnijcje klas będących częścią implementacji modelu dziedziny w~aplikacji.
 
@@ -91,7 +91,7 @@ Rysunek~\ref{fig:implementation_core:singleSourceFile} obrazuje przykładową or
 \subsection{Pojedynczy katalog z~wieloma plikami źródłowymi}
 
 Kontynuując przykład, w~miarę upływu czasu portal może rozrosnąć się na tyle, że wprowadzi możliwość prowadzenia blogów przez jego użytkowników.
-Wtedy może wystąpić potrzeba podzielenia schematu bazy danych na kilka plików - np. według nazw schematów (ang. \emph{scheme}), w~których znajdują się poszczególne tabele.
+Wtedy może wystąpić potrzeba podzielenia struktury bazy danych na kilka plików - np. według nazw schematów (ang. \emph{schema}), w~których znajdują się poszczególne tabele.
 Wszystkie te pliki w~dalszym ciągu byłyby źródłem dla generatora, a~wynikowe klasy mogłyby być umieszczone w~osobnych katalogach (podzielonych według nazw schematow, w~których znajdują się odpowiadające im tabele).
 
 Rysunek~\ref{fig:implementation_core:multipleSourceFiles} obrazuje przykład.
