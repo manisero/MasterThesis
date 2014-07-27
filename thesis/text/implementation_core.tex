@@ -1,6 +1,6 @@
 \chapter{Założenia dotyczące trzonu narzędzia} \label{chap:implementation:core}
 
-Przed przystąpieniem do prac nad generatorem aplikacji konkretnego typu, należy sformułować założenia dotyczące komponentu realizującego sam proces generacji artefaktów systemu, nazwanego tutaj trzonem narzędzia.
+Przed przystąpieniem do prac nad generatorem aplikacji konkretnego typu, należy sformułować założenia dotyczące komponentu realizującego sam proces generacji artefaktów systemu, nazwanego trzonem narzędzia.
 
 
 
@@ -9,11 +9,11 @@ Przed przystąpieniem do prac nad generatorem aplikacji konkretnego typu, należ
 %=======
 
 O ile elastyczność generatora konkretnego typu aplikacji może być ograniczona, o~tyle trzon powinien być na tyle uniwersalny, by mógł być użyty w~celu wygenerowania wielu rodzajów plików tekstowych, w~tym kodu źródłowego w~dowolnym języku, skryptów DLL, skryptów powłoki, dokumentancji w~formacie HTML lub XML itd.
-Pliki te powinny być generowane w~ten sam sposób (np. na podstawie szablonów napisanych w~jednym języki, takim jak xslt), tak aby programista korzystający z~narzędzia nie musiał poznawać całej gamy języków lub narzędzi używanych do tworzenia szablonów generacji.
-Pożądaną funkcjonalnością jest możliwość łatwiej wymiany domyślnie użwanego rodzaju szablonów na inny, tak aby programista korzystający z~narzędzia mógł w~łatwy sposób użyć w~nim szablonów stworzonych w~języku, ktory zna.
-Co więcej, trzon narzędzia nie pownien narzucać sposobu formatowania danych wejściowych (w~tym przypadku - opisu dziedziny aplikaji).
+Wszystkie rodzaje plików powinny być generowane w~ten sam sposób (np. na podstawie szablonów napisanych w~jednym języku, takim jak xslt~\cite{xslt}), tak aby programista korzystający z~komponentu nie musiał poznawać całej gamy języków lub narzędzi używanych do tworzenia szablonów generacji.
+Pożądaną funkcjonalnością jest możliwość łatwiej wymiany domyślnie użwanego rodzaju szablonów na inny, tak aby użytkownik mógł w~łatwy sposób użyć w~nim szablonów stworzonych w~języku, ktory zna najlepiej.
+Co więcej, trzon narzędzia nie pownien narzucać sposobu formatowania danych wejściowych (w~tym przypadku - opisu dziedziny aplikacji).
 
-Dla wygody autora narzędzia zakłada się, że zarówno trzon narzędzia jak i~generator konkretnego typu aplikacji zostanie stworzony w~technolgii .NET Framework
+Dla wygody autora narzędzia zakłada się, że zarówno jego trzon jak i~generator aplikacji konkretnego typu zostanie stworzony w~technolgii .NET Framework
 
 
 
@@ -21,37 +21,38 @@ Dla wygody autora narzędzia zakłada się, że zarówno trzon narzędzia jak i~
 \section{Kroki generacji}
 %=======
 
-Generacja odbbywać się będzie w~natępujących krokach:
+Generacja odbywać się będzie w~natępujących krokach:
 
 
 \subsection{Wczytanie definicji dziedziny aplikacji}
 
-Generator na wejściu przyjmował będzie ścieżkę do pliku lub katalogu źródłowego (patrz: sekcja~\ref{sec:core:files_structure}.
-Każdego plik zostanie odwiedzony przez generator, a~jego treść zostanie zdeserializowana do obiektu odpowiadającej mu klasy.
+Komponent na wejściu przyjmował będzie ścieżkę do pliku lub katalogu źródłowego (patrz: sekcja~\ref{sec:core:files_structure}).
+Każdy plik katalogu źródłowego zostanie odwiedzony przez generator, a~jego treść zostanie zdeserializowana do obiektu odpowiadającej mu klasy.
 
 
 \subsection{Zdeserializowanie definicji dziedziny aplkacji}
 
-Jak wymieniono w~założeniach dotyczących trzonu generatora (patrz:~\ref{sec:core:basic_requirements}, format opisu dziedziny aplikacji nie będzie narzucony z~góry.
-Każdy plik źródłowy może być zapisany w~innym formacie (np. JSON lub XML).
-Domyślnie wspierany będzie jeden format~\ref{sec:core:domain_definition}, a~użytkownik generatora będzie mógł dla każdego pliku źródłowego określić wybrany i~dostarczony przez siebie sposób deserializacji.
+Jak wymieniono w~założeniach dotyczących trzonu generatora (patrz: sekcja~\ref{sec:core:basic_requirements}), format opisu dziedziny aplikacji nie będzie narzucony z~góry.
+Każdy plik źródłowy może być zapisany w~innym formacie (np. XML lub JSON).
+Domyślnie wspierany będzie jeden format (patrz: sekcja~\ref{sec:core:domain_definition}), a~użytkownik generatora będzie mógł dla każdego pliku źródłowego określić wybrany i~dostarczony przez siebie sposób deserializacji.
 
 Zdeserializowany obiekt dziedziny może posłużyć jako wskazanie na kolejne pliki reprezentujące elementy dziedziny.
-Przykładem obrazującym potrzebę takiego działania może być sytuacja, w~której plik zawiera ogólne informacje na temat encji, pliku w~podkatalogu sąsiadującym z~tym plikiem zawierają definicje poszczególnych pól danej encji (patrz: sekcja~\ref{sec:core:files_structure:many_folders}).
-Wtedy wczytanie i~deserializacja pól encji odbędzie się dopiero po zdeserializowaniu opisu samej encji i~na tej podstawie określeniu, który katalog zawiera kolejne pliki opisujące elementy do niej należące. 
+Przykładem obrazującym potrzebę takiego działania może być sytuacja, w~której dany plik zawiera ogólne informacje na temat encji, a~pliki w~podkatalogu sąsiadującym z~tym plikiem zawierają definicje poszczególnych pól danej encji (patrz: sekcja~\ref{sec:core:files_structure:many_folders}).
+Wtedy wczytanie i~deserializacja opisu pól encji odbędzie się dopiero po zdeserializowaniu opisu samej encji i~na tej podstawie określeniu, który katalog zawiera kolejne pliki opisujące jej pola. 
 
 
 \subsection{Wyodrębnienie jednostek generacji}
 
-Po uzyskaniu kompletnego obiektu - lub kolekcji obiektów - opisującego dziedzinę aplikacji, tzn. po zdeserializowaniu wszystkich plików zawierających dziedzinę aplikacji, generator będzie musiał przygotować kolejne obiekty (tutaj: jednostki generacji), które będą podstawą do wygenerowania plików wynikowych.
-Jednostką generacji może być na przykład pojedyncza encja dziedziny aplikacji.
+Po uzyskaniu kompletnego obiektu - lub kolekcji obiektów - opisującego dziedzinę aplikacji, tzn. po zdeserializowaniu wszystkich plików zawierających dziedzinę aplikacji, generator będzie musiał przygotować kolejne obiekty, które będą podstawą do wygenerowania plików wynikowych.
+Obiekty te nazwano jednostkami generacji.
+Jednostką generacji może być na przykład opis pojedynczej encji dziedziny aplikacji lub, bardziej szczegółowo, pojedynczej tabeli bazy danych.
 
-Aby zachować elastyczność, krok ten będzie musiał być zaimplementowany po stronie użytkownika generatora, tzn. generatora aplikacji konkretnego typu.
-Umożliwi to obsłużenie scenariusza, w~którym na podstawie pojedynczego elementy opisu dziedziny aplikacji generowanych będzie wiele różnych plików (np. definicja tabeli bazy danych, definicja klasy w~kodzie źródłowym aplkacji i~kod HTML będący częścią dokumentancji systemu).
-Odpowiedzialność wyekstrahowania jednostek generacji z~pełnego opisu dziedziny zostanie zrzucona na użytkownika generatora dlatego, że trzon generatora nie jest w~stanie go zautomatyzować bez utraty elastyczności.
-Aby jednak obsłużyć najprostsze scenariusze, pominięcie implementacji tego kroku w~aplikacji będącej użytkownikiem generatora zaskutkuje potraktowaniem głównego obieku dziedziny (lub kolekcji obiektów) jako jednostki generacji (lub osobnych jednostek generacji).
+Aby zachować elastyczność, krok ten będzie musiał być zaimplementowany po stronie użytkownika komponentu, tzn. generatora aplikacji konkretnego typu.
+Umożliwi to obsłużenie scenariusza, w~którym pojedynczy element opisu dziedziny aplikacji posłuży za źródło generacji wielu plików wynikowych (np. definicja tabeli bazy danych, definicja klasy w~kodzie źródłowym aplikacji i~kod HTML będący częścią dokumentancji systemu mogą być wygenerowane na podstawie pojedynczej jednostki generacji będącej opisem encji).
+Odpowiedzialność wyodrębnienia jednostek generacji z~pełnego opisu dziedziny zostanie zrzucona na użytkownika komponentu dlatego, że trzon generatora nie jest w~stanie go zautomatyzować bez utraty elastyczności.
+Aby jednak obsłużyć najprostsze scenariusze, pominięcie implementacji tego kroku w~aplikacji będącej użytkownikiem komponentu zaskutkuje potraktowaniem głównego obieku (lub kolekcji obiektów) dziedziny jako jednostki (lub osobnych jednostek) generacji.
 
-Uzyskane jednostki generacji bezpośrednio posłużą do wygenerowania plików wynikowych - pojedyncza jednostka odpowiadać będzie pojedynczemu plikowi wynikowemu.
+Uzyskane jednostki generacji bezpośrednio posłużą do wygenerowania plików wynikowych. Pojedyncza jednostka będzie mogła odpowiadać jednemu lub wielu plikom wynikowym.
 
 
 \subsection{Użycie szablonów do wygenerowania plików}
