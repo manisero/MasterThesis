@@ -125,18 +125,18 @@ Opisy te najwygodniej byłoby przechowywać w~osobnych plikach.
 %=======
 
 O~ile założenie o~elastyczności generatora powinno dopuszczać zdefiniowanie dziedziny aplikacji w~dowolny sposób, używając dowolnego formatu plików zawierających opis poszczególnych elementów tej dziedziny, o~tyle generator powinien obsługiwać pewien domyślny sposób formatowania.
-Poniżej przestawiono kilka z~możliwych wyborów:
+Poniżej przedstawiono kilka z~możliwych wyborów:
 
 \subsection{UML}
 
-Oczywistym wyborem sposobu opisu dziedziny aplikacji wydaje się być język UML, stworzony między innymi do tego właśnie celu.
-Do opisu przykładowej dziedziny posłużyć może diagram klas przestawiony na rysuku~\ref{fig:implementation_core:uml}.
+Oczywistym wyborem sposobu opisu dziedziny aplikacji wydaje się być język UML~\cite{uml}, stworzony między innymi do tego właśnie celu.
+Do opisu przykładowej dziedziny posłużyć może diagram klas przedstawiony na rysunku~\ref{fig:implementation_core:uml}.
 
 \input{figures/implementation_core/uml}
 
-Trzeba jednak zauważyć, ze taki opis nie jest wystarczająco elastyczny - posiada on zdefiniowany z~góry zestaw atrybutów, .
-Natomiast rzeczywiste scenariusze użycia generatora wymagać mogą atrybutów, których przewidzenie na etapie projektowania generatora jest niemożliwe.
-Przykładowo, do opisu encji mogą należeć takie atrybuty, jak:
+Trzeba jednak zauważyć, ze taki opis nie jest wystarczająco elastyczny - posiada on zdefiniowany z~góry zestaw atrybutów.
+Natomiast rzeczywiste scenariusze użycia generatora wymagać mogą atrybutów, których przewidzenie na etapie projektowania jego trzonu jest niemożliwe.
+Przykładowo, do opisu encji mogą należeć takie atrybuty jak:
 
 \begin{itemize}
  \item opis encji, który powinien znaleźć się w~dokumentancji systemu;
@@ -147,7 +147,7 @@ Przykładowo, do opisu encji mogą należeć takie atrybuty, jak:
 Diagram klas nie przewiduje przechowywania żadej z~tych informacji.
 
 Co więcej, podstawową jednostką diagramu klas UML jest encja, co samo w~sobie jest ograniczeniem elastyczności.
-Opis dziedziny aplikacji tworzony przez użytkownika generatora może natomiast za postawową jednostkę obierać na przykład pojedyncze pole encji.
+Opis dziedziny aplikacji tworzony przez użytkownika generatora może natomiast za postawową jednostkę obierać na przykład pojedyncze pole encji (patrz: rysunek~\ref{fig:implementation_core:multipleFolders_multipleInputFiles}).
 Do opisu pojedynczego pola encji, oprócz jego nazy i~typu, mogą należeć takie atrybuty, jak:
 
 \begin{itemize}
