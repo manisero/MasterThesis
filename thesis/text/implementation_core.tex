@@ -193,11 +193,11 @@ Przykładowy opis dziedziny zapisany języku YAML został przedstawiony na rysun
 
 \subsection{Domyślny język opisu dziedziny}
 
-Jako że język UML nie spełnia wymagań trzonu generatora, domyślnie wspieranym językiem opisu dziedziny aplikacji będzie jeden z~pozostałych trzech opisanych wyżej.
-Będzie to język JSON, za kórym przemawiają nastepujące zalety:
+Jako że język UML nie spełnia wymagań trzonu generatora w~zakresie elastyczności, domyślnie wspieranym językiem opisu dziedziny aplikacji będzie jeden z~pozostałych trzech opisanych wyżej.
+Będzie to język JSON, za kórym przemawiają nastepujące fakty:
 
 \begin{itemize}
- \item ma najprostszą składnię za wszystkich trzech kandydatów;
+ \item ma on najprostszą składnię za wszystkich trzech kandydatów;
  \item jest bardziej czytelny dla człowieka niż XML;
  \item jest szerzej znany i~stosowany niż YAML.
 \end{itemize}
@@ -214,25 +214,28 @@ Kolejną decyzją jest wybór typu danych, do którego deserializoway będzie op
 Wyboru należy dokonać pomiędzy dwoma przeciwstawnymi podejściami:
 
 \begin{enumerate}
- \item Wymóg określenia schematu dziedziny aplikacji:
+ \item Dane silnie typizowane, z~czym wiąże się wymóg określenia schematu opisu dziedziny aplikacji.
+  Konsekwencje tego wyboru:
   \begin{itemize}
-   \item deserializacja definicji dziedziny aplikacji do obiektu konkretnego typu;
-   \item wystąpienie w~opisie pola nieobecnego w~schemacie dziedziny jest ignorowane lub powoduje błąd deserializacji.
+   \item wynikiem deserializacji opisu dziedziny aplikacji będzie obiekt konkretnego typu;
+   \item wystąpienie w~opisie pola nieobecnego w~schemacie dziedziny zostanie zignorowane lub spowoduje błąd deserializacji.
   \end{itemize}
- \item Brak takiego wymogu
+ \item Dane dynamiczne; brak wymogu istnienia schematu opisu dziedziny.
+  Konsekwencje wyboru:
   \begin{itemize}
-   \item deserializacja definicji dziedziny aplikacji do obiektu dynamicznego lub słownika;
-   \item wystąpienie w~opisie pola nieobecnego w~schemacie jest akceptowalne - pole takie znajdzie się w~obiekcie powstałym w~wyniku deserializacji.
+   \item wynikiem deserializacji opisu dziedziny będzie obiekt dynamiczny lub zbiór par klucz-wartość;
+   \item wystąpienie w~opisie pola nieobecnego w~schemacie będzie akceptowalne - pole takie znajdzie się w~obiekcie powstałym w~wyniku deserializacji.
   \end{itemize}
 
 \end{enumerate}
 
-Pierwsza możliwość wydaje się lepsza, a~to za sprawą następujących zalet:
+Pierwsza możliwość wydaje się bardziej korzystna
+Przemawiają za nią następujące zalety:
 
 \begin{itemize}
- \item generator sprawdza spójność opisu dziedziny aplikacji;
- \item ewentualne błędy (literówki) opisu zostaną wykryte na etapie deserializacji;
- \item szablony generacji mogą pracować na danych silnie typizowanych.
+ \item generator będzie sprawdzał spójność opisu dziedziny aplikacji;
+ \item ewentualne błędy opisu (na przykład tzw. literówki) zostaną wykryte na etapie deserializacji;
+ \item szablony generacji będą mogły pracować na danych silnie typizowanych.
 \end{itemize}
 
 Domyślnie wspieranym podejściem będzie więc deserializacja opisu dziedziny do obiektu silnego typu.
