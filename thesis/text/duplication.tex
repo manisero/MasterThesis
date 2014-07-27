@@ -96,8 +96,8 @@ Pojawienie się duplikacji w~systemie ma zazwyczaj szkodliwe skutki.
 Rozprzestrzenia się ona tym szybciej, a wyrządzane szkody są tym dotkliwsze, im więszy jest rozmiar systemu.
 
 Najbardziej oczywistym skutkiem występowania duplikacji jest wydłużenie się czasu poświęcanego przez programistów na nieskomplikowane lub powtarzalne zadania.
-Przykładowo, nieznajomość kodu współdzielonego przez wszystkie moduły systemu (tzw. rdzenia, ang. \emph{core}) powoduje, że programiści niepotrzebnie spędzają czas na implementowaniu podstawowych funcji, które są już dostępne w~rdzeniu systemu.
-Innym przykładem może być praktyka ręcznego wykonywania czynności, które mogą wykonywanie automatycznie, w~tle.
+Przykładowo, nieznajomość kodu współdzielonego przez wszystkie komponenty systemu (tzw. rdzenia, ang. \emph{core}) powoduje, że programiści niepotrzebnie spędzają czas na implementowaniu podstawowych funcji, które są już dostępne w~rdzeniu systemu.
+Innym przykładem może być praktyka ręcznego wykonywania czynności, które mogą być wykonywane automatycznie, w~tle.
 
 Po drugie, pojedyncza porcja wiedzy jest reprezentowana w~wielu miejsach, a~więc zmiana pojedynczego zachowania systemu wymaga modyfikacji wielu jego modułów.
 Wprowadzając dowolną modyfikację, programista musi ręcznie zlokalizować wszystkie miejsca wymagające zaktualizowania.
@@ -110,14 +110,14 @@ Po trzecie, duplikacja powoduje zbędne powiększenie rozmiarów systemu.
 Kod, w~którym występują zduplikowane fragmenty jest dłuższy, a przez to mniej czytelny.
 Co więcej, zwiększona ilość kodu powoduje niepożądane zwiększenie rozmiarów plików wchodzących w~skład systemu.
 
-Należy również zwrócić uwagę na zagrożenie, jakie niesie ze sobą wystąpienie pojedynczej duplikacji, której istnienie zostanie zaakceptowane przez programistów wchodzących w~skład zespołu tworzącego projekt.
+Należy również zwrócić uwagę na zagrożenie, jakie niesie ze sobą wystąpienie pojedynczej duplikacji, której istnienie zostanie zaaprobowane przez programistów wchodzących w~skład zespołu tworzącego projekt.
 Może to spowodować osłabienie dyscypliny w~zespole, a~w~efekcie doprowadzić do pojawienia się kolejnych duplikacji, a~także innych złych praktyk programistycznych.
-Pojedyncze wystąpienie tego zjawiska może więc doprowadzić do rozprzestrzenia się innych niepożadanych zjawisk i~pogorszenia jakości całego systemu~\cite{prag_prog:entropy}.
+Pojedyncze wystąpienie tego zjawiska może więc doprowadzić do rozprzestrzenia się innych niepożądanych zjawisk i~pogorszenia jakości całego systemu~\cite{prag_prog:entropy}.
 
 
 
 %=======
-\section{Rozwiązanie: zapisywanie wszystkich powiązanych i~zduplikowanych miejsc}
+\section{Rozwiązanie: utrzymywanie listy zduplikowanych fragmentów}
 %=======
 
 Najprostszym, a~zarazem najbardziej naiwnym sposobem na zniwelowanie skutków duplikacji może być utrzymywanie listy fragmentów systemu, w~których duplikacja występuje.
@@ -128,7 +128,7 @@ Takie podejście ma jednak istotne wady:
 
 \begin{itemize}
  \item rozwiązanie to nie powstrzymuje programistów przed wprowadzaniem kolejnych duplikacji, a~wręcz na to przyzwala;
- \item istnienie takiej listy samo w~sobie jest duplikacją - pojawienie się nowego miejsca występowania pól encji (np. alternatywnej implementacji modelu danych) wymaga zaktualizowania listy;
+ \item pojawienie się nowego miejsca występowania pól encji (np. alternatywnej implementacji modelu danych) wymaga zaktualizowania listy; niezaktualizowana lista może skutkować pominięciem nowych miejsc w~szacunkach dotyczących czasu potrzebnego na implementację nowych funkcjonalności i~w~samej implementacji tych funkcjonalności;
  \item rozwiązanie to niweluje tylko drugi z~wymienionych skutków występowania duplikacji - programista nie musi samodzielnie szukać miejsc, w~których powinien wprowadzić modyfikacje.
 \end{itemize}
 
