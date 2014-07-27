@@ -1,19 +1,19 @@
-\chapter{Założenia dotyczące trzonu narzędzia} \label{chap:implementation:core}
+\chapter{Założenia dotyczące rdzenia narzędzia} \label{chap:implementation:core}
 
-Przed przystąpieniem do prac nad generatorem aplikacji konkretnego typu, należy sformułować założenia dotyczące komponentu realizującego sam proces generacji artefaktów systemu, nazwanego trzonem narzędzia.
+Przed przystąpieniem do prac nad generatorem aplikacji konkretnego typu, należy sformułować założenia dotyczące komponentu realizującego sam proces generacji artefaktów systemu, nazwanego rdzeniem narzędzia.
 
 
 
 %=======
-\section{Podstawowe założenia dotyczące trzonu narzędzia} \label{sec:core:basic_requirements}
+\section{Podstawowe założenia dotyczące rdzenia narzędzia} \label{sec:core:basic_requirements}
 %=======
 
-O ile elastyczność generatora konkretnego typu aplikacji może być ograniczona, o~tyle trzon powinien być na tyle uniwersalny, by mógł być użyty w~celu wygenerowania wielu rodzajów plików tekstowych, w~tym kodu źródłowego w~dowolnym języku, skryptów DLL, skryptów powłoki, dokumentancji w~formacie HTML lub XML itd.
+O ile elastyczność generatora konkretnego typu aplikacji może być ograniczona, o~tyle rdzeń powinien być na tyle uniwersalny, by mógł być użyty w~celu wygenerowania wielu rodzajów plików tekstowych, w~tym kodu źródłowego w~dowolnym języku, skryptów DLL, skryptów powłoki, dokumentancji w~formacie HTML lub XML itd.
 Wszystkie rodzaje plików powinny być generowane w~ten sam sposób (np. na podstawie szablonów napisanych w~jednym języku, takim jak xslt~\cite{xslt}), tak aby programista korzystający z~komponentu nie musiał poznawać całej gamy języków lub narzędzi używanych do tworzenia szablonów generacji.
 Pożądaną funkcjonalnością jest możliwość łatwiej wymiany domyślnie użwanego rodzaju szablonów na inny, tak aby użytkownik mógł w~łatwy sposób użyć w~nim szablonów stworzonych w~języku, ktory zna najlepiej.
-Co więcej, trzon narzędzia nie pownien narzucać sposobu formatowania danych wejściowych (w~tym przypadku - opisu dziedziny aplikacji).
+Co więcej, rdzeń narzędzia nie pownien narzucać sposobu formatowania danych wejściowych (w~tym przypadku - opisu dziedziny aplikacji).
 
-Dla wygody autora narzędzia zakłada się, że zarówno jego trzon jak i~generator aplikacji konkretnego typu zostanie stworzony w~technolgii .NET Framework
+Dla wygody autora narzędzia zakłada się, że zarówno jego rdzeń jak i~generator aplikacji konkretnego typu zostanie stworzony w~technolgii .NET Framework
 
 
 
@@ -32,7 +32,7 @@ Każdy plik katalogu źródłowego zostanie odwiedzony przez generator, a~jego t
 
 \subsection{Zdeserializowanie definicji dziedziny aplkacji}
 
-Jak wymieniono w~założeniach dotyczących trzonu generatora (patrz: sekcja~\ref{sec:core:basic_requirements}), format opisu dziedziny aplikacji nie będzie narzucony z~góry.
+Jak wymieniono w~założeniach dotyczących rdzenia generatora (patrz: sekcja~\ref{sec:core:basic_requirements}), format opisu dziedziny aplikacji nie będzie narzucony z~góry.
 Każdy plik źródłowy może być zapisany w~innym formacie (np. XML lub JSON).
 Domyślnie wspierany będzie jeden format (patrz: sekcja~\ref{sec:core:domain_definition}), a~użytkownik generatora będzie mógł dla każdego pliku źródłowego określić wybrany i~dostarczony przez siebie sposób deserializacji.
 
@@ -49,7 +49,7 @@ Jednostką generacji może być na przykład opis pojedynczej encji dziedziny ap
 
 Aby zachować elastyczność, krok ten będzie musiał być zaimplementowany po stronie użytkownika komponentu, tzn. generatora aplikacji konkretnego typu.
 Umożliwi to obsłużenie scenariusza, w~którym pojedynczy element opisu dziedziny aplikacji posłuży za źródło generacji wielu plików wynikowych (np. definicja tabeli bazy danych, definicja klasy w~kodzie źródłowym aplikacji i~kod HTML będący częścią dokumentancji systemu mogą być wygenerowane na podstawie pojedynczej jednostki generacji będącej opisem encji).
-Odpowiedzialność wyodrębnienia jednostek generacji z~pełnego opisu dziedziny zostanie zrzucona na użytkownika komponentu dlatego, że trzon generatora nie jest w~stanie go zautomatyzować bez utraty elastyczności.
+Odpowiedzialność wyodrębnienia jednostek generacji z~pełnego opisu dziedziny zostanie zrzucona na użytkownika komponentu dlatego, że rdzeń generatora nie jest w~stanie go zautomatyzować bez utraty elastyczności.
 Aby jednak obsłużyć najprostsze scenariusze, pominięcie implementacji tego kroku w~aplikacji będącej użytkownikiem komponentu zaskutkuje potraktowaniem głównego obieku (lub kolekcji obiektów) dziedziny jako jednostki (lub osobnych jednostek) generacji.
 
 Uzyskane jednostki generacji bezpośrednio posłużą do wygenerowania plików wynikowych. Pojedyncza jednostka będzie mogła odpowiadać jednemu lub wielu plikom wynikowym.
@@ -60,7 +60,7 @@ Uzyskane jednostki generacji bezpośrednio posłużą do wygenerowania plików w
 Ostatnim krokiem będzie użycie jednostek generacji w~celu wygenerowania plików wynikowych.
 Domyślny mechanizm generacji pliku wynikowego oparty będzie o~wykorzystanie silnika generacji plików na postawie szablonu generacji (patrz: sekcja~\ref{sec:core:templating_engine}).
 
-Trzon generatora przekaże daną jednostkę generacji odpowiedniemu szablonowi, a~wygenerowana treść zostanie umieszczona w~odpowiednim pliku.
+Rdzeń generatora przekaże daną jednostkę generacji odpowiedniemu szablonowi, a~wygenerowana treść zostanie umieszczona w~odpowiednim pliku.
 Zadaniem użytkownika komponentu będzie dostarczenie zarówno szablonu generacji, jak i~ściezki, pod którą ma się znaleźć wygenerowany plik.
 
 Aby zachować elastyczność, wykorzystywany silnik generacji będzie mógł zostać wymieniony na inny przez użytkonika generatora.
@@ -71,8 +71,8 @@ Aby zachować elastyczność, wykorzystywany silnik generacji będzie mógł zos
 \section{Organizacja plików źródłowych i~wynikowych} \label{sec:core:files_structure}
 %=======
 
-Podstawową decyzją, którą należy podjąć w~trakcie precyzowania założeń dotyczących pierwszego kroku generacji jest organizacja i~format plików źródłowych, na których pracował będzie trzon narzędzia, a~także organizacja plików, które będzie w~stanie wygenerować.
-Jak wspomniano wyżej, od trzonu oczekuje się jak największej elastyczności - dlatego powinien on wspierać kilka scenariuszy.
+Podstawową decyzją, którą należy podjąć w~trakcie precyzowania założeń dotyczących pierwszego kroku generacji jest organizacja i~format plików źródłowych, na których pracował będzie rdzeń narzędzia, a~także organizacja plików, które będzie w~stanie wygenerować.
+Jak wspomniano wyżej, od rdzenia oczekuje się jak największej elastyczności - dlatego powinien on wspierać kilka scenariuszy.
 Za przykład niech posłuży internetowy portal informacyjny.
 
 
@@ -103,7 +103,7 @@ Rysunek~\ref{fig:implementation_core:multipleSourceFiles} obrazuje przykład.
 
 W~dłuższej perspektywie, w~opisywanym przykładzie może pojawić się potrzeba wprowadzenia podkatalogów dla poszczególnych schematów.
 Pojedynczy podkatalog zawierałby osobne pliki zawierające definicje tabel, widoków i~procedur składowanych obecnych w~bazie danych.
-Trzon narzędzia generującego powinien być w~stanie dotrzeć do wszystkich tych plików.
+Rdzeń narzędzia generującego powinien być w~stanie dotrzeć do wszystkich tych plików.
 Przykład takiej organizacji został przedstawiony na rysunku~\ref{fig:implementation_core:multipleFolders}.
 
 \input{figures/implementation_core/multipleFolders}
@@ -135,7 +135,7 @@ Do opisu przykładowej dziedziny posłużyć może diagram klas przedstawiony na
 \input{figures/implementation_core/uml}
 
 Trzeba jednak zauważyć, ze taki opis nie jest wystarczająco elastyczny - posiada on zdefiniowany z~góry zestaw atrybutów.
-Natomiast rzeczywiste scenariusze użycia generatora wymagać mogą atrybutów, których przewidzenie na etapie projektowania jego trzonu jest niemożliwe.
+Natomiast rzeczywiste scenariusze użycia generatora wymagać mogą atrybutów, których przewidzenie na etapie projektowania jego rdzenia jest niemożliwe.
 Przykładowo, do opisu encji mogą należeć takie atrybuty jak:
 
 \begin{itemize}
@@ -193,7 +193,7 @@ Przykładowy opis dziedziny zapisany języku YAML został przedstawiony na rysun
 
 \subsection{Domyślny język opisu dziedziny}
 
-Jako że język UML nie spełnia wymagań trzonu generatora w~zakresie elastyczności, domyślnie wspieranym językiem opisu dziedziny aplikacji będzie jeden z~pozostałych trzech opisanych wyżej.
+Jako że język UML nie spełnia wymagań rdzenia generatora w~zakresie elastyczności, domyślnie wspieranym językiem opisu dziedziny aplikacji będzie jeden z~pozostałych trzech opisanych wyżej.
 Będzie to język JSON, za kórym przemawiają nastepujące fakty:
 
 \begin{itemize}
@@ -247,7 +247,7 @@ Aby jednak zachować elastyczność, możliwa będzie deserializacja do typu dyn
 \section{Wybór silnika do generacji kodu} \label{sec:core:templating_engine}
 %=======
 
-Ostatnią decyzją w~ramach założeń dotyczących trzonu generatora jest wybór silnika generacji kodu (ang. \emph{templating engine}) przez niego używanego.
+Ostatnią decyzją w~ramach założeń dotyczących rdzenia generatora jest wybór silnika generacji kodu (ang. \emph{templating engine}) przez niego używanego.
 Domyślnie używany silnik wybrano spośród następujących możliwości:
 
 
@@ -291,7 +291,7 @@ Taka integracja ze środowiskiem programistycznym i~platformą .NET niesie za so
 
 \subsection{Wybrany silnik}
 
-Ze względu na fakt, że zarówno trzon generatora jak i~generator konkretnego typu aplikacji stworzone zostaną w~oparciu o~platformę .NET, silnikiem generacji domyślnie wspieranym przez trzon generatora będzie T4.
+Ze względu na fakt, że zarówno rdzeń generatora jak i~generator konkretnego typu aplikacji stworzone zostaną w~oparciu o~platformę .NET, silnikiem generacji domyślnie wspieranym przez rdzeń generatora będzie T4.
 Powodem tego wyboru jest łatwość tworzenia jego szablonów w~środowisku Visual Studio.
 
 Przykładowy szablon został przedstawiony na rysunku~\ref{fig:implementation_core:t4}.
@@ -306,5 +306,5 @@ Podobnie jak w~przypadku pozostałych podjętych dezycji, używany przez generat
 \section{Podsumowanie}
 %=======
 
-Wymagania dotyczące trzonu generatora zostały skompletowane.
+Wymagania dotyczące rdzenia generatora zostały skompletowane.
 Następnym krokiem jest sformułowanie założeń dotyczących generatora aplikacji konkretnego typu.
