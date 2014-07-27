@@ -3,11 +3,11 @@
 Zasada ``DRY'' (ang. \emph{``Don't Repeat Yourself''}), sformułowana przez Andrew Hunt'a i~David'a Thomas'a, mówi: ``Każda porcja wiedzy powinna mieć pojedynczą, jednoznaczną i autorytatywną reprezentację w~systemie''~\cite{prag_prog:dupl}.
 Poprawne jej stosowanie skutkuje osiągnięciem stanu, w~którym pojedyncza zmiana zachowania systemu wymaga modyfikacji tylko jednego fragmentu reprezentacji wiedzy.
 Należy podkreślić, że autorzy tej zasady przez ``reprezentację wiedzy'' rozumieją nie tylko kod źródłowy tworzony przez programistów systemu.
-Zaliczają do niej również dokumentację systemu, schemat bazy danych przez niego używanej i~inne artefakty powstające w~procesie wytwarzania oprogramowania (takie jak np. scenariusze testów akceptacyjnych), a~nawet czynności wykonywane rutynowo przez programistów.
+Zaliczają do niej również dokumentację systemu, schemat bazy danych przez niego używanej oraz inne artefakty powstające w~procesie wytwarzania oprogramowania (np. scenariusze testów akceptacyjnych), a~nawet czynności wykonywane rutynowo przez programistów.
 
-Celem stosowania tej zasady ``DRY'' jest unikanie duplikacji wiedzy zawartej w~systemie.
+Celem stosowania zasady ``DRY'' jest unikanie duplikacji wiedzy zawartej w~systemie.
 Duplikacją określa się fakt występowania w~systemie dwóch reprezentacji tej samej porcji wiedzy.
-Należy wyjaśnić, że wielokrotne występowanie nazw klas lub zmiennych (bądź innych identyfikatorów) w~kodzie programu nie jest duplikacją - identyfikatory są jedynie odnośnikami do wiedzy reprezentowanej przez artefakty, które identyfikują.
+Należy wyjaśnić, że wielokrotne występowanie nazw klas lub zmiennych (bądź innych identyfikatorów) w~kodzie programu nie jest duplikacją - identyfikatory nie są reprezentacją więdzy, a~jedynie odnośnikami do wiedzy reprezentowanej przez artefakty, na które wskazują.
 
 
 
@@ -18,10 +18,10 @@ Należy wyjaśnić, że wielokrotne występowanie nazw klas lub zmiennych (bąd�
 Wyróżnia się cztery rodzaje duplikacji ze względu na przyczynę jej powstania~\cite{prag_prog:dupl}:
 
 \begin{itemize}
- \item duplikacja wymuszona (ang. \emph{imposed duplication}) - pojawia się gdy programista świadomie duplikuje kod aplikacji uznając, że w~danej sytuacji jest to nie do uniknięcia;
- \item duplikacja niezamierzona (ang. \emph{inadvertent duplication}) - występuje, gry programista nie jest świadomy, że doprowadza do duplikacji;
- \item duplikacja niecierpliwa (ang. \emph{impatient duplication}) - jest wynikiem niedbalstwa programisty; ma miejsce w sytuacji, gdy programista świadomie wybierze rozwiązanie najprostsze w danej sytuacji;
- \item duplikacja pomiędzy programistami (ang. \emph{interdeveloper duplication}) - pojawia się, gdy kilku programistów tworzących tę samą aplikację wzajemnie duplikuje tworzony kod.
+ \item duplikacja wymuszona (ang. \emph{imposed duplication}) - pojawia się, gdy programista świadomie duplikuje kod aplikacji (lub inną reprezentację wiedzy) uznając, że w~danej sytuacji nie jest możliwe uniknięcie duplikacji;
+ \item duplikacja niezamierzona (ang. \emph{inadvertent duplication}) - występuje wtedy, gdy programista nie jest świadomy, że jego działania prowadzą do powstania duplikacji;
+ \item duplikacja niecierpliwa (ang. \emph{impatient duplication}) - jest wynikiem niedbalstwa programisty; ma miejsce w sytuacji, gdy programista, napotkawszy problem, świadomie wybierze rozwiązanie najprostsze, ale prowadzące do powstania duplikacji;
+ \item duplikacja pomiędzy programistami (ang. \emph{interdeveloper duplication}) - pojawia się, gdy kilku programistów tworzących tę samą aplikację wzajemnie duplikuje tworzony kod lub tworzy niezależne reprezentacje tej samej wiedzy.
 \end{itemize}
 
 Duplikacja może występować w~różnych postaciach:
@@ -36,16 +36,16 @@ Czynności te zwykle składają się z~kilku kroków. Przykładowo, na aktualiza
 \begin{enumerate}
  \item Usunięcie istniejącej bazy.
  \item Stworzenie nowej bazy.
- \item Zainicjalizowanie schematu nowej bazy przy pomocy skryptu DLL.
- \item Wypełnienie nowej bazy danymi przy pomocy skryptu DML.
+ \item Zainicjalizowanie schematu nowej bazy przy pomocy zaktualizowanego skryptu DLL (\emph{Data Definition Language}).
+ \item Wypełnienie nowej bazy danymi przy pomocy zaktualizowanego skryptu DML (\emph{Data Manipulation Language}).
 \end{enumerate}
 
-Jeśli wszystkie z~tych kroków wykonywane są ręcznie, mamy do czynienia z~duplikacją - każdy programista w~zespole, zamiast tylko odwoływać się do wiedzy o~tym, jak zaktualizować bazę danych, musi posiadać tę więdzę i~wcielać ją w~życie krok po kroku.
+Jeśli wszystkie z~tych kroków wykonywane są ręcznie, to mamy do czynienia z~duplikacją - każdy programista w~zespole, zamiast tylko odwoływać się do wiedzy o~tym, jak zaktualizować bazę danych, musi posiadać tę więdzę i~wielokrotnie wcielać ją w~życie krok po kroku.
 
 
 \subsection{Duplikacja kodu źródłowego aplikacji} \label{sec:code_dupl_kinds}
 
-Programistom wielokrotnie zdarza się spowodować duplikację w~kodzie źródłowym tworzonych programów.
+Programistom niejednokrotnie zdarza się spowodować duplikację w~kodzie źródłowym tworzonych programów.
 Powielone fragmenty kodu są zazwyczaj niewielkie, a podzielić je można na następujące kategorie~\cite{soft_sol_dupl}:
 
 \begin{itemize}
@@ -53,7 +53,7 @@ Powielone fragmenty kodu są zazwyczaj niewielkie, a podzielić je można na nas
  \item parametryczna duplikacja wyrażeń (ang. \emph{parametric literal duplication}) - obejmuje fragmenty kodu, których treść różni się jedynie typami danych, na których te fragmenty operują;
  \item duplikacja strukturalna (ang. \emph{structural duplication}) - obejmuje fragmenty kodu, które mają ten sam schemat działania, ale różnią się pojedynczymi instrukcjami (przykład: dwie pętle iterurąjce po tej samej kolekcji z~tym samym warunkiem stopu, ale wykonujące różne operacje na elementach kolekcji);
  \item duplikacja czasowa (ang. \emph{temporal duplication}) - określa fragment kodu, który jest niepotrzebnie wykonynway wiele razy (przykład: zliczenie elementów kolekcji podczas każdego sprawdzenia warunku stopu pętli iterurąjcej po tej kolekcji);
- \item duplikacja intencji (ang. \emph{duplication of intent}) - występuje, gdy dwóch programistów umieści w~różnych modułach aplikacji dwa fragmenty, których wynik działania (ale niekoniecznie treść) jest identyczny.
+ \item duplikacja intencji (ang. \emph{duplication of intent}) - występuje, gdy dwóch programistów umieści w~różnych modułach aplikacji dwa fragmenty, których wynik działania (ale niekoniecznie treść) jest identyczny (jest to jeden z~przypadków duplikacji pomiędzy programistami).
 \end{itemize}
 
 
@@ -69,22 +69,22 @@ Te miejsca to:
 
 Kolejnym typowym miejscem, w~którym umieszcza się informacje o~dziedzinie aplikacji jest jej dokumentacja.
 
-W~miarę rozrastania się systemu i~pojawiania się kolejnych funkcjonalności i~modułów, występuje tendencja do powielania całości bądź części definicji dziedziny w~różnych modułach.
-Dotyczy to modułów, których zadaniem jest obróbka tych samych danych, ale w~różny sposób.
-Przykładowo, aplikacja może udostępniać przechowywane dane na następujące sposoby:
+W~miarę rozrastania się systemu i~powstawania kolejnych funkcjonalności i~komponentów, pojawia się tendencja do powielania całości bądź części definicji dziedziny w~różnych modułach.
+Dotyczy to głównie tych modułów, których zadaniem jest obróbka tych samych danych, ale w~różny sposób.
+Przykładowo, aplikacja może pozwalać na dostęp do przechowywanych danych na następujące sposoby:
 
 \begin{itemize}
- \item wyświetlać je na stronie WWW,
- \item wystawiać jako API,
- \item eksportować do arkusza kalkulacyjnego.
+ \item wyświetlać je na stronach WWW,
+ \item udostępniać je poprzez usługi sieciowe jako API (\emph{Application Programming Interface}),
+ \item umożliwiać ich eksport do arkusza kalkulacyjnego.
 \end{itemize}
 
-Moduły te mogą korzystać z~pojedynczej implementacji dziedziny.
+Komponenty realizujące te funkcjonalności mogą korzystać z~pojedynczej implementacji dziedziny.
 Może to jednak nie być pożądane, szczególnie w~przypadku, gdy każdy ze sposobów udostępnia inny zestaw danych.
-Przykładowo, strona WWW może wyświetlać podstawowe dane każdej encji będącej częścią dziedziny, podczas gdy API udostępnia pełne dane wszystkich encji, a eksport do arkusza kalkulacyjnego udostępnia pełne dane niektórych encji.
+Przykładowo, strony WWW mogą wyświetlać podstawowe dane każdej encji będącej częścią dziedziny, podczas gdy API udostępnia pełne dane wszystkich encji, a eksport do arkusza kalkulacyjnego udostępnia pełne dane tylko niektórych encji.
 
-W~takim przypadku moduł odpowiedzialny za API operuje na pełnej dziedzinie, a~moduły strony WWW i~eksportu do arkusza kalkulacyjnego  - na jej fragmentach.
-Jeśli każdy z~tych modułów posiada niezależną implementację dziedziny aplikacji, to mamy do czynienia z~duplikacją.
+W~takim przypadku komponent odpowiedzialny za API operuje na pełnej dziedzinie, a~komponenty stron WWW i~eksportu do arkusza kalkulacyjnego - jedynie na jej fragmentach.
+Jeśli każdy z~tych komponentów posiada niezależną implementację dziedziny aplikacji, to mamy do czynienia z~duplikacją.
 
 
 
