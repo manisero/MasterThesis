@@ -57,33 +57,33 @@ Uzyskane jednostki generacji bezpośrednio posłużą do wygenerowania plików w
 
 \subsection{Użycie szablonów do wygenerowania plików}
 
-Ostatnim krokiem generacji będzie użycie jednostek generacji do wygenerowania plików wynikowych.
+Ostatnim krokiem będzie użycie jednostek generacji w~celu wygenerowania plików wynikowych.
 Domyślny mechanizm generacji pliku wynikowego oparty będzie o~wykorzystanie silnika generacji plików na postawie szablonu generacji (patrz: sekcja~\ref{sec:core:templating_engine}).
 
-Trzon generatora przekaże daną jednostkę generacji odpowiedniemu szablonowi, a~wygenerowana treśc zostanie umieszczona w~odpowiednim pliku.
-Zadaniem użytkownika generatora będzie dostarczenie zarówno szablonu generacji, jak i~ściezki, pod którą ma się znaleźć wygenerowany plik.
+Trzon generatora przekaże daną jednostkę generacji odpowiedniemu szablonowi, a~wygenerowana treść zostanie umieszczona w~odpowiednim pliku.
+Zadaniem użytkownika komponentu będzie dostarczenie zarówno szablonu generacji, jak i~ściezki, pod którą ma się znaleźć wygenerowany plik.
 
-Aby zachować elastyczność, wykorzystywany silnik, jak również cały mechanizm generacji będzie mógł zostać wymieniony na inny przez użytkonika generatora.
+Aby zachować elastyczność, wykorzystywany silnik generacji będzie mógł zostać wymieniony na inny przez użytkonika generatora.
 
 
 
 %=======
-\section{Organizacja plików wejściowych i~wyjściowych} \label{sec:core:files_structure}
+\section{Organizacja plików źródłowych i~wynikowych} \label{sec:core:files_structure}
 %=======
 
-Pierszą decyzją, którą należy podjąć w~trakcie implementacji, jest organizacja i~format plików źródłowych, na których pracował będzie trzon narzędzia, także organizacja plików, które będzie w~stanie wygenerować.
-Jak wspomniano wyżej, od trzonu oczekuje się jak największej elastyczności - dlatego trzon powinien wspierać kilka scenariuszy.
+Podstawową decyzją, którą należy podjąć w~trakcie precyzowania założeń dotyczących pierwszego kroku generacji jest organizacja i~format plików źródłowych, na których pracował będzie trzon narzędzia, a~także organizacja plików, które będzie w~stanie wygenerować.
+Jak wspomniano wyżej, od trzonu oczekuje się jak największej elastyczności - dlatego powinien on wspierać kilka scenariuszy.
 Za przykład niech posłuży internetowy portal informacyjny.
 
 
 \subsection{Pojedynczy plik źródłowy}
 
 W~tym scenariuszu całość dziedziny aplikacji (lub innych informacji o~systmie) zawarta jest pojedynczym pliku.
-Przykładem zastosowania może pojedynczy skrypt SQL zawierający schemat bazy danych używanej przez aplkację.
+Przykładem zastosowania może być pojedynczy skrypt SQL zawierający schemat bazy danych używanej przez aplkację.
 Taki plik, oprócz swojego standardowego przeznaczenia, tj. konfigurowania bazy danych, pełniłby rolę źródła generatora \emph{Code First}.
 Na jego podstawie generowane byłyby pliki zawierające defnijcje klas będących częścią implementacji modelu dziedziny w~aplikacji.
 
-Rysunek~\ref{fig:implementation_core:singleSourceFile} obrazuje przykład.
+Rysunek~\ref{fig:implementation_core:singleSourceFile} obrazuje przykładową organizację plików portalu.
 
 \input{figures/implementation_core/singleSourceFile}
 
@@ -91,7 +91,7 @@ Rysunek~\ref{fig:implementation_core:singleSourceFile} obrazuje przykład.
 \subsection{Pojedynczy katalog z~wieloma plikami źródłowymi}
 
 Kontynuując przykład, w~miarę upływu czasu portal może rozrosnąć się na tyle, że wprowadzi możliwość prowadzenia blogów przez jego użytkowników.
-Wtedy może wystąpić potrzeba podzielenia schematu bazy danych na kilka plików - np. według nazw schematów (ang. \emph{scheme})), w~których znajdują się poszczególne tabele.
+Wtedy może wystąpić potrzeba podzielenia schematu bazy danych na kilka plików - np. według nazw schematów (ang. \emph{scheme}), w~których znajdują się poszczególne tabele.
 Wszystkie te pliki w~dalszym ciągu byłyby źródłem dla generatora, a~wynikowe klasy mogłyby być umieszczone w~osobnych katalogach (podzielonych według nazw schematow, w~których znajdują się odpowiadające im tabele).
 
 Rysunek~\ref{fig:implementation_core:multipleSourceFiles} obrazuje przykład.
@@ -104,19 +104,19 @@ Rysunek~\ref{fig:implementation_core:multipleSourceFiles} obrazuje przykład.
 W~dłuższej perspektywie, w~opisywanym przykładzie może pojawić się potrzeba wprowadzenia podkatalogów dla poszczególnych schematów.
 Pojedynczy podkatalog zawierałby osobne pliki zawierające definicje tabel, widoków i~procedur składowanych obecnych w~bazie danych.
 Trzon narzędzia generującego powinien być w~stanie dotrzeć do wszystkich tych plików.
-
-Rysunek~\ref{fig:implementation_core:multipleFolders} obrazuje przykład.
+Przykład takiej organizacji został przedstawiony na rysunku~\ref{fig:implementation_core:multipleFolders}.
 
 \input{figures/implementation_core/multipleFolders}
 
-Innym przykładem wykorzystującym ten scenariusz scenariuszem jest sytuacja, w~której pojedynczy plik wynikowy generowany jest z~wielu plików źródłowych.
-Przykladem może być zorganizowanie opisu dziedziny aplikacji w~taki sposób, że informacje na temat każdego pola każdej encji umieszczone są w~osobnym pliku.
+Innym przykładem wykorzystującym ten scenariusz jest sytuacja, w~której pojedynczy plik wynikowy generowany jest na podstawie wielu plików źródłowych.
+Przykładem może być zorganizowanie opisu dziedziny aplikacji w~taki sposób, aby informacje na temat każdego pola każdej encji umieszczone były w~osobnym pliku.
 Rysunek~\ref{fig:implementation_core:multipleFolders_multipleInputFiles} obrazuje przykład.
 
 \input{figures/implementation_core/multipleFolders_multipleInputFiles}
 
-Taka organizacja może mieć zastosowanie w~przypadku, gdy w~systemiie w~wielu miejscach występują jedynie fragmenty encji (np. w~widokach bazy danych).
-Wtedy każde pole może wymagać skonfigurowania dla niego miejsc, w~których występuje.
+Taka organizacja może mieć zastosowanie w~przypadku, gdy w~systemie w~wielu miejscach występują jedynie fragmenty encji (np. w~licznych widokach bazy danych).
+Wtedy każde pole może wymagać skonfigurowania dla niego miejsc, w~których występuje, czego skutkiem mogą być rozległe opisy każdego z~pól.
+Opisy te najwygodniej byłoby przechowywać w~osobnych plikach.
 
 
 
