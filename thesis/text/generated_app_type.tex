@@ -11,7 +11,7 @@ Po zebraniu założeń dotyczących rdzenia narzędzia generującego aplikacje, 
 Narzędzie powinno generować taki typ aplikacji, aby można było w~pełni zbadać jego użyteczność i~ocenić, na ile niweluje ono duplikację.
 Aby było to możliwe, narzędzie powinno generować aplikacje, w~których występuje dużo potencjalnych miejsc występowania duplikacji.
 
-Wymaganie to spełniają aplikacje o~architekturze wielowarstwowej (ang. \emph{multi-tier architecture, n-tier architecture})~\cite{ntier}.
+Wymaganie to spełniają aplikacje o~architekturze wielowarstwowej (ang. \emph{multi-tier architecture, n-tier architecture}~\cite{ntier}).
 
 
 \subsection{Architektura wielowarstwowa}
@@ -31,10 +31,15 @@ Współpracę pomiędzy warstwami architektury trójwarstwowej przedstawia diagr
 
 \input{figures/generated_app_type/three_tier}
 
-że pomiędzy warstwami jest dto
+W~takiej architekturze elementy dziedziny aplikacji często mają swoje odwzorowanie w~każdej z~warstw, na przykład:
 
-czyli ze dużo duplikacji
+\begin{itemize}
+ \item jako obiekty modelu w~warstwie dostępu do danych;
+ \item jako obiekty biznesowe (ang. \emph{business object})~\cite{business_object} w~warstwie logiki biznesowej;
+ \item jako modele widoków (ang. \emph{view model})~\cite{view_model} interfejsu użytkownika lub obiekty tranportu danych (ang. \emph{Data Transfer Object, DTO})~\cite{dto} usług sieciowych w~warstwie prezentacji.
+\end{itemize}
 
+To sprawia, że aplikacja o~architekturze wielowarstwowej jest narażona na powszechne występowanie duplikacji wiedzy na temat dziedziny aplikacji.
 
 
 
