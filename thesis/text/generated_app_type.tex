@@ -48,30 +48,62 @@ To sprawia, że aplikacja o~architekturze wielowarstwowej jest narażona na pows
 %=======
 
 Przypadkiem szczególnym architektury wielowarstwowej jest architektura CQRS (\emph{Command Query Responsibility Segregation})~\cite{cqrs}.
+Zakłada ona podział wszystkich działań w~aplikacji na dwa rodzaje:
+
+\begin{itemize}
+ \item zapytanie (ang. \emph{query}) - działanie polegające na pobraniu danych z~bazy danych (lub innego źródła danych);
+ \item komenda (ang. \emph{command}) - działanie polegające na modyfikacji danych w~bazie danych.
+\end{itemize}
+
+Działania te w~architekturze CQRS są rozłączne.
+Ich wykonywaniem zajmują się dwa osobne modele danych aplikacji:
+
+\begin{itemize}
+ \item model zapytań (ang. \emph{Query Model}) - model przeznaczony do odczytu danych;
+ \item model komend (ang. \emph{Command Model}) - model przeznaczony do modyfikacji danych.
+\end{itemize}
+
+
+Koncepcyjny schemat tej architektury przedstawia rysunek~\ref{fig:cqrs}.
+
+\input{figures/generated_app_type/cqrs}
+
+Podział odpowiedzialności pomiędzy komponenty przedstawia się następująco:
+
+\begin{itemize}
+ \item model zapytań zajmuje się odczytywaniem danych z~bazy danych;
+ \item odpowiedzialnością modelu komend jest realizacja logiki biznesowej aplikacji, w~tym weryfikacja poprawności danych, aktualizacja danych w~bazie danych itd.;
+ \item warstwa prezentacji (\emph{UI}):
+  \begin{itemize}
+   \item wyświetla dane pobrane z~modelu zapytań za pośrednictwem interfejsów (\emph{Service Interfaces}),
+   \item przekazuje - w~postaci komend - akcje wykonywane przez użytkownika do modelu komend.
+  \end{itemize}
+\end{itemize}
+
+Celem wprowadzenia takiego podziału jest
 
 
 
 Specyficzną cechą aplikacji aprtych o~tę architekturę jest to, że operują one na modelach o~wysokim stopniu denormalizacji, co wiąże się z~powszechnie występującą duplikacją metadanych.
 
 
+\begin{itemize}
+ \item opisać CQRS
+ \item że często idzie w parze z Event Sourcing
+\end{itemize}
+
+Wybór tej architektury wniesie problemy do rozwiązania podczas implementacji generatora:
+
+\begin{itemize}
+ \item gdzie w CQRS zdefiniowana jest dziedzina (encje) aplikacji? Model do odczytywania nie zawiera przecież encji, a tylko widoki.
+ \item model "read" i model "write" częściowo na siebie zachodzą (lub nawet "read" zawiera "write"). Jak uniknąć duplikacji metadanych?
+\end{itemize}
 
 \begin{itemize}
  \item wybrać typ aplikacji
  \item dlaczego CQRS
   \item bo zdenormalizowana dziedzina
-  \item gdzie w CQRS zdefiniowana jest dziedzina (encje) aplikacji? Model do odczytywania nie zawiera przecież encji, a tylko widoki.
-  \item model "read" i model "write" częściowo na siebie zachodzą (lub nawet "read" zawiera "write"). Jak uniknąć duplikacji metadanych?
  \item że webowa (bo bardzo dzisiaj popularny typ)
-\end{itemize}
-
-
-%=======
-\section{CQRS}
-%=======
-
-\begin{itemize}
- \item opisać CQRS
- \item że często idzie w parze z Event Sourcing
 \end{itemize}
 
 
