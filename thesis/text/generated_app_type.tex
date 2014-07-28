@@ -1,0 +1,62 @@
+\chapter{Sprecyzowanie typu aplikacji generowanych przez narzędzie} \label{chap:generated_app_type}
+
+Po zebraniu założeń dotyczących rdzenia narzędzia generującego aplikacje, nadszedł czas na wybór typu aplikacji, które będą generowane przez narzędzie.
+
+%=======
+\section{Wybór typu aplikacji}
+%=======
+
+\begin{itemize}
+ \item wybrać typ aplikacji
+ \item dlaczego CQRS
+  \item bo zdenormalizowana dziedzina
+  \item gdzie w CQRS zdefiniowana jest dziedzina (encje) aplikacji? Model do odczytywania nie zawiera przecież encji, a tylko widoki.
+  \item model "read" i model "write" częściowo na siebie zachodzą (lub nawet "read" zawiera "write"). Jak uniknąć duplikacji metadanych?
+\end{itemize}
+
+Szczególna uwaga zostanie poświęcona aplikacjom opartym o~architekturę CQRS i~wykorzystującym bazy danych typu NoSQL.
+Specyficzną cechą takich aplikacji jest to, że operują one na modelach o~wysokim stopniu denormalizacji, co wiąże się z~masowo występującą duplikacją metadanych.
+
+
+
+%=======
+\section{CQRS}
+%=======
+
+\begin{itemize}
+ \item opisać CQRS
+ \item że często idzie w parze z Event Sourcing
+\end{itemize}
+
+
+
+%=======
+\section{Event sourcing}
+%=======
+
+\begin{itemize}
+ \item opisać Event Sourcing
+ \item że całość dobrze idzie w parze z NoSQL
+\end{itemize}
+
+
+
+%=======
+\section{NoSQL}
+%=======
+
+\begin{itemize}
+ \item opisać NoSQL
+  \begin{itemize}
+   \item opisać rodzaje baz NoSQL
+   \item wybrać bazę NoSQL i dlaczego Cassandra
+  \end{itemize}
+\end{itemize}
+
+
+
+%=======
+\section{Cassandra}
+%=======
+
+opisać Cassandrę
