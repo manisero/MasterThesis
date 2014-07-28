@@ -2,9 +2,47 @@
 
 Po zebraniu założeń dotyczących rdzenia narzędzia generującego aplikacje, nadszedł czas na wybór typu aplikacji, które będą generowane przez narzędzie.
 
+
+
 %=======
 \section{Wybór typu aplikacji}
 %=======
+
+Narzędzie powinno generować taki typ aplikacji, aby można było w~pełni zbadać jego użyteczność i~ocenić, na ile niweluje ono duplikację.
+Aby było to możliwe, narzędzie powinno generować aplikacje, w~których występuje dużo potencjalnych miejsc występowania duplikacji.
+
+Wymaganie to spełniają aplikacje o~architekturze wielowarstwowej (ang. \emph{multi-tier architecture, n-tier architecture})~\cite{ntier}.
+
+
+\subsection{Architektura wielowarstwowa}
+
+Architektura wielowarstwowa to taka, w~której ogólne obszary przetwarzania danych w~aplikacji są fizycznie rozdzielone pomiędzy osobne komponenty.
+Współpraca pomiędzy tymi komponentami jest zorganizowana w~taki sposób, że komponent $A$ może korzystać z~funkcjonalności komponentu $B$ tylko wtedy, gdy komponent $B$ należy do warstwy logicznie umiejscowionej nie wyżej niż warstwa, do której należy komponent $A$.
+
+Przykładem, a jednocześnie najpopularniejszą realizacją tej architektury jest architektura trójwarstwowa (ang. \emph{three-tier architecture}), która wprowadza podział aplikcji na trzy warstwy:
+
+\begin{enumerate}
+ \item Warstwa prezentacji (ang. \emph{Presentation Layer}) - odpowiada za komunikację z~użytkownikiem aplikacji (np. poprzez interfejs graficzny) lub innymi systemami (np. poprzez usługi sieciowe); jest to warstwa logicznie najwyższa;
+ \item Warstwa logiki biznesowej (ang. \emph{Business Logic Layer, BLL}) - odpowiada za przetwarzanie danych zgodnie z~wymaganiami funkcjonalnymi aplikacji;
+ \item Warstwa dostępu do danych (ang. \emph{Data Access Layer, DAL}) - udostępnia mechanizmy odczytu i~zapisu danych składowanych przez aplikację (np. w~pamięci lub w~bazie danych); jest to warstwa logicznie najniższa.
+\end{enumerate}
+
+Współpracę pomiędzy warstwami architektury trójwarstwowej przedstawia diagram zamieszczony na rysunku~\ref{fig:three_tier}.
+
+\input{figures/generated_app_type/three_tier}
+
+że pomiędzy warstwami jest dto
+
+czyli ze dużo duplikacji
+
+
+
+
+\begin{itemize}
+ \item że webowa (bo bardzo dzisiaj popularny typ)
+ \item że cqrs
+\end{itemize}
+
 
 \begin{itemize}
  \item wybrać typ aplikacji
