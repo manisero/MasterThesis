@@ -1,4 +1,4 @@
-\chapter{Sprecyzowanie typu aplikacji generowanych przez narzędzie} \label{chap:generated_app_type}
+\chapter{Sprecyzowanie typu generowanych aplikacji} \label{chap:generated_app_type}
 
 Po zebraniu założeń dotyczących rdzenia narzędzia generującego aplikacje, nadszedł czas na wybór typu aplikacji, które będą generowane przez narzędzie.
 
@@ -63,7 +63,7 @@ Ich wykonywaniem zajmują się dwa osobne modele danych aplikacji:
  \item model komend (ang. \emph{Command Model}) - model przeznaczony do modyfikacji danych.
 \end{itemize}
 
-
+Modele te mogą być całkowicie rozłączne lub częściowo na siebie zachodzić.
 Koncepcyjny schemat tej architektury przedstawia rysunek~\ref{fig:cqrs}.
 
 \input{figures/generated_app_type/cqrs}
@@ -80,31 +80,39 @@ Podział odpowiedzialności pomiędzy komponenty przedstawia się następująco:
   \end{itemize}
 \end{itemize}
 
-Celem wprowadzenia takiego podziału jest
-
-
-
-Specyficzną cechą aplikacji aprtych o~tę architekturę jest to, że operują one na modelach o~wysokim stopniu denormalizacji, co wiąże się z~powszechnie występującą duplikacją metadanych.
-
+Wprowadzenie podziału pomiędzy zapytanie i~komendę niesie ze sobą dwie ważne zalety:
 
 \begin{itemize}
- \item opisać CQRS
- \item że często idzie w parze z Event Sourcing
+ \item skomplikowana dziedzina aplikacji może być podzielona na dwie prostsze dziedziny, co ułatwia jej zrozumiene i~operowanie na niej;
+ \item zapytania i~komendy mogą być wykonywane równolegle, co poprawia wydajność aplikacji;
+ \item zapytania są wykonywane na specjalnie przygotowanych dla nich danych (np. zmaterializowanych widokach bazy danych), co ma bardzo pozytywny wpływ na ich wydajność.
 \end{itemize}
 
-Wybór tej architektury wniesie problemy do rozwiązania podczas implementacji generatora:
-
-\begin{itemize}
- \item gdzie w CQRS zdefiniowana jest dziedzina (encje) aplikacji? Model do odczytywania nie zawiera przecież encji, a tylko widoki.
- \item model "read" i model "write" częściowo na siebie zachodzą (lub nawet "read" zawiera "write"). Jak uniknąć duplikacji metadanych?
-\end{itemize}
+W~parze z~zaletami idą jednak wady:
 
 \begin{itemize}
- \item wybrać typ aplikacji
- \item dlaczego CQRS
-  \item bo zdenormalizowana dziedzina
- \item że webowa (bo bardzo dzisiaj popularny typ)
+ \item synchronizacja obu modeli w~przypadku, gdy korzystają one z~osobnych źródeł danych może być kłopotliwa; problem ten nie występuje na przykład wtedy, gdy model komend operuje na tabelach bazy danych, a~model zapytań - na zmaterializowanych widokach, których źródłem danych są te tabele (synchronizacja modeli odbywa się wtedy automatycznie po stronie bazy danych);
+ \item aby każde zapytanie mogło być obsłużone jak najszybciej, model jest w~dużym stopniu zdenormalizowany.
 \end{itemize}
+
+Konsekwencją drugiej wady jest to, że w~modelu zapytań masowo występuje duplikacja elementów dziedziny aplikacji.
+Jest to dobry powód do tego, aby generator generował aplikacje oparte właśnie o~architekturę CQRS.
+Dodatkowo, wybór tej architektury stworzy okazję do przyjrzenia się innym problemom związanym z~zastosowaniem architektury CQRS.
+Te problemy to:
+
+\begin{enumerate}
+ \item Model komend i model zapytań częściowo na siebie zachodzą lub nawet model zapytań w~całości zawiera model komend - rodzi to dwa pytania:
+ \begin{itemize}
+  \item jak w~tej sytuacji uniknąć duplikacji wiedzy na temat dziedziny aplikacji?
+  \item który model wybrać na “pojedynczą, jednoznaczną i~autorytatywną” (patrz: Zasada ``DRY'' w~rozdziale~\ref{chap:duplication}) reprezentację wiedzy o~dziedzinie aplikacji?
+ \end{itemize}
+ \item Model komend może nie być nigdzie fizycznie przechowywany - komendy mogą bezpośrednio aktualizować zdenormalizowaną strukturę tabel bazy danych.
+ Gdzie w~takim przypadku należy umieścić wiedzę na temat encji należących do dziedziny apliacji?
+ Model zapytań nie zawiera przecież encji dziedziny, a~tylko widoki na te encje.
+\end{enumerate}
+
+Architektura CQRS często idzie w~parze z~wykorzystaniem wzorca Event Sourcing i~baz danych typu NoSQL.
+Zagadnienia te zostaną opisane w~kolejnych sekcjach.
 
 
 
@@ -114,7 +122,6 @@ Wybór tej architektury wniesie problemy do rozwiązania podczas implementacji g
 
 \begin{itemize}
  \item opisać Event Sourcing
- \item że całość dobrze idzie w parze z NoSQL
 \end{itemize}
 
 
