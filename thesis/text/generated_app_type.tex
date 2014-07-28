@@ -8,7 +8,7 @@ Po zebraniu założeń dotyczących rdzenia narzędzia generującego aplikacje, 
 \section{Wybór typu aplikacji}
 %=======
 
-Narzędzie powinno generować taki typ aplikacji, aby można było w~pełni zbadać jego użyteczność i~ocenić, na ile niweluje ono duplikację.
+Narzędzie powinno generować taki typ aplikacji, aby można było w~pełni zbadać jego użyteczność i~ocenić, na ile eliminuje ono duplikację.
 Aby było to możliwe, narzędzie powinno generować aplikacje, w~których występuje dużo potencjalnych miejsc występowania duplikacji.
 
 Wymaganie to spełniają aplikacje o~architekturze wielowarstwowej (ang. \emph{multi-tier architecture, n-tier architecture}~\cite{ntier}).
@@ -39,14 +39,20 @@ W~takiej architekturze elementy dziedziny aplikacji często mają swoje odwzorow
  \item jako modele widoków (ang. \emph{view model})~\cite{view_model} interfejsu użytkownika lub obiekty tranportu danych (ang. \emph{Data Transfer Object, DTO})~\cite{dto} usług sieciowych w~warstwie prezentacji.
 \end{itemize}
 
-To sprawia, że aplikacja o~architekturze wielowarstwowej jest narażona na powszechne występowanie duplikacji wiedzy na temat dziedziny aplikacji.
+To sprawia, że aplikacja o~architekturze wielowarstwowej jest narażona na powszechne występowanie duplikacji wiedzy na temat dziedziny aplikacji, a~tym samym dobrze nadaje się jako typ aplikacji generowanych przez narzędzie.
 
 
 
-\begin{itemize}
- \item że webowa (bo bardzo dzisiaj popularny typ)
- \item że cqrs
-\end{itemize}
+%=======
+\section{CQRS}
+%=======
+
+Przypadkiem szczególnym architektury wielowarstwowej jest architektura CQRS (\emph{Command Query Responsibility Segregation})~\cite{cqrs}.
+
+
+
+Specyficzną cechą aplikacji aprtych o~tę architekturę jest to, że operują one na modelach o~wysokim stopniu denormalizacji, co wiąże się z~powszechnie występującą duplikacją metadanych.
+
 
 
 \begin{itemize}
@@ -55,11 +61,8 @@ To sprawia, że aplikacja o~architekturze wielowarstwowej jest narażona na pows
   \item bo zdenormalizowana dziedzina
   \item gdzie w CQRS zdefiniowana jest dziedzina (encje) aplikacji? Model do odczytywania nie zawiera przecież encji, a tylko widoki.
   \item model "read" i model "write" częściowo na siebie zachodzą (lub nawet "read" zawiera "write"). Jak uniknąć duplikacji metadanych?
+ \item że webowa (bo bardzo dzisiaj popularny typ)
 \end{itemize}
-
-Szczególna uwaga zostanie poświęcona aplikacjom opartym o~architekturę CQRS i~wykorzystującym bazy danych typu NoSQL.
-Specyficzną cechą takich aplikacji jest to, że operują one na modelach o~wysokim stopniu denormalizacji, co wiąże się z~masowo występującą duplikacją metadanych.
-
 
 
 %=======
