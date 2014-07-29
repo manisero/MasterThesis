@@ -47,7 +47,7 @@ To sprawia, że aplikacja o~architekturze wielowarstwowej jest narażona na pows
 \section{CQRS}
 %=======
 
-Przypadkiem szczególnym architektury wielowarstwowej jest architektura CQRS (\emph{Command Query Responsibility Segregation})~\cite{cqrs}.
+Przypadkiem szczególnym architektury wielowarstwowej jest architektura CQRS (\emph{Command Query Responsibility Segregation})~\cite{cqrs_journey}.
 Zakłada ona podział wszystkich działań w~aplikacji na dwa rodzaje:
 
 \begin{itemize}
@@ -117,12 +117,61 @@ Zagadnienia te zostaną opisane w~kolejnych sekcjach.
 
 
 %=======
-\section{Event sourcing}
+\section{Event Sourcing}
 %=======
 
+Event Sourcing~\cite{eventSourcing_msdn} jest wzorcem architektonicznym, który realizuje przechowywanie stanu aplikacji poprzez przechowywanie wszystkich zdarzeń (ang. \emph{event}), które zaszły w~systemie od początku jego działania aż do stanu obecnego.
+Terminem ``zdarzenie'' określa się tutaj dowolną akcję, która ma wpływ na stan systemu.
+Rejestrowanie zdarzeń odbywa się poprzez stworzenie obiektu opisującego daną akcję i~zapisanie go w~systemie.
+Zdarzenia rejestrowane są w~dzienniku zdarzeń (ang. \emph{event log}).
+
+
+\subsection{Cechy zdarzenia}
+
+Zdarzenie posiada następujące cechy~\cite{eventSourcing_intro}:
+
 \begin{itemize}
- \item opisać Event Sourcing
+ \item ma ono znaczenie dopiero wtedy, kiedy rzeczywiście wystąpi (np. ``Post został skomentowany'') - zdarzeń przyszłych nie bierze się pod uwagę;
+ \item jest ono niezmienne - jako że zdarzenie zaszło w~przeszłości, nie może ono zostać zmienione ani cofnięte; jego skutki mogą jednak zostać zniwelowane przez inne zdarzenie (np. ``Komentarz został usunięty'');
+ \item powinno ono mieć znaczenie biznesowe, a~nie implementacyjne - opisanie zajścia zdarzenia słowami: ``Do tabeli Comment dodano nowy rekord'' niesie ze sobą mniejszą wartość biznesową niż: ``Post został skomentowany''.
+ \item zazwyczaj zawiera ono informacje na temat kontekstu, w~którym zaszło (np. ``Użytkownik $X$ dodał komentarz $Y$ pod postem $Z$'', ``Moderator $W$ usunął komentarz $Y$'');
+ \item informacja o~zajściu zdarzenia jest informacją jednokierunkową od nadawacy (ang. \emph{publisher}) do odbiorcy (ang. \emph{subscriber}) lub wielu odbiorców; reakcja odbiorcy na zdarzenie nie jest bezpośrednio znana nadawcy.
 \end{itemize}
+
+
+\subsection{Zalety i~wady wzorca}
+
+Wzorzec Event Sourcing wprowadza nastepujące zalety:
+
+\begin{itemize}
+ \item dziennik zdarzeń dostarcza informacji o~historii działań użytkoniwków systemu - informacje te mogą być przydatne podczas szukania przyczyn występienia błędów;
+ \item aplikację można łatwo usunąć i~przywrócić do poprzedniego stanu poprzez zarejestrowanie wszystkich zdarzeń od nowa (np. podczas przenoszenia jej na inną maszynę);
+ \item stan aplikacji można łatwo cofnąć do dowolnego punktu w~czasie - wystarczy wyczyścić stan aplikacji i~zarejestrować od nowa wszystkie zdarzenia, ktore zaszły przed wybranym punktem w~czasie (może to ułatwić szukanie przyczyn wystąpienia błędów);
+ \item w~razie wykrycia zdarzenia będącego przyczyną wystąpienia błędu, można usunąć to zdarzenie z~dziennika i~zarejestrować od nowa wszystkie zdarzenia, które nastąpiły po nim; na podobnej zasadzie można skorygować kolejność zdarzeń zarejestowanych w~złej kolejności (z~tej zalety powinno się korzystać jedynie w~sytuacjach awaryjnych, ponieważ narusza ona cechę zdarzeń mówiącą o~ich niezmieności).
+\end{itemize}
+
+Wady:
+
+\begin{itemize}
+ \item implementacja dziennika zdarzeń nie jest łatwa - powinna ona gwarantować, że zdarzenia zostaną wpisane do dziennika w~kolejności ich zgłaszania (co nie jest oczywiste w~aplikacjach wielowątkowych);
+ \item odtwarzanie stanu systemu, w~którym zarejestrowano tysiące zdarzeń może trwać bardzo długo (rozwiązaniem tego problemu jest tworzenie migawek (ang. \emph{snapshot}) systemu przechowujacych stan systemu co ileś zdarzeń);
+ \item zmiany w~kodzie źródłowym systemu moga powodować, że dawno zarejestrowane zdarzenia przestaną być niekompatybilne z~nową wersją systemu.
+\end{itemize}
+
+
+\subsection{Przykłady aplikacji wykorzystujących Event Sourcing}
+
+Aby łatwiej zrozumieć działanie wzorca, garść przykładów aplikacji używanych na co dzień, które są oparte o~Event Sorcing lub częściowo go wykorzystują:
+
+\begin{itemize}
+ \item systemy kontroli wersji - dziennik zdarzeń przechowuje zmiany dokonywane na plikach znajdujących się w~wersjonowanym katalogu;
+ \item edytory tekstu i~edytory graficzne - dziennik zdarzeń przechowuje zmiany dokonywane na edytowanym pliku.
+\end{itemize}
+
+Wzorzec ten ma jednak zastosowanie nie tylko w~aplikacjach użytkowych.
+W~połączeniu z~wzorcem CQRS, sprawdza się także w~aplikacjach klasy enterprise.
+
+\subsection{Współgranie z~CQRS}
 
 
 
