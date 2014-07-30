@@ -177,7 +177,7 @@ Wzorzec ten ma jednak zastosowanie nie tylko w~aplikacjach użytkowych.
 W~połączeniu z~wzorcem CQRS, sprawdza się także w~aplikacjach klasy enterprise.
 
 
-\subsection{Współgranie z~CQRS}
+\subsection{Współpraca z~CQRS}
 
 Zasady działania wzorca Event Sorcing w~systemie opartym o~architekturę CQRS są następujące~\cite{cqrs_es}:
 
@@ -198,13 +198,48 @@ Współpraca ta została schematycznie przedstawiona na rysunku~\ref{fig:cqrs_es
 \section{NoSQL}
 %=======
 
+opisać NoSQL
+
+\subsection{Dostępne bazy NoSQL}
+
+opisać rodzaje baz NoSQL
+
+\subsubsection{Wide Column Store}
+
 \begin{itemize}
- \item opisać NoSQL
-  \begin{itemize}
-   \item opisać rodzaje baz NoSQL
-   \item wybrać bazę NoSQL i dlaczego Cassandra
-  \end{itemize}
+ \item Hadoop~\cite{hadoop} - platforma stworzona w~technologii Java, wykonująca obliczenia na dużych ilościach danych realizowane przez wiele rozproszonych aplikacji, służy przede wszstkim do przetwarzania danych, a~nie do ich składowania;
+ \item Cassandra~\cite{cassandra} - stworzona w~technologii Java baza danych, której główne cele to skalowalność, wysoka wydajność i~brak pojedynczego punktu awarii (ang. \emph{Single Point of Failure}, \emph{SPOF});
+ \item Amazon SimpleDB~\cite{simple_db} - komercyjna baza danych nastawiona na prostotę użytkowania i~zarządzania.
 \end{itemize}
+
+\subsubsection{Document Store}
+
+\begin{itemize}
+ \item MongoDB~\cite{mongo_db} - umożliwia wygodne przeszukiwanie danych i~tworzenie indeksów na dowolnych ich atrybutach, wspiera automatyczne dzielenie danych pomiędzy wiele maszyn (ang. \emph{sharding}); stworzona w~języku C++;
+ \item CouchDB~\cite{couch_db} - stworzona w~języku Erlang baza danych udostępniająca przechowywane dane poprzez protokół HTTP; nastawiona na wykorzystanie w~aplikacjach webowych i~mobilnych;
+ \item RavenDB~\cite{raven_db} - baza danych umożliwiająca wykonywanie dowolnych operacji (np. przebudowy struktury) bez potrzeby zatrzymywania korzystających z~niej aplikacji i~udostępniająca wygodny sposób przeszukiwania danych; oparta na platformie .NET;
+\end{itemize}
+
+\subsubsection{Key Value Store}
+
+\begin{itemize}
+ \item DynamoDB~\cite{dynamo_db}
+ \item Azure Table Storage~\cite{azure_table_storage}
+ \item Redis~\cite{redis}
+\end{itemize}
+
+\subsubsection{Graph Databases}
+
+\begin{itemize}
+ \item Neo4J~\cite{neo4j}
+ \item TITAN~\cite{titan}
+ \item Trinity~\cite{trinity}
+\end{itemize}
+
+
+\subsection{Dlaczego Cassandra}
+
+wybrać bazę NoSQL i dlaczego Cassandra
 
 
 
