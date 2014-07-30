@@ -159,14 +159,14 @@ Wady:
 \begin{itemize}
  \item implementacja dziennika zdarzeń nie jest łatwa - powinna ona gwarantować, że zdarzenia zostaną wpisane do dziennika w~kolejności ich zgłaszania (co nie jest oczywiste w~aplikacjach wielowątkowych);
  \item z~reguły reakcja na zdarzenie odbywa się asynchronicznie względem procesu zgłaszającego jego zajście - zmiany stanu systemu nie są więc widoczne natychmiast po zajściu zdarzenia; zjawisko to jest widoczne na przykład w~serwisie YouTube~\cite{youtube} - zdarzenie ``Obejrzano film'' jest przetwarzane znacznie wolniej niż zdarzenie ``Dodano komentarz'' (wyświetlenia filmu sprawdzane są pod kątem fałszywych wyświetleń mających na celu sztuczne zwiększenie popularności filmu~\cite{youtube:301}), co skutkuje wyświetleniem większej liczby komentarzy niż liczby wyświetleń pod danym filmem (jeśli komentarzy i~wyświetleń jest odpowiednio dużo);
- \item odtwarzanie stanu systemu, w~którym zarejestrowano tysiące zdarzeń może trwać bardzo długo (rozwiązaniem tego problemu jest tworzenie migawek (ang. \emph{snapshot}) systemu przechowujacych stan systemu co ileś zdarzeń);
+ \item odtwarzanie stanu systemu, w~którym zarejestrowano tysiące zdarzeń może trwać bardzo długo (rozwiązaniem tego problemu jest tworzenie migawek (ang. \emph{snapshot}) systemu przechowujących stan systemu co ileś zdarzeń);
  \item zmiany w~kodzie źródłowym systemu moga powodować, że dawno zarejestrowane zdarzenia przestaną być niekompatybilne z~nową wersją systemu.
 \end{itemize}
 
 
 \subsection{Przykłady aplikacji wykorzystujących Event Sourcing}
 
-Aby łatwiej zrozumieć działanie wzorca, garść przykładów aplikacji używanych na co dzień, które są oparte o~Event Sorcing lub częściowo go wykorzystują:
+Aby łatwiej zrozumieć działanie wzorca, garść przykładów aplikacji używanych na co dzień, które są oparte o~Event Sourcing lub częściowo go wykorzystują:
 
 \begin{itemize}
  \item systemy kontroli wersji - dziennik zdarzeń przechowuje zmiany dokonywane na plikach znajdujących się w~wersjonowanym katalogu;
@@ -179,7 +179,7 @@ W~połączeniu z~wzorcem CQRS, sprawdza się także w~aplikacjach klasy enterpri
 
 \subsection{Współpraca z~CQRS}
 
-Zasady działania wzorca Event Sorcing w~systemie opartym o~architekturę CQRS są następujące~\cite{cqrs_es}:
+Zasady działania wzorca Event Sourcing w~systemie opartym o~architekturę CQRS są następujące~\cite{cqrs_es}:
 
 \begin{itemize}
  \item rolę modelu komend pełni dziennik zdarzeń - jedynym zadaniem komend jest zarejestrowanie zdarzenia w~dzienniku;
@@ -199,7 +199,7 @@ Współpraca ta została schematycznie przedstawiona na rysunku~\ref{fig:cqrs_es
 \section{NoSQL}
 %=======
 
-Bazy danych typu NoSQL (ang. \emph{Not Only SQL}) odrzucają praktykę składowania danych w~tabelarycznej, opartej na relacjach, ustrukturyzywanej formie będącej podstawą relacyjnych baz danych.
+Bazy danych typu NoSQL (ang. \emph{Not Only SQL}) odrzucają praktykę składowania danych w~tabelarycznej, opartej na relacjach, ustrukturyzowanej formie będącej podstawą relacyjnych baz danych.
 Zamiast tego składują dane w~innych, bardziej elastycznych postaciach, na przykład grafu lub zbioru par klucz-wartość.
 Pozwala to na wykonywanie niektórych operacji szybciej, niż są one wykonywane przez relacyjne bazy danych.
 Nie jest to jednak rozwiązanie bezwględnie lepsze od relacyjnych baz danych - niektóre operacje są wykonywane wolniej w~bazach typu NoSQL, niż w~bazach relacyjnych.
@@ -216,7 +216,7 @@ Dlatego istnieje wiele takich baz, które różnią się wydajnością bądź of
 Można je podzielić ze względu na model przechowywania danych.
 Najczęściej stosowane modele to:
 
-\subsubsection{Rodzina kolum}
+\subsubsection{Rodzina kolumn}
 
 Rodzina kolumn (ang. \emph{column family}, \emph{wide column}) jest modelem najbardziej przypominającym tabele w~relacyjnej bazie danych.
 Dane przechowywane są w~wierszach, które składają się z~kolumn wraz z~przypisanymi im wartościami.
@@ -237,7 +237,7 @@ Przykłady baz danych przechowujących rodziny kolumn:
 \subsubsection{Zbiór par klucz-wartość}
 
 Para klucz-wartość (ang. \emph{key-value pair}) jest zdecydowanie najprostszą strukturą danych używaną w~bazach danych typu NoSQL.
-Przechowywane w~postaci zbiorów takich par dane nie są w~żaden sposób ustrukturyzywane.
+Przechowywane w~postaci zbiorów takich par dane nie są w~żaden sposób ustrukturyzowane.
 Pary klucz-wartość są podstawą dla innych modeli danych, na przykład rodzin kolumn, gdzie wiersze składają się z~par kolumna-wartość.
 Są więc najbardziej elastycznym modelem, ale zazwyczaj oferującym ubogi zestaw funkcjonalności.
 
@@ -245,7 +245,7 @@ Przykłady baz przechowujących pary klucz-wartość to:
 
 \begin{itemize}
  \item DynamoDB~\cite{dynamo_db} - baza danych będąca w~stanie wydajnie działać pod bardzo dużym obciążeniem, jej kluczowymi celami są wydajność i~skalowalność; stworzona w~technologii Java;
- \item Azure Table Storage~\cite{azure_table_storage} - baza danych wspierająca przchowywanie danych w~tabelarycznej, ustrukturyzywanej formie; stworzona na platformie .Net;
+ \item Azure Table Storage~\cite{azure_table_storage} - baza danych wspierająca przchowywanie danych w~tabelarycznej, ustrukturyzowanej formie; stworzona na platformie .Net;
  \item Redis~\cite{redis} - napisana w~języku C wydajna baza danych wspierająca przechowywanie złożonych struktur takich jak listy, kolejki czy posortowane zbiory.
 \end{itemize}
 
@@ -274,7 +274,7 @@ Do grafowych baz danych należą:
 Dokument (ang. \emph{document}) jest typem danych, który z~założenia reprezentuje duże porcje danych, z~których tylko fragmenty są udostępniane na potrzeby pojedynczych zapytań.
 Dokumenty mogą posiadać dowolną strukturę, na co pozwala format, w~jakim są przechowywane (np. XML lub JSON).
 
-Bazy danych przechowujace dokumenty (ang. \emph{document-oriented databases}) są więc przystosowane do przechowywania i~przeszukiwania dużych jednostek danych.
+Bazy danych przechowujące dokumenty (ang. \emph{document-oriented databases}) są więc przystosowane do przechowywania i~przeszukiwania dużych jednostek danych.
 Do baz tego rodzaju należą:
 
 \begin{itemize}
@@ -284,18 +284,24 @@ Do baz tego rodzaju należą:
 \end{itemize}
 
 
-\subsection{Dlaczego Cassandra}
+\subsection{Wybrana baza typu NoSQL}
 
-Spośród dostępnych rodzajów baz danych typu NoSQL należy wybrać jeden, który będzie używany przez aplikacje generowane przez narzędzie.
+Spośród dostępnych baz danych typu NoSQL należy wybrać jedną, która będzie używana przez aplikacje generowane przez narzędzie.
+Wydaje się, że z~mechanizem generacji dziedziny aplikacji najlepiej komponują się bazy za model danych obierające rodziny kolumn.
+Model ten jest najbardziej zblizony do klasycznego modelu relacyjnego - dobrze nadaje się więc do przechowywania ustrukturyzowanej dziedziny aplikacji, a~sama struktura bazy danych może być jednym z~generowanych artefaktów;
 
+Współpraca takiej bazy danych z~architekturą CQRS i~wzorcem Event Sourcing wyglądać będzie następująco:
 
-Że rodziny kolumn.
-Bo najbardziej zblizone do rdbms, więc najwygodniej w nich modelować dziedzinę dowolnej apliakacji.
-(mogłyby też być document-oriented, ale typowo przechowywane obiekty nie będą aż tak duże)
+\begin{itemize}
+ \item baza typu NoSQL pełnić będzie rolę modelu zapytań (komponent \emph{Data Storage} na rysunku~\ref{fig:cqrs_es});
+ \item model zapytań będzie w~dużym stopniu zdenormalizowany, a~więc przystosowany do przechowywania go w~postaci rodzin kolumn;
+ \item procedury obsługi zdarzeń będą modyfikować dane zawarte w~tej bazie;
+ \item wykorzystanie tej bazy nie będzie miało wpływu na model komend i~dziennik zdarzeń - zdarzenia mogą, ale nie muszą być przechowywane w~tej bazie.
+\end{itemize}
 
-Jak to będzie współgrać z CQRS + ES (zdarzenia (model komend) przechowywane gdziekolwiek (rdbms lub nosql), ale skupimy się na modelu zapytań) - który będzie ostro zdenormalizowany, więc dobrze nadaje się pod rodziny kolumn
-
-wybrać bazę NoSQL i dlaczego Cassandra (bo najpopularniejsza, najbardziej wydajna)
+dlaczego Cassandra
+bo najpopularniejsza
+najbardziej wydajna
 
 
 
