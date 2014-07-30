@@ -137,7 +137,7 @@ Zdarzenie posiada następujące cechy~\cite{eventSourcing_intro}:
 \end{itemize}
 
 Rejestrowanie zdarzeń odbywa się poprzez stworzenie obiektu opisującego daną akcję i~zapisanie go w~systemie.
-Zdarzenia rejestrowane są w~dzienniku zdarzeń (ang. \emph{event log}).
+Zdarzenia rejestrowane są w~dzienniku zdarzeń (ang. \emph{event log} lub \emph{event storage}).
 Za reagowanie na zdarzenia, a~w~efekcie faktyczną zmianę stanu systemu odpowiadają wyznaczone do tego obiekty implementujące odpowiednie procedury obsługi (ang. \emph{event handlers}).
 Obiekty te pobierają nieprzetworzone zdarzenia z~dziennika zdarzeń i~wykonują procedury.
 Pojedyczne zdarzenie może zostać przetworzone przez wiele takich obiektów, wykonujących wiele osobnych modyfikacji stanu systemu.
@@ -176,10 +176,22 @@ Aby łatwiej zrozumieć działanie wzorca, garść przykładów aplikacji używa
 Wzorzec ten ma jednak zastosowanie nie tylko w~aplikacjach użytkowych.
 W~połączeniu z~wzorcem CQRS, sprawdza się także w~aplikacjach klasy enterprise.
 
+
 \subsection{Współgranie z~CQRS}
 
-TODO
+Zasady działania wzorca Event Sorcing w~systemie opartym o~architekturę CQRS są następujące~\cite{cqrs_es}:
 
+\begin{itemize}
+ \item rolę modelu komend pełni dziennik zdarzeń - jedynym zadaniem komend jest zarejestrowanie zdarzenia w~dzienniku;
+ \item stan systemu jest przechowywany w~modelu zapytań;
+ \item za synchronizację modelu zapytań z~modelem komend odpowiadają procedury obsługi zdarzeń (\emph{event handlers}) - synchronizacja ta odbywa się asynchronicznie;
+ \item wzorzec Event Sourcing nie ma wpływu na warstwę prezentacji systemu.
+\end{itemize}
+
+
+Współpraca ta została schematycznie przedstawiona na rysunku~\ref{fig:cqrs_es}.
+
+\input{figures/generated_app_type/cqrs_es}
 
 
 %=======
