@@ -234,6 +234,41 @@ Przykłady baz danych przechowujących rodziny kolumn:
  \item Amazon SimpleDB~\cite{simple_db} - komercyjna baza danych nastawiona na prostotę użytkowania i~zarządzania.
 \end{itemize}
 
+\subsubsection{Zbiór par klucz-wartość}
+
+Para klucz-wartość (ang. \emph{key-value pair}) jest zdecydowanie najprostszą strukturą danych używaną w~bazach danych typu NoSQL.
+Przechowywane w~postaci zbiorów takich par dane nie są w~żaden sposób ustrukturyzywane.
+Pary klucz-wartość są podstawą dla innych modeli danych, na przykład rodzin kolumn, gdzie wiersze składają się z~par kolumna-wartość.
+Są więc najbardziej elastycznym modelem, ale zazwyczaj oferującym ubogi zestaw funkcjonalności.
+
+Przykłady baz przechowujących pary klucz-wartość to:
+
+\begin{itemize}
+ \item DynamoDB~\cite{dynamo_db} - baza danych będąca w~stanie wydajnie działać pod bardzo dużym obciążeniem, jej kluczowymi celami są wydajność i~skalowalność; stworzona w~technologii Java;
+ \item Azure Table Storage~\cite{azure_table_storage} - baza danych wspierająca przchowywanie danych w~tabelarycznej, ustrukturyzywanej formie; stworzona na platformie .Net;
+ \item Redis~\cite{redis} - napisana w~języku C wydajna baza danych wspierająca przechowywanie złożonych struktur takich jak listy, kolejki czy posortowane zbiory.
+\end{itemize}
+
+\subsubsection{Graf}
+
+Niektóre bazy danych typu NoSQL za model danych obierają graf.
+Takie bazy nazywamy grafowymi bazami danych (ang. \emph{graph databases}).
+
+Węzłem grafu może być dowolny obiekt (np. zbiór par klucz-wartość), a~krawędź może łączyć dwa dowolne węzły.
+Pojedyncza krawędź reprezentuje dowolną relację pomiędzy węzłami.
+Model ten jest więc bardzo elastyczny.
+
+Zaletą grafu jest to, że, podobnie jak relacja, jest on strukturą danych o~silnym podłożu matematycznym.
+Istnieje więc wiele wydajnych algorytmów operujących na tej strukturze (np. algorytmy wyszukiwania ścieżek), co sprawia, że struktura ta bardzo dobrze nadaje się do modelowania wszelkiego rodzaju danych przestrzennych (np. map) lub innych sieci (np. zbiorów użytkowników portali społecznościowych, gdzie wierzchołek reprezentuje osobę, a~krawędź - relację ``zna'').
+
+Do grafowych baz danych należą:
+
+\begin{itemize}
+ \item Neo4J~\cite{neo4j} - najpopularniejsza grafowa baza danych, cechuje się wysoką wydajnością i~skalowalnością; wspiera mechanizm transakcji; stworzona w~technologii Java;
+ \item TITAN~\cite{titan} - baza danych wykorzystująca inne rozwiązania, takie jak Cassandra, korzytając z~wymiennych mechanizmów; stworzona w~technologii Java;
+ \item Trinity~\cite{trinity} - stworzona na platformie .Net baza danych wspierająca wygodne, deklaratywne modelowanie i~przeszukiwanie danych.
+\end{itemize}
+
 \subsubsection{Dokument}
 
 Dokument (ang. \emph{document}) jest typem danych, który z~założenia reprezentuje duże porcje danych, z~których tylko fragmenty są udostępniane na potrzeby pojedynczych zapytań.
@@ -246,26 +281,6 @@ Do baz tego rodzaju należą:
  \item MongoDB~\cite{mongo_db} - umożliwia wygodne przeszukiwanie danych i~tworzenie indeksów na dowolnych ich atrybutach, wspiera automatyczne dzielenie danych pomiędzy wiele maszyn (ang. \emph{sharding}); stworzona w~języku C++;
  \item CouchDB~\cite{couch_db} - stworzona w~języku Erlang baza danych udostępniająca przechowywane dane poprzez protokół HTTP; nastawiona na wykorzystanie w~aplikacjach webowych i~mobilnych;
  \item RavenDB~\cite{raven_db} - baza danych umożliwiająca wykonywanie dowolnych operacji (np. przebudowy struktury) bez potrzeby zatrzymywania korzystających z~niej aplikacji i~udostępniająca wygodny sposób przeszukiwania danych; oparta na platformie .Net.
-\end{itemize}
-
-\subsubsection{Key Value Store}
-
-Para klucz-wartość (ang. \emph{key-value pair}).
-
-\begin{itemize}
- \item DynamoDB~\cite{dynamo_db} - baza danych będąca w~stanie wydajnie działać pod bardzo dużym obciążeniem, jej kluczowymi celami są wydajność i~skalowalność; stworzona w~technologii Java;
- \item Azure Table Storage~\cite{azure_table_storage} - baza danych wspierająca przchowywanie danych w~tabelarycznej, ustrukturyzywanej formie; stworzona na platformie .Net;
- \item Redis~\cite{redis} - napisana w~języku C wydajna baza danych wspierająca przechowywanie złożonych struktur takich jak listy, kolejki czy posortowane zbiory.
-\end{itemize}
-
-\subsubsection{Graf}
-
-Graf (ang. \emph{graph}).
-
-\begin{itemize}
- \item Neo4J~\cite{neo4j} - najpopularniejsza grafowa baza danych, cechuje się wysoką wydajnością i~skalowalnością; wspiera mechanizm transakcji; stworzona w~technologii Java;
- \item TITAN~\cite{titan} - baza danych wykorzystująca inne rozwiązania, takie jak Cassandra, korzytając z~wymiennych mechanizmów; stworzona w~technologii Java;
- \item Trinity~\cite{trinity} - stworzona na platformie .Net baza danych wspierająca wygodne, deklaratywne modelowanie i~przeszukiwanie danych.
 \end{itemize}
 
 
