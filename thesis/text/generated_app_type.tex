@@ -218,7 +218,15 @@ Najczęściej stosowane modele to:
 
 \subsubsection{Rodzina kolum}
 
-Rodzina kolumn (ang. \emph{column family}, \emph{wide column}).
+Rodzina kolumn (ang. \emph{column family}, \emph{wide column}) jest modelem najbardziej przypominającym tabele w~relacyjnej bazie danych.
+Dane przechowywane są w~wierszach, które składają się z~kolumn wraz z~przypisanymi im wartościami.
+Pojedyczny wiersz może składać się z~bardzo dużej liczby kolumn.
+W~odróżnieniu od relacyjnych baz danych, wiersz nie musi posiadać wszystkich kolumn wchodzących w~skład rodziny i~może posiadać kolumny nienalażące do rodziny.
+Każda wartość przypisana do dajen kolumny wchodzącej w~skład rodziny musi jednak być określonego dla tej kolumny typu.
+
+W~odróżnieniu od baz relacyjnych bazy oparte o~rodziny kolumn nie~wspierają relacji pomiędzy tabelami (rodzinami kolumn).
+Aby osiągnąć satyfakcjonującą wydajność przeszukiwania, przechowuje się w~nich dane o~wysokim stopniu denormalizacji.
+Przykłady baz danych przechowujących rodziny kolumn:
 
 \begin{itemize}
  \item Hadoop~\cite{hadoop} - platforma stworzona w~technologii Java, wykonująca obliczenia na dużych ilościach danych realizowane przez wiele rozproszonych aplikacji, służy przede wszstkim do przetwarzania danych, a~nie do ich składowania;
@@ -228,7 +236,11 @@ Rodzina kolumn (ang. \emph{column family}, \emph{wide column}).
 
 \subsubsection{Dokument}
 
-Dokument (ang. \emph{document}).
+Dokument (ang. \emph{document}) jest typem danych, który z~założenia reprezentuje duże porcje danych, z~których tylko fragmenty są udostępniane na potrzeby pojedynczych zapytań.
+Dokumenty mogą posiadać dowolną strukturę, na co pozwala format, w~jakim są przechowywane (np. XML lub JSON).
+
+Bazy danych przechowujace dokumenty (ang. \emph{document-oriented databases}) są więc przystosowane do przechowywania i~przeszukiwania dużych jednostek danych.
+Do baz tego rodzaju należą:
 
 \begin{itemize}
  \item MongoDB~\cite{mongo_db} - umożliwia wygodne przeszukiwanie danych i~tworzenie indeksów na dowolnych ich atrybutach, wspiera automatyczne dzielenie danych pomiędzy wiele maszyn (ang. \emph{sharding}); stworzona w~języku C++;
@@ -238,7 +250,7 @@ Dokument (ang. \emph{document}).
 
 \subsubsection{Key Value Store}
 
-Para klucz-wartość (ang. \emph{key-value pair}.
+Para klucz-wartość (ang. \emph{key-value pair}).
 
 \begin{itemize}
  \item DynamoDB~\cite{dynamo_db} - baza danych będąca w~stanie wydajnie działać pod bardzo dużym obciążeniem, jej kluczowymi celami są wydajność i~skalowalność; stworzona w~technologii Java;
@@ -259,7 +271,13 @@ Graf (ang. \emph{graph}).
 
 \subsection{Dlaczego Cassandra}
 
-wybrać bazę NoSQL i dlaczego Cassandra
+Że rodziny kolumn.
+Bo najbardziej zblizone do rdbms, więc najwygodniej w nich modelować dziedzinę dowolnej apliakacji.
+(mogłyby też być document-oriented, ale typowo przechowywane obiekty nie będą aż tak duże)
+
+Jak to będzie współgrać z CQRS + ES (zdarzenia (model komend) przechowywane gdziekolwiek (rdbms lub nosql), ale skupimy się na modelu zapytań) - który będzie ostro zdenormalizowany, więc dobrze nadaje się pod rodziny kolumn
+
+wybrać bazę NoSQL i dlaczego Cassandra (bo najpopularniejsza, najbardziej wydajna)
 
 
 
