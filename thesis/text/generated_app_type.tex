@@ -194,17 +194,31 @@ Współpraca ta została schematycznie przedstawiona na rysunku~\ref{fig:cqrs_es
 \input{figures/generated_app_type/cqrs_es}
 
 
+
 %=======
 \section{NoSQL}
 %=======
 
-opisać NoSQL
+Bazy danych typu NoSQL (ang. \emph{Not Only SQL}) odrzucają praktykę składowania danych w~tabelarycznej, opartej na relacjach, ustrukturyzywanej formie będącej podstawą relacyjnych baz danych.
+Zamiast tego składują dane w~innych, bardziej elastycznych postaciach, na przykład grafu lub zbioru par klucz-wartość.
+Pozwala to na wykonywanie niektórych operacji szybciej, niż są one wykonywane przez relacyjne bazy danych.
+Nie jest to jednak rozwiązanie bezwględnie lepsze od relacyjnych baz danych - niektóre operacje są wykonywane wolniej w~bazach typu NoSQL, niż w~bazach relacyjnych.
+
+Bazy danych typu NoSQL są nastawione na przechowywanie bardzo dużych ilości danych.
+Tym, co odróżnia je od baz relacyjnych jest fakt, że zazwyczaj domyślnie wspierają one rozproszenie danych pomiędzy wiele maszyn.
+Zapewnia to łatwą poziomą skalowalność systemów z~nich korzystających.
+
 
 \subsection{Dostępne bazy NoSQL}
 
-opisać rodzaje baz NoSQL
+Bazy danych typu NoSQL są tworzone pod kątem konkretnych problemów, jakie mają rozwiązywać.
+Dlatego istnieje wiele takich baz, które różnią się wydajnością bądź oferowanymi funkcjonalnościami.
+Można je podzielić ze względu na model przechowywania danych.
+Najczęściej stosowane modele to:
 
-\subsubsection{Wide Column Store}
+\subsubsection{Rodzina kolum}
+
+Rodzina kolumn (ang. \emph{column family}, \emph{wide column}).
 
 \begin{itemize}
  \item Hadoop~\cite{hadoop} - platforma stworzona w~technologii Java, wykonująca obliczenia na dużych ilościach danych realizowane przez wiele rozproszonych aplikacji, służy przede wszstkim do przetwarzania danych, a~nie do ich składowania;
@@ -212,7 +226,9 @@ opisać rodzaje baz NoSQL
  \item Amazon SimpleDB~\cite{simple_db} - komercyjna baza danych nastawiona na prostotę użytkowania i~zarządzania.
 \end{itemize}
 
-\subsubsection{Document Store}
+\subsubsection{Dokument}
+
+Dokument (ang. \emph{document}).
 
 \begin{itemize}
  \item MongoDB~\cite{mongo_db} - umożliwia wygodne przeszukiwanie danych i~tworzenie indeksów na dowolnych ich atrybutach, wspiera automatyczne dzielenie danych pomiędzy wiele maszyn (ang. \emph{sharding}); stworzona w~języku C++;
@@ -222,13 +238,17 @@ opisać rodzaje baz NoSQL
 
 \subsubsection{Key Value Store}
 
+Para klucz-wartość (ang. \emph{key-value pair}.
+
 \begin{itemize}
  \item DynamoDB~\cite{dynamo_db} - baza danych będąca w~stanie wydajnie działać pod bardzo dużym obciążeniem, jej kluczowymi celami są wydajność i~skalowalność; stworzona w~technologii Java;
  \item Azure Table Storage~\cite{azure_table_storage} - baza danych wspierająca przchowywanie danych w~tabelarycznej, ustrukturyzywanej formie; stworzona na platformie .Net;
  \item Redis~\cite{redis} - napisana w~języku C wydajna baza danych wspierająca przechowywanie złożonych struktur takich jak listy, kolejki czy posortowane zbiory.
 \end{itemize}
 
-\subsubsection{Graph Databases}
+\subsubsection{Graf}
+
+Graf (ang. \emph{graph}).
 
 \begin{itemize}
  \item Neo4J~\cite{neo4j} - najpopularniejsza grafowa baza danych, cechuje się wysoką wydajnością i~skalowalnością; wspiera mechanizm transakcji; stworzona w~technologii Java;
