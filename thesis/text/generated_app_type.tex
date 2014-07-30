@@ -122,8 +122,6 @@ Zagadnienia te zostaną opisane w~kolejnych sekcjach.
 
 Event Sourcing~\cite{eventSourcing_msdn} jest wzorcem architektonicznym, który realizuje przechowywanie stanu aplikacji poprzez przechowywanie wszystkich zdarzeń (ang. \emph{event}), które zaszły w~systemie od początku jego działania aż do stanu obecnego.
 Terminem ``zdarzenie'' określa się tutaj dowolną akcję, która ma wpływ na stan systemu.
-Rejestrowanie zdarzeń odbywa się poprzez stworzenie obiektu opisującego daną akcję i~zapisanie go w~systemie.
-Zdarzenia rejestrowane są w~dzienniku zdarzeń (ang. \emph{event log}).
 
 
 \subsection{Cechy zdarzenia}
@@ -135,8 +133,14 @@ Zdarzenie posiada następujące cechy~\cite{eventSourcing_intro}:
  \item jest ono niezmienne - jako że zdarzenie zaszło w~przeszłości, nie może ono zostać zmienione ani cofnięte; jego skutki mogą jednak zostać zniwelowane przez inne zdarzenie (np. ``Komentarz został usunięty'');
  \item powinno ono mieć znaczenie biznesowe, a~nie implementacyjne - opisanie zajścia zdarzenia słowami: ``Do tabeli Comment dodano nowy rekord'' niesie ze sobą mniejszą wartość biznesową niż: ``Post został skomentowany''.
  \item zazwyczaj zawiera ono informacje na temat kontekstu, w~którym zaszło (np. ``Użytkownik $X$ dodał komentarz $Y$ pod postem $Z$'', ``Moderator $W$ usunął komentarz $Y$'');
- \item informacja o~zajściu zdarzenia jest informacją jednokierunkową od nadawacy (ang. \emph{publisher}) do odbiorcy (ang. \emph{subscriber}) lub wielu odbiorców; reakcja odbiorcy na zdarzenie nie jest bezpośrednio znana nadawcy.
+ \item informacja o~zajściu zdarzenia jest informacją jednokierunkową od nadawacy (ang. \emph{publisher}) do odbiorcy (ang. \emph{subscriber}) lub wielu odbiorców; reakcja odbiorcy na zdarzenie nie jest bezpośrednio znana nadawcy.\\
 \end{itemize}
+
+Rejestrowanie zdarzeń odbywa się poprzez stworzenie obiektu opisującego daną akcję i~zapisanie go w~systemie.
+Zdarzenia rejestrowane są w~dzienniku zdarzeń (ang. \emph{event log}).
+Za reagowanie na zdarzenia, a~w~efekcie faktyczną zmianę stanu systemu odpowiadają wyznaczone do tego obiekty implementujące odpowiednie procedury obsługi (ang. \emph{event handlers}).
+Obiekty te pobierają nieprzetworzone zdarzenia z~dziennika zdarzeń i~wykonują procedury.
+Pojedyczne zdarzenie może zostać przetworzone przez wiele takich obiektów, wykonujących wiele osobnych modyfikacji stanu systemu.
 
 
 \subsection{Zalety i~wady wzorca}
@@ -154,6 +158,7 @@ Wady:
 
 \begin{itemize}
  \item implementacja dziennika zdarzeń nie jest łatwa - powinna ona gwarantować, że zdarzenia zostaną wpisane do dziennika w~kolejności ich zgłaszania (co nie jest oczywiste w~aplikacjach wielowątkowych);
+ \item z~reguły reakcja na zdarzenie odbywa się asynchronicznie względem procesu zgłaszającego jego zajście - zmiany stanu systemu nie są więc widoczne natychmiast po zajściu zdarzenia; zjawisko to jest widoczne na przykład w~serwisie YouTube~\cite{youtube} - zdarzenie ``Obejrzano film'' jest przetwarzane znacznie wolniej niż zdarzenie ``Dodano komentarz'' (wyświetlenia filmu sprawdzane są pod kątem fałszywych wyświetleń mających na celu sztuczne zwiększenie popularności filmu~\cite{youtube:301}), co skutkuje wyświetleniem większej liczby komentarzy niż liczby wyświetleń pod danym filmem (jeśli komentarzy i~wyświetleń jest odpowiednio dużo);
  \item odtwarzanie stanu systemu, w~którym zarejestrowano tysiące zdarzeń może trwać bardzo długo (rozwiązaniem tego problemu jest tworzenie migawek (ang. \emph{snapshot}) systemu przechowujacych stan systemu co ileś zdarzeń);
  \item zmiany w~kodzie źródłowym systemu moga powodować, że dawno zarejestrowane zdarzenia przestaną być niekompatybilne z~nową wersją systemu.
 \end{itemize}
@@ -172,6 +177,8 @@ Wzorzec ten ma jednak zastosowanie nie tylko w~aplikacjach użytkowych.
 W~połączeniu z~wzorcem CQRS, sprawdza się także w~aplikacjach klasy enterprise.
 
 \subsection{Współgranie z~CQRS}
+
+TODO
 
 
 
