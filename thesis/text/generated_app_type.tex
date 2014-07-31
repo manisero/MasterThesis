@@ -320,6 +320,7 @@ węzły, klastry, redundancja, replikacja
 Cassandra przechowuje dane w~postaci rodziny kolumn (patrz: sekcja~\ref{sec:column_family})~\cite{cassandra_model}.
 Każdy wiersz rodziny jest identyfikowany poprzez klucz główny (ang. \emph{primary key}).
 W~odróżnieniu od tabel w~bazach relacyjnych, każda rodzina kolumn musi posiadać klucz główny.
+Należy podkreślić, że rodziny kolumn nie mogą posiadać znanych w~bazach relacyjnych kluczy obcych (ang. \emph{foreign key}) - kolumn wskazujących na inne rodziny.
 
 Strukturę pojedynczego wiersza rodziny przedstawia rysunek~\ref{fig:cassandra_model}.
 
@@ -343,6 +344,15 @@ Superkolumny, podobnie jak klucz partycjonujący sortowane są według ich warto
 
 Wartościami kolumn mogą być różnego rodzaju wartości skalarne znane z~baz relacyjnych, takie jak napisy (\emph{text}, \emph{ascii}), liczby całkowite (\emph{int}, \emph{bigint}) lub zmiennoprzecinkowe (\emph{float}, \emph{double}), czy wartości logiczne (\emph{boolean}).
 
+Jednakże w~odróżnieniu od baz relacyjnych, wartościami kolumn mogą być również kolekcje: lista (\emph{list}), zbiór unikalnych elementów (\emph{set}) i~mapa par klucz-wartość (\emph{map}).
+Kolekcje mają następujące ograniczenia~\cite{cassandra:collections}:
+
+\begin{itemize}
+ \item maksymalny rozmiar pojedynczego elementu kolekcji wynosi 64 KB;
+ \item kolekcje są odczytywane i~zwracane w~całości - dlatego nie powinny zawierać dużej ilości elementów.
+\end{itemize}
+
+
 \subsubsection{Indeksy}
 
 Domyślnie, rodzina kolumn może być przeszukiwana jedynie po wartościach jej klucza partycjonującego.
@@ -354,4 +364,8 @@ Pojedynczy indeks przechowuje tylko wartości kolumn należących do wierszy, kt
 
 \subsection{CQL}
 
+Do przeszykiwania i~modyfikowania danych przechowywanych w~bazie danych Cassandra służy język CQL (Cassandra Query Language).
+Jest on podobny do języka SQL, jednak 
 
+no FKs -> no joins
+no subquery
