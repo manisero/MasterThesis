@@ -216,7 +216,7 @@ Dlatego istnieje wiele takich baz, które różnią się wydajnością bądź of
 Można je podzielić ze względu na model przechowywania danych.
 Najczęściej stosowane modele to:
 
-\subsubsection{Rodzina kolumn}
+\subsubsection{Rodzina kolumn} \label{sec:column_family}
 
 Rodzina kolumn (ang. \emph{column family}, \emph{wide column}) jest modelem najbardziej przypominającym tabele w~relacyjnej bazie danych.
 Dane przechowywane są w~wierszach, które składają się z~kolumn wraz z~przypisanymi im wartościami.
@@ -310,18 +310,47 @@ Dlatego to właśnie z~tej bazy korzystać będą wygenerowane aplikacje.
 %=======
 
 
+\subsection{Architektura}
+
+węzły, klastry, redundancja, replikacja
+
+
 \subsection{Model danych}
 
-\cite{cassandra_model}
-\ref{fig:cassandra_model}
+Cassandra przechowuje dane w~postaci rodziny kolumn (patrz: sekcja~\ref{sec:column_family})~\cite{cassandra_model}.
+Każdy wiersz rodziny jest identyfikowany poprzez klucz główny (ang. \emph{primary key}).
+W~odróżnieniu od tabel w~bazach relacyjnych, każda rodzina kolumn musi posiadać klucz główny.
+
+Strukturę pojedynczego wiersza rodziny przedstawia rysunek~\ref{fig:cassandra_model}.
 
 \input{figures/generated_app_type/cassandra_model}
 
+Wiersze należące do tej samej rodziny przechowywane są w~kolejności posortowanej według wartości jej klucza głównego.
+Kolumny należące do wiersza sortowane są według ich nazw.
 
-\subsection{Architektura}
+\subsubsection{Superkolumny}
 
-węzły, klastry, redundancja, replikacjakutas
+Klucz główny rodziny może składać się z~wielu kolumn.
+W~takim przypadku pierwszą z~kolumn wchodzących w~skład klucza głównego nazywa się kluczem partycjonującym (ang. \emph{partition key}).
+Pozostałe kolumny klucza głównego nazywa się superkolumnami (ang. \emph{Super Column}).
+Strukturę wiersza należacego do rodziny kolumn posiadającej superkolumnę przedstawia rysunek~\ref{fig:cassandra_model_supercolumn}.
 
+\input{figures/generated_app_type/cassandra_model_supercolumn}
+
+Superkolumny, podobnie jak klucz partycjonujący sortowane są według ich wartości - różnica polega na tym, że klucze partycjonujące sortowane są w~obrębie całej rodziny kolumn, a~superkolumny - w~obrębie pojedynczego wiersza.
+
+\subsubsection{Wartości kolumn}
+
+Wartościami kolumn mogą być różnego rodzaju wartości skalarne znane z~baz relacyjnych, takie jak napisy (\emph{text}, \emph{ascii}), liczby całkowite (\emph{int}, \emph{bigint}) lub zmiennoprzecinkowe (\emph{float}, \emph{double}), czy wartości logiczne (\emph{boolean}).
+
+\subsubsection{Indeksy}
+
+Domyślnie, rodzina kolumn może być przeszukiwana jedynie po wartościach jej klucza partycjonującego.
+Aby móc przeszukiwać wiersze rodziny po wartościach innych kolumn (w~tym superkolumn), należy stworzyć na nich indeksy.
+
+Indeks (ang. \emph{index}) to, podobnie jak w~relacyjych bazach danych, osobna (nie będąca częścią rodziny kolumn) struktura danych przechowująca posortowane wartości indeksowanych kolumn wraz ze wskazaniami na wiersze, do których te wartości należą.
+
+Pojedynczy indeks przechowuje tylko wartości kolumn należących do wierszy, które znajdują się w~jego węźle.
 
 \subsection{CQL}
 
