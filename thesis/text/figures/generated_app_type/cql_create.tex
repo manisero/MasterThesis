@@ -1,0 +1,15 @@
+\begin{figure}[!ht]
+\begin{verbatim}
+CREATE TABLE "User" (
+ "UserName" text,
+ "FirstName" text,
+ "LastName" text,
+ PRIMARY KEY ("UserName")
+);
+
+CREATE INDEX ON "User" ("LastName");
+\end{verbatim}
+
+\caption{Komendy języka CQL tworzące rodzinę kolumn o~nazwie \emph{User} i~kluczu głównym \emph{UserName}, a~także indeks na kolumnie \emph{LastName} tej rodziny.}
+\label{fig:cql:create}
+\end{figure}

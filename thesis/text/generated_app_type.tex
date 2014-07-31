@@ -318,6 +318,7 @@ węzły, klastry, redundancja, replikacja
 \subsection{Model danych}
 
 Cassandra przechowuje dane w~postaci rodziny kolumn (patrz: sekcja~\ref{sec:column_family})~\cite{cassandra_model}.
+Od wersji 2.0
 Każdy wiersz rodziny jest identyfikowany poprzez klucz główny (ang. \emph{primary key}).
 W~odróżnieniu od tabel w~bazach relacyjnych, każda rodzina kolumn musi posiadać klucz główny.
 Należy podkreślić, że rodziny kolumn nie mogą posiadać znanych w~bazach relacyjnych kluczy obcych (ang. \emph{foreign key}) - kolumn wskazujących na inne rodziny.
@@ -364,8 +365,17 @@ Pojedynczy indeks przechowuje tylko wartości kolumn należących do wierszy, kt
 
 \subsection{CQL}
 
-Do przeszykiwania i~modyfikowania danych przechowywanych w~bazie danych Cassandra służy język CQL (Cassandra Query Language).
+Do przesukiwania i~modyfikowania danych przechowywanych w~bazie danych Cassandra służy język CQL (Cassandra Query Language).
 Jest on podobny do języka SQL, jednak 
+
+\ref{fig:cql:create}
+\input{figures/generated_app_type/cql_create}
+
+\ref{fig:cql:insert}
+\input{figures/generated_app_type/cql_insert}
+
+\ref{fig:cql:select}
+\input{figures/generated_app_type/cql_select}
 
 no FKs -> no joins
 no subquery
