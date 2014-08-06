@@ -386,17 +386,21 @@ Pojedynczy indeks przechowuje tylko wartości kolumn należących do wierszy, kt
 
 \subsection{CQL}
 
-Do przesukiwania i~modyfikowania danych przechowywanych w~bazie danych Cassandra służy język CQL (Cassandra Query Language).
-Jest on podobny do języka SQL, jednak 
+Do przeszukiwania i~modyfikowania danych przechowywanych w~bazie danych Cassandra służy język CQL (Cassandra Query Language).
+Przypomina on język SQL, jednak jest znacznie prostszy.
+Ograniczenia języka CQL względem SQL to na przykład~\cite{cassandra_3_0}:
 
-\ref{fig:cql:create}
+\begin{itemize}
+ \item brak podzapytań (ang. \emph{subquery});
+ \item brak złączeń (ang. \emph{join});
+ \item brak sortowania według wartości dowolnych kolumn - sortowanie jest możliwe tylko według wartości klucza partycjonującego (domyślnie) lub pierwszej superkolumny.
+\end{itemize}
+
+Niemniej jednak, język CQL umożliwia efektywne zarządzanie strukturą danych przechowywanych w~bazie i~przeszukanie tych danych.
+Przykłady komend i~zapytań tego języka zostały przedstawione na rysunkach: \ref{fig:cql:create}, \ref{fig:cql:insert} i~\ref{fig:cql:select}.
+
 \input{figures/generated_app_type/cql_create}
 
-\ref{fig:cql:insert}
 \input{figures/generated_app_type/cql_insert}
 
-\ref{fig:cql:select}
 \input{figures/generated_app_type/cql_select}
-
-no FKs -> no joins
-no subquery
