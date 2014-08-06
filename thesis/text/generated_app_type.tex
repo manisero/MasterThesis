@@ -309,6 +309,9 @@ Dlatego to właśnie z~tej bazy korzystać będą wygenerowane aplikacje.
 \section{Cassandra}
 %=======
 
+Cassandra to baza danych o~hierarchicznej architekturze i~skomplikowanym modelu danych, a~jednocześnie udostępniająca prosty i~intuicyjny język przeszukiwania danych.
+Jej główne zalety to wysoka wydajność i~odporność na awarie.
+
 
 \subsection{Architektura}
 
@@ -323,9 +326,15 @@ Hierchia elementów architektury bazy Cassandra jest następująca:
  Centra danych należące do klastra mogą być geograficznie odległe od siebie.
 \end{enumerate}
 
-Takie rozproszenie ma na celu
-no SPOF
-no master node
+Rozproszenie danych pomiędzy węzłami ma na celu zminimalizowanie ryzyka utraty dużej ilości danych w~razie awarii pojedynczej maszyny.
+Aby zminimalizować ilość danych traconych w~razie awarii, dane mogą być replikowane pomiędzy węzłami.
+Jeśli jeden z~węzłów utraci dane, zostaną one uzupełnione ich kopiami z~innych węzłów.
+Co więcej, żaden z~węzłów nie jest głównym właścicielem danej porcji danych.
+Sprawia to, że architektura jest wolna od pojedynczych punktów awarii.
+
+Przykładowy klaster wykorzystujący replikację danych został przedstawiony na rysunku~\ref{fig:cassandra_architecture}.
+
+\input{figures/generated_app_type/cassandra_architecture}
 
 
 \subsection{Model danych}
