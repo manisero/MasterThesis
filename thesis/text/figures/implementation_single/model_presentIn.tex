@@ -1,0 +1,41 @@
+\begin{figure}[!ht]
+\begin{verbatim}
+{
+ "Name": "Post",
+ "Fields": [
+  {
+   "Name": "PostID",
+   "Type": "timeuuid",
+   "IsKeyInModel": true,
+   "PresentInViews": [
+    {
+     "View": "Comment",
+     "IsKey": true,
+     "OnKeyPosition": 0
+    }
+   ],
+   "PresentInEvents": [
+    {
+     "Event": "PostCommentedEvent"
+    }
+   ]
+  },
+  {
+   "Name": "Title",
+   "Type": "text"
+  },
+  {
+   "Name": "Content",
+   "Type": "text"
+  },
+  {
+   "Name": "CommentsNumber",
+   "Type": "int"
+  }
+ ],
+ "IsPresentInModel": true
+}
+\end{verbatim}
+\caption{Opis encji $Post$ w~wykorzystaniem konstrukcji ``PresentIn''.}
+\label{fig:single:model_presentIn}
+\end{figure}
