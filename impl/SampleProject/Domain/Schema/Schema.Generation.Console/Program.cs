@@ -2,6 +2,7 @@
 using CodeGeneration.Logic;
 using Schema.Model;
 using Schema.Templates.Database;
+using Schema.Templates.Documentation;
 using Schema.Templates.DotNet;
 
 namespace Schema.Generation.Console
@@ -62,6 +63,12 @@ namespace Schema.Generation.Console
             CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cs"),
                                               () => new ViewClassTemplate(),
                                               viewsPath);
+
+            // Generate documentation
+            var documentationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\documentation\documentation.html";
+            CodeGenerationFacade.GenerateCode(domain.Entities,
+                                              new DocumentationTemplate(),
+                                              documentationPath);
         }
     }
 }

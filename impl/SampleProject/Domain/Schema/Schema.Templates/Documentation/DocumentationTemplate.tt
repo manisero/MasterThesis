@@ -1,0 +1,16 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Schema.Templates.Utilities" #>
+<#@ parameter type="System.Collections.Generic.IEnumerable<Schema.Model.Entity>" name="Metadata" #>
+<html>
+<# foreach (var entity in Metadata) { #>
+ <div>
+  <#= entity.Name #>:
+  <ul>
+<# foreach (var field in entity.Fields) { #>
+   <li><#= field.Name #> (<#= field.Type #>)</li>
+<# } #>
+  </ul>
+ </div>
+<# } #>
+</html>
