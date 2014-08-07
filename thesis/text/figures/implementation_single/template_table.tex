@@ -1,0 +1,44 @@
+\begin{figure}[!ht]
+Szablon:
+
+\begin{verbatim}
+<#@ template language="C#" #>
+<#@ parameter type="Schema.Model.View" name="Metadata" #>
+<#@ parameter type="System.String" name="KeySpace" #>
+USE "<#= KeySpace #>";
+
+CREATE TABLE "<#= Metadata.Name #>" (
+<# foreach (var field in Metadata.Fields) { #>
+ "<#= field.Name #>" <#= field.Type #>,
+<# } #>
+ <#= CqlHelper.FormatPrimaryKey(Metadata) #>
+);
+
+<# foreach (var field in Metadata.Fields.Where(x => x.IsSearchable)) { #>
+CREATE INDEX ON "<#= Metadata.Name #>" ("<#= field.Name #>");
+<# } #>
+\end{verbatim}
+
+Wynik:
+
+\begin{verbatim}
+USE "Sample";
+
+CREATE TABLE "Post" (
+ "PostID" timeuuid,
+ "Title" text,
+ "Content" text,
+ "CommentsNumber" int,
+ "Author" text,
+ PRIMARY KEY ("PostID")
+);
+
+CREATE INDEX ON "Post" ("Author");
+\end{verbatim}
+
+\caption{
+ Szablon generacji definicji tabel i~przykładowy wynik jego działania.
+ Metoda $FormatPrimaryKey$ klasy $CqlHelper$ formatuje kolumny klucza głównego.
+}
+\label{fig:single:template_table}
+\end{figure}
