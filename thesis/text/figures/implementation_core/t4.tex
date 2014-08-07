@@ -1,0 +1,39 @@
+\begin{figure}[!ht]
+Szablon:
+
+\begin{verbatim}
+<#@ template language="C#" #>
+<#@ parameter type="Sample.Schema.Entity" name="Entity" #>
+namespace Sample
+{
+ /// <summary> <#= Entity.Description #> </summary>
+ public class <#= Entity.Name #>
+ {
+<# foreach (var field in Entity.Fields) { #>
+  /// <summary> <#= field.Description #> </summary>
+  public <#= field.Type #> <#= field.Name #> { get; set; }
+<# } #>
+ }
+}
+\end{verbatim}
+
+Wynik:
+
+\begin{verbatim}
+namespace Sample
+{
+ /// <summary> The user of the system. </summary>
+ public class User
+ {
+  /// <summary> The first name of the User. </summary>
+  public string FirstName { get; set; }
+  
+  /// <summary> The last name of the User. </summary>
+  public string LastName { get; set; }
+ }
+}
+\end{verbatim}
+
+\caption{Przykładowy szablon T4 i~wynikowy kod C\#.}
+\label{fig:implementation_core:t4}
+\end{figure}

@@ -1,0 +1,53 @@
+\begin{figure}[!ht]
+\begin{verbatim}
+{
+ "Name": "Post",
+ "Type": "View",
+ "Fields": [
+  {
+   "Name": "PostID",
+   "Type": "timeuuid",
+   "IsKey": true
+  },
+  {
+   "Name": "Title",
+   "Type": "text"
+  },
+  {
+   "Name": "Content",
+   "Type": "text"
+  },
+  {
+   "Name": "CommentsNumber",
+   "Type": "int"
+  }
+ ]
+}
+
+{
+ "Name": "Comment",
+ "Type": "View",
+ "Fields": [
+  {
+   "Name": "PostID",
+   "Type": "timeuuid"
+  },
+  ...
+ ]
+}
+
+{
+ "Name": "PostCommentedEvent",
+ "Type": "Event",
+ "Fields": [
+  {
+   "Name": "PostID",
+   "Type": "timeuuid"
+  },
+  ...
+ ]
+}
+\end{verbatim}
+\caption{Opis encji $Post$.}
+\label{fig:single:model_perView}
+\end{figure}

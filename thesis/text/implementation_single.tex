@@ -1,0 +1,114 @@
+\chapter{Implementacja generatora} \label{chap:implementation:single_type}
+
+\begin{itemize}
+ \item Wybrór klienta Cassandry (?)  
+\end{itemize}
+
+
+
+%=======
+\section{Co będzie generowane, a~co nie}
+%=======
+
+Założenia dotyczące całości:
+
+\begin{itemize}
+ \item generator ma generować dziedzinę aplikacji CQRS wykorzystująej Cassandrę:
+  \begin{itemize}
+   \item czy w ogóle generować schemat bazy danych (no schema) (?)
+   \item schemat DLL (czyli tak)
+   \item klasy C\#: model komend, model zapytań
+   \item dokumentancja HTML
+  \end{itemize}
+ \item ...
+\end{itemize}
+
+Ogólnie nie chodzi o to, żeby w ogóle nie pisać nazw klas / właściwości - tylko o to, żeby nie trzeba było pamiętać o wszystkich miejscach, gdzie dana encja jest używana.
+
+
+
+%=======
+\section{Przykład generowanej aplikacji}
+%=======
+
+Sformułowanie przykładu aplikacji
+
+
+
+%=======
+\section{Sposób definicji dziedziny}
+%=======
+
+\begin{itemize}
+ \item że będzie schemat opisu \ref{sec:core:domain_schema_requirement}
+ \item ale że schema powinna być w jednym miejsu - będzie jako klasa w kodzie
+ \item zdefiniowanie schematu opisu dziedziny na potrzeby CQRS (zapisać każdy w JSONie)
+  \begin{itemize}
+   \item każda tabela osobno (duplikacje)
+   \item PresentIn
+  \end{itemize}
+ \item które typy umieścić w definicji? CQLowe, .NETowe, czy własne? (nie ma potrzeby własnych, bo trzeba by robić dwie mapy; lepiej CQLowe bo jeden .NETowy mapuje się na wiele CQLowych) (że będzie potrzebna TypesMap.GetDotNetType)
+ \item organizacja plików wejściowych i wyjściowych \ref{sec:core:files_structure}
+\end{itemize}
+
+\ref{fig:single:model_presentIn}
+\input{figures/implementation_single/model_presentIn}
+
+\ref{fig:single:model_perView}
+\input{figures/implementation_single/model_perView}
+
+
+%=======
+\section{Podstawowe jednostki generacji}
+%=======
+
+\begin{itemize}
+ \item entity
+ \item event
+ \item view
+\end{itemize}
+
+
+
+%=======
+\section{Implementacja szablonów generacji}
+%=======
+
+Implementacja szablonów
+
+\begin{itemize}
+ \item CQL:
+  \begin{itemize}
+   \item create table
+   \item select
+  \end{itemize}
+ \item C\#:
+  \begin{itemize}
+   \item entity
+   \item event
+   \item view
+  \end{itemize}
+ \item HTML (dokumentancja)
+\end{itemize}
+
+\ref{fig:single:template_table}
+\input{figures/implementation_single/template_table}
+
+\ref{fig:single:template_class}
+\input{figures/implementation_single/template_class}
+
+\ref{fig:single:template_docs}
+\input{figures/implementation_single/template_docs}
+
+
+
+%=======
+\section{Implementacja kolejnych modułów aplikacji}
+%=======
+
+\begin{itemize}
+ \item CQL (create keyspace, create tables (do pojedynczego skryptu inicjalizującego bazę danych)
+ \item DAL (repozytorium bazowe zahardkodowane, konkretnych nie da się wygenerować)
+ \item BLL (obsługa zdarzeń zahardkodowana, da się wygenerować Eventy, a EventHandlery?)
+ \item WEB (Nancy, da się wygenerować ViewModele, formy)
+\end{itemize}

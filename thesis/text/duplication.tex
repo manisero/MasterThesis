@@ -1,0 +1,286 @@
+\chapter{Duplikacja} \label{chap:duplication}
+
+Zasada ``DRY'' (ang. \emph{``Don't Repeat Yourself''}), sformułowana przez Andrew Hunt'a i~David'a Thomas'a, mówi: ``Każda porcja wiedzy powinna mieć pojedynczą, jednoznaczną i autorytatywną reprezentację w~systemie''~\cite{prag_prog:dupl}.
+Poprawne jej stosowanie skutkuje osiągnięciem stanu, w~którym pojedyncza zmiana zachowania systemu wymaga modyfikacji tylko jednego fragmentu reprezentacji wiedzy.
+Należy podkreślić, że autorzy tej zasady przez ``reprezentację wiedzy'' rozumieją nie tylko kod źródłowy tworzony przez programistów systemu.
+Zaliczają do niej również dokumentację systemu, strukturę bazy danych przez niego używanej oraz inne artefakty powstające w~procesie wytwarzania oprogramowania (np. scenariusze testów akceptacyjnych), a~nawet czynności wykonywane rutynowo przez programistów.
+
+Celem stosowania zasady ``DRY'' jest unikanie duplikacji wiedzy zawartej w~systemie.
+Duplikacją określa się fakt występowania w~systemie dwóch reprezentacji tej samej porcji wiedzy.
+Należy wyjaśnić, że wielokrotne występowanie nazw klas lub zmiennych (bądź innych identyfikatorów) w~kodzie programu nie jest duplikacją - identyfikatory nie są reprezentacją więdzy, a~jedynie odnośnikami do wiedzy reprezentowanej przez artefakty, na które wskazują.
+
+
+
+%=======
+\section{Rodzaje duplikacji} \label{sec:dupl_kinds}
+%=======
+
+Wyróżnia się cztery rodzaje duplikacji ze względu na przyczynę jej powstania~\cite{prag_prog:dupl}:
+
+\begin{itemize}
+ \item duplikacja wymuszona (ang. \emph{imposed duplication}) - pojawia się, gdy programista świadomie duplikuje kod aplikacji (lub inną reprezentację wiedzy) uznając, że w~danej sytuacji nie jest możliwe uniknięcie duplikacji;
+ \item duplikacja niezamierzona (ang. \emph{inadvertent duplication}) - występuje wtedy, gdy programista nie jest świadomy, że jego działania prowadzą do powstania duplikacji;
+ \item duplikacja niecierpliwa (ang. \emph{impatient duplication}) - jest wynikiem niedbalstwa programisty; ma miejsce w sytuacji, gdy programista, napotkawszy problem, świadomie wybierze rozwiązanie najprostsze, ale prowadzące do powstania duplikacji;
+ \item duplikacja pomiędzy programistami (ang. \emph{interdeveloper duplication}) - pojawia się, gdy kilku programistów tworzących tę samą aplikację wzajemnie duplikuje tworzony kod lub tworzy niezależne reprezentacje tej samej wiedzy.
+\end{itemize}
+
+Duplikacja może występować w~różnych postaciach:
+
+
+\subsection{Duplikacja czynności wykonywanych przez programistów} \label{sec:tasks_dupl}
+
+Do rutynowych czynności wykonywanych podczas pracy programisty należą wszelkiego rodzaju aktualizacje: struktury bazy danych rezydującej na maszynie programisty czy wersji tworzonego oprogramowania zainstalowanej w~środowisku testowym lub produkcyjnym.
+
+Czynności te zwykle składają się z~kilku kroków. Przykładowo, na aktualizację bazy danych może składać się:
+
+\begin{enumerate}
+ \item Usunięcie istniejącej bazy.
+ \item Stworzenie nowej bazy.
+ \item Zainicjalizowanie struktury nowej bazy przy pomocy zaktualizowanego skryptu DLL (\emph{Data Definition Language}).
+ \item Wypełnienie nowej bazy danymi przy pomocy zaktualizowanego skryptu DML (\emph{Data Manipulation Language}).
+\end{enumerate}
+
+Jeśli wszystkie z~tych kroków wykonywane są ręcznie, to mamy do czynienia z~duplikacją - każdy programista w~zespole, zamiast tylko odwoływać się do wiedzy o~tym, jak zaktualizować bazę danych, musi posiadać tę więdzę i~wielokrotnie wcielać ją w~życie krok po kroku.
+
+
+\subsection{Duplikacja kodu źródłowego aplikacji} \label{sec:code_dupl_kinds}
+
+Programistom niejednokrotnie zdarza się spowodować duplikację w~kodzie źródłowym tworzonych programów.
+Powielone fragmenty kodu są zazwyczaj niewielkie, a podzielić je można na następujące kategorie~\cite{soft_sol_dupl}:
+
+\begin{itemize}
+ \item prosta duplikacja wyrażeń (ang. \emph{basic literal duplication}) - najprostszy rodzaj duplikacji; obejmuje fragmenty kodu, których treść jest identyczna (przykład: dwie identyczne metody umiejscowione w~różnych modułach systemu);
+ \item parametryczna duplikacja wyrażeń (ang. \emph{parametric literal duplication}) - obejmuje fragmenty kodu, których treść różni się jedynie typami danych, na których te fragmenty operują;
+ \item duplikacja strukturalna (ang. \emph{structural duplication}) - obejmuje fragmenty kodu, które mają ten sam schemat działania, ale różnią się pojedynczymi instrukcjami (przykład: dwie pętle iterurąjce po tej samej kolekcji z~tym samym warunkiem stopu, ale wykonujące różne operacje na elementach kolekcji);
+ \item duplikacja czasowa (ang. \emph{temporal duplication}) - określa fragment kodu, który jest niepotrzebnie wykonynway wiele razy (przykład: zliczenie elementów kolekcji podczas każdego sprawdzenia warunku stopu pętli iterurąjcej po tej kolekcji);
+ \item duplikacja intencji (ang. \emph{duplication of intent}) - występuje, gdy dwóch programistów umieści w~różnych modułach aplikacji dwa fragmenty, których wynik działania (ale niekoniecznie treść) jest identyczny (jest to jeden z~przypadków duplikacji pomiędzy programistami).
+\end{itemize}
+
+
+\subsection{Duplikacja opisu dziedziny aplikacji}
+
+W~każdej aplikacji obiektowej korzystającej z~bazy danych opis dziedziny aplikacji występuje w~co najmniej dwóch miejscach.
+Te miejsca to:
+
+\begin{itemize}
+ \item struktura bazy danych (DDL);
+ \item definicje klas w~kodzie źródłowym aplikacji.
+\end{itemize}
+
+Kolejnym typowym miejscem, w~którym umieszcza się informacje o~dziedzinie aplikacji jest jej dokumentacja.
+
+W~miarę rozrastania się systemu i~powstawania kolejnych funkcjonalności i~komponentów, pojawia się tendencja do powielania całości bądź części definicji dziedziny w~różnych modułach.
+Dotyczy to głównie tych modułów, których zadaniem jest obróbka tych samych danych, ale w~różny sposób.
+Przykładowo, aplikacja może pozwalać na dostęp do przechowywanych danych na następujące sposoby:
+
+\begin{itemize}
+ \item wyświetlać je na stronach WWW,
+ \item udostępniać je poprzez usługi sieciowe jako API (\emph{Application Programming Interface}),
+ \item umożliwiać ich eksport do arkusza kalkulacyjnego.
+\end{itemize}
+
+Komponenty realizujące te funkcjonalności mogą korzystać z~pojedynczej implementacji dziedziny.
+Może to jednak nie być pożądane, szczególnie w~przypadku, gdy każdy ze sposobów udostępnia inny zestaw danych.
+Przykładowo, strony WWW mogą wyświetlać podstawowe dane każdej encji będącej częścią dziedziny, podczas gdy API udostępnia pełne dane wszystkich encji, a eksport do arkusza kalkulacyjnego udostępnia pełne dane tylko niektórych encji.
+
+W~takim przypadku komponent odpowiedzialny za API operuje na pełnej dziedzinie, a~komponenty stron WWW i~eksportu do arkusza kalkulacyjnego - jedynie na jej fragmentach.
+Jeśli każdy z~tych komponentów posiada niezależną implementację dziedziny aplikacji, to mamy do czynienia z~duplikacją.
+
+
+
+%=======
+\section{Skutki występowania duplikacji}
+%=======
+
+Pojawienie się duplikacji w~systemie ma zazwyczaj szkodliwe skutki.
+Rozprzestrzenia się ona tym szybciej, a wyrządzane szkody są tym dotkliwsze, im więszy jest rozmiar systemu.
+
+Najbardziej oczywistym skutkiem występowania duplikacji jest wydłużenie się czasu poświęcanego przez programistów na nieskomplikowane lub powtarzalne zadania.
+Przykładowo, nieznajomość kodu współdzielonego przez wszystkie komponenty systemu (tzw. rdzenia, ang. \emph{core}) powoduje, że programiści niepotrzebnie spędzają czas na implementowaniu podstawowych funcji, które są już dostępne w~rdzeniu systemu.
+Innym przykładem może być praktyka ręcznego wykonywania czynności, które mogą być wykonywane automatycznie, w~tle.
+
+Po drugie, pojedyncza porcja wiedzy jest reprezentowana w~wielu miejsach, a~więc zmiana pojedynczego zachowania systemu wymaga modyfikacji wielu jego modułów.
+Wprowadzając dowolną modyfikację, programista musi ręcznie zlokalizować wszystkie miejsca wymagające zaktualizowania.
+Problem ten jest najbardziej odczuwalny podczas naprawy zgłoszonych błędów: będąc świadomym występowania duplikacji kodu, programista naprawiający błąd musi pamiętać, że poprawiany przez niego fragment może być powielony w~wielu miejscach w~systemie.
+Wszystkie te miejsca musi zlokalizować i~poprawić~\cite{repetition}.
+Jeśli tego nie zrobi, w~systemie pozostaną sprzeczne ze sobą reprezentacje danej wiedzy, a~kolejni programiści nie będą świadomi, która reprezentacja jest poprawna.
+W dłuższej perspektywie taka sytuacja prowadzi do pojawienia się kolejnych błędów.
+
+Po trzecie, duplikacja powoduje zbędne powiększenie rozmiarów systemu.
+Kod, w~którym występują zduplikowane fragmenty jest dłuższy, a przez to mniej czytelny.
+Co więcej, zwiększona ilość kodu powoduje niepożądane zwiększenie rozmiarów plików wchodzących w~skład systemu.
+
+Należy również zwrócić uwagę na zagrożenie, jakie niesie ze sobą wystąpienie pojedynczej duplikacji, której istnienie zostanie zaaprobowane przez programistów wchodzących w~skład zespołu tworzącego projekt.
+Może to spowodować osłabienie dyscypliny w~zespole, a~w~efekcie doprowadzić do pojawienia się kolejnych duplikacji, a~także innych złych praktyk programistycznych.
+Pojedyncze wystąpienie tego zjawiska może więc doprowadzić do rozprzestrzenia się innych niepożądanych zjawisk i~pogorszenia jakości całego systemu~\cite{prag_prog:entropy}.
+
+
+
+%=======
+\section{Rozwiązanie: utrzymywanie listy zduplikowanych fragmentów}
+%=======
+
+Najprostszym, a~zarazem najbardziej naiwnym sposobem na zniwelowanie skutków duplikacji może być utrzymywanie listy fragmentów systemu, w~których duplikacja występuje.
+Przykładowo, zespół może przygotować listę miejsc, które należy zmodyfikować, jeśli pojedyncza encja zostanie wzbogacona o~nowe pole.
+Na takiej liście znalazłaby się struktura bazy danych, implementacja modelu danych w~kodzie źródłowym programu, dokumetacja systemu, itd.
+
+Takie podejście ma jednak istotne wady:
+
+\begin{itemize}
+ \item rozwiązanie to nie powstrzymuje programistów przed wprowadzaniem kolejnych duplikacji, a~wręcz na to przyzwala;
+ \item pojawienie się nowego miejsca występowania pól encji (np. alternatywnej implementacji modelu danych) wymaga zaktualizowania listy; niezaktualizowana lista może skutkować pominięciem nowych miejsc w~szacunkach dotyczących czasu potrzebnego na implementację nowych funkcjonalności i~w~samej implementacji tych funkcjonalności;
+ \item rozwiązanie to niweluje tylko drugi z~wymienionych skutków występowania duplikacji - programista nie musi samodzielnie szukać miejsc, w~których powinien wprowadzić modyfikacje.
+\end{itemize}
+
+
+
+%=======
+\section{Rozwiązanie: skrypty automatyzujące rutynowe czynności}
+%=======
+
+Wiele czynności wykonywanych przez programistów da się zautomatyzować, tworząc skrypty je wykonujące.
+Przykłady:
+
+\begin{itemize}
+ \item wszystkie kroki składające się na czynność aktualizacji shcematu bazy przedstawone w sekcji~\ref{sec:tasks_dupl} mogą być wykonywane przez pojedynczy skrypt powłoki korzystający z~kilku skryptów DDL i DML;
+ \item operacja instalacji nowej wersji systemu na środowisku testowym lub produkcyjnym nie musi wiązać się z~ręcznym przesyłaniem plików systemu na serwer FPT zdalnej maszyny - może odbywać się automatycznie, po uruchomieniu odpowiedniego skryptu lub zarejestrowaniu zmiany kodu źródłowego w~systemie kontroli wersji~\cite{cont_delivery}.
+\end{itemize}
+
+Taka automatyzacja ma wiele zalet, w~tym:
+
+\begin{itemize}
+ \item w~trakcie działania skryptu w tle, programista może skupić się na innych zadaniach,
+ \item wiedza na temat kroków składających się na daną czynność jest reprezentowana w~jednym miejscu (skrypcie),
+ \item programiści lub inne skrypty odwołują się do tej wiedzy poprzez jej identyfikator (nazwę lub ścieżkę w~systemie plików).
+\end{itemize}
+
+Należy jednak zauważyć, że podejście to rozwiązuje jedynie problem duplikacji czynności wykonywanych przez programistów.
+Pozostałe postacie duplikacji nie mogą być zniwelowanie w~ten sposób.
+
+
+
+%=======
+\section{Rozwiązanie: generyczna implementacja}
+%=======
+
+Rozwiązaniem problemu duplikacji kodu źródłowego aplikacji może być generyczna implementacja aplikacji.
+W~językach obiektowych jest ona możliwa do osiągnięcia na kilka sposobów:
+
+
+\subsection{Dziedziczenie}
+
+Podstawowym sposobem na uniknięcie duplikacji w~kodzie aplikacji wykorzystujących języki obiektowe jest dziedziczene.
+Metody wspólne dla rodzin klas obiektów są umieszczane w~ich klasach bazowych.
+Pozwala to uniknąć podstawowej duplikacji wyrażeń (patrz: sekcja~\ref{sec:code_dupl_kinds}).
+
+
+\subsection{Typy szablonowe i~generyczne}
+
+Innych rodzajów duplikacji - parametrycznej duplikacji wyrażeń i~duplikacji strukturalnej - można uniknąć poprzez zastosowanie typów generycznych i~szablonów klas.
+Kod o~tej samej strukturze i~działaniu, ale operujący na danych innego typu, może być zamknięty w~pojedynczej klasie generycznej.
+
+
+\subsection{Refleksja}
+
+W~sytuacjach, w~których występuje potrzeba zaimplementowania podobnej funkcjonalności dla kilku typów obiektów, które nie należą do jednej rodziny, można skorzystać z~mechanizmu refleksji.
+Pozwala on osiągnąć rezultaty podobne do tych oferowanych przez klasy bazowe i~typy generyczne.\\
+
+
+Należy podkreślić, że przedstawione propozycje rozwiązują jedynie problem duplikacji kodu źródłowego aplikacji.
+
+
+%=======
+\section{Rozwiązanie: użycie generatorów}
+%=======
+
+Rozwiązaniem pozwalającym na uniknięcie duplikacji opisu dziedziny aplikacji jest zastosowanie różnego typu generatów.
+
+Należy wyjaśnić, że kodu źródłowego (bądź innych artefaktów) wygenerowanego na podstawie innego kodu nie uznaje się za duplikację.
+Powodem jest to, że jeśli na podstawie danego fragmentu kodu generowanych jest wiele artefaktów, to aby wprowadzić zmiany we wszystkich tych artefaktach, należy jedynie  zmodyfikować źródłowy fragment kodu i~uruchomić proces generacji.
+Za ``pojedynczą, jednoznaczną i autorytatywną'' reprezentację danej porcji wiedzy (patrz: Zasada ``DRY'') uznaje się w tym przypadku źródłowy fragment kodu.
+
+
+\subsection{Generator modelu dziedziny aplikacji na podstawie struktury bazy danych} \label{sec:database_first}
+
+Najpowszechniejszym przykładem użycia generatorów kodu jest wykorzystanie generatora zestawu klas wchodzących w~skład modelu dziedziny aplikacji na podstawie struktury bazy danych używanej przez tę aplikację.
+Takie podejście nosi nazwę ``najpierw baza danych'' (ang. \emph{Database First}).
+
+Przykładami narzędzi umożliwiających taką generację kodu są:
+
+\begin{itemize}
+ \item EntityFramework~\cite{entity_framework} - rozbudowane narzędzie ORM (ang. \emph{Object-Relational Mapping}) przeznaczone na platformę .Net;
+ \item SQLMetal~\cite{sqlmetal} - narzędzie dla platformy .Net, którego jedynym zadaniem jest generacja kodu źródłowego klas na podstawie struktury bazy danych;
+ \item Django~\cite{django} - platforma aplikacji webowych dla języka Python.
+\end{itemize}
+
+
+\subsection{Generator struktury bazy danych na podstawie modelu dziedziny aplikacji}
+
+Podejściem przeciwstawnym dla \emph{``Database First''} jest podejście ``najpierw kod'' (ang. \emph{Code First}).
+Jak sama nazwa wskazuje, generatory tego typu generują strukturę bazy danych na podstawie klas należących do implementacji modelu w~kodzie źródłowym aplikacji.
+
+Przykłady generatorów \emph{``Code First''} to:
+
+\begin{itemize}
+ \item Hibernate~\cite{hibernate} - narzędzie ORM dla platform Java i~.Net;
+ \item EntityFramework (patrz: sekcja~\ref{sec:database_first});
+ \item Django (patrz: sekcja~\ref{sec:database_first}).
+\end{itemize}
+
+
+\subsection{Generator dokumentacji}
+
+Duplikacji opisu dziedziny aplikacji w~jej dokumentacji można uniknąć poprzez zastosowanie narzędzi generujących tę dokumentację na podstawie kodu źródłowego aplikacji.
+Generatory tego rodzaju wymagają umieszczania w~kodzie źródłowym specjalnie sformatowanych komentarzy, na podstawie których są w~stanie wygenerować dokumentację w~kilku formatach, takich jak PDF czy HTML.
+Przykłady takich narzędzi to:
+
+\begin{itemize}
+ \item Doxygen~\cite{doxygen} - popularne narzędzie obsługujące wiele języków programowania (w~tym C++, Java C\#), wspierające wiele formatów dokumentacji (w~tym HTML, PDF, LaTeX, XML);
+ \item JavaDoc~\cite{javadoc} - generator dedykowany językowi Java, dymyślnie wspiera jedynie format HTML;
+ \item C\# XML Documentation~\cite{msdn:xml_doc} - format tworzenia dokumentacji wbudowany w~język C\#, na podstawie którego generowana jest dokumentacja w~formacie XML;
+ \item pydoc~\cite{pydoc} - narzędzie będące częścią standardowego zestawu narzędzi deweloperskich języka Python; wspiera format tekstowy i~HTML.
+\end{itemize}
+
+
+\subsection{Inne generatory}
+
+Istnieje wiele innych generatorów, należących do typu programowania nazywanego programowaniem automatycznym (ang. \emph{automatic programming})~\cite{auto_prog}.
+Jednakże większość z~nich, tak jak powyższe przykłady, eliminuje tylko pojedyncze rodzaje duplikacji.\\
+
+Warto zwrócić uwagę na fakt, że różne typy generatorów za źródło danych obierają sobie różne definicje dziedziny: np. generator \emph{Database First} bazuje na strukturze bazy danych, a~generator dokumentacji - na kodzie źródłowym aplikacji.
+Używanie wielu różnych generatorów usuwających pojedyncze rozdzaje duplikacji w końcu doprowadziłoby do powstania ``łańcucha'' generatów, w~którym wynik działania jedngo generatora byłby źródłem danych dla innego.
+Takie rozwiązanie mogłoby być trudne w~utrzymaniu.
+
+
+
+%=======
+\section{Rozwiązanie: pojedynczy generator wszystkich artefaktów systemu}
+%=======
+
+Przedstawione rozwiązania mają pewne wspólne wady.
+Po pierwsze, wszystkie z~nich usuwają tylko pojedyczne rodzaje duplikacji.
+Aby całkowicie wyeliminować duplikację z~systemu, należałoby by użyć prawie wszystkich z~nich.
+
+Po drugie, rozwiązania zwalczające duplikację czynności wykonywanych przez programistów i~duplikacje kodu źródłowgo aplikacji nie są rozwiązaniami prewencyjnymi - nie zapobiegają pojawianiu się nowych duplikacji.
+To, czy nowa rutynowa czynność zostanie zautomatyzowana przy pomocy skryptu powłoki, i~czy nowy moduł aplikacji zostanie zaimplementowany w~sposób generyczny, zależy jedynie od dyscypliny i~dbałości zespołu tworzącego system.
+Aby uniknąć takiej sytuacji, wydaje się, że mechanizmy niwelujące duplikację powinny leżeć u podstawy systemu - tak, aby programiści intuicyjnie korzystali z~nich, wprowadzając nowe czynności lub aktualizując dziedzinę aplikacji.
+
+Odpowiednim rozwiązaniem wydaje się być zastosowanie pojedynczego generatora potrafiącego wygenerować wszystkie potrzebne w~systemie artefakty.
+Powstanie takiego generatora dającego się zastosować w~każdym projekcie jest jednak bardzo mało prawdopodobne, ponieważ:
+
+\begin{itemize}
+ \item każdy projekt ma inne wymagania odnośnie wygenerowanych artefaktów;
+ \item prawdopodobne nie istnieje format, który pozwalałby zdefiniować każdą dziedzinę w~najlepszy dla niej - tj. najbardziej naturalny, a~przy tym pozbawiony duplikacji - sposób.
+\end{itemize}
+
+
+
+%=======
+\section{Podsumowanie}
+%======
+
+Jak widać, powszechnie dostępne są jedynie rozwiązania pozwalające wyeliminować pojedyncze rodzaje duplikacji.
+Nie jest jednak dostępny pojedynczy, spójny sposób na wyeliminowanie duplikacji w~obrębie całego systemu.
+Odpowiednim rozwiązaniem wydaje się być połączenie kilku z~wyżej przedstawionych sposobów.
+W~dalszej części pracy podjęta zostanie próba stworzenia takiego rozwiązania.
+Zostanie ono oparte o~generację kodu, a~głównym założeniem jest skonstruowanie go w~taki sposób, aby pozwolić na usunięcie jak największej liczby rodzajów duplikacji patrząc zarówno z~perspektywy ich postaci, jak i~przyczyn powstawania~(patrz: sekcja~\ref{sec:dupl_kinds}).

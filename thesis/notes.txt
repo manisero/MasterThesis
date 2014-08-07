@@ -1,3 +1,23 @@
+wspomnieć o DSL (domain specific language)
+
+===================
+
+w Generacji wspomnieć o CodeDom
+
+===================
+
+Choosing a Template Engine for code generation
+
+http://pjmolina.com/metalevel/2009/06/choosing-a-template-engine-for-code-generation/
+
+===================
+
+Dlaczego użytkownik musi definiować schemat jsona poddawanego generacji? (projekt Schema) alternatywa: podejście no-schema
+
+no-schema sql: http://www.cs.uiuc.edu/class/fa06/cs511/nssql.pdf
+
+===================
+
 Problem: gdzie w CQRS zdefiniowana jest dziedzina (encje) aplikacji? Model do odczytywania nie zawiera przecież encji.
 Rozwiązanie: niech będzie w JSONie.
 
@@ -10,16 +30,6 @@ Rozwiązanie: niech będzie jeden model w JSONie.
 
 Ogólnie nie chodzi o to, żeby w ogóle nie pisać nazw klas / właściwości - tylko o to, żeby nie trzeba było pamiętać o wszystkich miejscach, gdzie dana encja jest używana.
 Rozwiązanie: wystarczy, że po usunięciu czegoś z JSONa wywali się kompilacja. No i w JSONie można zapisać miejsca, w których encja jest używana (jeśli trzeba będize coś do niej dodać).
-
-===================
-
-Dlaczego użytkownik musi definiować schemat jsona poddawanego generacji? (projekt Schema) alternatywa: podejście no-schema
-
-no-schema sql: http://www.cs.uiuc.edu/class/fa06/cs511/nssql.pdf
-
-===================
-
-Wybór silnika do generacji kodu (templating engine) (dlaczego t4?) (np. razor nie, bo razora tez mozemy chciec generowac - generowanie razora razorem mogloby byc utrudnione)
 
 ===================
 

@@ -1,0 +1,310 @@
+\chapter{Założenia dotyczące rdzenia narzędzia} \label{chap:implementation:core}
+
+Przed przystąpieniem do prac nad generatorem aplikacji konkretnego typu, należy sformułować założenia dotyczące komponentu realizującego sam proces generacji artefaktów systemu, nazwanego rdzeniem narzędzia.
+
+
+
+%=======
+\section{Podstawowe założenia dotyczące rdzenia narzędzia} \label{sec:core:basic_requirements}
+%=======
+
+O ile elastyczność generatora konkretnego typu aplikacji może być ograniczona, o~tyle rdzeń powinien być na tyle uniwersalny, by mógł być użyty w~celu wygenerowania wielu rodzajów plików tekstowych, w~tym kodu źródłowego w~dowolnym języku, skryptów DLL, skryptów powłoki, dokumentancji w~formacie HTML lub XML itd.
+Wszystkie rodzaje plików powinny być generowane w~ten sam sposób (np. na podstawie szablonów napisanych w~jednym języku, takim jak xslt~\cite{xslt}), tak aby programista korzystający z~komponentu nie musiał poznawać całej gamy języków lub narzędzi używanych do tworzenia szablonów generacji.
+Pożądaną funkcjonalnością jest możliwość łatwiej wymiany domyślnie użwanego rodzaju szablonów na inny, tak aby użytkownik mógł w~łatwy sposób użyć w~nim szablonów stworzonych w~języku, ktory zna najlepiej.
+Co więcej, rdzeń narzędzia nie pownien narzucać sposobu formatowania danych wejściowych (w~tym przypadku - opisu dziedziny aplikacji).
+
+Dla wygody autora narzędzia zakłada się, że zarówno jego rdzeń jak i~generator aplikacji konkretnego typu zostanie stworzony w~technolgii .NET Framework
+
+
+
+%=======
+\section{Kroki generacji}
+%=======
+
+Generacja odbywać się będzie w~natępujących krokach:
+
+
+\subsection{Wczytanie definicji dziedziny aplikacji}
+
+Komponent na wejściu przyjmował będzie ścieżkę do pliku lub katalogu źródłowego (patrz: sekcja~\ref{sec:core:files_structure}).
+Każdy plik katalogu źródłowego zostanie odwiedzony przez generator, a~jego treść zostanie zdeserializowana do obiektu odpowiadającej mu klasy.
+
+
+\subsection{Zdeserializowanie definicji dziedziny aplkacji}
+
+Jak wymieniono w~założeniach dotyczących rdzenia generatora (patrz: sekcja~\ref{sec:core:basic_requirements}), format opisu dziedziny aplikacji nie będzie narzucony z~góry.
+Każdy plik źródłowy może być zapisany w~innym formacie (np. XML lub JSON).
+Domyślnie wspierany będzie jeden format (patrz: sekcja~\ref{sec:core:domain_definition}), a~użytkownik generatora będzie mógł dla każdego pliku źródłowego określić wybrany i~dostarczony przez siebie sposób deserializacji.
+
+Zdeserializowany obiekt dziedziny może posłużyć jako wskazanie na kolejne pliki reprezentujące elementy dziedziny.
+Przykładem obrazującym potrzebę takiego działania może być sytuacja, w~której dany plik zawiera ogólne informacje na temat encji, a~pliki w~podkatalogu sąsiadującym z~tym plikiem zawierają definicje poszczególnych pól danej encji (patrz: sekcja~\ref{sec:core:files_structure:many_folders}).
+Wtedy wczytanie i~deserializacja opisu pól encji odbędzie się dopiero po zdeserializowaniu opisu samej encji i~na tej podstawie określeniu, który katalog zawiera kolejne pliki opisujące jej pola. 
+
+
+\subsection{Wyodrębnienie jednostek generacji}
+
+Po uzyskaniu kompletnego obiektu - lub kolekcji obiektów - opisującego dziedzinę aplikacji, tzn. po zdeserializowaniu wszystkich plików zawierających dziedzinę aplikacji, generator będzie musiał przygotować kolejne obiekty, które będą podstawą do wygenerowania plików wynikowych.
+Obiekty te nazwano jednostkami generacji.
+Jednostką generacji może być na przykład opis pojedynczej encji dziedziny aplikacji lub, bardziej szczegółowo, pojedynczej tabeli bazy danych.
+
+Aby zachować elastyczność, krok ten będzie musiał być zaimplementowany po stronie użytkownika komponentu, tzn. generatora aplikacji konkretnego typu.
+Umożliwi to obsłużenie scenariusza, w~którym pojedynczy element opisu dziedziny aplikacji posłuży za źródło generacji wielu plików wynikowych (np. definicja tabeli bazy danych, definicja klasy w~kodzie źródłowym aplikacji i~kod HTML będący częścią dokumentancji systemu mogą być wygenerowane na podstawie pojedynczej jednostki generacji będącej opisem encji).
+Odpowiedzialność wyodrębnienia jednostek generacji z~pełnego opisu dziedziny zostanie zrzucona na użytkownika komponentu dlatego, że rdzeń generatora nie jest w~stanie go zautomatyzować bez utraty elastyczności.
+Aby jednak obsłużyć najprostsze scenariusze, pominięcie implementacji tego kroku w~aplikacji będącej użytkownikiem komponentu zaskutkuje potraktowaniem głównego obieku (lub kolekcji obiektów) dziedziny jako jednostki (lub osobnych jednostek) generacji.
+
+Uzyskane jednostki generacji bezpośrednio posłużą do wygenerowania plików wynikowych. Pojedyncza jednostka będzie mogła odpowiadać jednemu lub wielu plikom wynikowym.
+
+
+\subsection{Użycie szablonów do wygenerowania plików}
+
+Ostatnim krokiem będzie użycie jednostek generacji w~celu wygenerowania plików wynikowych.
+Domyślny mechanizm generacji pliku wynikowego oparty będzie o~wykorzystanie silnika generacji plików na postawie szablonu generacji (patrz: sekcja~\ref{sec:core:templating_engine}).
+
+Rdzeń generatora przekaże daną jednostkę generacji odpowiedniemu szablonowi, a~wygenerowana treść zostanie umieszczona w~odpowiednim pliku.
+Zadaniem użytkownika komponentu będzie dostarczenie zarówno szablonu generacji, jak i~ściezki, pod którą ma się znaleźć wygenerowany plik.
+
+Aby zachować elastyczność, wykorzystywany silnik generacji będzie mógł zostać wymieniony na inny przez użytkonika generatora.
+
+
+
+%=======
+\section{Organizacja plików źródłowych i~wynikowych} \label{sec:core:files_structure}
+%=======
+
+Podstawową decyzją, którą należy podjąć w~trakcie precyzowania założeń dotyczących pierwszego kroku generacji jest organizacja i~format plików źródłowych, na których pracował będzie rdzeń narzędzia, a~także organizacja plików, które będzie w~stanie wygenerować.
+Jak wspomniano wyżej, od rdzenia oczekuje się jak największej elastyczności - dlatego powinien on wspierać kilka scenariuszy.
+Za przykład niech posłuży internetowy portal informacyjny.
+
+
+\subsection{Pojedynczy plik źródłowy}
+
+W~tym scenariuszu całość dziedziny aplikacji (lub innych informacji o~systmie) zawarta jest pojedynczym pliku.
+Przykładem zastosowania może być pojedynczy skrypt SQL zawierający strukturę bazy danych używanej przez aplkację.
+Taki plik, oprócz swojego standardowego przeznaczenia, tj. konfigurowania bazy danych, pełniłby rolę źródła generatora \emph{Code First}.
+Na jego podstawie generowane byłyby pliki zawierające defnijcje klas będących częścią implementacji modelu dziedziny w~aplikacji.
+
+Rysunek~\ref{fig:implementation_core:singleSourceFile} obrazuje przykładową organizację plików portalu.
+
+\input{figures/implementation_core/singleSourceFile}
+
+
+\subsection{Pojedynczy katalog z~wieloma plikami źródłowymi}
+
+Kontynuując przykład, w~miarę upływu czasu portal może rozrosnąć się na tyle, że wprowadzi możliwość prowadzenia blogów przez jego użytkowników.
+Wtedy może wystąpić potrzeba podzielenia struktury bazy danych na kilka plików - np. według nazw schematów (ang. \emph{schema}), w~których znajdują się poszczególne tabele.
+Wszystkie te pliki w~dalszym ciągu byłyby źródłem dla generatora, a~wynikowe klasy mogłyby być umieszczone w~osobnych katalogach (podzielonych według nazw schematow, w~których znajdują się odpowiadające im tabele).
+
+Rysunek~\ref{fig:implementation_core:multipleSourceFiles} obrazuje przykład.
+
+\input{figures/implementation_core/multipleSourceFiles}
+
+
+\subsection{Drzewo katalogów z~wielona plikami źródłowymi} \label{sec:core:files_structure:many_folders}
+
+W~dłuższej perspektywie, w~opisywanym przykładzie może pojawić się potrzeba wprowadzenia podkatalogów dla poszczególnych schematów.
+Pojedynczy podkatalog zawierałby osobne pliki zawierające definicje tabel, widoków i~procedur składowanych obecnych w~bazie danych.
+Rdzeń narzędzia generującego powinien być w~stanie dotrzeć do wszystkich tych plików.
+Przykład takiej organizacji został przedstawiony na rysunku~\ref{fig:implementation_core:multipleFolders}.
+
+\input{figures/implementation_core/multipleFolders}
+
+Innym przykładem wykorzystującym ten scenariusz jest sytuacja, w~której pojedynczy plik wynikowy generowany jest na podstawie wielu plików źródłowych.
+Przykładem może być zorganizowanie opisu dziedziny aplikacji w~taki sposób, aby informacje na temat każdego pola każdej encji umieszczone były w~osobnym pliku.
+Rysunek~\ref{fig:implementation_core:multipleFolders_multipleInputFiles} obrazuje przykład.
+
+\input{figures/implementation_core/multipleFolders_multipleInputFiles}
+
+Taka organizacja może mieć zastosowanie w~przypadku, gdy w~systemie w~wielu miejscach występują jedynie fragmenty encji (np. w~licznych widokach bazy danych).
+Wtedy każde pole może wymagać skonfigurowania dla niego miejsc, w~których występuje, czego skutkiem mogą być rozległe opisy każdego z~pól.
+Opisy te najwygodniej byłoby przechowywać w~osobnych plikach.
+
+
+
+%=======
+\section{Sposób zdefiniowania dziedziny aplikacji} \label{sec:core:domain_definition}
+%=======
+
+O~ile założenie o~elastyczności generatora powinno dopuszczać zdefiniowanie dziedziny aplikacji w~dowolny sposób, używając dowolnego formatu plików zawierających opis poszczególnych elementów tej dziedziny, o~tyle generator powinien obsługiwać pewien domyślny sposób formatowania.
+Poniżej przedstawiono kilka z~możliwych wyborów:
+
+\subsection{UML}
+
+Oczywistym wyborem sposobu opisu dziedziny aplikacji wydaje się być język UML~\cite{uml}, stworzony między innymi do tego właśnie celu.
+Do opisu przykładowej dziedziny posłużyć może diagram klas przedstawiony na rysunku~\ref{fig:implementation_core:uml}.
+
+\input{figures/implementation_core/uml}
+
+Trzeba jednak zauważyć, ze taki opis nie jest wystarczająco elastyczny - posiada on zdefiniowany z~góry zestaw atrybutów.
+Natomiast rzeczywiste scenariusze użycia generatora wymagać mogą atrybutów, których przewidzenie na etapie projektowania jego rdzenia jest niemożliwe.
+Przykładowo, do opisu encji mogą należeć takie atrybuty jak:
+
+\begin{itemize}
+ \item opis encji, który powinien znaleźć się w~dokumentancji systemu;
+ \item wersja systemu, w~której encja została wprowadzona;
+ \item widoki bazy danych, kórych źródłem jest encja.
+\end{itemize}
+
+Diagram klas nie przewiduje przechowywania żadej z~tych informacji.
+
+Co więcej, podstawową jednostką diagramu klas UML jest encja, co samo w~sobie jest ograniczeniem elastyczności.
+Opis dziedziny aplikacji tworzony przez użytkownika generatora może natomiast za postawową jednostkę obierać na przykład pojedyncze pole encji (patrz: rysunek~\ref{fig:implementation_core:multipleFolders_multipleInputFiles}).
+Do opisu pojedynczego pola encji, oprócz jego nazy i~typu, mogą należeć takie atrybuty, jak:
+
+\begin{itemize}
+ \item opis pola, który powinien znaleźć się w~dokumentancji systemu;
+ \item wersja systemu, w~której pole zostało wprowadzone;
+ \item widoki bazy danych, w~których występuje pole.
+\end{itemize}
+
+Diagram klas nie przewiduje przechowywania żadej z~tych informacji.
+
+
+\subsection{XML}
+
+Język XML~\cite{xml} jest powszechnie używany do opisu dziedziny.
+Jest o niego oparty na przykład język WSDL (język definicji usług sieciowych, ang. \emph{Web Services Description Language})~\cite{wsdl} stosowany do opisu kontraktów (ang. \emph{contract}) realizowaych przez usługi sieciowe (ang. \emph{web service}).
+
+XML jest pozbawiony wad języka UML - można w~nim zamodelować dowolne atrybuty.
+Tę samą dziedzinę, która została przedstawiona na diagramie klas języka UML (rysunek~\ref{fig:implementation_core:uml}), ale wzbogaconą o~niedostępne na tym diagramie atrybuty, przedstawia rysunek~\ref{fig:implementation_core:xml}.
+
+\input{figures/implementation_core/xml}
+
+
+\subsection{JSON}
+
+Język JSON~\cite{json} posiada zestaw cech upodabniający go do języka XML.
+Jest on jednak prostszy i~bardziej zwięzły - nie jest to język znaczników, więc nazwy atrybutów nie są duplikowane w~znaczniku otwierającym i~zamykającym.
+JSON również jest szeroko stosowany do opisu dziedziny, na przykład do opisu metadanych usług sieciowych opartych o~protokół OData~\cite{odata}.
+
+Rysunek~\ref{fig:implementation_core:json} przedstawia przykładowy opis dziedziny zapisany w~tym języku.
+
+\input{figures/implementation_core/json}
+
+
+\subsection{YAML}
+
+Język YAML~\cite{yaml} jest pod względem użyteczności podobny do języków XML i~JSON.
+Jest to język najbardziej zwięzły z~przedstawionych, jednak nie jest on używany w~żadnym popularnym standardzie.
+
+Przykładowy opis dziedziny zapisany języku YAML został przedstawiony na rysunku~\ref{fig:implementation_core:json}.
+
+\input{figures/implementation_core/yaml}
+
+
+\subsection{Domyślny język opisu dziedziny}
+
+Jako że język UML nie spełnia wymagań rdzenia generatora w~zakresie elastyczności, domyślnie wspieranym językiem opisu dziedziny aplikacji będzie jeden z~pozostałych trzech opisanych wyżej.
+Będzie to język JSON, za kórym przemawiają nastepujące fakty:
+
+\begin{itemize}
+ \item ma on najprostszą składnię za wszystkich trzech kandydatów;
+ \item jest bardziej czytelny dla człowieka niż XML;
+ \item jest szerzej znany i~stosowany niż YAML.
+\end{itemize}
+
+Aby zachować elastyczność, język opisu dziedziny będzie jednak można łatwo wymienić.
+
+
+
+%=======
+\section{Czy wymagać stworzenia schematu definicji dziedziny aplikacji?} \label{sec:core:domain_schema_requirement}
+%=======
+
+Kolejną decyzją jest wybór typu danych, do którego deserializoway będzie opis dziedziny aplikacji.
+Wyboru należy dokonać pomiędzy dwoma przeciwstawnymi podejściami:
+
+\begin{enumerate}
+ \item Dane silnie typizowane, z~czym wiąże się wymóg określenia schematu opisu dziedziny aplikacji.
+  Konsekwencje tego wyboru:
+  \begin{itemize}
+   \item wynikiem deserializacji opisu dziedziny aplikacji będzie obiekt konkretnego typu;
+   \item wystąpienie w~opisie pola nieobecnego w~schemacie dziedziny zostanie zignorowane lub spowoduje błąd deserializacji.
+  \end{itemize}
+ \item Dane dynamiczne; brak wymogu istnienia schematu opisu dziedziny.
+  Konsekwencje wyboru:
+  \begin{itemize}
+   \item wynikiem deserializacji opisu dziedziny będzie obiekt dynamiczny lub zbiór par klucz-wartość;
+   \item wystąpienie w~opisie pola nieobecnego w~schemacie będzie akceptowalne - pole takie znajdzie się w~obiekcie powstałym w~wyniku deserializacji.
+  \end{itemize}
+
+\end{enumerate}
+
+Pierwsza możliwość wydaje się bardziej korzystna
+Przemawiają za nią następujące zalety:
+
+\begin{itemize}
+ \item generator będzie sprawdzał spójność opisu dziedziny aplikacji;
+ \item ewentualne błędy opisu (na przykład tzw. literówki) zostaną wykryte na etapie deserializacji;
+ \item szablony generacji będą mogły pracować na danych silnie typizowanych.
+\end{itemize}
+
+Domyślnie wspieranym podejściem będzie więc deserializacja opisu dziedziny do obiektu silnego typu.
+Aby jednak zachować elastyczność, możliwa będzie deserializacja do typu dynamicznego.
+
+
+
+%=======
+\section{Wybór silnika generacji kodu} \label{sec:core:templating_engine}
+%=======
+
+Ostatnią decyzją w~ramach założeń dotyczących rdzenia generatora jest wybór silnika generacji kodu (ang. \emph{templating engine}) przez niego używanego.
+Domyślnie używany silnik wybrano spośród następujących możliwości:
+
+
+\subsection{XSLT}
+
+XSLT (Xml Stylesheets Transformations)~\cite{xslt} jest językiem generacji dowolnych plików tekstowych na podstawie plików XML.
+Jest to standard zaproponowany przez organizację W3C~\cite{w3c}.
+Jego zaletą jest to, że szablony generacji tworzone są w~języku XML, co zwalnia programistę z~potrzeby poznawania kolejnego języka.
+Jest on jednak mało czytelny, a~wprowadzanie zmian w~szablonie jest niewygodne.
+
+
+\subsection{Razor}
+
+Razor~\cite{razor} jest silnikiem generacji tekstu stworzonym na potrzeby platformy ASP.NET MVC.
+Służy głównie do generacji kodu HTML, jednak może być używany w~celu tworzenia dowolnych plików tekstowych.
+
+Wadą tego wyboru - niezależną od samego silnika - jest to, że szablony Razor są powszechnie używane w~typowych aplikacjach opartych o~platformę ASP.NET MVC, a~więc same mogą stanowić pliki wynikowe dla generatora.
+Stworzenie szablonu Razor generującego inny szablon Razor jest możliwe, ale taki szablon byłby bardzo nieczytelny - co dyskwalifikuje ten silnik.
+
+
+\subsection{T4}
+
+T4~\cite{t4} to silnik generacji tekstu wbudowany w~środowisko programistyczne Microsoft Visual Studio.
+Jest on przeznaczony do generowania plików tekstowych dowolnego typu na podstawie danych przekazanych szablonowi.
+
+Szablon T4 nie jest interpretowany, a~kompilowany do kodu języka C\#, co daje następujące korzyści:
+
+\begin{itemize}
+ \item szybkość generacji tekstu jest większa niż w~przypadku pozostałych silników;
+ \item szablon może odwoływać się do bibliotek zewnętrznych i~wywoływać ich metody (np. w~celu pobrania potrzebnych danych z~bazy danych);
+ \item szablon może wywoływać inne szablony lub dziedziczyć po innym szablonie.
+\end{itemize}
+
+Taka integracja ze środowiskiem programistycznym i~platformą .NET niesie za sobą dalsze konsekwencje:
+
+\begin{itemize}
+ \item tworzenie szablonów jest ułatwione ze względu na podświetalnie i~podpowiadanie składni (zarówno języka szablonu i~jak korzystającego z~niego kodu C\#);
+ \item silnik ten jest niedostępny dla programistów innych platform.
+\end{itemize}
+
+
+\subsection{Wybrany silnik}
+
+Ze względu na fakt, że zarówno rdzeń generatora jak i~generator konkretnego typu aplikacji stworzone zostaną w~oparciu o~platformę .NET, silnikiem generacji domyślnie wspieranym przez rdzeń generatora będzie T4.
+Powodem tego wyboru jest łatwość tworzenia jego szablonów w~środowisku Visual Studio.
+
+Przykładowy szablon został przedstawiony na rysunku~\ref{fig:implementation_core:t4}.
+
+\input{figures/implementation_core/t4}
+
+Podobnie jak w~przypadku pozostałych podjętych dezycji, używany przez generator silnik będzie mógł być zastąpiony przez inny.
+
+
+
+%=======
+\section{Podsumowanie}
+%=======
+
+Wymagania dotyczące rdzenia generatora zostały skompletowane.
+Następnym krokiem jest sformułowanie założeń dotyczących generatora aplikacji konkretnego typu.

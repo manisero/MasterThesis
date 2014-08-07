@@ -1,0 +1,29 @@
+\begin{figure}[!ht]
+Źródło generacji:
+
+\dirtree{%
+.1 domain.
+ .2 user.json.
+ .2 user\_fields.
+  .3 FirstName.json.
+  .3 LastName.json.
+  .3 ....
+ .2 news.json.
+ .2 news\_fields.
+  .3 Title.json.
+  .3 Content.json.
+ .2 ....
+}
+
+Wynik generacji:
+
+\dirtree{%
+.1 Model.
+ .2 User.cs.
+ .2 News.cs.
+ .2 ....
+}
+
+\caption{Przykład organizacji plików przy generacji wielu katalogów wynikowych na podstawie wielu katalogów źródłowych. Pojedynczy plik wynikowy jest generowany na podstawie wielu plików źródłowych.}
+\label{fig:implementation_core:multipleFolders_multipleInputFiles}
+\end{figure}

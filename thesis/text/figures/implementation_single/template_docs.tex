@@ -1,0 +1,40 @@
+\begin{figure}[!ht]
+Szablon:
+
+\begin{verbatim}
+<#@ template language="C#" #>
+<#@ parameter type="IEnumerable<Schema.Model.Entity>" name="Metadata" #>
+<html>
+<# foreach (var entity in Metadata) { #>
+ <div>
+  <#= entity.Name #>:
+  <ul>
+<# foreach (var field in entity.Fields) { #>
+   <li><#= field.Name #> (<#= field.Type #>)</li>
+<# } #>
+  </ul>
+ </div>
+<# } #>
+</html>
+\end{verbatim}
+
+Wynik:
+
+\begin{verbatim}
+<html>
+ <div>
+  Post:
+  <ul>
+   <li>PostID (timeuuid)</li>
+   <li>Title (text)</li>
+   <li>Content (text)</li>
+   ...
+  </ul>
+ </div>
+ ...
+</html>
+\end{verbatim}
+
+\caption{Szablon generacji dokumentacji i~fragment wyniku jego działania.}
+\label{fig:single:template_docs}
+\end{figure}

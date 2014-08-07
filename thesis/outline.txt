@@ -1,0 +1,95 @@
+- Wstęp
+ 
+- Duplikacja
+ - Rodzaje duplikacji
+ - Skutki wystąpienia duplikacji
+ - Możliwe rozwiązania
+
+- Sprecyzowanie problemu
+ - że rozwiązanie będzie oparte o generację
+ - że zajmę się głównie dziedziną aplikacji
+
+- Generacja
+ - kiedy to się opłaca, a kiedy może powodować problemy
+ - generacja aktywna vs pasywna
+ - przykłady konkretnych dużych generatorów
+ - albo typów
+  – na podstawie szablonu
+  – z CodeDom
+  – inne
+ - wniosek: żaden generator nie będzie jednocześnie bogaty w funkcjonalności i dobry dla każdego typu aplikacji
+ - zatem: rozwięzanie podzielę na dwie części
+   - trzon narzędzia do generacji
+   - generator aplikacji jednego typu
+
+- Trzon narzędzia do generacji:
+ - jakiej organizacji plików źródłowych oczekuje generator
+   - organizajca powinna być właściwie dowolna
+   - plików źródłowych może być wiele
+   - powinien być wspierany scenariusz, gdzie jeden plik docelowy jest generowany na podstawie kilku źródłowych i odwrotnie
+ - kroki generacji:
+   - wczytanie definicji dziedziny aplikacji
+   - zdeserializowanie jej
+   - wyodrębnienie konkretnych jednostek generacji (np. encji) (tego core nie zrobi)
+   - użycie zdefiniowanych (nie przez core) szablonów do wygenerowania plików na podstawie jednostek generacji
+ - sposób zdefiniowania dziedziny aplikacji
+   - np. UML czy EMF (?) nie nadają się zbytnio bo działają na encjach, a chodzi o pojedyncze pola
+   - podkreślić, że podstawową jednostką nie jest encja, tylko pole
+   - format powinien być zupełnie dowolny
+   - domyślnie będzie JSON, ale można to łatwo podmienić
+ - czy wymagać stworzenia schematu definicji dziedziny aplikacji?
+   - są dwie opcje:
+     - (no schema) definicję dziedziny deserializować do dynamic, szablonom przekazywać dynamic (jest dowolność, ale nie wyłapie się błędów podczas deserializacji)
+     - definicję dziedziny deserializować do konkretnego typu, szablonom przekazywać konkretne typy
+   - druga opcja wydaje się lepsza (opis dziedziny powinien być spójny)
+   - ale mechanizm będzie generyczny, decyzja będzie należała do konkretnego generatora
+ - Wybór silnika do generacji kodu (templating engine)
+   - opisać dostępne w .NET
+   - dlaczego t4? - np. razor nie, bo razora tez mozemy chciec generowac - generowanie razora razorem mogloby byc utrudnione
+
+- Założenia co do generatora aplikacji pojedynczego typu
+  - wybrać typ aplikacji
+  - dlaczego CQRS
+   - bo zdenormalizowana dziedzina
+   - gdzie w CQRS zdefiniowana jest dziedzina (encje) aplikacji? Model do odczytywania nie zawiera przecież encji, a tylko widoki.
+   - model "read" i model "write" częściowo na siebie zachodzą (lub nawet "read" zawiera "write"). Jak uniknąć duplikacji metadanych?
+  - opisać CQRS
+  - że często idzie w parze z Event Sourcing
+  - opisać Event Sourcing
+  - że całość dobrze idzie w parze z NoSQL
+  - opisać NoSQL
+    - opisać rodzaje baz NoSQL
+    - wybrać bazę NoSQL i dlaczego Cassandra
+    - opisać Cassandrę
+  - więc generator ma generować dziedzinę aplikacji CQRS wykorzystująej Cassandrę:
+    – schemat DLL
+    – klasy C#: model Read, model Write
+    – dokumentancja HTML
+
+- Implementacja generatora aplikacji pojedynczego typu
+  - Ogólnie nie chodzi o to, żeby w ogóle nie pisać nazw klas / właściwości - tylko o to, żeby nie trzeba było pamiętać o wszystkich miejscach, gdzie dana encja jest używana.
+  - czy w ogóle generować schemat bazy danych (no schema) (?)
+  - wybrać sposób definicji dedziny
+   - że będzie schema
+   - ale że schema powinna być w jednym miejsu - będzie jako klasa w kodzie
+   - zdefiniowanie schematu opisu dziedziny na potrzeby CQRS
+     - PresentIn
+  - Wybrór klienta Cassandry (?)
+  - Sformułowanie przykładu aplikacji
+  - Zapisanie schemy w JSONie
+  - Implementacja szablonów
+  - Implementacja kolejnych modułów aplikacji
+    - DAL (repozytorium bazowe zahardkodowane, konkretnych nie da się wygenerować)
+    - BLL (obsługa zdarzeń zahardkodowana, da się wygenerować EventHandlery)
+    - WEB (Nancy, da się wygenerować ViewModele, formy)
+
+- Ocena rozwiązania
+  - Co dało się wygenerować, a co nie
+  - Jakiej duplikacji udało się uniknąć
+  - jak łatwo wprowadza się zmiany w aplikacji
+  - ile pracy wymagałoby dodanie nowej funkcjonalności (API, eksport) - przykład?
+  - jaką inną aplikację można wygenerować (przykład)
+
+- Wnioski
+
+- Koniec
