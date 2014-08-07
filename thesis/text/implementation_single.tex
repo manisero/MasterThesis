@@ -1,40 +1,98 @@
-\chapter{Implementacja generatora aplikacji pojedynczego typu} \label{chap:implementation:single_type}
+\chapter{Implementacja generatora} \label{chap:implementation:single_type}
 
 \begin{itemize}
- \item Ogólnie nie chodzi o to, żeby w ogóle nie pisać nazw klas / właściwości - tylko o to, żeby nie trzeba było pamiętać o wszystkich miejscach, gdzie dana encja jest używana.
- \item czy w ogóle generować schemat bazy danych (no schema) (?)
- \item wybrać sposób definicji dedziny
-  \item że będzie schema
-  \item ale że schema powinna być w jednym miejsu - będzie jako klasa w kodzie
-  \item wybór formatu
-   \item uml, emf się nie nadają - operują na encjach, a nie na polach
-   \item xml albo json, bez różnicy - czytelniejszy i bardziej intuicyjny wydaje się JSON (xml ma atrybuty i węzły zagnieżdzone - nie wiadomo czego użyć)
-  \item zdefiniowanie schematu opisu dziedziny na potrzeby CQRS
-   \begin{itemize}
-    \item PresentIn
-   \end{itemize}
- \item Wybrór klienta Cassandry (?)
- \item Sformułowanie przykładu aplikacji
- \item Zapisanie schemy w JSONie
- \item Implementacja szablonów
- \item Implementacja kolejnych modułów aplikacji
-  \begin{itemize}
-   \item DAL (repozytorium bazowe zahardkodowane, konkretnych nie da się wygenerować)
-   \item BLL (obsługa zdarzeń zahardkodowana, da się wygenerować EventHandlery)
-   \item WEB (Nancy, da się wygenerować ViewModele, formy)
-  \end{itemize}
+ \item Wybrór klienta Cassandry (?)  
 \end{itemize}
 
 
+
+%=======
+\section{Co będzie generowane, a~co nie}
+%=======
 
 Założenia dotyczące całości:
 
 \begin{itemize}
  \item generator ma generować dziedzinę aplikacji CQRS wykorzystująej Cassandrę:
   \begin{itemize}
-   \item schemat DLL
-   \item klasy C\#: model Read, model Write
+   \item czy w ogóle generować schemat bazy danych (no schema) (?)
+   \item schemat DLL (czyli tak)
+   \item klasy C\#: model komend, model zapytań
    \item dokumentancja HTML
   \end{itemize}
  \item ...
+\end{itemize}
+
+Ogólnie nie chodzi o to, żeby w ogóle nie pisać nazw klas / właściwości - tylko o to, żeby nie trzeba było pamiętać o wszystkich miejscach, gdzie dana encja jest używana.
+
+
+
+%=======
+\section{Przykład generowanej aplikacji}
+%=======
+
+Sformułowanie przykładu aplikacji
+
+
+
+%=======
+\section{Sposób definicji dziedziny}
+%=======
+
+\begin{itemize}
+ \item że będzie schemat opisu \ref{sec:core:domain_schema_requirement}
+ \item ale że schema powinna być w jednym miejsu - będzie jako klasa w kodzie
+ \item zdefiniowanie schematu opisu dziedziny na potrzeby CQRS (zapisać każdy w JSONie)
+  \begin{itemize}
+   \item każda tabela osobno (duplikacje)
+   \item PresentIn
+  \end{itemize}
+ \item organizacja plików wejściowych i wyjściowych \ref{sec:core:files_structure}
+\end{itemize}
+
+
+
+%=======
+\section{Podstawowe jednostki generacji}
+%=======
+
+\begin{itemize}
+ \item entity
+ \item event
+ \item view
+\end{itemize}
+
+
+
+%=======
+\section{Implementacja szablonów generacji}
+%=======
+
+Implementacja szablonów
+
+\begin{itemize}
+ \item CQL:
+  \begin{itemize}
+   \item create table
+   \item select
+  \end{itemize}
+ \item C\#:
+  \begin{itemize}
+   \item entity
+   \item event
+   \item view
+  \end{itemize}
+ \item HTML (dokumentancja)
+\end{itemize}
+
+
+
+%=======
+\section{Implementacja kolejnych modułów aplikacji}
+%=======
+
+\begin{itemize}
+ \item DAL (repozytorium bazowe zahardkodowane, konkretnych nie da się wygenerować)
+ \item BLL (obsługa zdarzeń zahardkodowana, da się wygenerować Eventy, a EventHandlery?)
+ \item WEB (Nancy, da się wygenerować ViewModele, formy)
 \end{itemize}
