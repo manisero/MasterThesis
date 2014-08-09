@@ -5,17 +5,17 @@ using System.IO;
 using System.Linq;
 using CodeGeneration.Logic.Infrastructure;
 
-namespace CodeGeneration.Logic.DomainDeserialization._Impl
+namespace CodeGeneration.Logic.DomainProcessing._Impl
 {
     public class DomainDeserializer : IDomainDeserializer
     {
         private readonly IFileSystemService _fileSystemService;
-        private readonly IJsonDeserializer _jsonDeserializer;
+        private readonly IJsonService _jsonService;
 
-        public DomainDeserializer(IFileSystemService fileSystemService, IJsonDeserializer jsonDeserializer)
+        public DomainDeserializer(IFileSystemService fileSystemService, IJsonService jsonService)
         {
             _fileSystemService = fileSystemService;
-            _jsonDeserializer = jsonDeserializer;
+            _jsonService = jsonService;
         }
 
         public TDomain Deserialize<TDomain>(string rootFolderPath)
@@ -39,7 +39,7 @@ namespace CodeGeneration.Logic.DomainDeserialization._Impl
 
             if (rootFiles.Count == 1)
             {
-                return _jsonDeserializer.Deserialize<TDomain>(_fileSystemService.GetFileContent(rootFiles[0]));
+                return _jsonService.Deserialize<TDomain>(_fileSystemService.GetFileContent(rootFiles[0]));
             }
 
             throw new InvalidOperationException("Root folder contains more than one file.");
@@ -66,7 +66,7 @@ namespace CodeGeneration.Logic.DomainDeserialization._Impl
                     foreach (var file in filesInDirectory)
                     {
                         var fileContent = _fileSystemService.GetFileContent(file);
-                        var domainItem = _jsonDeserializer.Deserialize(domainItemType, fileContent);
+                        var domainItem = _jsonService.Deserialize(domainItemType, fileContent);
 
                         collectionItems.Add(domainItem);
                     }

@@ -16,6 +16,10 @@ namespace Schema.Generation.Console
 
             var domain = CodeGenerationFacade.DeserializeDomain<Domain>(metadataPath);
 
+            // Create domain snapshot
+            var snapshotPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Snapshots\snapshot1.json";
+            CodeGenerationFacade.CreateDomainSnapshot<Domain>(metadataPath, snapshotPath);
+
             IList<View> views;
             IList<Event> events;
             new DomainProcessor().Process(domain, out views, out events);

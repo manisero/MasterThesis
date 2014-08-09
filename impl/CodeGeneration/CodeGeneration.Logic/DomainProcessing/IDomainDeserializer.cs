@@ -1,4 +1,4 @@
-﻿namespace CodeGeneration.Logic.DomainDeserialization
+﻿namespace CodeGeneration.Logic.DomainProcessing
 {
     public interface IDomainDeserializer
     {
