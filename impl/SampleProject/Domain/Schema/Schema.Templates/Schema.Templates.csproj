@@ -42,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\MigrationTemplate.cs">
+      <DependentUpon>MigrationTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Database\ViewSelectTemplate.cs">
       <DependentUpon>ViewSelectTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -92,6 +97,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Database\MigrationTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>MigrationTemplate.cs</LastGenOutput>
+    </None>
     <None Include="Database\ViewSelectTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ViewSelectTemplate.cs</LastGenOutput>

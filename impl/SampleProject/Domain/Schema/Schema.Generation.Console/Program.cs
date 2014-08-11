@@ -25,6 +25,12 @@ namespace Schema.Generation.Console
             var testSnapshotPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Snapshots\snapshot_test.json";
             var delta = MigrationsFacade.GetDelta(testSnapshotPath, new Snapshot { Views = generationUnits.Views });
 
+            var migrationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\migrations\migration.cql";
+            CodeGenerationFacade.GenerateCode(delta.ComplexCollectionDeltas["Views"],
+                                              new MigrationTemplate(),
+                                              migrationPath,
+                                              new TemplateArgument { Name = "KeySpace", Value = domain.KeySpace.Name });
+
             // Generate database code
             var keySpaceGenerationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\ddl\create_keyspace.cql";
             CodeGenerationFacade.GenerateCode(domain.KeySpace,

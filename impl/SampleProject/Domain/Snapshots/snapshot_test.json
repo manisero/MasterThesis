@@ -9,7 +9,7 @@
           "IsKey": true,
           "OnKeyPostion": 1,
           "IsNullable": false,
-          "IsSearchable": true
+          "IsSearchable": false
         },
         {
           "Name": "ParentCommentID",
@@ -42,7 +42,15 @@
           "OnKeyPostion": null,
           "IsNullable": false,
           "IsSearchable": false
-        }
+        },
+        {
+          "Name": "LikesNumber",
+          "Type": "int",
+          "IsKey": false,
+          "OnKeyPostion": null,
+          "IsNullable": false,
+          "IsSearchable": true
+        },
       ]
     },
     {
