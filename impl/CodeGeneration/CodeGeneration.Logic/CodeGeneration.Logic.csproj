@@ -59,6 +59,7 @@
     <Compile Include="DomainProcessing\_Impl\DomainDeserializer.cs" />
     <Compile Include="CodeGenerationUnit.cs" />
     <Compile Include="DomainProcessing\_Impl\DomainSerializer.cs" />
+    <Compile Include="SnapshotFacade.cs" />
     <Compile Include="TemplateArgument.cs" />
     <Compile Include="Generation\ICodeGenerator.cs" />
     <Compile Include="Generation\ITemplateExecutor.cs" />

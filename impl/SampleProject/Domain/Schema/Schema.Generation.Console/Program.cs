@@ -15,14 +15,11 @@ namespace Schema.Generation.Console
             var metadataPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Model";
 
             var domain = CodeGenerationFacade.DeserializeDomain<Domain>(metadataPath);
+            var generationUnits = new DomainProcessor().Process(domain);
 
             // Create domain snapshot
             var snapshotPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Snapshots\snapshot1.json";
-            CodeGenerationFacade.CreateDomainSnapshot<Domain>(metadataPath, snapshotPath);
-
-            IList<View> views;
-            IList<Event> events;
-            new DomainProcessor().Process(domain, out views, out events);
+            SnapshotFacade.CreateGenerationUnitsSnapshot(generationUnits, snapshotPath);
 
             // Generate database code
             var keySpaceGenerationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\ddl\create_keyspace.cql";
@@ -36,35 +33,35 @@ namespace Schema.Generation.Console
                                               keySpaceDropPath);
 
             var tablesGenerationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\ddl\create_tables.txt";
-            CodeGenerationFacade.GenerateCode(views,
+            CodeGenerationFacade.GenerateCode(generationUnits.Views,
                                               new TablesCreationTemplate(),
                                               tablesGenerationPath);
 
             var tablesPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\ddl\tables";
-            CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cql"),
+            CodeGenerationFacade.GenerateCode(generationUnits.Views.ToCodeGenerationUnits("cql"),
                                               () => new ViewCreationTemplate(),
                                               tablesPath,
                                               new TemplateArgument { Name = "KeySpace", Value = domain.KeySpace.Name });
 
             var selectsPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\dql";
-            CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cql", "select_"),
+            CodeGenerationFacade.GenerateCode(generationUnits.Views.ToCodeGenerationUnits("cql", "select_"),
                                               () => new ViewSelectTemplate(),
                                               selectsPath,
                                               new TemplateArgument { Name = "KeySpace", Value = domain.KeySpace.Name });
 
             // Generate .Net code
             var entitiesPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Entities";
-            CodeGenerationFacade.GenerateCode(domain.Entities.ToCodeGenerationUnits("cs"),
+            CodeGenerationFacade.GenerateCode(generationUnits.Entities.ToCodeGenerationUnits("cs"),
                                               () => new EntityTemplate(),
                                               entitiesPath);
 
             var eventsPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Events";
-            CodeGenerationFacade.GenerateCode(events.ToCodeGenerationUnits("cs"),
+            CodeGenerationFacade.GenerateCode(generationUnits.Events.ToCodeGenerationUnits("cs"),
                                               () => new EventTemplate(),
                                               eventsPath);
 
             var viewsPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\dotnet\Sample.Domain\Views";
-            CodeGenerationFacade.GenerateCode(views.ToCodeGenerationUnits("cs"),
+            CodeGenerationFacade.GenerateCode(generationUnits.Views.ToCodeGenerationUnits("cs"),
                                               () => new ViewClassTemplate(),
                                               viewsPath);
 

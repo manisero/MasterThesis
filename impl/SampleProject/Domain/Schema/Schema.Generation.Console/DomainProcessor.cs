@@ -6,7 +6,7 @@ namespace Schema.Generation.Console
 {
     public class DomainProcessor
     {
-        public void Process(Domain domain, out IList<View> views, out IList<Event> events)
+        public GenerationUnits Process(Domain domain)
         {
             var viewsDictionary = new Dictionary<string, View>();
             var eventsDictionary = new Dictionary<string, Event>();
@@ -31,8 +31,12 @@ namespace Schema.Generation.Console
                 }
             }
 
-            views = viewsDictionary.Values.ToList();
-            events = eventsDictionary.Values.ToList();
+            return new GenerationUnits
+                {
+                    Entities = domain.Entities,
+                    Views = viewsDictionary.Values.ToList(),
+                    Events = eventsDictionary.Values.ToList()
+                };
         }
 
         private void ProcessEntityField(EntityField field, Entity entity, IDictionary<string, View> views, IDictionary<string, Event> events)

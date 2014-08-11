@@ -15,13 +15,11 @@ namespace CodeGeneration.Logic
         private class Dependencies
         {
             public IDomainDeserializer DomainDeserializer { get; private set; }
-            public IDomainSerializer DomainSerializer { get; private set; }
             public ICodeGenerator CodeGenerator { get; private set; }
 
-            public Dependencies(IDomainDeserializer domainDeserializer, IDomainSerializer domainSerializer, ICodeGenerator codeGenerator)
+            public Dependencies(IDomainDeserializer domainDeserializer, ICodeGenerator codeGenerator)
             {
                 DomainDeserializer = domainDeserializer;
-                DomainSerializer = domainSerializer;
                 CodeGenerator = codeGenerator;
             }
         }
@@ -68,13 +66,6 @@ namespace CodeGeneration.Logic
                                                    params TemplateArgument[] templateArguments)
         {
             GetDependencies().CodeGenerator.Generate(generationUnits, templateGetter, outputDirectoryPath, templateArguments);
-        }
-
-        public static void CreateDomainSnapshot<TDomain>(string rootFolderPath, string outputFilePath)
-            where TDomain : new()
-        {
-            var domain = GetDependencies().DomainDeserializer.Deserialize<TDomain>(rootFolderPath);
-            GetDependencies().DomainSerializer.Serialize(domain, outputFilePath);
         }
     }
 }
