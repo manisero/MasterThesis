@@ -107,7 +107,7 @@
           "IsKey": false,
           "OnKeyPostion": null,
           "IsNullable": false,
-          "IsSearchable": false
+          "IsSearchable": true
         }
       ]
     }

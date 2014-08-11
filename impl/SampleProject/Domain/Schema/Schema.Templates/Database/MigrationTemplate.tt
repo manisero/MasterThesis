@@ -22,10 +22,16 @@ USE "<#= KeySpace #>";
 
 	<# foreach (var delta in viewDelta.Value.ComplexCollectionDeltas["Fields"].ModifiedItems) { #>
 		<# if (delta.Value.SimplePropertyDeltas.ContainsKey("Name")) { #>
-			ALTER TABLE "<#= viewDelta.Key #>" RENAME "<#= delta.Value.SimplePropertyDeltas["Name"].OldValue #>" TO "<#= delta.Value.SimplePropertyDeltas["Name"].NewValue #>";
-		<# } #>
+			<# if (delta.Value.OldItem.IsSearchable) { #>
+			DROP INDEX "<#= viewDelta.Key #>_<#= delta.Key #>_idx";
+			<# } #>
 
-		<# if (delta.Value.SimplePropertyDeltas.ContainsKey("IsSearchable")) { #>
+			ALTER TABLE "<#= viewDelta.Key #>" RENAME "<#= delta.Value.SimplePropertyDeltas["Name"].OldValue #>" TO "<#= delta.Value.SimplePropertyDeltas["Name"].NewValue #>";
+
+			<# if (delta.Value.NewItem.IsSearchable) { #>
+			CREATE INDEX "<#= viewDelta.Key #>"."<#= delta.Value.NewItem.Name #>";
+			<# } #>
+		<# } else if (delta.Value.SimplePropertyDeltas.ContainsKey("IsSearchable")) { #>
 			<# if (delta.Value.SimplePropertyDeltas["IsSearchable"].NewValue) { #>
 				CREATE INDEX "<#= viewDelta.Key #>"."<#= delta.Key #>";
 			<# } else { #>

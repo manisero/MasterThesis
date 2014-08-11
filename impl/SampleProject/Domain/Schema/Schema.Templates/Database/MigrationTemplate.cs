@@ -171,84 +171,77 @@ namespace Schema.Templates.Database
             
             #line default
             #line hidden
-            this.Write("\t\t\tALTER TABLE \"");
-            
-            #line 25 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewDelta.Key));
-            
-            #line default
-            #line hidden
-            this.Write("\" RENAME \"");
-            
-            #line 25 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(delta.Value.SimplePropertyDeltas["Name"].OldValue));
-            
-            #line default
-            #line hidden
-            this.Write("\" TO \"");
-            
-            #line 25 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(delta.Value.SimplePropertyDeltas["Name"].NewValue));
-            
-            #line default
-            #line hidden
-            this.Write("\";\r\n\t\t");
-            
-            #line 26 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t");
-            
-            #line 28 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
- if (delta.Value.SimplePropertyDeltas.ContainsKey("IsSearchable")) { 
-            
-            #line default
-            #line hidden
             this.Write("\t\t\t");
             
-            #line 29 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
- if (delta.Value.SimplePropertyDeltas["IsSearchable"].NewValue) { 
+            #line 25 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+ if (delta.Value.OldItem.IsSearchable) { 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\tCREATE INDEX \"");
+            this.Write("\t\t\tDROP INDEX \"");
             
-            #line 30 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewDelta.Key));
-            
-            #line default
-            #line hidden
-            this.Write("\".\"");
-            
-            #line 30 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(delta.Key));
-            
-            #line default
-            #line hidden
-            this.Write("\";\r\n\t\t\t");
-            
-            #line 31 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
- } else { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\tDROP INDEX \"");
-            
-            #line 32 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            #line 26 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewDelta.Key));
             
             #line default
             #line hidden
             this.Write("_");
             
-            #line 32 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            #line 26 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(delta.Key));
             
             #line default
             #line hidden
             this.Write("_idx\";\r\n\t\t\t");
+            
+            #line 27 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t\tALTER TABLE \"");
+            
+            #line 29 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewDelta.Key));
+            
+            #line default
+            #line hidden
+            this.Write("\" RENAME \"");
+            
+            #line 29 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(delta.Value.SimplePropertyDeltas["Name"].OldValue));
+            
+            #line default
+            #line hidden
+            this.Write("\" TO \"");
+            
+            #line 29 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(delta.Value.SimplePropertyDeltas["Name"].NewValue));
+            
+            #line default
+            #line hidden
+            this.Write("\";\r\n\r\n\t\t\t");
+            
+            #line 31 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+ if (delta.Value.NewItem.IsSearchable) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\tCREATE INDEX \"");
+            
+            #line 32 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewDelta.Key));
+            
+            #line default
+            #line hidden
+            this.Write("\".\"");
+            
+            #line 32 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(delta.Value.NewItem.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\";\r\n\t\t\t");
             
             #line 33 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
  } 
@@ -258,19 +251,75 @@ namespace Schema.Templates.Database
             this.Write("\t\t");
             
             #line 34 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+ } else if (delta.Value.SimplePropertyDeltas.ContainsKey("IsSearchable")) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t");
+            
+            #line 35 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+ if (delta.Value.SimplePropertyDeltas["IsSearchable"].NewValue) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\tCREATE INDEX \"");
+            
+            #line 36 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewDelta.Key));
+            
+            #line default
+            #line hidden
+            this.Write("\".\"");
+            
+            #line 36 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(delta.Key));
+            
+            #line default
+            #line hidden
+            this.Write("\";\r\n\t\t\t");
+            
+            #line 37 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\tDROP INDEX \"");
+            
+            #line 38 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewDelta.Key));
+            
+            #line default
+            #line hidden
+            this.Write("_");
+            
+            #line 38 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(delta.Key));
+            
+            #line default
+            #line hidden
+            this.Write("_idx\";\r\n\t\t\t");
+            
+            #line 39 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t");
+            
+            #line 40 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t");
             
-            #line 35 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            #line 41 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 36 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
+            #line 42 "C:\dev\MasterThesis\impl\SampleProject\Domain\Schema\Schema.Templates\Database\MigrationTemplate.tt"
  } 
             
             #line default

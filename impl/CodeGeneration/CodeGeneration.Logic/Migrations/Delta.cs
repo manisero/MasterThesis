@@ -12,6 +12,10 @@ namespace CodeGeneration.Logic.Migrations
             ComplexCollectionDeltas = new Dictionary<string, ComplexCollectionDelta>();
         }
 
+        public dynamic OldItem { get; set; }
+
+        public dynamic NewItem { get; set; }
+
         public IDictionary<string, SimplePropertyDelta> SimplePropertyDeltas { get; set; }
 
         public IDictionary<string, Delta> ComplexPropertyDeltas { get; set; }

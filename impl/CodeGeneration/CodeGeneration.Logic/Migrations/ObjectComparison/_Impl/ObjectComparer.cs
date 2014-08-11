@@ -22,7 +22,7 @@ namespace CodeGeneration.Logic.Migrations.ObjectComparison._Impl
 
         private Delta Compare(object old, object @new, Type type)
         {
-            var result = new Delta();
+            var result = new Delta { OldItem = old, NewItem = @new };
             var properties = type.GetProperties();
 
             foreach (var property in properties)
