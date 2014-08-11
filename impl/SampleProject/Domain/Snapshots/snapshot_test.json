@@ -102,15 +102,7 @@
           "IsSearchable": false
         },
         {
-          "Name": "FirstName",
-          "Type": "text",
-          "IsKey": false,
-          "OnKeyPostion": null,
-          "IsNullable": false,
-          "IsSearchable": false
-        },
-        {
-          "Name": "LastName",
+          "Name": "Name",
           "Type": "text",
           "IsKey": false,
           "OnKeyPostion": null,

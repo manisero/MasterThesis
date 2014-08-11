@@ -1,4 +1,6 @@
-﻿using Ninject;
+﻿using CodeGeneration.Logic.Migrations.ObjectComparison;
+using CodeGeneration.Logic.Migrations.ObjectComparison.KeyChangeDetectors;
+using Ninject;
 using Ninject.Extensions.Conventions;
 
 namespace CodeGeneration.Logic.Bootstrap
@@ -10,6 +12,13 @@ namespace CodeGeneration.Logic.Bootstrap
             kernel.Bind(x => x.FromThisAssembly()
                               .SelectAllClasses()
                               .BindDefaultInterface());
+
+            RegisterCustomBindings(kernel);
+        }
+
+        private void RegisterCustomBindings(IKernel kernel)
+        {
+            kernel.Bind<IKeyChangeDetector>().To<InteractiveKeyChangeDetector>();
         }
     }
 }

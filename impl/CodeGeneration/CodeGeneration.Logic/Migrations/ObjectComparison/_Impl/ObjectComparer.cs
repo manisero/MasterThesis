@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using CodeGeneration.Logic.Extensions;
 
@@ -7,6 +8,13 @@ namespace CodeGeneration.Logic.Migrations.ObjectComparison._Impl
 {
     public class ObjectComparer : IObjectComparer
     {
+        private readonly IKeyChangeDetector _keyChangeDetector;
+
+        public ObjectComparer(IKeyChangeDetector keyChangeDetector)
+        {
+            _keyChangeDetector = keyChangeDetector;
+        }
+
         public Delta Compare<T>(T old, T @new)
         {
             return Compare(old, @new, typeof(T));
@@ -99,13 +107,16 @@ namespace CodeGeneration.Logic.Migrations.ObjectComparison._Impl
         {
             var oldItems = (oldCollection ?? new object[0]).Cast<object>().ToDictionary(x => GetKey(x, itemType));
             var newItems = (newCollection ?? new object[0]).Cast<object>().ToDictionary(x => GetKey(x, itemType));
+            var matchedKeys = oldItems.Keys.Intersect(newItems.Keys).ToDictionary(x => x, x => x);
             var result = new ComplexCollectionDelta();
 
             foreach (var oldItem in oldItems)
             {
-                object correspondingNewItem;
+                var correspondingNewItem = matchedKeys.ContainsKey(oldItem.Key)
+                                               ? newItems[oldItem.Key]
+                                               : newItems.SingleOrDefault(x => CheckKeysMatch(oldItem.Key, oldItem.Value, x.Key, x.Value, matchedKeys)).Value;
 
-                if (newItems.TryGetValue(oldItem.Key, out correspondingNewItem))
+                if (correspondingNewItem != null)
                 {
                     var delta = Compare(oldItem.Value, correspondingNewItem, itemType);
 
@@ -122,7 +133,7 @@ namespace CodeGeneration.Logic.Migrations.ObjectComparison._Impl
 
             foreach (var newItem in newItems)
             {
-                if (!oldItems.Any(x => x.Key == newItem.Key))
+                if (!matchedKeys.ContainsValue(newItem.Key))
                 {
                     result.AddedItems.Add(newItem.Value);
                 }
@@ -147,6 +158,27 @@ namespace CodeGeneration.Logic.Migrations.ObjectComparison._Impl
             }
             
             throw new InvalidOperationException(string.Format("Could not determine the of type '{0}'.", type.FullName));
+        }
+
+        private bool CheckKeysMatch(string oldKey, object oldItem, string newKey, object newItem, Dictionary<string, string> matchedKeys)
+        {
+            if (matchedKeys.ContainsKey(oldKey))
+            {
+                return false;
+            }
+
+            if (matchedKeys.ContainsValue(newKey))
+            {
+                return false;
+            }
+
+            if (_keyChangeDetector.IsTheSameItem(oldItem, oldKey, newItem, newKey))
+            {
+                matchedKeys[oldKey] = newKey;
+                return true;
+            }
+
+            return false;
         }
     }
 }
