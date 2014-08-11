@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using CodeGeneration.Logic.Bootstrap;
-using CodeGeneration.Logic.DomainDeserialization;
+using CodeGeneration.Logic.DomainProcessing;
 using CodeGeneration.Logic.Generation;
 using Ninject;
 

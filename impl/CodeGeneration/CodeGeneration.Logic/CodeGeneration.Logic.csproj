@@ -54,20 +54,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrap\NinjectBootstrapper.cs" />
-    <Compile Include="DomainDeserialization\IDomainDeserializer.cs" />
-    <Compile Include="DomainDeserialization\_Impl\DomainDeserializer.cs" />
+    <Compile Include="DomainProcessing\IDomainDeserializer.cs" />
+    <Compile Include="DomainProcessing\IDomainSerializer.cs" />
+    <Compile Include="DomainProcessing\_Impl\DomainDeserializer.cs" />
     <Compile Include="CodeGenerationUnit.cs" />
+    <Compile Include="DomainProcessing\_Impl\DomainSerializer.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Migrations\Delta.cs" />
+    <Compile Include="Migrations\MigrationsFacade.cs" />
+    <Compile Include="Migrations\ObjectComparison\IKeyChangeDetector.cs" />
+    <Compile Include="Migrations\ObjectComparison\IObjectComparer.cs" />
+    <Compile Include="Migrations\ObjectComparison\KeyChangeDetectors\InteractiveKeyChangeDetector.cs" />
+    <Compile Include="Migrations\ObjectComparison\_Impl\ObjectComparer.cs" />
+    <Compile Include="SnapshotFacade.cs" />
     <Compile Include="TemplateArgument.cs" />
     <Compile Include="Generation\ICodeGenerator.cs" />
     <Compile Include="Generation\ITemplateExecutor.cs" />
     <Compile Include="Generation\_Impl\CodeGenerator.cs" />
     <Compile Include="Infrastructure\IFileSystemService.cs" />
-    <Compile Include="Infrastructure\IJsonDeserializer.cs" />
+    <Compile Include="Infrastructure\IJsonService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CodeGenerationFacade.cs" />
     <Compile Include="Generation\_Impl\TemplateExecutor.cs" />
     <Compile Include="Infrastructure\_Impl\FileSystemService.cs" />
-    <Compile Include="Infrastructure\_Impl\JsonDeserializer.cs" />
+    <Compile Include="Infrastructure\_Impl\JsonService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

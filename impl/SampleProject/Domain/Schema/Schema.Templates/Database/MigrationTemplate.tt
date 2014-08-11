@@ -1,0 +1,42 @@
+﻿<#@ template language="C#" #>
+<#@ parameter type="CodeGeneration.Logic.Migrations.ComplexCollectionDelta" name="Metadata" #>
+<#@ parameter type="System.String" name="KeySpace" #>
+USE "<#= KeySpace #>";
+
+<# foreach (var viewDelta in Metadata.ModifiedItems) { #>
+	<# foreach (var field in viewDelta.Value.ComplexCollectionDeltas["Fields"].RemovedItems) { #>
+		<# if (field.IsSearchable) { #>
+			DROP INDEX "<#= viewDelta.Key #>_<#= field.Name #>_idx";
+		<# } #>
+
+		ALTER TABLE "<#= viewDelta.Key #>" DROP "<#= field.Name #>";
+	<# } #>
+
+	<# foreach (var field in viewDelta.Value.ComplexCollectionDeltas["Fields"].AddedItems) { #>
+		ALTER TABLE "<#= viewDelta.Key #>" ADD "<#= field.Name #>" <#= field.Type #>;
+
+		<# if (field.IsSearchable) { #>
+			CREATE INDEX "<#= viewDelta.Key #>"."<#= field.Name #>";
+		<# } #>
+	<# } #>
+
+	<# foreach (var delta in viewDelta.Value.ComplexCollectionDeltas["Fields"].ModifiedItems) { #>
+		<# if (delta.Value.SimplePropertyDeltas.ContainsKey("Name")) { #>
+			<# if (delta.Value.OldItem.IsSearchable) { #>
+			DROP INDEX "<#= viewDelta.Key #>_<#= delta.Key #>_idx";
+			<# } #>
+
+			ALTER TABLE "<#= viewDelta.Key #>" RENAME "<#= delta.Value.SimplePropertyDeltas["Name"].OldValue #>" TO "<#= delta.Value.SimplePropertyDeltas["Name"].NewValue #>";
+
+			<# if (delta.Value.NewItem.IsSearchable) { #>
+			CREATE INDEX "<#= viewDelta.Key #>"."<#= delta.Value.NewItem.Name #>";
+			<# } #>
+		<# } else if (delta.Value.SimplePropertyDeltas.ContainsKey("IsSearchable")) { #>
+			<# if (delta.Value.SimplePropertyDeltas["IsSearchable"].NewValue) { #>
+				CREATE INDEX "<#= viewDelta.Key #>"."<#= delta.Key #>";
+			<# } else { #>
+				DROP INDEX "<#= viewDelta.Key #>_<#= delta.Key #>_idx";
+			<# } #>
+		<# } #>
+	<# } #>
+<# } #>
