@@ -1,0 +1,121 @@
+[
+  {
+    "Name": "Comment",
+    "Fields": [
+      {
+        "Name": "CommentID",
+        "Type": "timeuuid",
+        "IsKey": true,
+        "OnKeyPostion": 1,
+        "IsNullable": false,
+        "IsSearchable": true
+      },
+      {
+        "Name": "ParentCommentID",
+        "Type": "timeuuid",
+        "IsKey": false,
+        "OnKeyPostion": null,
+        "IsNullable": true,
+        "IsSearchable": false
+      },
+      {
+        "Name": "Content",
+        "Type": "text",
+        "IsKey": false,
+        "OnKeyPostion": null,
+        "IsNullable": false,
+        "IsSearchable": false
+      },
+      {
+        "Name": "PostID",
+        "Type": "timeuuid",
+        "IsKey": true,
+        "OnKeyPostion": 0,
+        "IsNullable": false,
+        "IsSearchable": false
+      },
+      {
+        "Name": "Author",
+        "Type": "text",
+        "IsKey": false,
+        "OnKeyPostion": null,
+        "IsNullable": false,
+        "IsSearchable": false
+      }
+    ]
+  },
+  {
+    "Name": "Post",
+    "Fields": [
+      {
+        "Name": "PostID",
+        "Type": "timeuuid",
+        "IsKey": true,
+        "OnKeyPostion": null,
+        "IsNullable": false,
+        "IsSearchable": false
+      },
+      {
+        "Name": "Title",
+        "Type": "text",
+        "IsKey": false,
+        "OnKeyPostion": null,
+        "IsNullable": false,
+        "IsSearchable": false
+      },
+      {
+        "Name": "Content",
+        "Type": "text",
+        "IsKey": false,
+        "OnKeyPostion": null,
+        "IsNullable": false,
+        "IsSearchable": false
+      },
+      {
+        "Name": "CommentsNumber",
+        "Type": "int",
+        "IsKey": false,
+        "OnKeyPostion": null,
+        "IsNullable": false,
+        "IsSearchable": false
+      },
+      {
+        "Name": "Author",
+        "Type": "text",
+        "IsKey": false,
+        "OnKeyPostion": null,
+        "IsNullable": false,
+        "IsSearchable": true
+      }
+    ]
+  },
+  {
+    "Name": "User",
+    "Fields": [
+      {
+        "Name": "UserName",
+        "Type": "text",
+        "IsKey": true,
+        "OnKeyPostion": null,
+        "IsNullable": false,
+        "IsSearchable": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "text",
+        "IsKey": false,
+        "OnKeyPostion": null,
+        "IsNullable": false,
+        "IsSearchable": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "text",
+        "IsKey": false,
+        "OnKeyPostion": null,
+        "IsNullable": false,
+        "IsSearchable": false
+      }
+    ]
+  }
+]

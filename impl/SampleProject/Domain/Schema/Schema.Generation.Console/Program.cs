@@ -19,7 +19,7 @@ namespace Schema.Generation.Console
 
             // Create domain snapshot
             var snapshotPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Snapshots\snapshot1.json";
-            SnapshotFacade.CreateGenerationUnitsSnapshot(generationUnits, snapshotPath);
+            SnapshotFacade.CreateSnapshot(generationUnits.Views, snapshotPath);
 
             // Generate database code
             var keySpaceGenerationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\ddl\create_keyspace.cql";

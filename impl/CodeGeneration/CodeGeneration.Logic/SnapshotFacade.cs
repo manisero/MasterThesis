@@ -36,10 +36,9 @@ namespace CodeGeneration.Logic
 
         #endregion
 
-        public static void CreateGenerationUnitsSnapshot<TGenerationUnits>(TGenerationUnits generationUnits, string outputFilePath)
-            where TGenerationUnits : new()
+        public static void CreateSnapshot<TSnapshot>(TSnapshot snapshot, string outputFilePath)
         {
-            var json = GetDependencies().JsonService.Serialize(generationUnits);
+            var json = GetDependencies().JsonService.Serialize(snapshot);
             GetDependencies().FileSystemService.SetFileContent(outputFilePath, json);
         }
     }
