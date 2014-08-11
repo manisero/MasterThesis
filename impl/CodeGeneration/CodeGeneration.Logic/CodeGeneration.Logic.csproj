@@ -59,6 +59,11 @@
     <Compile Include="DomainProcessing\_Impl\DomainDeserializer.cs" />
     <Compile Include="CodeGenerationUnit.cs" />
     <Compile Include="DomainProcessing\_Impl\DomainSerializer.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Migrations\Delta.cs" />
+    <Compile Include="Migrations\MigrationsFacade.cs" />
+    <Compile Include="Migrations\ObjectComparison\IObjectComparer.cs" />
+    <Compile Include="Migrations\ObjectComparison\_Impl\ObjectComparer.cs" />
     <Compile Include="SnapshotFacade.cs" />
     <Compile Include="TemplateArgument.cs" />
     <Compile Include="Generation\ICodeGenerator.cs" />

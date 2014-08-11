@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using CodeGeneration.Logic;
+﻿using CodeGeneration.Logic;
+using CodeGeneration.Logic.Migrations;
 using Schema.Model;
 using Schema.Templates.Database;
 using Schema.Templates.Documentation;
@@ -17,9 +17,13 @@ namespace Schema.Generation.Console
             var domain = CodeGenerationFacade.DeserializeDomain<Domain>(metadataPath);
             var generationUnits = new DomainProcessor().Process(domain);
 
-            // Create domain snapshot
-            var snapshotPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Snapshots\snapshot1.json";
-            SnapshotFacade.CreateSnapshot(generationUnits.Views, snapshotPath);
+            //// Create snapshot
+            //var snapshotPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Snapshots\snapshot1.json";
+            //SnapshotFacade.CreateSnapshot(new Snapshot { Views = generationUnits.Views }, snapshotPath);
+
+            // Create snapshot delta
+            var testSnapshotPath = @"c:\dev\MasterThesis\impl\SampleProject\Domain\Snapshots\snapshot_test.json";
+            var delta = MigrationsFacade.GetDelta(testSnapshotPath, new Snapshot { Views = generationUnits.Views });
 
             // Generate database code
             var keySpaceGenerationPath = @"c:\dev\MasterThesis\impl\SampleProject\Sample\database\ddl\create_keyspace.cql";

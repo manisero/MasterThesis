@@ -24,7 +24,7 @@
           "Type": "text",
           "IsKey": false,
           "OnKeyPostion": null,
-          "IsNullable": true,
+          "IsNullable": false,
           "IsSearchable": false
         },
         {
@@ -67,6 +67,14 @@
         {
           "Name": "Content",
           "Type": "text",
+          "IsKey": false,
+          "OnKeyPostion": null,
+          "IsNullable": false,
+          "IsSearchable": false
+        },
+        {
+          "Name": "CommentsNumber",
+          "Type": "int",
           "IsKey": false,
           "OnKeyPostion": null,
           "IsNullable": false,

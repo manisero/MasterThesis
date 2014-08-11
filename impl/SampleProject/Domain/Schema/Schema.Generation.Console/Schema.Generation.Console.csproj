@@ -49,6 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DomainProcessor.cs" />
     <Compile Include="DomainItemsCollectionExtensions.cs" />
+    <Compile Include="Snapshot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
