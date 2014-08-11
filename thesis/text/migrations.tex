@@ -1,3 +1,52 @@
 \chapter{Obsługa zmiany dziedziny aplikacji} \label{chap:migrations}
 
-TODO
+\begin{itemize}
+ \item generator potrafi zrobić snapshot dziedziny / jednostki generacji
+ \item snapshot będzie porównywany z obecnym stanem (lub innym snapshotem)
+ 
+ \item co serializować w snapshocie (czyli na podstawie czego migrować):
+  \begin{itemize}
+   
+   \item dziedzinę:
+    \begin{itemize}
+     \item zalety:
+      \begin{itemize}
+       \item odporne na zmiany schematu jednostek generacji
+      \end{itemize}
+     \item wady:
+      \begin{itemize}
+       \item i tak raczej trzeba będzie generować jednostki generacji
+       \item do schematu dziedziny mogą tylko dochodzić nowe rzeczy (nic nie moze się zmienić / wypaść)
+       \item trzeba i tak tworzyć jednostki generacji
+       \item nie odporne na zmiany mechanizmu wyznaczania jednostek generacji na podstawie dziedziny (ten sam będzie używany do starych i nowych snapshotów)
+      \end{itemize}
+    \end{itemize}
+   
+   \item jednostki generacji
+    \begin{itemize}
+     \item zalety:
+      \begin{itemize}
+       \item efekty migracji i tak dotyczyć będą jednostek generacji, a nie dziedziny
+       \item nie trzeba czytać dziedziny, tylko jednostki generacji (aktualną dziedzinę i tak trzeba czytać)
+       \item można robić snapshot tylko niektórych jednostek generacji (np. tylko Views)
+       \item odporne na zmiany schematu dziedziny
+       \item zmiana jednostek generacji może wynikać z poprawki błędu działania mechanizmu generacji jednostek generacji - w tym przypadku taka poprawka też będzie potraktowana jako migracja
+      \end{itemize}
+     \item wady:
+      \begin{itemize}
+       \item do schematu jednostek generacji mogą tylko dochodzić nowe rzeczy (nic nie moze się zmienić / wypaść)
+       \item na podstawie snapshota nie da się łatwo odtworzyć dziedziny
+      \end{itemize}
+    \end{itemize}
+   
+  \end{itemize}
+  
+  
+  \item przykłady:
+   \begin{itemize}
+    \item migracje bazy danych (cql)
+    \item changelog w dokumentacji?
+   \end{itemize}
+
+\end{itemize}
+
