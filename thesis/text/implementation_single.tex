@@ -89,30 +89,43 @@ Zgodnie z~założeniami dotyczącymi implementacji generatora, wszystkie artefak
 Podczas implementacji tego aspektu pojawiają się następujące problemy:
 
 
-\subsection{Czy wymagać schematu opisu dziedziny}
+\subsection{Czy tworzyć schemat opisu dziedziny?}
 
-\begin{itemize}
- \item że będzie schemat opisu \ref{sec:core:domain_schema_requirement}
- \item ale gdzie ten schemat ma być zapisany
- \item że schema powinna być w jednym miejsu - będzie jako klasa w kodzie
-\end{itemize}
+Problem ten poruszony został w~sekcji~\ref{sec:core:domain_schema_requirement}.
+Stwierdzono, że słusznym wyborem jest stworzenie schematu opisu dziedziny aplikacji.
+Pozostaje jednak pytanie, gdzie należy ten schemat zdefiniować i~przechowywać.
 
+Nie ulega wątpliwości, że, aby uniknąć duplikacji, schemat opisu dziedziny powinen być zdefiniowany tylko w~jednym miejscu.
+Odpowiednim takim miejscem, jako że tam właśnie schemat ten będzie używany, wyjdaje się być klasa należąca do kodu źródłowego generatora aplikacji CQRS.
+Gdyby schemat być przechowywany gdzie indziej, odpowiadająca mu klasa i~tak musiałaby być stworzona lub wygenerowana, aby moć zdeserializować dziedzinę do obiektu silnie typizowanego.
 
 \subsection{Schemat opisu dziedziny aplikacji}
 
-\begin{itemize}
- \item zdefiniowanie schematu opisu dziedziny na potrzeby CQRS (zapisać każdy w JSONie)
-  \begin{itemize}
-   \item per tabela (widoki) (duplikacje) (trudność wygenerowania modelu komend, i zdarzeń)
-   \item per encja (PresentIn) (brak duplikacji) (encje generują się same, generacja widoków i zdarzeń wymaga trochę pracy, ale jest ok)
-  \end{itemize}
-\end{itemize}
+zdefiniowanie schematu opisu dziedziny na potrzeby CQRS (zapisać każdy w JSONie)
+
+\subsubsection{per widok}
+
+duplikacje
+trudność wygenerowania modelu komend, i zdarzeń
 
 \ref{fig:single:model_presentIn}
 \input{figures/implementation_single/model_presentIn}
 
+\subsubsection{per encja}
+
+PresentIn
+brak duplikacji
+encje generują się same, generacja widoków i zdarzeń wymaga trochę pracy, ale jest ok
+
 \ref{fig:single:model_perView}
 \input{figures/implementation_single/model_perView}
+
+\subsubsection{per pole}
+po prostu zbiór pól i gdzie występują
+brak duplikacji
+
+
+Wybór 2 rozwiązuje oba problemy postawione na końcu sekcji~\ref{sec:cqrs}.
 
 
 \subsection{które typy umieścić w definicji?}
