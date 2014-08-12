@@ -22,13 +22,36 @@ Użytkownik serwisu (encja $User$) będzie mógł:
  \item skomentować komentarz innego użytkownika.
 \end{itemize}
 
-Dziedzina serwisu została przestawiona na rysunku~\ref{fig:single:domain_normalized}.
+Dziedzina serwisu została przedstawiona na rysunku~\ref{fig:single:domain_normalized}.
 Dziedzina ta reprezentuje jednocześnie model komend systemu.
+Należy zaznaczyć, że na potrzeby przykładu dziedzina została w~jak największym stopniu uproszczona (np. nie znalazła się w~niej encja $Blog$, która mogłaby przechowywać nazwę, opis i~logo bloga).
 
 \input{figures/implementation_single/domain_normalized}
 
-\ref{fig:single:domain_denormalized}
+Na potrzeby architektury CQRS należy także zdefiniować model zapytań.
+Elementy wchodzące w~skłąd tego modelu nazywane będa widokami.
+Widoki powinny udostępniać dane zdenormalizowane w~takim stopniu, aby umożliwić jak najefektywniejsze wykonywane najczęstszych zapytań wykonywanych w~systemie~\cite{cassandra_model}.
+
+W~omawianym przykładzie najczęściej wykonywane będa zapytania na potrzeby:
+
+\begin{itemize}
+ \item wyświetlania danego bloga, tzn. wszystkich wpisów jego autora - w~tym celu wykonane zostanie pojedyncze odwołanie do widoku $Post$;
+ \item wyświetlania danego wpisu wraz z~jego komentarzami i~``polubieniami'' - w~tym celu wykonane zostaną odwołania do widków: $Post$, $Comment$ i~$PostLike$;
+ \item wyświetlenia profilu użytkownika wraz z~jego ulubionymi wpisami - w~tym celu wykonane zostanie jedno odwołanie do widoku $User$ i~jedno do widoku $UserLike$.
+\end{itemize}
+
+Model zapytań został przedstawiony na rysunku~\ref{fig:single:domain_denormalized}.
+
 \input{figures/implementation_single/domain_denormalized}
+
+Że UserPost rozbito
+Na uwagę zasługuje pole CommentsNumber widoku Post.
+
+
+
+%=======
+\section{Generowane artefakty}
+%=======
 
 Artefaktami generowanymi na podstawie opisu dziedziny aplikacji będą:
 
