@@ -35,7 +35,7 @@ Widoki powinny udostępniać dane zdenormalizowane w~takim stopniu, aby umożliw
 W~omawianym przykładzie najczęściej wykonywane będa zapytania na potrzeby:
 
 \begin{itemize}
- \item wyświetlania danego bloga, tzn. wszystkich wpisów jego autora - w~tym celu wykonane zostanie pojedyncze odwołanie do widoku $Post$;
+ \item wyświetlania danego bloga, tzn. wszystkich wpisów jego autora wraz z~liczbą ich komentarzy - w~tym celu wykonane zostanie pojedyncze odwołanie do widoku $Post$;
  \item wyświetlania danego wpisu wraz z~jego komentarzami i~``polubieniami'' - w~tym celu wykonane zostaną odwołania do widków: $Post$, $Comment$ i~$PostLike$;
  \item wyświetlenia profilu użytkownika wraz z~jego ulubionymi wpisami - w~tym celu wykonane zostanie jedno odwołanie do widoku $User$ i~jedno do widoku $UserLike$.
 \end{itemize}
@@ -44,8 +44,19 @@ Model zapytań został przedstawiony na rysunku~\ref{fig:single:domain_denormali
 
 \input{figures/implementation_single/domain_denormalized}
 
-Że UserPost rozbito
-Na uwagę zasługuje pole CommentsNumber widoku Post.
+Pomiędzy znormalizowanym modelem dziedziny (rysunek~\ref{fig:single:domain_normalized}), a~modelem zdenormalizowanym modelem zapytań wystepują dwie istotne różnice:
+
+\begin{enumerate}
+ \item Encja $Like$ została rozbita na dwia widoki: $UserLike$ i~$PostLike$.
+ Przechowują one dane inne niż tylko identyfikatory powiązanych encji.
+ Umożliwia to wykonywanie stałej (równej $2$) liczby zapytań do bazy danych w~celu wyświetlenia profilu użytkownika wraz z~tytułami lubianych przez niego wpisów (lub wyświetlania wpisu wraz imionami i~nazwiskami użytkowników go lubiących).
+ Pozostawienie encji $Like$ w~niezmienionym kształcie skutkowałoby potrzebą wykonania w~tym celu $n + 2$ zapytań, gdzie $n$ to liczba wpisów lubianych przez danego użytkownika (lub liczba użytkowników lubiących dany wpis).
+ Brak operacji złączenia w~języku CQL uniemożliwia wydobycie wszystkich potrzebnych danych w~jednym zapytaniu.
+ \item Widok $Post$ otrzymał pole $CommentsNumber$.
+ Umożliwia to wyświetlenie wpisów wraz z~liczbą ich komentarzy bez potrzeby odwoływania się do widoku $Comment$.
+ Używając języka SQL, aby uzyskać te dane przy użyciu pojedynczego zapytania, wystarczyłoby wykorzystać złączenie i~funkcję agregującą $Count$.
+ Jednakże język CQL nie umożliwia stworzenia takiego zapytania (a~tym samym wymusza jak najmniejszy koszt zapytania).
+\end{enumerate}
 
 
 
