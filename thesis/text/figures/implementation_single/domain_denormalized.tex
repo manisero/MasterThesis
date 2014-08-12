@@ -1,0 +1,44 @@
+\begin{figure}[!ht]
+\begin{center}
+\begin{tikzpicture} 
+\umlclass[y=4]{User}{ 
+ UserName\\
+ FirstName\\
+ LastName
+}{}
+
+\umlclass{UserPost}{ 
+ UserName\\
+ PostID\\
+ PostTitle
+}{}
+
+\umlclass[x=4.5,y=4]{Post}{ 
+ PostID\\
+ Author\\
+ Title\\
+ Content\\
+ CommentsNumber
+}{}
+
+\umlclass[x=4.5]{PostUser}{ 
+ PostID\\
+ UserName\\
+ UserFirstName\\
+ UserLastName
+}{}
+
+\umlclass[x=10,y=2]{Comment}{ 
+ CommentID\\
+ PostID\\
+ Author\\
+ ParentCommentID\\
+ Content
+}{}
+
+\end{tikzpicture}
+\end{center}
+
+\caption{Zdenormalizowana dziedzina.}
+\label{fig:single:domain_denormalized}
+\end{figure}

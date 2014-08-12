@@ -1,0 +1,42 @@
+\begin{figure}[!ht]
+\begin{center}
+\begin{tikzpicture} 
+\umlclass[x=4,y=5]{User}{ 
+ UserName\\
+ FirstName\\
+ LastName
+}{}
+
+\umlclass[y=2]{UserPost}{ 
+ UserName\\
+ PostID
+}{}
+
+\umlclass[x=4]{Post}{ 
+ PostID\\
+ Author\\
+ Title\\
+ Content
+}{}
+
+\umlclass[x=9,y=2]{Comment}{ 
+ CommentID\\
+ PostID\\
+ Author\\
+ ParentCommentID\\
+ Content
+}{}
+
+\umluniassoc{UserPost}{User}
+\umluniassoc{UserPost}{Post}
+\umluniassoc{Comment}{User}
+\umluniassoc{Comment}{Post}
+\umluniassoc{Comment}{Comment}
+\umluniassoc{Post}{User}
+
+\end{tikzpicture}
+\end{center}
+
+\caption{Znormalizowana dziedzina.}
+\label{fig:single:domain_normalized}
+\end{figure}
