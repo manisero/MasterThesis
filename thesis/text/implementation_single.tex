@@ -61,7 +61,7 @@ Pomiędzy znormalizowanym modelem dziedziny (rysunek~\ref{fig:single:domain_norm
 
 
 %=======
-\section{Generowane artefakty}
+\section{Generowane artefakty} \label{sec:generated_artifacts}
 %=======
 
 Artefaktami generowanymi na podstawie opisu dziedziny aplikacji będą:
@@ -85,16 +85,27 @@ Elementy mniej narażone na duplikację dziedziny, takie jak klasy realizujące 
 \section{Sposób definicji dziedziny}
 %=======
 
+Zgodnie z~założeniami dotyczącymi implementacji generatora, wszystkie artefakty wymienione w~sekcji~\ref{sec:generated_artifacts} powinny być generowane na podstawie pojedynczego opisu dziedziny aplikacji.
+Podczas implementacji tego aspektu pojawiają się następujące problemy:
+
+
+\subsection{Czy wymagać schematu opisu dziedziny}
+
 \begin{itemize}
  \item że będzie schemat opisu \ref{sec:core:domain_schema_requirement}
- \item ale że schema powinna być w jednym miejsu - będzie jako klasa w kodzie
+ \item ale gdzie ten schemat ma być zapisany
+ \item że schema powinna być w jednym miejsu - będzie jako klasa w kodzie
+\end{itemize}
+
+
+\subsection{Schemat opisu dziedziny aplikacji}
+
+\begin{itemize}
  \item zdefiniowanie schematu opisu dziedziny na potrzeby CQRS (zapisać każdy w JSONie)
   \begin{itemize}
-   \item każda tabela osobno (duplikacje)
-   \item PresentIn
+   \item per tabela (widoki) (duplikacje) (trudność wygenerowania modelu komend, i zdarzeń)
+   \item per encja (PresentIn) (brak duplikacji) (encje generują się same, generacja widoków i zdarzeń wymaga trochę pracy, ale jest ok)
   \end{itemize}
- \item które typy umieścić w definicji? CQLowe, .NETowe, czy własne? (nie ma potrzeby własnych, bo trzeba by robić dwie mapy; lepiej CQLowe bo jeden .NETowy mapuje się na wiele CQLowych) (że będzie potrzebna TypesMap.GetDotNetType)
- \item organizacja plików wejściowych i wyjściowych \ref{sec:core:files_structure}
 \end{itemize}
 
 \ref{fig:single:model_presentIn}
@@ -102,6 +113,17 @@ Elementy mniej narażone na duplikację dziedziny, takie jak klasy realizujące 
 
 \ref{fig:single:model_perView}
 \input{figures/implementation_single/model_perView}
+
+
+\subsection{które typy umieścić w definicji?}
+
+które typy umieścić w definicji? CQLowe, .NETowe, czy własne? (nie ma potrzeby własnych, bo trzeba by robić dwie mapy; lepiej CQLowe bo jeden .NETowy mapuje się na wiele CQLowych) (że będzie potrzebna TypesMap.GetDotNetType)
+
+
+\subsection{organizacja plików wejściowych i wyjściowych}
+
+organizacja plików wejściowych i wyjściowych \ref{sec:core:files_structure}
+
 
 
 %=======
