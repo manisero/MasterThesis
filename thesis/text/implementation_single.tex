@@ -1,29 +1,10 @@
 \chapter{Implementacja generatora} \label{chap:implementation:single_type}
 
-\begin{itemize}
- \item Wybrór klienta Cassandry (?)  
-\end{itemize}
+Generator aplikacji konkretnego typu będzie korzystał z~trzonu narzędzia w~celu wygenerowania części aplikacji opartej o~architekturę CQRS, korzystającej z~wzorca Event Souring i~z~bazy danych Cassandra.
+Głównym celem generatora jest wyeliminowanie z~systemu duplikacji opisu dziedziny aplikacji.
+Zostanie to osiągnięte przez umieszczenie pełnego opisu dziedziny w~jednym miejscu i na jego podstawie~generowanie innych artefaktów systemu, które duplikowałyby wiedzę na temat dziedziny.
 
-
-
-%=======
-\section{Co będzie generowane, a~co nie}
-%=======
-
-Założenia dotyczące całości:
-
-\begin{itemize}
- \item generator ma generować dziedzinę aplikacji CQRS wykorzystująej Cassandrę:
-  \begin{itemize}
-   \item czy w ogóle generować schemat bazy danych (no schema) (?)
-   \item schemat DLL (czyli tak)
-   \item klasy C\#: model komend, model zapytań
-   \item dokumentancja HTML
-  \end{itemize}
- \item ...
-\end{itemize}
-
-Ogólnie nie chodzi o to, żeby w ogóle nie pisać nazw klas / właściwości - tylko o to, żeby nie trzeba było pamiętać o wszystkich miejscach, gdzie dana encja jest używana.
+W~celu przestawienia kolejnych kroków implementacji narzędzia, sformułowany zostanie przykład generowanej aplikacji.
 
 
 
@@ -31,13 +12,39 @@ Ogólnie nie chodzi o to, żeby w ogóle nie pisać nazw klas / właściwości -
 \section{Przykład generowanej aplikacji}
 %=======
 
-Sformułowanie przykładu aplikacji
+Przykładowa aplikacja będzie serwisem internetowym, który umożliwia użytkownikom prowadzenie blogów.
+Użytkownik serwisu (encja $User$) będzie mógł:
 
-\ref{fig:single:domain_normalized}
+\begin{itemize}
+ \item dodać wpis na swoim blogu (encja $Post$);
+ \item polubić wpis innego użytkownika (encja $Like$);
+ \item skomentować wpis innego użytkownika (encja $Comment$);
+ \item skomentować komentarz innego użytkownika.
+\end{itemize}
+
+Dziedzina serwisu została przestawiona na rysunku~\ref{fig:single:domain_normalized}.
+Dziedzina ta reprezentuje jednocześnie model komend systemu.
+
 \input{figures/implementation_single/domain_normalized}
 
 \ref{fig:single:domain_denormalized}
 \input{figures/implementation_single/domain_denormalized}
+
+Artefaktami generowanymi na podstawie opisu dziedziny aplikacji będą:
+
+\begin{itemize}
+ \item skrypty DLL definiujące strukturę bazy danych;
+ \item klasy wchodzące w~skład modelu komend (patrz: sekcja~\ref{sec:cqrs});
+ \item klasy wchodzące w~skład modelu zapytań (patrz: sekcja~\ref{sec:cqrs});
+ \item klasy reprezentujące zdarzenia zachodzące w~systmie (patrz: sekcja~\ref{sec:event_sourcing});
+ \item klasy reprezentujące dane wyświetlane w~interfejscie użytkownika (\emph{view models});
+ \item dokumentację systemu w~formacie HTML;
+ \item pomocnicze skrypty powłoki automatyzujące rutynowe czynności wykonywane przez programistów (patrz: sekcje~\ref{sec:tasks_dupl}, \ref{sec:tasks_scripts}).
+\end{itemize}
+
+We wszystkich tych elementach zazwyczaj powielana jest wiedza na temat dziedziny aplikacji.
+Elementy mniej narażone na duplikację dziedziny, takie jak klasy realizujące logikę biznesową aplikacji, nie będą generowane przez narzędzie.
+
 
 
 %=======
