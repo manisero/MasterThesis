@@ -1,0 +1,42 @@
+\begin{figure}[!ht]
+\begin{verbatim}
+[
+ {
+  "Name": "PostID",
+  "Type": "timeuuid",
+  "PresentInEntity": "Post",
+  "IsEntityKey": true,
+  "PresentInViews": [
+   {
+    "View": "UserLike",
+    "IsKey": true,
+    "OnKeyPosition": 1
+   },
+   {
+    "View": "PostLike",
+    "IsKey": true,
+    "OnKeyPosition": 0
+   },
+   {
+    "View": "Comment",
+    "IsKey": true,
+    "OnKeyPosition": 0
+   }
+  ],
+  "PresentInEvents": [
+   "PostLikedEvent",
+   "PostCommentedEvent"
+  ]
+ },
+ {
+  "Name": "Title",
+  "Type": "text"
+  "PresentInEntity": "Post",
+  ...
+ },
+ ...
+]
+\end{verbatim}
+\caption{Opis encji $Post$ w~notacji ``per field''.}
+\label{fig:single:model_perField}
+\end{figure}

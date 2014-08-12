@@ -108,8 +108,8 @@ zdefiniowanie schematu opisu dziedziny na potrzeby CQRS (zapisać każdy w JSONi
 duplikacje
 trudność wygenerowania modelu komend, i zdarzeń
 
-\ref{fig:single:model_presentIn}
-\input{figures/implementation_single/model_presentIn}
+\ref{fig:single:model_perView}
+\input{figures/implementation_single/model_perView}
 
 \subsubsection{per encja}
 
@@ -117,13 +117,15 @@ PresentIn
 brak duplikacji
 encje generują się same, generacja widoków i zdarzeń wymaga trochę pracy, ale jest ok
 
-\ref{fig:single:model_perView}
-\input{figures/implementation_single/model_perView}
+\ref{fig:single:model_presentIn}
+\input{figures/implementation_single/model_presentIn}
 
 \subsubsection{per pole}
 po prostu zbiór pól i gdzie występują
 brak duplikacji
 
+\ref{fig:single:model_perField}
+\input{figures/implementation_single/model_perField}
 
 Wybór 2 rozwiązuje oba problemy postawione na końcu sekcji~\ref{sec:cqrs}.
 
