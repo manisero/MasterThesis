@@ -109,7 +109,7 @@ Gdyby schemat być przechowywany gdzie indziej, odpowiadająca mu klasa i~tak mu
 Najważniejszym aspektem określenia sposobu definicji dziedziny aplikacji jest określenie schematu tej dziedziny.
 Schemat ten powinien pozwalać na zapisanie dowolnej dziedziny w~wygody sposób, tak aby wprowadzanie modyfikacji dziedziny było jak najłatwiejsze.
 
-\subsubsection{wszystko}
+\subsubsection{Podejście naiwne}
 
 Najprostszym sposobem opisu dziedziny jest jawne wypisanie wszystkich elementów, które powinny być generowane przez generator.
 Umożliwi to bardzo łatwą generację artefaktów systemu.
@@ -143,7 +143,7 @@ Wprowadza to kilka problemów:
 %duplikacje
 %trudność wygenerowania modelu komend, i zdarzeń
 
-\subsubsection{per pole}
+\subsubsection{Obranie pola jako podstawowego elementu opisu dziedziny}
 
 Aby rozwiązać problem duplikacji, można jako pojedynczy element dziedziny potraktować nie widok, czy zdarzenie, a~pojedyncze pole.
 Taki opis zawierałby informację o~każdym z~pól dziedziny systemu wraz z~informacją o~widokach i~zdarzeniach, do których dane pole należy.
@@ -165,7 +165,7 @@ Jednakże i~ono posiada pewne wady:
  \item opis nie zawiera żadnej informacji na temat encji występujących w~systemie (patrz: problemy postawione na końcu sekcji~\ref{sec:cqrs}).
 \end{itemize}
 
-\subsubsection{per encja}
+\subsubsection{Obranie encji jako podstawowego elementu opisu dziedziny}
 
 Kolejnym podejściem może być potraktowanie encji jako pojedynczego elementu dziedziny - pomimo faktu, że encje nie wystąpią w~żadnym artefakcie systemu.
 Taki opis byłby podobny do poprzedniego rozwiązania, jednak pola byłyby pogrupowane według encji, do których należą.
