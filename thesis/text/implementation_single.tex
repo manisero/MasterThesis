@@ -70,9 +70,8 @@ Artefaktami generowanymi na podstawie opisu dziedziny aplikacji będą:
 
 \begin{itemize}
  \item skrypty DLL definiujące strukturę bazy danych;
- \item klasy wchodzące w~skład modelu komend (patrz: sekcja~\ref{sec:cqrs});
  \item klasy wchodzące w~skład modelu zapytań (patrz: sekcja~\ref{sec:cqrs});
- \item klasy reprezentujące zdarzenia zachodzące w~systmie (patrz: sekcja~\ref{sec:event_sourcing});
+ \item klasy reprezentujące zdarzenia zachodzące w~systemie (patrz: sekcja~\ref{sec:event_sourcing});
  \item klasy reprezentujące dane wyświetlane w~interfejscie użytkownika (\emph{view models});
  \item dokumentację systemu w~formacie HTML;
  \item pomocnicze skrypty powłoki automatyzujące rutynowe czynności wykonywane przez programistów (patrz: sekcje~\ref{sec:tasks_dupl}, \ref{sec:tasks_scripts}).
@@ -101,11 +100,15 @@ Nie ulega wątpliwości, że aby uniknąć duplikacji, schemat opisu dziedziny p
 Odpowiednim takim miejscem, jako że tam właśnie schemat ten będzie używany, wyjdaje się być klasa należąca do kodu źródłowego generatora aplikacji CQRS.
 Gdyby schemat być przechowywany gdzie indziej, odpowiadająca mu klasa i~tak musiałaby być stworzona lub wygenerowana, aby moć zdeserializować dziedzinę do obiektu silnie typizowanego.
 
+
 \subsection{Schemat opisu dziedziny aplikacji}
 
-zdefiniowanie schematu opisu dziedziny na potrzeby CQRS (zapisać każdy w JSONie)
+Najważniejszym aspektem określenia sposobu definicji dziedziny aplikacji jest określenie schematu tej dziedziny.
+Schemat ten powinien pozwalać na zapisanie dowolnej dziedziny w~wygody sposób, tak aby wprowadzanie modyfikacji dziedziny było jak najłatwiejsze.
 
 \subsubsection{wszystko}
+
+Najbardziej naiwnym sposobem opisu dziedziny jest jawne wypisanie wszystkich elementów, które powinny znaleźć się w~systemie.
 
 \ref{fig:single:model_verbose}
 
@@ -215,4 +218,21 @@ Implementacja szablonów
  \item DAL (repozytorium bazowe zahardkodowane, konkretnych nie da się wygenerować)
  \item BLL (obsługa zdarzeń zahardkodowana, da się wygenerować Eventy, a EventHandlery?)
  \item WEB (Nancy, da się wygenerować ViewModele, formy)
+\end{itemize}
+
+
+
+%=======
+\section{Abstrachując od konkretnego przykładu}
+%=======
+
+Że ten zapis nadaje się nie tylko do CQRS
+kroki postępowania:
+
+\begin{itemize}
+ \item zdefiniować encje
+ \item zdefiniować elementy, gdzie powielana jest wiedza na temat encji (tu: struktura bazy, model zapytań, zdarzenia, view modele)
+ \item zdefiniować główne jednostki generacji (niektóre elementy są równoważne) (tu: zdarzenia, widoki)
+ \item przypisać pola encji do pól głównych jednostek generacji (jedno pole encji - wiele pól jednostek generacji)
+ \item zapisać schemat
 \end{itemize}
