@@ -145,7 +145,7 @@ Wprowadza to kilka problemów:
 
 \subsubsection{per pole}
 
-Aby rozwiązać problem duplikacji, można jako pojedynczy element dziedziny potraktować nie encję, widok, czy zdarzenie, a~pojedyncze pole.
+Aby rozwiązać problem duplikacji, można jako pojedynczy element dziedziny potraktować nie widok, czy zdarzenie, a~pojedyncze pole.
 Taki opis zawierałby informację o~każdym z~pól dziedziny systemu wraz z~informacją o~widokach i~zdarzeniach, do których dane pole należy.
 
 Fragment opisu dziedziny przykładowej aplikacji wykorzystujący tę notację przedstawia rysunek~\ref{fig:single:model_perField}.
@@ -156,25 +156,42 @@ To rozwiązanie wyeliminowało duplikację z~opisu dziedziny aplikacji, rozwiąz
 Jednakże i~ono posiada pewne wady:
 
 \begin{itemize}
- \item zarządzanie taką listą pól może być utrudnione - pola nie są w~żaden sposób pogrupowane;
- \item 
+ \item zarządzanie taką listą pól może być utrudnione:
+  \begin{itemize}
+   \item pola nie są w~żaden sposób pogrupowane,
+   \item na liście mogą występować pola o~tej samej nazwie (należące do innych encji);
+  \end{itemize}
+ \item algorytm wyodrębnienia jednostek generacji na podstawie opisu dziedziny może być skomplikowany;
+ \item opis nie zawiera żadnej informacji na temat encji występujących w~systemie (patrz: problemy postawione na końcu sekcji~\ref{sec:cqrs}).
 \end{itemize}
 
 \subsubsection{per encja}
 
-PresentIn
-brak duplikacji
-encje generują się same, generacja widoków i zdarzeń wymaga trochę pracy, ale jest ok
+Kolejnym podejściem może być potraktowanie encji jako pojedynczego elementu dziedziny - pomimo faktu, że encje nie wystąpią w~żadnym artefakcie systemu.
+Taki opis byłby podobny do poprzedniego rozwiązania, jednak pola byłyby pogrupowane według encji, do których należą.
 
-\ref{fig:single:model_presentIn}
+Pełny opis pojedynczej encji wykorzystujący tę notację przedstawia rysunek~\ref{fig:single:model_presentIn}.
+
 \input{figures/implementation_single/model_presentIn}
 
-Wybór 3 rozwiązuje oba problemy postawione na końcu sekcji~\ref{sec:cqrs}:
+Rozwiązanie to jest najlepsze spośród omówionych:
 
 \begin{itemize}
- \item costam
- \item costam
+ \item nie występuje w~nim duplikacja;
+ \item występuje w~nim hierarchiczna organizacja:
+ \begin{itemize}
+  \item pola są pogrupowane,
+  \item występowanie wielu pól o~tej samej nazwie nie jest problemem;
+ \end{itemize}
+ \item rozwiązuje ono oba problemy postawione na końcu sekcji~\ref{sec:cqrs}:
+  \begin{itemize}
+   \item wiedza na temat modelu komend (równoważnego z~modelem encji) znalazła się w~opisie dziedziny
+   \item na ``pojedynczą, jednoznaczną i~autorytatywną reprezentację wiedzy o~dziedzinie aplikacji'' wybrany został model komend.
+  \end{itemize}
+
 \end{itemize}
+
+encje generują się same, generacja widoków i zdarzeń wymaga trochę pracy, ale jest ok
 
 
 \subsection{które typy umieścić w definicji?}

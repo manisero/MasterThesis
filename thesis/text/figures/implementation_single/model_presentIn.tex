@@ -2,19 +2,22 @@
 \begin{verbatim}
 {
  "Name": "User",
+ "IsView": true
  "Fields": [
   {
    "Name": "UserName",
    "Type": "text",
    "IsKey": true,
    "PresentInViews": [
-    { "Name": "Post" },
     { "Name": "PostLike", "IsKey": true },
-    ...
+    { "Name": "UserLike", "IsKey": true },
+    { "Name": "Post" },
+    { "Name": "Comment" }
    ],
    "PresentInEvents": [
     "PostPublishedEvent",
-    ...
+    "PostLikedEvent",
+    "PostCommentedEvent"
    ]
   },
   {
@@ -30,6 +33,9 @@
  ]
 }
 \end{verbatim}
-\caption{Fragment opisu encji $User$ w~wykorzystaniem konstrukcji ``PresentIn''.}
+\caption{
+ Pełny opis encji $User$ w~notacji, w~której za pojedyczny element dziedziny przyjęto encję.
+ $IsView$ - wartość oznaczająca, że wszystkie pola encji obecne są w~widoku $User$ (likwiduje to potrzebę wymieniania tego widoku w~weźle $PresentInViews$ każdego pola).
+}
 \label{fig:single:model_presentIn}
 \end{figure}
