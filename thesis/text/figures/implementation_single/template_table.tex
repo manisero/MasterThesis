@@ -4,9 +4,6 @@ Szablon:
 \begin{verbatim}
 <#@ template language="C#" #>
 <#@ parameter type="Schema.Model.View" name="Metadata" #>
-<#@ parameter type="System.String" name="KeySpace" #>
-USE "<#= KeySpace #>";
-
 CREATE TABLE "<#= Metadata.Name #>" (
 <# foreach (var field in Metadata.Fields) { #>
  "<#= field.Name #>" <#= field.Type #>,
@@ -19,21 +16,19 @@ CREATE INDEX ON "<#= Metadata.Name #>" ("<#= field.Name #>");
 <# } #>
 \end{verbatim}
 
-Wynik:
+Wynik dla widoku $Post$:
 
 \begin{verbatim}
-USE "Sample";
-
 CREATE TABLE "Post" (
  "PostID" timeuuid,
  "Title" text,
  "Content" text,
  "CommentsNumber" int,
- "Author" text,
+ "UserName" text,
  PRIMARY KEY ("PostID")
 );
 
-CREATE INDEX ON "Post" ("Author");
+CREATE INDEX ON "Post" ("UserName");
 \end{verbatim}
 
 \caption{
