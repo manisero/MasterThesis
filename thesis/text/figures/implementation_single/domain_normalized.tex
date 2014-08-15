@@ -2,22 +2,27 @@
 \begin{center}
 \begin{tikzpicture} 
 \umlclass[x=4,y=5]{User}{ 
- UserName\\
+ \textbf{UserName}\\
  FirstName\\
  LastName
 }{}
 
 \umlclass[y=2]{Like}{
+ \textbf{UserName}\\
+ \textbf{PostID}\\
 }{}
 
 \umlclass[x=4]{Post}{ 
- PostID\\
+ \textbf{PostID}\\
+ UserName\\
  Title\\
  Content
 }{}
 
 \umlclass[x=9,y=2]{Comment}{ 
- CommentID\\
+ \textbf{CommentID}\\
+ PostID\\
+ UserName\\
  ParentCommentID\\
  Content
 }{}
@@ -34,7 +39,7 @@
 
 \caption{
  Schemat dziedziny przykładowej aplikacji.
- Pola reprezentujące klucze obce zostały pominięte.
+ Pola wchodządze w~skład kluczy głównych zostały pogrubione.
 }
 \label{fig:single:domain_normalized}
 \end{figure}

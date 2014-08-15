@@ -1,41 +1,35 @@
 \begin{figure}[!ht]
 \begin{verbatim}
 {
- "Name": "Post",
+ "Name": "User",
  "Fields": [
   {
-   "Name": "PostID",
-   "Type": "timeuuid",
-   "IsKeyInModel": true,
+   "Name": "UserName",
+   "Type": "text",
+   "IsKey": true,
    "PresentInViews": [
-    {
-     "View": "Comment",
-     "IsKey": true,
-     "OnKeyPosition": 0
-    }
+    { "Name": "Post" },
+    { "Name": "PostLike", "IsKey": true },
+    ...
    ],
    "PresentInEvents": [
-    {
-     "Event": "PostCommentedEvent"
-    }
+    "PostPublishedEvent",
+    ...
    ]
   },
   {
-   "Name": "Title",
-   "Type": "text"
+   "Name": "FirstName",
+   "Type": "text",
+   "PresentInViews": [ { "Name": "UserLike" } ]
   },
   {
-   "Name": "Content",
-   "Type": "text"
-  },
-  {
-   "Name": "CommentsNumber",
-   "Type": "int"
+   "Name": "LastName",
+   "Type": "text",
+   "PresentInViews": [ { "Name": "UserLike" } ]
   }
- ],
- "IsPresentInModel": true
+ ]
 }
 \end{verbatim}
-\caption{Opis encji $Post$ w~wykorzystaniem konstrukcji ``PresentIn''.}
+\caption{Fragment opisu encji $User$ w~wykorzystaniem konstrukcji ``PresentIn''.}
 \label{fig:single:model_presentIn}
 \end{figure}

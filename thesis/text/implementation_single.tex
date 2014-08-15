@@ -16,10 +16,10 @@ Przykładowa aplikacja będzie serwisem internetowym, który umożliwia użytkow
 Użytkownik serwisu (encja $User$) będzie mógł:
 
 \begin{itemize}
- \item dodać wpis na swoim blogu (encja $Post$);
- \item polubić wpis innego użytkownika (encja $Like$);
- \item skomentować wpis innego użytkownika (encja $Comment$);
- \item skomentować komentarz innego użytkownika.
+ \item opublikować wpis (encja $Post$) na swoim blogu (zdarzenie $PostPublishedEvent$);
+ \item polubić (encja $Like$) wpis innego użytkownika (zdarzenie $PostLikedEvent$);
+ \item skomentować (encja $Comment$) wpis innego użytkownika (zdarzenie $PostCommentedEvent$);
+ \item skomentować komentarz innego użytkownika (również zdarzenie $PostCommentedEvent$).
 \end{itemize}
 
 Dziedzina serwisu została przedstawiona na rysunku~\ref{fig:single:domain_normalized}.
@@ -27,6 +27,12 @@ Dziedzina ta reprezentuje jednocześnie model komend systemu.
 Należy zaznaczyć, że na potrzeby przykładu dziedzina została w~jak największym stopniu uproszczona (np. nie znalazła się w~niej encja $Blog$, która mogłaby przechowywać nazwę, opis i~logo bloga).
 
 \input{figures/implementation_single/domain_normalized}
+
+TODO:
+wymienić zdarzenia
+
+\ref{fig:single:domain_events}
+\input{figures/implementation_single/domain_events}
 
 Na potrzeby architektury CQRS należy także zdefiniować model zapytań.
 Elementy wchodzące w~skłąd tego modelu nazywane będa widokami.
@@ -105,26 +111,23 @@ zdefiniowanie schematu opisu dziedziny na potrzeby CQRS (zapisać każdy w JSONi
 
 \subsection{wszystko}
 
-\begin{verbatim}
-{
-entities:...
-views...
-events...
-}
-\end{verbatim}
+\ref{fig:single:model_verbose}
+
+\input{figures/implementation_single/model_verbose}
 
 
 \subsubsection{per widok}
 
 Elementy modelu zapytań pojawiają się w~największej liczbie artefaktów systemu - w~skryptach CQL i~klasach modelu zapytań.
 Co więcej, tylko one muszą być dokładnie odwzorowane w~systemie - odpowiadają za przechowywanie danych i~bezpośrednio definiują strukturę bazy danych.
-Dlatego wydaje się, że najlepszym i~najbardziej naturalnym sposobem opisu dziedziny aplikacji jest opisanie jedynie widków i~użycie tego opisu jak podstawy do wygenerowania wszystkich artefaktów.
+Dlatego wydaje się, że najlepszym i~najbardziej naturalnym sposobem opisu dziedziny aplikacji jest opisanie jedynie widków i~użycie tego opisu jako podstawy do wygenerowania wszystkich artefaktów.
+
+Przykład takiego zapisu został przedstawiony na rysunku~\ref{fig:single:model_perView}.
+
+\input{figures/implementation_single/model_perView}
 
 duplikacje
 trudność wygenerowania modelu komend, i zdarzeń
-
-\ref{fig:single:model_perView}
-\input{figures/implementation_single/model_perView}
 
 \subsubsection{per encja}
 

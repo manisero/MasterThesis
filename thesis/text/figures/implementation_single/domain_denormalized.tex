@@ -2,36 +2,36 @@
 \begin{center}
 \begin{tikzpicture} 
 \umlclass[y=4]{User}{ 
- UserName\\
+ \textbf{UserName}\\
  FirstName\\
  LastName
 }{}
 
 \umlclass{UserLike}{ 
- UserName\\
- PostID\\
+ \textbf{UserName}\\
+ \textbf{PostID}\\
  PostTitle
 }{}
 
 \umlclass[x=4.5,y=4]{Post}{ 
- PostID\\
- Author\\
+ \textbf{PostID}\\
+ UserName\\
  Title\\
  Content\\
  CommentsNumber
 }{}
 
 \umlclass[x=4.5]{PostLike}{ 
- PostID\\
- UserName\\
- UserFirstName\\
- UserLastName
+ \textbf{PostID}\\
+ \textbf{UserName}\\
+ FirstName\\
+ LastName
 }{}
 
 \umlclass[x=10,y=2]{Comment}{ 
- CommentID\\
+ \textbf{CommentID}\\
  PostID\\
- Author\\
+ UserName\\
  ParentCommentID\\
  Content
 }{}

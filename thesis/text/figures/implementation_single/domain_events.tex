@@ -1,0 +1,26 @@
+\begin{figure}[!ht]
+\begin{center}
+\begin{tikzpicture} 
+\umlclass{PostPublishedEvent}{ 
+ UserName\\
+ Title\\
+ Content
+}{}
+
+\umlclass[x=5]{PostLikedEvent}{ 
+ UserName\\
+ PostID
+}{}
+
+\umlclass[x=10]{PostCommentedEvent}{ 
+ PostID\\
+ UserName\\
+ ParentCommentID\\
+ Content
+}{}
+\end{tikzpicture}
+\end{center}
+
+\caption{Zdarzenia występujące w~przykładowej aplikacji.}
+\label{fig:single:domain_events}
+\end{figure}

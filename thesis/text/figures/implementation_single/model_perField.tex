@@ -2,41 +2,34 @@
 \begin{verbatim}
 [
  {
-  "Name": "PostID",
-  "Type": "timeuuid",
-  "PresentInEntity": "Post",
+  "Name": "UserName",
+  "Type": "text",
+  "BelongsToEntity": "User",
   "IsEntityKey": true,
   "PresentInViews": [
-   {
-    "View": "UserLike",
-    "IsKey": true,
-    "OnKeyPosition": 1
-   },
-   {
-    "View": "PostLike",
-    "IsKey": true,
-    "OnKeyPosition": 0
-   },
-   {
-    "View": "Comment",
-    "IsKey": true,
-    "OnKeyPosition": 0
-   }
+   { "Name": "User", "IsKey": true },
+   { "Name": "Post" },
+   ...
   ],
   "PresentInEvents": [
+   "PostPublishedEvent",
    "PostLikedEvent",
    "PostCommentedEvent"
   ]
  },
  {
-  "Name": "Title",
+  "Name": "FirstName",
   "Type": "text"
-  "PresentInEntity": "Post",
-  ...
+  "BelongsToEntity": "User",
+  "PresentInViews": [
+   { "Name": "User" },
+   { "Name": "PostLike" },
+   ...
+  ]
  },
  ...
 ]
 \end{verbatim}
-\caption{Opis encji $Post$ w~notacji ``per field''.}
+\caption{Fragment opisu dziedziny w~notacji ``per field''.}
 \label{fig:single:model_perField}
 \end{figure}

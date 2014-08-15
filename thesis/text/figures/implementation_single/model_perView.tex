@@ -1,53 +1,26 @@
 \begin{figure}[!ht]
 \begin{verbatim}
-{
- "Name": "Post",
- "Type": "View",
- "Fields": [
-  {
-   "Name": "PostID",
-   "Type": "timeuuid",
-   "IsKey": true
-  },
-  {
-   "Name": "Title",
-   "Type": "text"
-  },
-  {
-   "Name": "Content",
-   "Type": "text"
-  },
-  {
-   "Name": "CommentsNumber",
-   "Type": "int"
-  }
- ]
-}
-
-{
- "Name": "Comment",
- "Type": "View",
- "Fields": [
-  {
-   "Name": "PostID",
-   "Type": "timeuuid"
-  },
-  ...
- ]
-}
-
-{
- "Name": "PostCommentedEvent",
- "Type": "Event",
- "Fields": [
-  {
-   "Name": "PostID",
-   "Type": "timeuuid"
-  },
-  ...
- ]
-}
+[
+ {
+  "Name": "User",
+  "Fields": [
+   { "Name": "UserName", "Type": "text", "IsKey": true },
+   { "Name": "FirstName", "Type": "text" },
+   { "Name": "LastName", "Type": "text" }
+  ]
+ },
+ {
+  "Name": "PostLike",
+  "Fields": [
+   ...
+   { "Name": "UserName", "Type": "text", "IsKey": true },
+   { "Name": "UserFirstName", "Type": "text" },
+   { "Name": "UserLastName", "Type": "text" }
+  ]
+ },
+ ...
+]
 \end{verbatim}
-\caption{Opis encji $Post$ w~notacji ``per view''.}
+\caption{Fragment opisu dziedziny w~notacji ``per view''.}
 \label{fig:single:model_perView}
 \end{figure}

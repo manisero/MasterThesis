@@ -1,0 +1,40 @@
+\begin{figure}[!ht]
+\begin{verbatim}
+[
+ "Entities": [
+  {
+   "Name": "User",
+   "Fields": [
+    { "Name": "UserName", "Type": "text", "IsKey": true },
+    { "Name": "FirstName", "Type": "text" },
+    { "Name": "LastName", "Type": "text" }
+   ]
+  },
+  ...
+ ],
+ "Views": [
+  {
+   "Name": "User",
+   "Fields": [
+    { "Name": "UserName", "Type": "text", "IsKey": true },
+    { "Name": "FirstName", "Type": "text" },
+    { "Name": "LastName", "Type": "text" }
+   ]
+  },
+  ...
+ ],
+ "Events": [
+  {
+   "Name": "PostPublishedEvent",
+   "Fields": [
+    { "Name": "UserName", "Type": "text" },
+    ...
+   ]
+  },
+  ...
+ ]
+]
+\end{verbatim}
+\caption{Fragment opisu dziedziny aplikacji w~notacji ``verbose''.}
+\label{fig:single:model_verbose}
+\end{figure}
