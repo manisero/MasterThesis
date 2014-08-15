@@ -144,11 +144,21 @@ Wprowadza to kilka problemów:
 %trudność wygenerowania modelu komend, i zdarzeń
 
 \subsubsection{per pole}
-po prostu zbiór pól i gdzie występują
-brak duplikacji
 
-\ref{fig:single:model_perField}
+Aby rozwiązać problem duplikacji, można jako pojedynczy element dziedziny potraktować nie encję, widok, czy zdarzenie, a~pojedyncze pole.
+Taki opis zawierałby informację o~każdym z~pól dziedziny systemu wraz z~informacją o~widokach i~zdarzeniach, do których dane pole należy.
+
+Fragment opisu dziedziny przykładowej aplikacji wykorzystujący tę notację przedstawia rysunek~\ref{fig:single:model_perField}.
+
 \input{figures/implementation_single/model_perField}
+
+To rozwiązanie wyeliminowało duplikację z~opisu dziedziny aplikacji, rozwiązując wszystkie problemy powodowane przez podejście opisane wyżej.
+Jednakże i~ono posiada pewne wady:
+
+\begin{itemize}
+ \item zarządzanie taką listą pól może być utrudnione - pola nie są w~żaden sposób pogrupowane;
+ \item 
+\end{itemize}
 
 \subsubsection{per encja}
 

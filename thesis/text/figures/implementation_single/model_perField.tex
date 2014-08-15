@@ -4,10 +4,9 @@
  {
   "Name": "UserName",
   "Type": "text",
-  "BelongsToEntity": "User",
-  "IsEntityKey": true,
   "PresentInViews": [
    { "Name": "User", "IsKey": true },
+   { "Name": "PostLike", "IsKey": true },
    { "Name": "Post" },
    ...
   ],
@@ -19,8 +18,7 @@
  },
  {
   "Name": "FirstName",
-  "Type": "text"
-  "BelongsToEntity": "User",
+  "Type": "text",
   "PresentInViews": [
    { "Name": "User" },
    { "Name": "PostLike" },
@@ -30,6 +28,9 @@
  ...
 ]
 \end{verbatim}
-\caption{Fragment opisu dziedziny w~notacji ``per field''.}
+\caption{
+ Fragment opisu, w~którym za pojedyczy element dziedziny przyjęto pole.
+ $PresentInEvents$ - informacja o~widokach, w~których pole występuje, $PresentInEvents$ - informacja o~zdarzeniach, w~których pole występuje.
+}
 \label{fig:single:model_perField}
 \end{figure}
