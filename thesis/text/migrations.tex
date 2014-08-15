@@ -27,7 +27,7 @@
      \item zalety:
       \begin{itemize}
        \item efekty migracji i tak dotyczyć będą jednostek generacji, a nie dziedziny
-       \item nie trzeba czytać dziedziny, tylko jednostki generacji (aktualną dziedzinę i tak trzeba czytać)
+       \item nie trzeba czytać dziedziny ze snapshota, tylko jednostki generacji (ale aktualną dziedzinę i tak trzeba czytać)
        \item można robić snapshot tylko niektórych jednostek generacji (np. tylko Views)
        \item odporne na zmiany schematu dziedziny
        \item zmiana jednostek generacji może wynikać z poprawki błędu działania mechanizmu generacji jednostek generacji - w tym przypadku taka poprawka też będzie potraktowana jako migracja
@@ -35,14 +35,14 @@
      \item wady:
       \begin{itemize}
        \item do schematu jednostek generacji mogą tylko dochodzić nowe rzeczy (nic nie moze się zmienić / wypaść)
-       \item na podstawie snapshota nie da się łatwo odtworzyć dziedziny
+       \item na podstawie snapshota nie da się łatwo odtworzyć dziedziny (ale czy jest to potrzebne?)
       \end{itemize}
     \end{itemize}
    
   \end{itemize}
   
   
-  \item przykłady:
+  \item implementacja dla:
    \begin{itemize}
     \item migracje bazy danych (cql)
     \item changelog w dokumentacji?

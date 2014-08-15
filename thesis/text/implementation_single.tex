@@ -86,7 +86,7 @@ Wystarczy, że ich pola występują w~modelu zapytań i~w~klasach zdarzeń.
 
 
 %=======
-\section{Sposób definicji dziedziny}
+\section{Sposób definicji dziedziny} \label{sec:domain_schema_definition}
 %=======
 
 Zgodnie z~założeniami dotyczącymi implementacji generatora, wszystkie artefakty wymienione w~sekcji~\ref{sec:generated_artifacts} powinny być generowane na podstawie pojedynczego opisu dziedziny aplikacji.
@@ -350,14 +350,21 @@ Zgodnie z~listą generowanych artefaktów zamieszczoną w~sekcji~\ref{sec:genera
 %=======
 
 Wszystkie kroki generacji aplikacji zostały zaimplementowane.
+Dzięki temu generacji podlega znaczna część artefaktów systemu, które korzystają z~wiedzy dotyczącej jego dziedziny.
 
-Że ten zapis nadaje się nie tylko do CQRS
-kroki postępowania:
+Należy zaznaczyć, że osiągnięta implementacja może posłużyć do wygenerowania aplikacji CQRS o~dziedzinach innych niż podana w~przykładzie.
+Co więcej, schemat opisu dziedziny aplikacji opracowany w~sekcji~\ref{sec:domain_schema_definition} może być wykorzystany do generowania aplikacji innych typów, np. aplikacji o klasycznej architekturze trójwarstwowej, korzystającej z~bazy danych SQL.
 
-\begin{itemize}
- \item zdefiniować encje
- \item zdefiniować elementy, gdzie powielana jest wiedza na temat encji (tu: struktura bazy, model zapytań, zdarzenia, view modele)
- \item zdefiniować główne jednostki generacji (niektóre elementy są równoważne) (tu: zdarzenia, widoki)
- \item przypisać pola encji do pól głównych jednostek generacji (jedno pole encji - wiele pól jednostek generacji)
- \item zapisać schemat
-\end{itemize}
+Ogólny schemat postępowania podczas konstruowania generatora dowolnej aplikacji jest następujący:
+
+\begin{enumerate}
+ \item Zdefiniowanie encji wchodzących w~skład dziedziny.
+ \item Zapisanie encji i~ich pól w~wybranym języku (tu: JSON).
+ \item Określenie artefaktów systemu, w~których powielana jest wiedza na temat encji (tu: struktura bazy danych, model zapytań, zdarzenia, modele widoków).
+ \item Zidentyfikowanie artefaktów równoważnych pod względem wykorzystywanej wiedzy i~wyznaczenie jednostek generacji, na podstawie których generowane będą te artefakty (tu: widoki, zdarzenia).
+ \item Dla każdego pola każdej encji określenie, w~których jednostkach generacji występować będzie to pole.
+ \item Uzupełnienie opisu pól każdej z~encji o~listy jednostek generacji, w~których będzie występować dane pole (tu: $PresentInViews$, $PresentInEvents$).
+ \item Implementacja algorytmu wyodrębnienia jednostek generacji z~opisu dziedziny.
+ \item Stworzenie szablonów generacji każdego z~artefaktów systemu określonych w~punkcie~3.
+ \item Określenie organizacji plików wyjściowych generatora (krok ten jest trywialny, nie został opisany w~niniejszym rozdziale).
+\end{enumerate}
