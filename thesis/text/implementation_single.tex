@@ -191,7 +191,7 @@ Rozwiązanie to jest najlepsze spośród omówionych:
 \end{itemize}
 
 Jedyną wadą tego podejścia w~stosunku do rozwiązania opisanego jako pierwsze jest to, że algorytm wyodrębnienia jednostek generacji na podstawie takiego opisu dziedziny może być skomplikowany.
-Aby skonstruować pojedyczny widok (lub zdarzenie), będzie on musiał odwiedzić opis każdej encji i~przeanalizować zawartość jej listy $PresentInViews$ (lub $PresentInEvents$).
+Aby skonstruować pojedyczny widok lub zdarzenie, będzie on musiał odwiedzić opis każdej encji i~przeanalizować zawartość jego listy $PresentInViews$ lub $PresentInEvents$ (patrz: sekcja~\ref{sec:generated_artifacts}).
 Wada ta jednak nie przesłania zalet tego rozwiązania.
 
 
@@ -263,13 +263,14 @@ Dlatego najlepszy w~tym przypadku jest wybór drugiej z~wymienionych możliwośc
 
 
 %=======
-\section{Podstawowe jednostki generacji}
+\section{Wyodrębnienie jednostek generacji z~opisu dziedziny aplikacji} \label{sec:gen_units_extraction}
 %=======
 
+Wszystkie generowane artefakty systemu (patrz: skecja~\ref{sec:generated_artifacts}) generowane będą na podstawie dwóch jednostek generacji
+
 \begin{itemize}
- \item entity
- \item event
- \item view
+ \item widok;
+ \item zdarzenie.
 \end{itemize}
 
 I algorytm ich generowania (sklejanie pól encji w widoki)
