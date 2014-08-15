@@ -54,7 +54,7 @@ Pomiędzy znormalizowanym modelem dziedziny (rysunek~\ref{fig:single:domain_norm
  Umożliwia to wykonywanie stałej (równej $2$) liczby zapytań do bazy danych w~celu wyświetlenia profilu użytkownika wraz z~tytułami lubianych przez niego wpisów (lub wyświetlania wpisu wraz imionami i~nazwiskami użytkowników go lubiących).
  Pozostawienie encji $Like$ w~niezmienionym kształcie skutkowałoby potrzebą wykonania w~tym celu $n + 2$ zapytań, gdzie $n$ to liczba wpisów lubianych przez danego użytkownika (lub liczba użytkowników lubiących dany wpis).
  Brak operacji złączenia w~języku CQL uniemożliwia wydobycie wszystkich potrzebnych danych w~jednym zapytaniu.
- \item Widok $Post$ otrzymał pole $CommentsNumber$.
+ \item Encja $Post$ otrzymała pole $CommentsNumber$.
  Umożliwia to wyświetlenie wpisów wraz z~liczbą ich komentarzy bez potrzeby odwoływania się do widoku $Comment$.
  Używając języka SQL, aby uzyskać te dane przy użyciu pojedynczego zapytania, wystarczyłoby wykorzystać złączenie i~funkcję agregującą $Count$.
  Jednakże język CQL nie umożliwia stworzenia takiego zapytania (a~tym samym wymusza jak najmniejszy koszt zapytania).
@@ -195,13 +195,13 @@ Aby skonstruować pojedyczny widok (lub zdarzenie), będzie on musiał odwiedzi�
 Wada ta jednak nie przesłania zalet tego rozwiązania.
 
 
-\subsection{które typy umieścić w definicji?}
+\subsection{Sposób definicji typów pól}
 
 Kolejnym problemem dotyczącym definicji dziedziny aplikacji jest sposób określania typów pól należących do encji.
 Bierze się on stąd, że w~różnych językach występują różne typy danych, a~te same typy mogą posiadać różne nazwy.
 Przykładowo, typ reprezentujący ciąg znaków w~języku CQL to $text$, a~w~języku C\# - $string$.
 
-\subsubsection{Możliwości}
+\subsubsection{Możliwe rozwiązania}
 
 W~przypadku omawianego generatora, dostępne są cztery możliwości rozwiązania tego problemu:
 
