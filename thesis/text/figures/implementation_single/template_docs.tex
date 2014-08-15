@@ -3,7 +3,7 @@ Szablon:
 
 \begin{verbatim}
 <#@ template language="C#" #>
-<#@ parameter type="IEnumerable<Schema.Model.Entity>" name="Metadata" #>
+<#@ parameter type="View[]" name="Metadata" #>
 <html>
 <# foreach (var entity in Metadata) { #>
  <div>
@@ -27,7 +27,6 @@ Wynik:
   <ul>
    <li>PostID (timeuuid)</li>
    <li>Title (text)</li>
-   <li>Content (text)</li>
    ...
   </ul>
  </div>
