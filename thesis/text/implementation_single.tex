@@ -17,7 +17,7 @@ Użytkownik serwisu (encja $User$) będzie mógł:
 
 \begin{itemize}
  \item opublikować wpis (encja $Post$) na swoim blogu (zdarzenie $PostPublishedEvent$);
- \item polubić (encja $Like$) wpis innego użytkownika (zdarzenie $PostLikedEvent$);
+ \item polubić (asocjacja $Like$) wpis innego użytkownika (zdarzenie $PostLikedEvent$);
  \item skomentować (encja $Comment$) wpis innego użytkownika (zdarzenie $PostCommentedEvent$);
  \item skomentować komentarz innego użytkownika (również zdarzenie $PostCommentedEvent$).
 \end{itemize}
@@ -242,6 +242,15 @@ Należałoby wtedy stosować własne nazwy typów (trzecie rozwiązanie) i~zaimp
 
 organizacja plików wejściowych i wyjściowych \ref{sec:core:files_structure}
 
+plik per encja
+
+\ref{fig:single:fileStructure_chosen}
+\input{figures/implementation_single/fileStructure_chosen}
+
+gdyby było wiecej encji, pól, widoków, wspieranych opcji: katalog per encja, plik per pole
+
+\ref{fig:single:fileStructure_generic}
+\input{figures/implementation_single/fileStructure_generic}
 
 
 %=======
