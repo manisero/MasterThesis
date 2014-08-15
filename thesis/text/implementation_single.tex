@@ -188,10 +188,11 @@ Rozwiązanie to jest najlepsze spośród omówionych:
    \item wiedza na temat modelu komend (równoważnego z~modelem encji) znalazła się w~opisie dziedziny
    \item na ``pojedynczą, jednoznaczną i~autorytatywną reprezentację wiedzy o~dziedzinie aplikacji'' wybrany został model komend.
   \end{itemize}
-
 \end{itemize}
 
-encje generują się same, generacja widoków i zdarzeń wymaga trochę pracy, ale jest ok
+Jedyną wadą tego podejścia w~stosunku do rozwiązania opisanego jako pierwsze jest to, że algorytm wyodrębnienia jednostek generacji na podstawie takiego opisu dziedziny może być skomplikowany.
+Aby skonstruować pojedyczny widok (lub zdarzenie), będzie on musiał odwiedzić opis każdej encji i~przeanalizować zawartość jej listy $PresentInViews$ (lub $PresentInEvents$).
+Wada ta jednak nie przesłania zalet tego rozwiązania.
 
 
 \subsection{które typy umieścić w definicji?}
