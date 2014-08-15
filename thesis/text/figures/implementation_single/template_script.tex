@@ -1,0 +1,25 @@
+\begin{figure}[!ht]
+Szablon:
+
+\begin{verbatim}
+<#@ template language="C#" #>
+<#@ parameter type="View[]" name="Metadata" #>
+<# foreach (var view in Metadata) { #>
+SOURCE 'column_families/<#= view.Name #>.cql';
+<# } #>
+\end{verbatim}
+
+Wynik:
+
+\begin{verbatim}
+SOURCE 'column_families/Comment.cql';
+SOURCE 'column_families/Post.cql';
+SOURCE 'column_families/User.cql';
+\end{verbatim}
+
+\caption{
+ Szablon generacji skryptu tworzącego rodziny kolumn w~bazie danych i~wynik jego działania.
+ Szablon zakłada, że wyniki działania szablonu~\ref{fig:single:template_table} znajdują się w~katalogu $column\_families$ w~plikach o~nazwach odpowiadających nazwom widoków.
+}
+\label{fig:single:template_script}
+\end{figure}

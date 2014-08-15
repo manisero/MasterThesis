@@ -195,7 +195,7 @@ Aby skonstruować pojedynczy widok lub zdarzenie, będzie on musiał odwiedzić 
 Wada ta jednak nie przesłania zalet tego rozwiązania.
 
 
-\subsection{Sposób definicji typów pól}
+\subsection{Sposób definicji typów pól} \label{sec:field_type_definition}
 
 Kolejnym problemem dotyczącym definicji dziedziny aplikacji jest sposób określania typów pól należących do encji.
 Bierze się on stąd, że w~różnych językach występują różne typy danych, a~te same typy mogą posiadać różne nazwy.
@@ -314,34 +314,34 @@ Algorytm zapewnia kilka ważnych funkcjonalności:
 
 
 %=======
-\section{Implementacja szablonów generacji}
+\section{Szablony generacji}
 %=======
 
-Implementacja szablonów
+Aby umożliwić wykonanie ostatniego kroku generacji, należy dostarczyć generatorowi szablony generacji.
+Na podstawie jednostek generacji wyodrębnienionych z~opisu dziedziny aplikacji, wygenerują one artefakty systemu.
+
+Zgodnie z~listą generowanych artefaktów zamieszczoną w~sekcji~\ref{sec:generated_artifacts}, stworzono następujące szablony:
 
 \begin{itemize}
- \item CQL:
+ \item szablon generujący definicję rodziny kolumn bazy danych Cassandra na podstawie widoku (rysunek~\ref{fig:single:template_table});
+ \item szablon generujący klasę widoku lub model widoku (\emph{view model}) na podstawie widoku (rysunek~\ref{fig:single:template_class});
+ \item szablon generujący klasę zdarzenia na podstawie zdarzenia;
+ \item szablon generujący model widoku (\emph{view model}) na podstawie widoku;
+ \item szablon generujący plik HTML na podstawie zbioru widoków (rysunek~\ref{fig:single:template_docs});
+ \item szablony generujące skrypty automatyzujące czynności wykonywane przez programistów:
   \begin{itemize}
-   \item create table
-   \item select
+   \item szablon generujący skrypt tworzący rodziny kolumn w~bazie danych na podstawie zbioru wszystkich widoków dziedziny (rysunek~\ref{fig:single:template_script});
+   \item szablon generujący skrypt pobierający wszystkie dane przechowywane w~danej rodzinie kolumn na~podstawie widoku odpowiadającego tej rodzinie.
   \end{itemize}
- \item C\#:
-  \begin{itemize}
-   \item entity
-   \item event
-   \item view
-  \end{itemize}
- \item HTML (dokumentancja)
 \end{itemize}
 
-\ref{fig:single:template_table}
 \input{figures/implementation_single/template_table}
 
-\ref{fig:single:template_class}
 \input{figures/implementation_single/template_class}
 
-\ref{fig:single:template_docs}
 \input{figures/implementation_single/template_docs}
+
+\input{figures/implementation_single/template_script}
 
 
 
