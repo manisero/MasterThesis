@@ -197,7 +197,39 @@ Wada ta jednak nie przesłania zalet tego rozwiązania.
 
 \subsection{które typy umieścić w definicji?}
 
-które typy umieścić w definicji? CQLowe, .NETowe, czy własne? (nie ma potrzeby własnych, bo trzeba by robić dwie mapy; lepiej CQLowe bo jeden .NETowy mapuje się na wiele CQLowych) (że będzie potrzebna TypesMap.GetDotNetType)
+Kolejnym problemem dotyczącym definicji dziedziny aplikacji jest sposób określania typów pól należących do encji.
+Bierze się on stąd, że w~różnych językach występują różne typy danych, a~te same typy mogą posiadać różne nazwy.
+Przykładowo, typ reprezentujący ciąg znaków w~języku CQL to $text$, a~w~języku C\# - $string$.
+
+W~przypadku omawianego generatora, dostępne są cztery możliwości rozwiązania tego problemu:
+
+\begin{itemize}
+ \item używanie w~opisie dziedziny jednie typów zaczerpniętych z~języka CQL:
+  \begin{itemize}
+   \item uprościłoby to generowanie definicji rodzin kolumn bazy danych - typy kolumn mogą zostać pobrane bezpośrednio z~opisu pól encji,
+   \item skutkowałoby to wymogiem mapowania typów języka CQL na typy języka C\# podczas generacji klas;
+  \end{itemize}
+ \item używanie w~opisie dziedziny jednie typów zaczerpniętych z~języka C\#:
+  \begin{itemize}
+   \item uprościłoby to generowanie klas,
+   \item wymagałoby to mapowania typów języka C\# na typy języka CQL podczas generacji definicji rodzin kolumn;
+  \end{itemize}
+ \item używanie własnych nazw typów - byłoby to podejście uniwersalne, niezależne od języków wykorzystywanych w~systemie, ale wymagające mapowania typów podczas generacji każdego z~artefaktów;
+ \item uwzględnianie obu typów w~opisie każdego pola (np. jako osobne wartości: $CQLType$ i~$CShartType$):
+  \begin{itemize}
+   \item generowanie zarówno klas, jak i~definicji rodzin kolumn byłoby ułatwione,
+   \item konieczność definiowania dwóch typów dla każdego pola mogłaby być uciążliwa.
+  \end{itemize}
+
+\end{itemize}
+
+Jako ze CQL dobrze mapuje sie na C\# (wiele CQL na jeden C\#, ale nie odwrotnie), w tym przypadku wystarczy CQL
+gdyby było inaczej (w innych bazach danych, w innych językach, w innych rodzajach aplikacji), to własne lub 2 pola)
+
+Dlatego w~dotychczas prezentowanych przykładach wszystkie pola encji, widoków i~zdarzeń posiadały typ $text$.
+Jest to typ danych języka CQL oznaczający ciąg znaków.
+
+że będzie potrzebna TypesMap.GetDotNetType
 
 
 \subsection{organizacja plików wejściowych i wyjściowych}
