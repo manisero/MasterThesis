@@ -22,20 +22,16 @@ Użytkownik serwisu (encja $User$) będzie mógł:
  \item skomentować komentarz innego użytkownika (również zdarzenie $PostCommentedEvent$).
 \end{itemize}
 
-Dziedzina serwisu została przedstawiona na rysunku~\ref{fig:single:domain_normalized}.
-Dziedzina ta reprezentuje jednocześnie model komend systemu.
-Należy zaznaczyć, że na potrzeby przykładu dziedzina została w~jak największym stopniu uproszczona (np. nie znalazła się w~niej encja $Blog$, która mogłaby przechowywać nazwę, opis i~logo bloga).
+Dziedzina serwisu została przedstawiona na rysunku~\ref{fig:single:domain_normalized}\footnote{Należy zaznaczyć, że na potrzeby przykładu dziedzina została w~jak największym stopniu uproszczona (np. nie znalazła się w~niej encja $Blog$, która mogłaby przechowywać nazwę, opis i~logo bloga).}.
+Jednocześnie reprezentuje ona model komend systemu.
+Natomiast zachodzące w~systemie zdarzenia pokazano na rysunku~\ref{fig:single:domain_events}.
 
 \input{figures/implementation_single/domain_normalized}
 
-TODO:
-wymienić zdarzenia
-
-\ref{fig:single:domain_events}
 \input{figures/implementation_single/domain_events}
 
 Na potrzeby architektury CQRS należy także zdefiniować model zapytań.
-Elementy wchodzące w~skłąd tego modelu nazywane będa widokami.
+Elementy wchodzące w~skład tego modelu nazywane będa widokami.
 Widoki powinny udostępniać dane zdenormalizowane w~takim stopniu, aby umożliwić jak najefektywniejsze wykonywane najczęstszych zapytań wykonywanych w~systemie~\cite{cassandra_model}.
 
 W~omawianym przykładzie najczęściej wykonywane będa zapytania na potrzeby:
@@ -109,7 +105,7 @@ Gdyby schemat być przechowywany gdzie indziej, odpowiadająca mu klasa i~tak mu
 
 zdefiniowanie schematu opisu dziedziny na potrzeby CQRS (zapisać każdy w JSONie)
 
-\subsection{wszystko}
+\subsubsection{wszystko}
 
 \ref{fig:single:model_verbose}
 
