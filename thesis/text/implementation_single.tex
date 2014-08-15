@@ -191,7 +191,7 @@ Rozwiązanie to jest najlepsze spośród omówionych:
 \end{itemize}
 
 Jedyną wadą tego podejścia w~stosunku do rozwiązania opisanego jako pierwsze jest to, że algorytm wyodrębnienia jednostek generacji na podstawie takiego opisu dziedziny może być skomplikowany.
-Aby skonstruować pojedyczny widok lub zdarzenie, będzie on musiał odwiedzić opis każdej encji i~przeanalizować zawartość jego listy $PresentInViews$ lub $PresentInEvents$ (patrz: sekcja~\ref{sec:generated_artifacts}).
+Aby skonstruować pojedynczy widok lub zdarzenie, będzie on musiał odwiedzić opis każdej encji i~przeanalizować zawartość jego listy $PresentInViews$ lub $PresentInEvents$ (patrz: sekcja~\ref{sec:generated_artifacts}).
 Wada ta jednak nie przesłania zalet tego rozwiązania.
 
 
@@ -246,7 +246,7 @@ Jedną z~wymienionych zalet wybranego schematu definicji dziedziny jest fakt, ż
 Pozwala to na wybór spomiędzy trzech organizacji plików opisu dziedziny:
 
 \begin{itemize}
- \item umieszczenie pełnego opisu dziedziny w~pojedycznym pliku;
+ \item umieszczenie pełnego opisu dziedziny w~pojedynczym pliku;
  \item umieszczenie opisu każdej encji w~osobnym pliku (rysunkek~\ref{fig:single:fileStructure_chosen});
  \item umieszczenie opisu każdego pola w~osobnum pliku (rysunkek~\ref{fig:single:fileStructure_generic}).
 \end{itemize}
@@ -257,7 +257,7 @@ Pozwala to na wybór spomiędzy trzech organizacji plików opisu dziedziny:
 Ostatni ze sposobów pozwala na uporządkowanie elementów skomplikowanych dziedzin, w~których występują encje posiadające wiele pól, a~opis każdego pola jest rozbudowany (oprócz typu pola i~list miejsc, w~których występuje, zawiera wiele dodatkowych wartości).
 
 Dziedzina przykładowej aplikacji nie jest jednak skomplikowana.
-Mimo to, pojedyczny plik z~jej opisem miałby ponad $100$ linii tekstu.
+Mimo to, pojedynczy plik z~jej opisem miałby ponad $100$ linii tekstu.
 Dlatego najlepszy w~tym przypadku jest wybór drugiej z~wymienionych możliwości.
 
 
@@ -266,22 +266,50 @@ Dlatego najlepszy w~tym przypadku jest wybór drugiej z~wymienionych możliwośc
 \section{Wyodrębnienie jednostek generacji z~opisu dziedziny aplikacji} \label{sec:gen_units_extraction}
 %=======
 
+Zdefiniowanie dziedziny aplikacji i~zapisanie jej w~odpowiedniej strukturze plików umożliwia wykonanie pierwszego i~drugiego kroku działania generatora (patrz: sekcja~\ref{sec:generation_steps}).
+Kolejny krok wymaga implementacji algorytmu wyodrębnienia jednostek generacji z~opisu dziedziny (patrz: sekcja~\ref{sec:generation_units}).
+
+\subsubsection{Jednostki generacji}
+
 Wszystkie generowane artefakty systemu (patrz: skecja~\ref{sec:generated_artifacts}) generowane będą na podstawie obiektu (lub kolekcji obiektów) jednej z~dwóch jednostek generacji: widoku lub zdarzenia.
 Klasy jednostek generacji zostały przedstawione na rysunku~\ref{fig:single:generation_units}.
 
 \input{figures/implementation_single/generation_units}
 
-Algorytm wyodrębnienia jednostek generacji z~opisu dziedziny (patrz: sekcja~\ref{sec:generation_units}) przebiega następująco:
+\subsubsection{Algorytm}
+
+Algorytm wyodrębnienia jednostek generacji z~opisu dziedziny przebiega następująco:
 
 \begin{enumerate}
  \item Stwórz pustą listę widoków $V$ i~pustą listę zdarzeń $E$.
- \item Dla każdej encji $e$ należącej do dziedziny:
+ \item Dla każdego pola $f$ każdej encji $e$ należącej do dziedziny:
   \begin{enumerate}
-   \item 
+   \item Jeśli $e.IsView$:
+    \begin{enumerate}
+     \item Jeśli $V$ nie zawiera widoku o~nazwie $e.Name$, stwórz go i~dodaj do $V$.
+     \item Na podstawie $f$ stwórz obiekt $ViewField$ i~dodaj go do widoku o~nazwie $e.Name$.
+    \end{enumerate}
+   \item Dla każdego widoku $v$ z~$f.PresentInViews$:
+    \begin{enumerate}
+     \item Jeśli $V$ nie zawiera widoku o~nazwie $v.Name$, stwórz go i~dodaj do $V$.
+     \item Na podstawie $f$ stwórz obiekt $ViewField$ i~dodaj go do widoku o~nazwie $v.Name$.
+    \end{enumerate}
+   \item Dla każdego zdarzenia $ev$ z~$f.PresentInEvents$:
+    \begin{enumerate}
+     \item Jeśli $E$ nie zawiera zdarzenia o~nazwie $ev.Name$, stwórz je i~dodaj do $E$.
+     \item Na podstawie $f$ stwórz obiekt $EventField$ i~dodaj go do zdarzenia o~nazwie $ev.Name$.
+    \end{enumerate}
   \end{enumerate}
  \item Zwróć $V$ i~$E$.
-
 \end{enumerate}
+
+Algorytm zapewnia kilka ważnych funkcjonalności:
+
+\begin{itemize}
+ \item w~pojedynczym widoku lub zdarzeniu mogą znalaźć się pola należące do kilku różnych encji;
+ \item dla danego widoku nie musi istnieć odpowiadająca mu encja; na przykład nie istnieją encje $PostLike$ i~$UserLike$ - widoki te występują jedynie w~listach $PresentInViews$ pól innych encji;
+ \item dla danej encji nie musi istnieć odpowiadający jej widok; może nie istnieć widok, który zawiera wszystkie jej pola.
+\end{itemize}
 
 
 
