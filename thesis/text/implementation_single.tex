@@ -201,6 +201,8 @@ Kolejnym problemem dotyczącym definicji dziedziny aplikacji jest sposób okreś
 Bierze się on stąd, że w~różnych językach występują różne typy danych, a~te same typy mogą posiadać różne nazwy.
 Przykładowo, typ reprezentujący ciąg znaków w~języku CQL to $text$, a~w~języku C\# - $string$.
 
+\subsubsection{Możliwości}
+
 W~przypadku omawianego generatora, dostępne są cztery możliwości rozwiązania tego problemu:
 
 \begin{itemize}
@@ -220,16 +222,20 @@ W~przypadku omawianego generatora, dostępne są cztery możliwości rozwiązani
    \item generowanie zarówno klas, jak i~definicji rodzin kolumn byłoby ułatwione,
    \item konieczność definiowania dwóch typów dla każdego pola mogłaby być uciążliwa.
   \end{itemize}
-
 \end{itemize}
 
-Jako ze CQL dobrze mapuje sie na C\# (wiele CQL na jeden C\#, ale nie odwrotnie), w tym przypadku wystarczy CQL
-gdyby było inaczej (w innych bazach danych, w innych językach, w innych rodzajach aplikacji), to własne lub 2 pola)
+\subsubsection{Wybór rozwiązania}
 
-Dlatego w~dotychczas prezentowanych przykładach wszystkie pola encji, widoków i~zdarzeń posiadały typ $text$.
-Jest to typ danych języka CQL oznaczający ciąg znaków.
+Pomiędzy typami języka C\# i~typami języka CQL występuje korzystna zależność: każdemu typowi języka CQL odpowiada pojedynczy typ języka C\#.
+Przykładowo, typom $ascii$, $text$ i~$varchar$ języka CQL odpowiada wspomniany już typ $string$ języka C\#.
+Jak widać, zależność ta nie jest symetryczna.
 
-że będzie potrzebna TypesMap.GetDotNetType
+Odpowiednim rozwiązaniem jest więc definiowanie typów pól encji przy użyciu typów języka CQL.
+Dlatego w~dotychczas prezentowanych przykładach wszystkie pola encji, widoków i~zdarzeń posiadały typy języka CQL.
+
+Warto podkreślić, że gdyby generowane aplikacje korzystały z~innej bazy danych czy innego języka programowania, lub gdyby korzystały z~więcej niż dwóch języków (np. przechowywały model komend w~bazie danych SQL), to wybrane rozwiązanie mogłoby być niewystarczające.
+Można by wtedy skorzystać z~ostatniego z~wymienionych rozwiązań, jednak w~przypadku konieczności definiowania trzech typów dla każdego pola byłoby ono zbyt uciążliwe.
+Należałoby wtedy stosować własne nazwy typów (trzecie rozwiązanie) i~zaimplementować mapowanie ich na typy zdefiniowane w~każdym z~używanych języków.
 
 
 \subsection{organizacja plików wejściowych i wyjściowych}
