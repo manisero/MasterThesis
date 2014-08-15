@@ -238,19 +238,28 @@ Można by wtedy skorzystać z~ostatniego z~wymienionych rozwiązań, jednak w~pr
 Należałoby wtedy stosować własne nazwy typów (trzecie rozwiązanie) i~zaimplementować mapowanie ich na typy zdefiniowane w~każdym z~używanych języków.
 
 
-\subsection{organizacja plików wejściowych i wyjściowych}
+\subsection{Organizacja plików}
 
-organizacja plików wejściowych i wyjściowych \ref{sec:core:files_structure}
+Ostatnim z~problemów, jakie należy rozwiązać ustalając sposób definicji dziedziny aplikacji, jest organizacja plików składających się na jej opis (patrz: sekcja \ref{sec:core:files_structure}).
 
-plik per encja
+Jedną z~wymienionych zalet wybranego schematu definicji dziedziny jest fakt, że jest ona hierarchiczna - w~dziedzinie występują encje, a~każda encja składa się z~pól.
+Pozwala to na wybór spomiędzy trzech organizacji plików opisu dziedziny:
 
-\ref{fig:single:fileStructure_chosen}
+\begin{itemize}
+ \item umieszczenie pełnego opisu dziedziny w~pojedycznym pliku;
+ \item umieszczenie opisu każdej encji w~osobnym pliku (rysunkek~\ref{fig:single:fileStructure_chosen});
+ \item umieszczenie opisu każdego pola w~osobnum pliku (rysunkek~\ref{fig:single:fileStructure_generic}).
+\end{itemize}
+
 \input{figures/implementation_single/fileStructure_chosen}
-
-gdyby było wiecej encji, pól, widoków, wspieranych opcji: katalog per encja, plik per pole
-
-\ref{fig:single:fileStructure_generic}
 \input{figures/implementation_single/fileStructure_generic}
+
+Ostatni ze sposobów pozwala na uporządkowanie elementów skomplikowanych dziedzin, w~których występują encje posiadające wiele pól, a~opis każdego pola jest rozbudowany (oprócz typu pola i~list miejsc, w~których występuje, zawiera wiele dodatkowych wartości).
+
+Dziedzina przykładowej aplikacji nie jest jednak skomplikowana.
+Mimo to, pojedyczny plik z~jej opisem miałby ponad $100$ linii tekstu.
+Dlatego najlepszy w~tym przypadku jest wybór drugiej z~wymienionych możliwości.
+
 
 
 %=======
