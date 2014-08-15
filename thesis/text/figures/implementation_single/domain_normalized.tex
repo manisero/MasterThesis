@@ -1,7 +1,7 @@
 \begin{figure}[!ht]
 \begin{center}
 \begin{tikzpicture} 
-\umlclass[x=4,y=5]{User}{ 
+\umlclass[x=5,y=5]{User}{ 
  \textbf{UserName}\\
  FirstName\\
  LastName
@@ -12,14 +12,14 @@
  \textbf{PostID}\\
 }{}
 
-\umlclass[x=4]{Post}{ 
+\umlclass[x=5]{Post}{ 
  \textbf{PostID}\\
  UserName\\
  Title\\
  Content
 }{}
 
-\umlclass[x=9,y=2]{Comment}{ 
+\umlclass[x=10,y=2]{Comment}{ 
  \textbf{CommentID}\\
  PostID\\
  UserName\\
@@ -27,12 +27,12 @@
  Content
 }{}
 
-\umluniassoc{Like}{User}
-\umluniassoc{Like}{Post}
-\umluniassoc{Comment}{User}
-\umluniassoc{Comment}{Post}
-\umluniassoc{Comment}{Comment}
-\umluniassoc{Post}{User}
+\umlassoc[mult1=1,mult2=*]{User}{Like}
+\umlassoc[mult1=1,mult2=*]{Post}{Like}
+\umlassoc[mult1=1,mult2=*]{User}{Comment}
+\umlassoc[mult1=1,mult2=*]{Post}{Comment}
+\umlassoc[mult1=1,mult2=*]{Comment}{Comment}
+\umlassoc[mult1=1,mult2=*]{User}{Post}
 
 \end{tikzpicture}
 \end{center}

@@ -1,0 +1,38 @@
+\begin{figure}[!ht]
+\begin{center}
+\begin{tikzpicture} 
+\umlclass{View}{ 
+ Name : string
+}{}
+
+\umlclass[y=-4.5]{ViewField}{ 
+ Name : string\\
+ Type : string\\
+ IsKey : bool\\
+ OnKeyPosition : int\\
+ IsNullable : bool\\
+ IsSearchable : bool
+}{}
+
+\umlclass[x=5]{Event}{ 
+ Name : string
+}{}
+
+\umlclass[x=5,y=-4.5]{EventField}{ 
+ Name : string\\
+ Type : string\\
+ IsNullable : bool
+}{}
+
+\umlassoc[mult1=1,mult2=*]{View}{ViewField}
+\umlassoc[mult1=1,mult2=*]{Event}{EventField}
+
+\end{tikzpicture}
+\end{center}
+
+\caption{
+ Klasy jednostek generacji.
+ $OnKeyPosition$ - określa pozycję pola w~kluczu głównym rodziny kolumn (dotyczy złożonych kluczy głównych); $IsNullable$ - określa, czy pole może przyjąć wartość $null$ (dotyczy typów prostych, takich jak $int$).
+}
+\label{fig:single:generation_units}
+\end{figure}

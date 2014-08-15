@@ -11,7 +11,7 @@
    "PresentInViews": [
     { "Name": "PostLike", "IsKey": true },
     { "Name": "UserLike", "IsKey": true },
-    { "Name": "Post" },
+    { "Name": "Post", "IsSearchable": true },
     { "Name": "Comment" }
    ],
    "PresentInEvents": [
@@ -35,7 +35,7 @@
 \end{verbatim}
 \caption{
  Pełny opis encji $User$ w~notacji, w~której za pojedyczny element dziedziny przyjęto encję.
- $IsView$ - wartość oznaczająca, że wszystkie pola encji obecne są w~widoku $User$ (likwiduje to potrzebę wymieniania tego widoku w~weźle $PresentInViews$ każdego pola).
+ $IsView$ - wartość oznaczająca, że wszystkie pola encji obecne są w~widoku $User$ (likwiduje to potrzebę wymieniania tego widoku w~węźle $PresentInViews$ każdego pola); $IsSearchable$ - wartość oznaczająca, że dla danego pola powinien istnieć w~danym widoku indeks.
 }
 \label{fig:single:model_presentIn}
 \end{figure}
