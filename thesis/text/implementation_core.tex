@@ -9,7 +9,8 @@ Przed przystąpieniem do prac nad generatorem aplikacji konkretnego typu, należ
 %=======
 
 O ile elastyczność generatora konkretnego typu aplikacji może być ograniczona, o~tyle rdzeń powinien być na tyle uniwersalny, by mógł być użyty w~celu wygenerowania wielu rodzajów plików tekstowych, w~tym kodu źródłowego w~dowolnym języku, skryptów DLL, skryptów powłoki, dokumentancji w~formacie HTML lub XML itd.
-Wszystkie rodzaje plików powinny być generowane w~ten sam sposób (np. na podstawie szablonów napisanych w~jednym języku, takim jak xslt~\cite{xslt}), tak aby programista korzystający z~komponentu nie musiał poznawać całej gamy języków lub narzędzi używanych do tworzenia szablonów generacji.
+Wszystkie rodzaje plików powinny być generowane w~ten sam sposób, np. na podstawie szablonów napisanych w~jednym języku, takim jak xslt (patrz: sekcja~\ref{sec:xslt}).
+Dzięki temu programista korzystający z~komponentu nie będzie musiał poznawać całej gamy języków lub narzędzi używanych do tworzenia szablonów generacji.
 Pożądaną funkcjonalnością jest możliwość łatwiej wymiany domyślnie użwanego rodzaju szablonów na inny, tak aby użytkownik mógł w~łatwy sposób użyć w~nim szablonów stworzonych w~języku, ktory zna najlepiej.
 Co więcej, rdzeń narzędzia nie pownien narzucać sposobu formatowania danych wejściowych (w~tym przypadku - opisu dziedziny aplikacji).
 
@@ -251,9 +252,9 @@ Ostatnią decyzją w~ramach założeń dotyczących rdzenia generatora jest wyb�
 Domyślnie używany silnik wybrano spośród następujących możliwości:
 
 
-\subsection{XSLT}
+\subsection{XSLT} \label{sec:xslt}
 
-XSLT (Xml Stylesheets Transformations)~\cite{xslt} jest językiem generacji dowolnych plików tekstowych na podstawie plików XML.
+XSLT\footnote{Xml Stylesheets Transformations - strona języka: http://www.w3.org/TR/xslt20/} jest językiem generacji dowolnych plików tekstowych na podstawie plików XML.
 Jest to standard zaproponowany przez organizację W3C~\cite{w3c}.
 Jego zaletą jest to, że szablony generacji tworzone są w~języku XML, co zwalnia programistę z~potrzeby poznawania kolejnego języka.
 Jest on jednak mało czytelny, a~wprowadzanie zmian w~szablonie jest niewygodne.
@@ -261,7 +262,7 @@ Jest on jednak mało czytelny, a~wprowadzanie zmian w~szablonie jest niewygodne.
 
 \subsection{Razor}
 
-Razor~\cite{razor} jest silnikiem generacji tekstu stworzonym na potrzeby platformy ASP.NET MVC.
+Razor\footnote{Razor - strona projektu: https://github.com/Antaris/RazorEngine} jest silnikiem generacji tekstu stworzonym na potrzeby platformy ASP.NET MVC.
 Służy głównie do generacji kodu HTML, jednak może być używany w~celu tworzenia dowolnych plików tekstowych.
 
 Wadą tego wyboru - niezależną od samego silnika - jest to, że szablony Razor są powszechnie używane w~typowych aplikacjach opartych o~platformę ASP.NET MVC, a~więc same mogą stanowić pliki wynikowe dla generatora.
@@ -270,7 +271,7 @@ Stworzenie szablonu Razor generującego inny szablon Razor jest możliwe, ale ta
 
 \subsection{T4}
 
-T4~\cite{t4} to silnik generacji tekstu wbudowany w~środowisko programistyczne Microsoft Visual Studio.
+T4\footnote{T4 - strona projektu: http://msdn.microsoft.com/pl-pl/library/bb126445.aspx} to silnik generacji tekstu wbudowany w~środowisko programistyczne Microsoft Visual Studio.
 Jest on przeznaczony do generowania plików tekstowych dowolnego typu na podstawie danych przekazanych szablonowi.
 
 Szablon T4 nie jest interpretowany, a~kompilowany do kodu języka C\#, co daje następujące korzyści:
