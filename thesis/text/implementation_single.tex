@@ -68,10 +68,10 @@ Pomiędzy znormalizowanym modelem komend (rysunek~\ref{fig:single:domain_normali
 Artefaktami generowanymi na podstawie opisu dziedziny aplikacji będą:
 
 \begin{itemize}
- \item skrypty DLL definiujące strukturę bazy danych;
+ \item skrypty DDL definiujące strukturę bazy danych;
  \item klasy wchodzące w~skład modelu zapytań (patrz: sekcja~\ref{sec:cqrs});
  \item klasy reprezentujące zdarzenia zachodzące w~systemie (patrz: sekcja~\ref{sec:event_sourcing});
- \item klasy reprezentujące dane wyświetlane w~interfejsie użytkownika (\emph{view models});
+ \item klasy reprezentujące dane wyświetlane w~interfejsie użytkownika (\emph{view models}, patrz: sekcja~\ref{sec:multitier});
  \item dokumentację systemu w~formacie HTML zawierającą spis widoków należących do modelu zapytań;
  \item pomocnicze skrypty powłoki automatyzujące rutynowe czynności wykonywane przez programistów (patrz: sekcje~\ref{sec:tasks_dupl}, \ref{sec:tasks_scripts}).
 \end{itemize}
@@ -99,18 +99,19 @@ Stwierdzono, że słusznym wyborem jest stworzenie schematu opisu dziedziny apli
 Pozostaje jednak pytanie, gdzie należy ten schemat zdefiniować i~przechowywać.
 
 Nie ulega wątpliwości, że aby uniknąć duplikacji, schemat opisu dziedziny powinen być zdefiniowany tylko w~jednym miejscu.
-Odpowiednim takim miejscem, jako że tam właśnie schemat ten będzie używany, wyjdaje się być klasa należąca do kodu źródłowego generatora aplikacji CQRS.
-Gdyby schemat być przechowywany gdzie indziej, odpowiadająca mu klasa i~tak musiałaby być stworzona lub wygenerowana, aby moć zdeserializować dziedzinę do obiektu silnie typizowanego.
+Odpowiednim takim miejscem wyjdaje się być klasa należąca do kodu źródłowego generatora aplikacji CQRS.
+To właśnie tam schemat ten będzie używany.
+Gdyby był on przechowywany gdzie indziej, odpowiadająca mu klasa i~tak musiałaby być stworzona lub wygenerowana - bez niej nie byłaby możliwa deserializacja opisu dziedziny do obiektu silnie typizowanego.
 
 
 \subsection{Schemat opisu dziedziny aplikacji}
 
-Najważniejszym aspektem określenia sposobu definicji dziedziny aplikacji jest określenie schematu tej dziedziny.
+Najważniejszym aspektem określenia sposobu definicji dziedziny aplikacji jest zdefiniowanie schematu tej dziedziny.
 Schemat ten powinien pozwalać na zapisanie dowolnej dziedziny w~wygody sposób, tak aby wprowadzanie modyfikacji dziedziny było jak najłatwiejsze.
 
 \subsubsection{Podejście naiwne}
 
-Najprostszym sposobem opisu dziedziny jest jawne wypisanie wszystkich elementów, które powinny być generowane przez generator.
+Najprostszym sposobem opisu dziedziny jest jawne wypisanie wszystkich elementów, które powinny być generowane przez narzędzie.
 Umożliwi to bardzo łatwą generację artefaktów systemu.
 Co więcej, sposób ten jest bardzo elastyczny - elementy dziedziny nie są ze sobą w~żaden sposób powiązane.
 
@@ -120,14 +121,15 @@ Fragment opisu dziedziny przykładowej aplikacji wykorzystujący tę notację pr
 
 Takie podejście ma jednak istotną wadę - wprowadza szeroko występującą duplikację wiedzy.
 Przykładowo, wiedza na temat pól~encji $User$ jest zduplikowana w~widokach $User$ i~$PostLike$.
-Oba widoki duplikują informacje o~typach pól tej encji (jak podkreślono w~rozdziale~\ref{chap:duplication}, występowanie nazw pól w~wielu miejscach nie jest duplikacją).
+Oba widoki duplikują informacje o~typach pól tej encji\footnote{Powielenie nazw pól nie jest duplikacją (patrz: rozdział~\ref{chap:duplication}).}.
 Wprowadza to kilka problemów:
 
 \begin{itemize}
  \item wzbogacenie pojedynczej encji o~nowe pole (lub usunięcie istniejącego pola) wymaga aktualizacji opisu wszystkich widoków i~zdarzeń, w~których to pole będzie występować (lub występuje);
  \item zmiana typu pojedynczego pola wymaga aktualizacji opisu wszystkich widoków i~zdarzeń, w~których to pole występuje;
- \item jeśli opisy poszczególnych widoków i~zdarzeń umieszczone będą w~osobnych plikach, aktualizacje te będą tym bardziej uciążliwe.
 \end{itemize}
+
+Jeśli opisy poszczególnych widoków i~zdarzeń umieszczone będą w~osobnych plikach, aktualizacje te będą tym bardziej uciążliwe.
 
 %\subsubsection{per widok}
 %
@@ -144,7 +146,7 @@ Wprowadza to kilka problemów:
 
 \subsubsection{Obranie pola jako podstawowego elementu opisu dziedziny}
 
-Aby rozwiązać problem duplikacji, można jako pojedynczy element dziedziny potraktować nie widok, czy zdarzenie, a~pojedyncze pole.
+Aby rozwiązać problem duplikacji, można jako pojedynczy element dziedziny potraktować nie widok czy zdarzenie, a~pojedyncze pole.
 Taki opis zawierałby informację o~każdym z~pól dziedziny systemu wraz z~informacją o~widokach i~zdarzeniach, do których dane pole należy.
 
 Fragment opisu dziedziny przykładowej aplikacji wykorzystujący tę notację przedstawia rysunek~\ref{fig:single:model_perField}.
