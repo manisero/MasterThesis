@@ -186,7 +186,7 @@ Rozwiązanie to jest najlepsze spośród omówionych:
  \end{itemize}
  \item rozwiązuje ono oba problemy postawione na końcu sekcji~\ref{sec:cqrs}:
   \begin{itemize}
-   \item wiedza na temat modelu komend (równoważnego z~modelem encji) znalazła się w~opisie dziedziny
+   \item wiedza na temat modelu komend (równoważnego modelowi encji) znalazła się w~opisie dziedziny
    \item na ``pojedynczą, jednoznaczną i~autorytatywną reprezentację wiedzy o~dziedzinie aplikacji'' wybrany został model komend.
   \end{itemize}
 \end{itemize}
@@ -218,7 +218,7 @@ W~przypadku omawianego generatora, dostępne są cztery możliwości rozwiązani
    \item wymagałoby to mapowania typów języka C\# na typy języka CQL podczas generacji definicji rodzin kolumn;
   \end{itemize}
  \item używanie własnych nazw typów - byłoby to podejście uniwersalne, niezależne od języków wykorzystywanych w~systemie, ale wymagające mapowania typów podczas generacji każdego z~artefaktów;
- \item uwzględnianie obu typów w~opisie każdego pola (np. jako osobne wartości: $CQLType$ i~$CShartType$):
+ \item uwzględnianie obu typów w~opisie każdego pola (np. jako osobne wartości: $CQLType$ i~$CSharpType$):
   \begin{itemize}
    \item generowanie zarówno klas, jak i~definicji rodzin kolumn byłoby ułatwione,
    \item konieczność definiowania dwóch typów dla każdego pola mogłaby być uciążliwa.
@@ -229,12 +229,12 @@ W~przypadku omawianego generatora, dostępne są cztery możliwości rozwiązani
 
 Pomiędzy typami języka C\# i~typami języka CQL występuje korzystna zależność: każdemu typowi języka CQL odpowiada pojedynczy typ języka C\#.
 Przykładowo, typom $ascii$, $text$ i~$varchar$ języka CQL odpowiada wspomniany już typ $string$ języka C\#.
-Jak widać, zależność ta nie jest symetryczna.
+Jak widać, zależność ta nie działa w~obie strony.
 
 Odpowiednim rozwiązaniem jest więc definiowanie typów pól encji przy użyciu typów języka CQL.
 Dlatego w~dotychczas prezentowanych przykładach wszystkie pola encji, widoków i~zdarzeń posiadały typy języka CQL.
 
-Warto podkreślić, że gdyby generowane aplikacje korzystały z~innej bazy danych czy innego języka programowania, lub gdyby korzystały z~więcej niż dwóch języków (np. przechowywały model komend w~bazie danych SQL), to wybrane rozwiązanie mogłoby być niewystarczające.
+Należy zaznaczyć, że gdyby generowane aplikacje korzystały z~innej bazy danych czy innego języka programowania, lub gdyby korzystały z~więcej niż dwóch języków (np. przechowywały model komend w~bazie danych SQL), to wybrane rozwiązanie mogłoby być niewystarczające.
 Można by wtedy skorzystać z~ostatniego z~wymienionych rozwiązań, jednak w~przypadku konieczności definiowania trzech typów dla każdego pola byłoby ono zbyt uciążliwe.
 Należałoby wtedy stosować własne nazwy typów (trzecie rozwiązanie) i~zaimplementować mapowanie ich na typy zdefiniowane w~każdym z~używanych języków.
 
@@ -249,7 +249,7 @@ Pozwala to na wybór spomiędzy trzech organizacji plików opisu dziedziny:
 \begin{itemize}
  \item umieszczenie pełnego opisu dziedziny w~pojedynczym pliku;
  \item umieszczenie opisu każdej encji w~osobnym pliku (rysunkek~\ref{fig:single:fileStructure_chosen});
- \item umieszczenie opisu każdego pola w~osobnum pliku (rysunkek~\ref{fig:single:fileStructure_generic}).
+ \item umieszczenie opisu każdego pola w~osobnym pliku (rysunkek~\ref{fig:single:fileStructure_generic}).
 \end{itemize}
 
 \input{figures/implementation_single/fileStructure_chosen}
@@ -295,10 +295,10 @@ Algorytm wyodrębnienia jednostek generacji z~opisu dziedziny przebiega następu
      \item Jeśli $V$ nie zawiera widoku o~nazwie $v.Name$, stwórz go i~dodaj do $V$.
      \item Na podstawie $f$ stwórz obiekt $ViewField$ i~dodaj go do widoku o~nazwie $v.Name$.
     \end{enumerate}
-   \item Dla każdego zdarzenia $ev$ z~$f.PresentInEvents$:
+   \item Dla każdej nazwy zdarzenia $ev$ z~$f.PresentInEvents$:
     \begin{enumerate}
-     \item Jeśli $E$ nie zawiera zdarzenia o~nazwie $ev.Name$, stwórz je i~dodaj do $E$.
-     \item Na podstawie $f$ stwórz obiekt $EventField$ i~dodaj go do zdarzenia o~nazwie $ev.Name$.
+     \item Jeśli $E$ nie zawiera zdarzenia o~nazwie $ev$, stwórz je i~dodaj do $E$.
+     \item Na podstawie $f$ stwórz obiekt $EventField$ i~dodaj go do zdarzenia o~nazwie $ev$.
     \end{enumerate}
   \end{enumerate}
  \item Zwróć $V$ i~$E$.
@@ -307,7 +307,7 @@ Algorytm wyodrębnienia jednostek generacji z~opisu dziedziny przebiega następu
 Algorytm zapewnia kilka ważnych funkcjonalności:
 
 \begin{itemize}
- \item w~pojedynczym widoku lub zdarzeniu mogą znalaźć się pola należące do kilku różnych encji;
+ \item w~pojedynczym widoku lub zdarzeniu mogą znaleźć się pola należące do kilku różnych encji;
  \item dla danego widoku nie musi istnieć odpowiadająca mu encja; na przykład nie istnieją encje $PostLike$ i~$UserLike$ - widoki te występują jedynie w~listach $PresentInViews$ pól innych encji;
  \item dla danej encji nie musi istnieć odpowiadający jej widok; może nie istnieć widok, który zawiera wszystkie jej pola.
 \end{itemize}
@@ -319,13 +319,13 @@ Algorytm zapewnia kilka ważnych funkcjonalności:
 %=======
 
 Aby umożliwić wykonanie ostatniego kroku generacji, należy dostarczyć generatorowi szablony generacji.
-Na podstawie jednostek generacji wyodrębnienionych z~opisu dziedziny aplikacji, wygenerują one artefakty systemu.
+Na podstawie jednostek generacji wyodrębnionych z~opisu dziedziny aplikacji wygenerują one artefakty systemu.
 
-Zgodnie z~listą generowanych artefaktów zamieszczoną w~sekcji~\ref{sec:generated_artifacts}, stworzono następujące szablony:
+Zgodnie z~listą generowanych artefaktów podaną w~sekcji~\ref{sec:generated_artifacts}, stworzono następujące szablony:
 
 \begin{itemize}
  \item szablon generujący definicję rodziny kolumn bazy danych Cassandra na podstawie widoku (rysunek~\ref{fig:single:template_table});
- \item szablon generujący klasę widoku lub model widoku (\emph{view model}) na podstawie widoku (rysunek~\ref{fig:single:template_class});
+ \item szablon generujący klasę widoku na podstawie widoku (rysunek~\ref{fig:single:template_class});
  \item szablon generujący klasę zdarzenia na podstawie zdarzenia;
  \item szablon generujący model widoku (\emph{view model}) na podstawie widoku;
  \item szablon generujący plik HTML na podstawie zbioru widoków (rysunek~\ref{fig:single:template_docs});
@@ -354,7 +354,7 @@ Wszystkie kroki generacji aplikacji zostały zaimplementowane.
 Dzięki temu generacji podlega znaczna część artefaktów systemu, które korzystają z~wiedzy dotyczącej jego dziedziny.
 
 Należy zaznaczyć, że osiągnięta implementacja może posłużyć do wygenerowania aplikacji CQRS o~dziedzinach innych niż podana w~przykładzie.
-Co więcej, schemat opisu dziedziny aplikacji opracowany w~sekcji~\ref{sec:domain_schema_definition} może być wykorzystany do generowania aplikacji innych typów, np. aplikacji o klasycznej architekturze trójwarstwowej, korzystającej z~bazy danych SQL.
+Co więcej, schemat opisu dziedziny aplikacji opracowany w~sekcji~\ref{sec:domain_schema_definition} może być wykorzystany do generowania aplikacji innego rodzaju, np. aplikacji o klasycznej architekturze trójwarstwowej, korzystającej z~bazy danych SQL.
 
 Ogólny schemat postępowania podczas konstruowania generatora dowolnej aplikacji jest następujący:
 
