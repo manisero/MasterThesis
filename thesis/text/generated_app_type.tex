@@ -378,12 +378,12 @@ Kolekcje mają następujące ograniczenia~\cite{cassandra:collections}:
 
 \begin{itemize}
  \item maksymalny rozmiar pojedynczego elementu kolekcji wynosi 64 KB;
- \item kolekcje są odczytywane i~zwracane w~całości - dlatego nie powinny zawierać dużej ilości elementów.
+ \item kolekcje są odczytywane i~zwracane w~całości - dlatego nie powinny zawierać dużej liczby elementów.
 \end{itemize}
 
 \subsubsection{Indeksy}
 
-Domyślnie, rodzina kolumn może być przeszukiwana jedynie po wartościach jej klucza partycjonującego.
+Domyślnie rodzina kolumn może być przeszukiwana jedynie po wartościach jej klucza partycjonującego.
 Aby móc przeszukiwać wiersze rodziny po wartościach innych kolumn (w~tym superkolumn), należy stworzyć na nich indeksy.
 
 Indeks (ang. \emph{index}) to, podobnie jak w~relacyjych bazach danych, osobna (nie będąca częścią rodziny kolumn) struktura danych przechowująca posortowane wartości indeksowanych kolumn wraz ze wskazaniami na wiersze, do których te wartości należą.
@@ -403,7 +403,7 @@ Ograniczenia języka CQL względem SQL to na przykład~\cite{cassandra_3_0}:
  \item brak sortowania według wartości dowolnych kolumn - sortowanie jest możliwe tylko według wartości klucza partycjonującego (domyślnie) lub pierwszej superkolumny.
 \end{itemize}
 
-Niemniej jednak, język CQL umożliwia efektywne zarządzanie strukturą danych przechowywanych w~bazie i~przeszukanie tych danych.
+Niemniej jednak, język CQL umożliwia efektywne zarządzanie strukturą danych przechowywanych w~bazie i~przeszukiwanie tych danych.
 Przykłady komend i~zapytań tego języka zostały przedstawione na rysunkach: \ref{fig:cql:create}, \ref{fig:cql:insert} i~\ref{fig:cql:select}.
 
 \input{figures/generated_app_type/cql_create}
