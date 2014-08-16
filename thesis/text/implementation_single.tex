@@ -51,7 +51,7 @@ Pomiędzy znormalizowanym modelem komend (rysunek~\ref{fig:single:domain_normali
  \item Encja $Like$ została rozbita na dwia widoki: $UserLike$ i~$PostLike$.
  Przechowują one dane inne niż tylko identyfikatory powiązanych encji.
  Umożliwia to wykonywanie stałej (równej $2$) liczby zapytań do bazy danych w~celu wyświetlenia profilu użytkownika wraz z~tytułami lubianych przez niego wpisów (lub wyświetlania wpisu wraz imionami i~nazwiskami użytkowników go lubiących).
- Pozostawienie encji $Like$ w~niezmienionym kształcie skutkowałoby potrzebą wykonania w~tym celu $n + 2$ zapytań, gdzie $n$ to liczba wpisów lubianych przez danego użytkownika (lub liczba użytkowników lubiących dany wpis).
+ Pozostawienie asocjacji $Like$ w~niezmienionym kształcie skutkowałoby potrzebą wykonania w~tym celu $n + 2$ zapytań, gdzie $n$ to liczba wpisów lubianych przez danego użytkownika (lub liczba użytkowników lubiących dany wpis).
  Brak operacji złączenia w~języku CQL uniemożliwia wydobycie wszystkich potrzebnych danych w~jednym zapytaniu.
  \item Encja $Post$ otrzymała pole $CommentsNumber$.
  Umożliwia to wyświetlenie wpisów wraz z~liczbą ich komentarzy bez potrzeby odwoływania się do widoku $Comment$.
