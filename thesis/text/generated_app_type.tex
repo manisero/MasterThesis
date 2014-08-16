@@ -160,7 +160,7 @@ Wady:
  \item implementacja dziennika zdarzeń nie jest łatwa - powinna ona gwarantować, że zdarzenia zostaną zarejestrowane w~kolejności ich zgłaszania (co nie jest oczywiste w~aplikacjach wielowątkowych);
  \item z~reguły reakcja na zdarzenie odbywa się asynchronicznie względem procesu zgłaszającego jego zajście - zmiany stanu systemu nie są więc widoczne natychmiast po zajściu zdarzenia
   \begin{itemize}
-   \item zjawisko to można zaobserwować na przykład na portalu YouTube~\cite{youtube} - zdarzenie ``Obejrzano film'' jest przetwarzane znacznie wolniej niż zdarzenie ``Dodano komentarz'' (wyświetlenia filmu sprawdzane są pod kątem fałszywych wyświetleń mających na celu sztuczne zwiększenie popularności filmu~\cite{youtube:301}), co skutkuje wyświetleniem pod danym filmem znacznie większej liczby komentarzy niż liczby wyświetleń (jeśli komentarzy i~wyświetleń jest odpowiednio dużo);
+   \item zjawisko to można zaobserwować na przykład na portalu YouTube\footnote{YouTube: https://www.youtube.com/} - zdarzenie ``Obejrzano film'' jest przetwarzane znacznie wolniej niż zdarzenie ``Dodano komentarz'' (wyświetlenia filmu sprawdzane są pod kątem fałszywych wyświetleń mających na celu sztuczne zwiększenie popularności filmu~\cite{youtube:301}), co skutkuje wyświetleniem pod danym filmem znacznie większej liczby komentarzy niż liczby wyświetleń (jeśli komentarzy i~wyświetleń jest odpowiednio dużo);
   \end{itemize}
  \item odtwarzanie stanu systemu, w~którym zarejestrowano tysiące zdarzeń może trwać bardzo długo
   \begin{itemize}
