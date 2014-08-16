@@ -172,7 +172,7 @@ Wady:
 
 \subsection{Przykłady aplikacji wykorzystujących Event Sourcing}
 
-Aby łatwiej zrozumieć działanie wzorca, garść przykładów aplikacji używanych na co dzień, które są oparte o~Event Sourcing lub częściowo go wykorzystują:
+Aby przybliżyć działanie wzorca, poniżej przedstawiono kilka przykładów aplikacji używanych na co dzień, które są oparte o~Event Sourcing lub częściowo go wykorzystują:
 
 \begin{itemize}
  \item systemy kontroli wersji - dziennik zdarzeń przechowuje zmiany dokonywane na plikach znajdujących się w~wersjonowanym katalogu;
@@ -180,7 +180,7 @@ Aby łatwiej zrozumieć działanie wzorca, garść przykładów aplikacji używa
 \end{itemize}
 
 Wzorzec ten ma jednak zastosowanie nie tylko w~aplikacjach użytkowych.
-W~połączeniu z~wzorcem CQRS, sprawdza się także w~aplikacjach klasy enterprise.
+W~połączeniu z~wzorcem CQRS, sprawdza się także w~aplikacjach klasy \emph{enterprise}.
 
 
 \subsection{Współpraca z~CQRS}
@@ -212,7 +212,7 @@ Nie jest to jednak rozwiązanie bezwględnie lepsze od relacyjnych baz danych - 
 
 Bazy danych typu NoSQL są nastawione na przechowywanie bardzo dużych ilości danych.
 Tym, co odróżnia je od baz relacyjnych jest fakt, że zazwyczaj domyślnie wspierają one rozproszenie danych pomiędzy wiele maszyn.
-Zapewnia to łatwą poziomą skalowalność systemów z~nich korzystających.
+Umożliwia to łatwą poziomą skalowalność systemów z~nich korzystających.
 
 
 \subsection{Dostępne bazy NoSQL}
@@ -221,24 +221,6 @@ Bazy danych typu NoSQL są tworzone pod kątem konkretnych problemów, jakie maj
 Dlatego istnieje wiele takich baz, które różnią się wydajnością bądź oferowanymi funkcjonalnościami.
 Można je podzielić ze względu na model przechowywania danych.
 Najczęściej stosowane modele to:
-
-\subsubsection{Rodzina kolumn} \label{sec:column_family}
-
-Rodzina kolumn (ang. \emph{column family}, \emph{wide column}) jest modelem najbardziej przypominającym tabele w~relacyjnej bazie danych.
-Dane przechowywane są w~wierszach, które składają się z~kolumn wraz z~przypisanymi im wartościami.
-Pojedyczny wiersz może składać się z~bardzo dużej liczby kolumn.
-W~odróżnieniu od relacyjnych baz danych, wiersz nie musi posiadać wszystkich kolumn wchodzących w~skład rodziny i~może posiadać kolumny nienalażące do rodziny.
-Każda wartość przypisana do dajen kolumny wchodzącej w~skład rodziny musi jednak być określonego dla tej kolumny typu.
-
-W~odróżnieniu od baz relacyjnych bazy oparte o~rodziny kolumn nie~wspierają relacji pomiędzy tabelami (rodzinami kolumn).
-Aby osiągnąć satyfakcjonującą wydajność przeszukiwania, przechowuje się w~nich dane o~wysokim stopniu denormalizacji.
-Przykłady baz danych przechowujących rodziny kolumn:
-
-\begin{itemize}
- \item Hadoop~\cite{hadoop} - platforma stworzona w~technologii Java, wykonująca obliczenia na dużych ilościach danych realizowane przez wiele rozproszonych aplikacji, służy przede wszstkim do przetwarzania danych, a~nie do ich składowania;
- \item Cassandra~\cite{cassandra} - stworzona w~technologii Java baza danych, której główne cele to skalowalność, wysoka wydajność i~brak pojedynczego punktu awarii (ang. \emph{Single Point of Failure}, \emph{SPOF});
- \item Amazon SimpleDB~\cite{simple_db} - komercyjna baza danych nastawiona na prostotę użytkowania i~zarządzania.
-\end{itemize}
 
 \subsubsection{Zbiór par klucz-wartość}
 
@@ -251,8 +233,26 @@ Przykłady baz przechowujących pary klucz-wartość to:
 
 \begin{itemize}
  \item DynamoDB~\cite{dynamo_db} - baza danych będąca w~stanie wydajnie działać pod bardzo dużym obciążeniem, jej kluczowymi celami są wydajność i~skalowalność; stworzona w~technologii Java;
- \item Azure Table Storage~\cite{azure_table_storage} - baza danych wspierająca przchowywanie danych w~tabelarycznej, ustrukturyzowanej formie; stworzona na platformie .Net;
+ \item Azure Table Storage~\cite{azure_table_storage} - baza danych wspierająca przechowywanie danych w~tabelarycznej, ustrukturyzowanej formie; stworzona na platformie .Net;
  \item Redis~\cite{redis} - napisana w~języku C wydajna baza danych wspierająca przechowywanie złożonych struktur takich jak listy, kolejki czy posortowane zbiory.
+\end{itemize}
+
+\subsubsection{Rodzina kolumn} \label{sec:column_family}
+
+Rodzina kolumn (ang. \emph{column family}, \emph{wide column}) jest modelem najbardziej przypominającym tabele w~relacyjnej bazie danych.
+Dane przechowywane są w~wierszach, które składają się z~kolumn wraz z~przypisanymi im wartościami.
+Pojedyczny wiersz może składać się z~bardzo dużej liczby kolumn.
+W~odróżnieniu od relacyjnych baz danych, wiersz nie musi posiadać wszystkich kolumn wchodzących w~skład rodziny i~może posiadać kolumny nienalażące do rodziny.
+Każda wartość przypisana do danej kolumny wchodzącej w~skład rodziny musi jednak być określonego dla tej kolumny typu.
+
+W~odróżnieniu od baz relacyjnych, bazy oparte o~rodziny kolumn nie~wspierają relacji (kluczy obcych) pomiędzy rodzinami.
+Aby osiągnąć satyfakcjonującą wydajność przeszukiwania, przechowuje się w~nich dane o~wysokim stopniu denormalizacji.
+Przykłady baz danych przechowujących rodziny kolumn:
+
+\begin{itemize}
+ \item Cassandra~\cite{cassandra} - stworzona w~technologii Java baza danych, której główne cele to skalowalność, wysoka wydajność i~brak pojedynczego punktu awarii (ang. \emph{Single Point of Failure}, \emph{SPOF});
+ \item Amazon SimpleDB~\cite{simple_db} - komercyjna baza danych nastawiona na prostotę użytkowania i~zarządzania.
+ \item Hadoop~\cite{hadoop} - platforma stworzona w~technologii Java, wykonująca obliczenia na dużych ilościach danych realizowane przez wiele rozproszonych aplikacji, służy przede wszstkim do przetwarzania danych, a~nie do ich składowania;
 \end{itemize}
 
 \subsubsection{Graf}
@@ -264,14 +264,15 @@ Węzłem grafu może być dowolny obiekt (np. zbiór par klucz-wartość), a~kra
 Pojedyncza krawędź reprezentuje dowolną relację pomiędzy węzłami.
 Model ten jest więc bardzo elastyczny.
 
-Zaletą grafu jest to, że, podobnie jak relacja, jest on strukturą danych o~silnym podłożu matematycznym.
-Istnieje więc wiele wydajnych algorytmów operujących na tej strukturze (np. algorytmy wyszukiwania ścieżek), co sprawia, że struktura ta bardzo dobrze nadaje się do modelowania wszelkiego rodzaju danych przestrzennych (np. map) lub innych sieci (np. zbiorów użytkowników portali społecznościowych, gdzie wierzchołek reprezentuje osobę, a~krawędź - relację ``zna'').
+Zaletą grafu jest to, że podobnie jak relacja (w~relacyjnych bazach danych), jest on strukturą danych o~silnym podłożu matematycznym.
+Istnieje więc wiele wydajnych algorytmów operujących na tej strukturze (np. algorytmy wyszukiwania ścieżek).
+Dzięki temu struktura ta bardzo dobrze nadaje się do modelowania wszelkiego rodzaju danych przestrzennych (np. map) lub innych sieci (np. zbiorów użytkowników portali społecznościowych, gdzie wierzchołek reprezentuje osobę, a~krawędź - relację ``zna'').
 
 Do grafowych baz danych należą:
 
 \begin{itemize}
  \item Neo4J~\cite{neo4j} - najpopularniejsza grafowa baza danych, cechuje się wysoką wydajnością i~skalowalnością; wspiera mechanizm transakcji; stworzona w~technologii Java;
- \item TITAN~\cite{titan} - baza danych wykorzystująca inne rozwiązania, takie jak Cassandra, korzytając z~wymiennych mechanizmów; stworzona w~technologii Java;
+ \item TITAN~\cite{titan} - baza danych wykorzystująca inne rozwiązania (np. bazę Cassandra) korzytając z~wymiennych mechanizmów; stworzona w~technologii Java;
  \item Trinity~\cite{trinity} - stworzona na platformie .Net baza danych wspierająca wygodne, deklaratywne modelowanie i~przeszukiwanie danych.
 \end{itemize}
 
@@ -293,21 +294,21 @@ Do baz tego rodzaju należą:
 \subsection{Wybrana baza typu NoSQL}
 
 Spośród dostępnych baz danych typu NoSQL należy wybrać jedną, która będzie używana przez aplikacje generowane przez narzędzie.
-Wydaje się, że z~mechanizem generacji dziedziny aplikacji najlepiej komponują się bazy za model danych obierające rodziny kolumn.
-Model ten jest najbardziej zblizony do klasycznego modelu relacyjnego - dobrze nadaje się więc do przechowywania ustrukturyzowanej dziedziny aplikacji, a~sama struktura bazy danych może być jednym z~generowanych artefaktów;
+Wydaje się, że z~mechanizmem generacji dziedziny aplikacji najlepiej komponują się bazy za model danych obierające rodziny kolumn.
+Model ten jest najbardziej zblizony do klasycznego modelu relacyjnego - dobrze nadaje się więc do przechowywania ustrukturyzowanej dziedziny aplikacji, a~sama struktura bazy danych może być jednym z~generowanych artefaktów.
 
-Współpraca takiej bazy danych z~architekturą CQRS i~wzorcem Event Sourcing wyglądać będzie następująco:
+Współpraca takiej bazy danych z~architekturą CQRS i~wzorcem Event Sourcing będzie wyglądać następująco:
 
 \begin{itemize}
- \item baza typu NoSQL pełnić będzie rolę modelu zapytań (komponent \emph{Data Storage} na rysunku~\ref{fig:cqrs_es});
+ \item baza typu NoSQL będzie pełnić rolę modelu zapytań (komponent \emph{Data Storage} na rysunku~\ref{fig:cqrs_es});
  \item model zapytań będzie w~dużym stopniu zdenormalizowany, a~więc przystosowany do przechowywania go w~postaci rodzin kolumn;
  \item procedury obsługi zdarzeń będą modyfikować dane zawarte w~tej bazie;
- \item wykorzystanie tej bazy nie będzie miało wpływu na model komend i~dziennik zdarzeń - zdarzenia mogą, ale nie muszą być przechowywane w~tej bazie.
+ \item wykorzystanie tej bazy nie będzie miało wpływu na model komend i~dziennik zdarzeń - zdarzenia mogą, ale nie muszą być przechowywane bazie NoSQL.
 \end{itemize}
 
 Spośród baz danych opartych o~model rodziny kolumn najbardziej popularna jest Cassandra.
 Przemawia za tym jej wysoka wydajność i~skalowalność potwierdzona w~badaniach~\cite{cassandra_perf}.
-Dlatego to właśnie z~tej bazy korzystać będą wygenerowane aplikacje.
+Dlatego to właśnie z~tej bazy korzystać będą generowane aplikacje.
 
 
 
@@ -324,7 +325,7 @@ Jej główne zalety to wysoka wydajność i~odporność na awarie.
 Hierchia elementów architektury bazy Cassandra jest następująca:
 
 \begin{enumerate}
- \item Podstawową jednostką architektury bazy Cassandra jest węzeł (ang. \emph{node}) - to właśnie on przechowuje dane składowane w~bazie.
+ \item Podstawową jednostką architektury jest węzeł (ang. \emph{node}) - to właśnie on przechowuje dane składowane w~bazie.
  Zazwyczaj jednemu węzłowi odpowiada jedna maszyna (choć możliwe jest stworzenie wielu węzłów na pojedynczej maszynie).
  \item Grupa węzłów tworzy centrum danych (ang. \emph{data center}).
  Działa ono zazwyczaj jako grupa maszyn wirtualnych na pojedynczej maszynie fizycznej lub grupa powiązanych maszyn fizycznych działających w~tej samej sieci.
