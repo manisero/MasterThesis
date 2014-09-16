@@ -1,0 +1,34 @@
+\begin{figure}[!ht]
+\begin{verbatim}
+Events:
+
+PostPublished: @User(UserName) of @User:UserName can publish
+a @Post(PostID[id]) with @Post:Title and @Post:Content.
+
+PostLiked: @User of @User:UserName can like a @Post by its @Post:PostID.
+
+PostCommented: @User of @User:UserName can write a @Comment(CommentID[id])
+of @Comment:Content under a post of ID @Comment:PostID or another comment
+of ID @Comment:ParentCommentID[id].
+
+========
+
+Views:
+
+I can display @Post list with @Post:UserName, @Post:Title, @Post:Content
+and @Post:CommentsNumber[int].
+
+I can display @Post details with @Post:UserName, @Post:Title,
+@Post:Content, @Post::@Comment:Content, @Post::@Comment:UserName,
+@Post::@User:FirstName and @Post::@User:LastName.
+
+I can display user profile with @User:UserName, @User:FirstName,
+@User:LastName and @User::@Post:Title.
+
+
+\end{verbatim}
+\caption{
+ Pełny opis dziedziny systemu w~języku DSL.
+}
+\label{fig:single:model_dsl}
+\end{figure}
