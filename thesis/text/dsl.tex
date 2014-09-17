@@ -1,0 +1,137 @@
+\chapter{DSL}
+
+- że ma być czytelne dla człowieka
+- że jak najbardziej business-friendly
+- że wynik taki sam jak dla opisu w poprzednim rozdziale
+- różnica tylko w opisie dziedziny i algorytmie wyodrębniania jednostek generacji (szablony i wszystko inne takie samo)
+
+%=======
+\section{Składnia}
+%=======
+
+- że typy własne (id zmiast timeuuid), żeby było zrozumiałe
+
+
+\subsection{Encje i~ich pola}
+
+\begin{itemize}
+ \item nazwy encji poprzedzone są znakiem małpy:
+  \begin{itemize}
+   \item przykład: \verb|@User|;
+  \end{itemize}
+  
+ \item nazwy pól wchodzących w~skład klucza encji wymienione są w~jej identyfikatorze, w~nawiasach okrągłych bezpośrednio po nazwie encji:
+  \begin{itemize}
+   \item przykład: \verb|@User(UserName)|,
+   \item nazwy pól wchodzących w~skład klucza złożonego oddzielone są przecinkami (bez spacji),
+   \item klucz encji wystarczy zdefiniować w~jednym (dowolnym) wystąpieniu jej identyfikatora,
+   \item w~opisie dziedziny nie mogą wystąpić dwie różne definicje klucza tej samej encji,
+   \item definicja klucza encji musi wystąpić przy co najmniej jednym wystąpieniu jej identyfikatora;
+  \end{itemize}
+ 
+ \item pola należące do encji występują po jej identyfikatorze, oddzielone od niego znakiem dwukropka:
+  \begin{itemize}
+   \item przykład: \verb|@User:FirstName|;
+  \end{itemize}
+  
+ \item typ pola podany jest nawiasach kwadratowych bezpośrednio po nazwie pola
+  \begin{itemize}
+   \item przykłady: \verb|@Post(PostID[id])|, \verb|@Post:CommentsNumber[int]|,
+   \item typ pola wystarczy zdefiniować przy jednym (dowolnym) wystąpieniu jego nazwy,
+   \item w~opisie dziedziny nie mogą wystąpić dwie różne definicje typu tego samego pola,
+   \item polom, których definicja typu nie występuje ani razu, nadawany jest typ $text$;
+  \end{itemize}
+ 
+ \item relację ``wiele do jednego'' pomiędzy encjami oznacza się znakiem dwukropka, oddzielającym identyfikatory tych encji:
+  \begin{itemize}
+   \item przykład: \verb|@Post:@User:FirstName|,
+   \item znaczenie: \emph{z~jedną instancją encji} \verb|@User| \emph{powiązanych jest wiele instancji encji} \verb|@Post|;
+  \end{itemize}
+ 
+ \item relację ``jeden do wielu'' pomiędzy encjami oznacza się dwoma znakami dwukropka, oddzielającymi identyfikatory tych encji:
+  \begin{itemize}
+   \item przykład: \verb|@Post::@Comment:Content|,
+   \item znaczenie: \emph{z~jedną instancją encji} \verb|@Post| \emph{powiązanych jest wiele instancji encji} \verb|@Comment|.
+  \end{itemize}
+\end{itemize}
+
+
+\subsection{Zdarzenia}
+
+\begin{itemize}
+ \item sekcja definicji zdarzeń następuje w~opisie dziedziny po linii o~treści ``\verb|Events:|'';
+ \item definicja pojedynczego zdarzenia składa się z dwóch części:
+  \begin{itemize}
+   \item nazwy zdarzenia,
+   \item opisu zdarzenia, zawierającego identyfikatory i~pola encji wchodzących w~jego skład;
+  \end{itemize}
+ \item przykład: \verb|PostPublished: @Post with @Post:Content can be published|;
+ \item definicje kolejnych zdarzeń są od siebie oddzielone pustymi liniami.
+\end{itemize}
+
+Pojedyncza definicja zdarzenia jednoznacznie określa pojedyncze zdarzenie wchodzące w~skład modelu komend systemu.
+
+
+\subsection{Widoki}
+
+\begin{itemize}
+ \item sekcja definicji widoków następuje w~opisie dziedziny po linii o~treści ``\verb|Views:|'';
+ \item definicja widoku to pojedyncze zdanie zawierające identyfikatory i~pola encji w~nim występujących;
+ \item przykład: \verb|I can display @Post with @Post:Title and @Post:Content|;
+ \item definicje kolejnych widoków są od siebie oddzielone pustymi liniami.
+\end{itemize}
+
+Pojedyncza definicja widoku nie określa jednoznacznie pojedynczego widoku wchodzącego w~skład modelu zapytań systemu.
+Określa natomiast treść wyświetlaną na pojedynczym ekranie aplikajcji, co z~biznesowego punktu widzenia jest bardziej intuicyjne.
+
+Model zapytań będzie więc generowany stopniowo na podstawie analizy wszystkich definicji widoków zawartych w~opisie dziedziny.
+Po analizie pojedynczej definicji widoku będzie następować aktualizacja całej definicji modelu zapytań.
+
+
+
+%=======
+\section{Przykład}
+%=======
+
+(patrz:~\ref{sec:sample_app})
+
+przedstawia rysunek~\ref{fig:single:model_dsl}
+\input{figures/implementation_single/model_dsl}
+
+Należy zwrócić uwagę na czytelność i~zwięzłość tego opisu.
+Żaden z~przedstawionych wcześniej sposobów opisu dziedziny nie mógł pokazany w~całości na jednej stronie, podczas gdy powyższy opis mieści się bez problemu.
+
+
+
+%=======
+\section{Algorytm}
+%=======
+
+\begin{enumerate}
+ \item Stwórz pustą listę widoków $V$ i~pustą listę zdarzeń $E$.
+ \item Dla każdej definicji zdarzenia zawartej w~sekcji definicji zdarzeń:
+  \begin{enumerate}
+   \item todo
+  \end{enumerate}
+ \item Dla każdej definicji widoku zawartej w~sekcji definicji widoków:
+  \begin{enumerate}
+   \item todo
+  \end{enumerate}
+
+\end{enumerate}
+
+
+
+%=======
+\section{Kroki postępowania}
+%=======
+
+
+
+%=======
+\section{Podsumowanie}
+%=======
+
+- że wystarczający na potrzeby tego systemu
+- że gdyby pojedyncze pole miało więcej właściwości, to lipa
+- że bardzo business-friendly
