@@ -15,16 +15,15 @@ of ID @Comment:ParentCommentID[id].
 
 Views:
 
-I can display @Post list with @Post:UserName, @Post:Title, @Post:Content
+I can display @Post list with @Post:@User:UserName, @Post:Title, @Post:Content
 and @Post:CommentsNumber[int].
 
-I can display @Post details with @Post:UserName, @Post:Title,
-@Post:Content, @Post::@Comment:Content, @Post::@Comment:UserName,
+I can display @Post details with @Post:@User:UserName, @Post:Title,
+@Post:Content, @Post::@Comment:Content, @Post::@Comment:@User:UserName,
 @Post::@User:FirstName and @Post::@User:LastName.
 
 I can display user profile with @User:UserName, @User:FirstName,
 @User:LastName and @User::@Post:Title.
-
 
 \end{verbatim}
 \caption{
