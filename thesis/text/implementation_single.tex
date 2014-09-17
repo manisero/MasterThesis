@@ -380,3 +380,53 @@ Ogólny schemat postępowania podczas konstruowania generatora dowolnej aplikacj
 
 przedstawia rysunek~\ref{fig:single:model_dsl}
 \input{figures/implementation_single/model_dsl}
+
+Składnia:
+
+\begin{itemize}
+ \item nazwy encji poprzedzone są znakiem małpy:
+  \begin{itemize}
+   \item przykład: \verb|@User|;
+  \end{itemize}
+  
+ \item nazwy pól wchodzących w~skład klucza encji wymienione są w~jej identyfikatorze, w~nawiasach okrągłych bezpośrednio po nazwie encji:
+  \begin{itemize}
+   \item przykład: \verb|@User(UserName)|,
+   \item nazwy pól wchodzących w~skład klucza złożonego oddzielone są przecinkami (bez spacji),
+   \item klucz encji wystarczy zdefiniować w~jednym (dowolnym) wystąpieniu jej identyfikatora,
+   \item w~opisie dziedziny nie mogą wystąpić dwie różne definicje klucza tej samej encji,
+   \item definicja klucza encji musi wystąpić przy co najmniej jednym wystąpieniu jej identyfikatora;
+  \end{itemize}
+ 
+ \item pola należące do encji występują po jej identyfikatorze, oddzielone od niego znakiem dwukropka:
+  \begin{itemize}
+   \item przykład: \verb|@User:FirstName|;
+  \end{itemize}
+  
+ \item typ pola podany jest nawiasach kwadratowych bezpośrednio po nazwie pola
+  \begin{itemize}
+   \item przykłady: \verb|@Post(PostID[id])|, \verb|@Post:CommentsNumber[int]|,
+   \item typ pola wystarczy zdefiniować przy jednym (dowolnym) wystąpieniu jego nazwy,
+   \item w~opisie dziedziny nie mogą wystąpić dwie różne definicje typu tego samego pola,
+   \item polom, których definicja typu nie występuje ani razu, nadawany jest typ $text$;
+  \end{itemize}
+ 
+ \item relację ``wiele do jednego'' pomiędzy encjami oznacza się znakiem dwukropka, oddzielającym identyfikatory tych encji:
+  \begin{itemize}
+   \item przykład: \verb|@Post:@User:FirstName|,
+   \item znaczenie: \emph{z~jedną instancją encji} \verb|@User| \emph{powiązanych jest wiele instancji encji} \verb|@Post|;
+  \end{itemize}
+ 
+ \item relację ``jeden do wielu'' pomiędzy encjami oznacza się dwoma znakami dwukropka, oddzielającymi identyfikatory tych encji:
+  \begin{itemize}
+   \item przykład: \verb|@Post::@Comment:Content|,
+   \item znaczenie: \emph{z~jedną instancją encji} \verb|@Post| \emph{powiązanych jest wiele instancji encji} \verb|@Comment|.
+  \end{itemize}
+\end{itemize}
+
+
+Algorytm:
+
+\begin{enumerate}
+ \item 
+\end{enumerate}
