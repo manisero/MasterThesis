@@ -430,10 +430,11 @@ Ogólny schemat postępowania podczas konstruowania generatora dowolnej aplikacj
    \item nazwy zdarzenia,
    \item opisu zdarzenia, zawierającego identyfikatory i~pola encji wchodzących w~jego skład;
   \end{itemize}
- \item przykład: \verb|PostPublished: @Post with @Post:Content can be published|.
- \item pojedyncza definicja zdarzenia jednoznacznie określa pojedyncze zdarzenie w~modelu komend systemu;
+ \item przykład: \verb|PostPublished: @Post with @Post:Content can be published|;
  \item definicje kolejnych zdarzeń są od siebie oddzielone pustymi liniami.
 \end{itemize}
+
+Pojedyncza definicja zdarzenia jednoznacznie określa pojedyncze zdarzenie wchodzące w~skład modelu komend systemu.
 
 \subsubsection{Widoki}
 
@@ -441,12 +442,15 @@ Ogólny schemat postępowania podczas konstruowania generatora dowolnej aplikacj
  \item definicje widoków następują w~opisie dziedziny po linii o~treści ``\verb|Views:|'';
  \item definicja widoku to pojedyncze zdanie zawierające identyfikatory i~pola encji w~nim występujących;
  \item przykład: \verb|I can display @Post with @Post:Title and @Post:Content|;
- \item pojedyncza definicja widoku nie określa jednoznacznie pojedynczego widoku w~modelu zapytań systemu:
-  \begin{itemize}
-   \item określa natomiast treść wyświetlaną na pojedynczym ekranie aplikajcji, co z~biznesowego punktu widzenia jest bardziej intuicyjne;
-  \end{itemize}
  \item definicje kolejnych widoków są od siebie oddzielone pustymi liniami.
 \end{itemize}
+
+Pojedyncza definicja widoku nie określa jednoznacznie pojedynczego widoku wchodzącego w~skład modelu zapytań systemu.
+Określa natomiast treść wyświetlaną na pojedynczym ekranie aplikajcji, co z~biznesowego punktu widzenia jest bardziej intuicyjne.
+
+Model zapytań będzie więc generowany stopniowo na podstawie analizy wszystkich definicji widoków zawartych w~opisie dziedziny.
+Po analizie pojedynczej definicji widoku będzie następować aktualizacja całej definicji modelu zapytań.
+
 
 \subsection{Przykład}
 
@@ -454,6 +458,10 @@ Ogólny schemat postępowania podczas konstruowania generatora dowolnej aplikacj
 
 przedstawia rysunek~\ref{fig:single:model_dsl}
 \input{figures/implementation_single/model_dsl}
+
+Należy zwrócić uwagę na czytelność i~zwięzłość tego opisu.
+Żaden z~przedstawionych wcześniej sposobów opisu dziedziny nie mógł pokazany w~całości na jednej stronie, podczas gdy powyższy opis mieści się bez problemu.
+
 
 \subsection{Algorytm}
 
