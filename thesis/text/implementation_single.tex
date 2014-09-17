@@ -376,12 +376,9 @@ Ogólny schemat postępowania podczas konstruowania generatora dowolnej aplikacj
 \section{DSL}
 %=======
 
-(patrz:~\ref{sec:sample_app})
+\subsection{Składnia}
 
-przedstawia rysunek~\ref{fig:single:model_dsl}
-\input{figures/implementation_single/model_dsl}
-
-Składnia:
+\subsubsection{Encje i~ich pola}
 
 \begin{itemize}
  \item nazwy encji poprzedzone są znakiem małpy:
@@ -424,9 +421,43 @@ Składnia:
   \end{itemize}
 \end{itemize}
 
+\subsubsection{Zdarzenia}
 
-Algorytm:
+\begin{itemize}
+ \item definicje zdarzeń następują w~opisie dziedziny po linii o~treści ``\verb|Events:|'';
+ \item definicja pojedynczego zdarzenia składa się z dwóch części:
+  \begin{itemize}
+   \item nazwy zdarzenia,
+   \item opisu zdarzenia, zawierającego identyfikatory i~pola encji wchodzących w~jego skład;
+  \end{itemize}
+ \item przykład: \verb|PostPublished: @Post with @Post:Content can be published|.
+ \item pojedyncza definicja zdarzenia jednoznacznie określa pojedyncze zdarzenie w~modelu komend systemu;
+ \item definicje kolejnych zdarzeń są od siebie oddzielone pustymi liniami.
+\end{itemize}
+
+\subsubsection{Widoki}
+
+\begin{itemize}
+ \item definicje widoków następują w~opisie dziedziny po linii o~treści ``\verb|Views:|'';
+ \item definicja widoku to pojedyncze zdanie zawierające identyfikatory i~pola encji w~nim występujących;
+ \item przykład: \verb|I can display @Post with @Post:Title and @Post:Content|;
+ \item pojedyncza definicja widoku nie określa jednoznacznie pojedynczego widoku w~modelu zapytań systemu:
+  \begin{itemize}
+   \item określa natomiast treść wyświetlaną na pojedynczym ekranie aplikajcji, co z~biznesowego punktu widzenia jest bardziej intuicyjne;
+  \end{itemize}
+ \item definicje kolejnych widoków są od siebie oddzielone pustymi liniami.
+\end{itemize}
+
+\subsection{Przykład}
+
+(patrz:~\ref{sec:sample_app})
+
+przedstawia rysunek~\ref{fig:single:model_dsl}
+\input{figures/implementation_single/model_dsl}
+
+\subsection{Algorytm}
 
 \begin{enumerate}
- \item 
+ \item Stwórz pustą listę widoków $V$ i~pustą listę zdarzeń $E$.
+ \item todo
 \end{enumerate}
