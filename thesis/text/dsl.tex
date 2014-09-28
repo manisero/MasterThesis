@@ -65,7 +65,7 @@
    \item nazwy zdarzenia,
    \item opisu zdarzenia, zawierającego identyfikatory i~pola encji wchodzących w~jego skład;
   \end{itemize}
- \item przykład: \verb|PostPublished: @Post with @Post:Content can be published|;
+ \item przykład: \verb|Post published: @Post with @Post:Content can be published|;
  \item definicje kolejnych zdarzeń są od siebie oddzielone pustymi liniami.
 \end{itemize}
 
@@ -107,74 +107,84 @@ Należy zwrócić uwagę na czytelność i~zwięzłość tego opisu.
 \section{Algorytm}
 %=======
 
-W~opsie algorytmu pominięto obsługę błędów składniowych.
-
 \begin{enumerate}
- \item Stwórz pustą listę widoków $V$ i~pustą listę zdarzeń $E$.
+ \item Stwórz pustą listę widoków $V$, pustą listę relacji $R$ i~pustą listę zdarzeń $E$.
  \item Dla każdej definicji widoku zawartej w~sekcji definicji widoków:
   \begin{enumerate}
-   \item Dla każdego identyfikatora $id$ encji lub pola występującego w~definicji widoku:
-    \begin{enumerate}
-     \item Jeśli $V$ nie zawiera widoku o~nazwie podanej w~$id$, stwórz widok $v$ na podstawie $id$, zapamiętując jego klucz (jeśli został podany w~$id$); w przeciwnym razie pobierz widok $v$ z~$V$ i~ustaw jego klucz (jeśli został podany w~$id$).
-     \item Jeśli $id$ jest identyfikatorem pola:
-      \begin{enumerate}
-       \item Jeśli $v$ nie zawiera pola o~nazwie podanej w~$id$, dodaj do niego pole $f$ na podstawie $id$, zapamiętując jego typ (jeśli został podany w~$id$); w przeciwnym razie pobierz pole $f$ z~$v$ i~ustaw jego typ (jeśli został podany w~$id$).
-      \end{enumerate}
-
-    \end{enumerate}
+   \item Dla każdego identyfikatora $id$ encji występującego w~definicji widoku wykonaj algorytm przetwarzania identyfikatora encji.
   \end{enumerate}
-
+ 
  \item Dla każdej definicji zdarzenia zawartej w~sekcji definicji zdarzeń:
   \begin{enumerate}
-   \item Stwórz zdarzenie $e$ o nazwie stworzonej na podstawie nazwy podanej w~defnicji zdarzenia (np. ``Push published'' -> ``PostPublishedEvent''.
-
+   \item Stwórz zdarzenie $e$ o~nazwie utworzonej na podstawie nazwy podanej w~defnicji zdarzenia (np. ``PostPublishedEvent'' na podstawie nazwy ``Post published'').
+   \item Dla każdego identyfikatora $id$ encji występującego w~opisie zdarzenia:
+    \begin{enumerate}
+     \item Wykonaj algorytm przetwarzania identyfikatora encji, uzyskując widok $v$ i~pole $f$.
+     \item Dodaj $f$ do pól zdarzenia $e$.
+    \end{enumerate}
+   \item Dodaj $e$ do $E$.
   \end{enumerate}
- \item Dla każdej definicji widoku zawartej w~sekcji definicji widoków:
+  
+ \item Dla każdej relacji ``wiele $v$ do jednego $v'$'' z~$R$, do pól $v$ dodaj wszystkie pola wchodzące w~skład klucza $v'$.
+ 
+ \item Dla każdej relacji $r$ ``jeden $v$ do wielu $v'$'' z~$R$:
   \begin{enumerate}
-   \item todo
+   \item Jeśli w~$R$ istnieje relacja ``jeden $v'$ do wielu $v$'':
+    \begin{itemize}
+     \item Stwórz nowy widok $v''$ o~nazwie utworzonej na podstawie nazw $v$ i~$v'$ (np. ``UserPost'' na podstawie relacji ``Jeden $User$ do wielu $Post$'').
+     \item Do pól $v''$ dodaj wszystkie pola wchodzące w~skład kluczy $v$ i~$v'$ i~ustaw je jako klucz $v''$.
+     \item Do pól $v''$ dodaj wszystkie pola należące do $r$.
+     \item Dodaj $v''$ do $V$.
+    \end{itemize}
+   \item W~przeciwnym razie, do pól $v'$ dodaj wszystkie pola wchodzące w~skład klucza $v$.
   \end{enumerate}
 
+  \item Zwróć $V$ i~$E$.
 \end{enumerate}
 
 
 \subsection{Algorytm przetwarzania identyfikatora encji}
 
-Co jeśli definicja relacji wystąpi najpierw, a definicja klucza widoku potem?
+W~opsie algorytmu pominięto obsługę błędów składniowych.
+zwraca widok i pole
 
 \begin{enumerate}
- \item Jako parametr wejściowy przyjmij identyfikator $id$ i~listę dotychczas utworzonych widoków $V$.
- \item Jeśli $V$ nie zawiera widoku o~nazwie podanej w~$id$, stwórz widok $v$ o~nazwie podanej w~$id$ i~dodaj go do $V$; w przeciwnym razie pobierz widok $v$ z~$V$.
+ \item Jako parametry wejściowe przyjmij identyfikator $id$, listę dotychczas utworzonych widoków $V$ i~listę dotychczas utworzonych relacji $R$.
+ \item Jeśli $V$ nie zawiera widoku o~nazwie podanej w~$id$, stwórz taki widok $v$ i~dodaj go do $V$; w przeciwnym razie pobierz widok $v$ z~$V$.
  \item Jeśli $id$ zawiera definicję klucza widoku:
   \begin{enumerate}
    \item Stwórz pustą listę pól $F$.
-   \item Dla każdej identyfikatora pola $id_f$ podanego w~definicji klucza widoku:
+   \item Dla każdego identyfikatora pola $id_f$ podanego w~definicji klucza widoku:
     \begin{enumerate}
      \item Wykonaj algorytm przetwarzania identyfikatora pola, uzyskując pole $f$.
      \item Dodaj $f$ do $F$.
     \end{enumerate}
    \item Ustaw $F$ jako klucz $v$.
   \end{enumerate}
- \item Jeśli $id$ zawiera definicję pola widoku, wykonaj algorytm przetwarzania identyfikatora pola i~zwróć $v$.
- \item Jeśli $id$ zawiera definicję relacji ``wiele do jednego'':
+ \item Jeśli $id$ zawiera definicję pola widoku:
   \begin{enumerate}
-   \item Rekurencyjnie wykonaj algorytm dla identyfikatora powiązaniej encji (wraz z~identyfikatorem jej klucza i~pola, jeśli zostały podane), uzyskując widok $v'$.
-   \item Do pól $v$ dodaj wszystkie pola wchodzące w~skład klucza $v'$ i~zwróć $v$.
+   \item Wykonaj algorytm przetwarzania identyfikatora pola, uzyskując pole $f$.
+   \item Zwróć $v$ i~$f$.
   \end{enumerate}
- \item Jeśli $id$ zawiera definicję relacji ``jeden do wielu'':
+ \item Jeśli $id$ zawiera definicję relacji (``wiele do jednego'' lub ``jeden do wielu''):
   \begin{enumerate}
-   \item 
+   \item Rekurencyjnie wykonaj algorytm dla identyfikatora powiązaniej encji (wraz z~identyfikatorem jej klucza i~pola, jeśli zostały podane), uzyskując widok $v'$ i~pole $f'$.
+   \item Jeśli $R$ nie zawiera relacji odpowiedniego typu pomiędzy $v$ i~$v'$, stwórz taką relację $r$ i~dodaj ją do $R$; w przeciwnym razie pobierz relację $r$ z~$R$.
+   \item Dodaj $f'$ do $r$.
+   \item Zwróć $v$ i~$f'$.
   \end{enumerate}
-
  \item Zwróć $v$.
 \end{enumerate}
 
 
 \subsection{Algorytm przetwarzania identyfikatora pola}
 
+zwraca pole
+
 \begin{enumerate}
- \item Jako parametr wejściowy przyjmij identyfikator $id_f$ i~widok $v$, do którego ono należy.
- \item Jeśli $v$ nie zawiera pola o~nazwie podanej w~$id_f$, stwórz pole $f$ o~nazwie podanej w~$id_f$ i~dodaj je do $v$; w przeciwnym razie pobierz pole $f$ z~$v$.
- \item Jeśli $id_f$ zawiera definicję typu pola, ustaw na jej postawie typ pola $f$.
+ \item Jako parametry wejściowe przyjmij identyfikator $id_f$ i~widok $v$, do którego ono należy.
+ \item Jeśli $v$ nie zawiera pola o~nazwie podanej w~$id_f$, stwórz takie pole $f$ i~dodaj je do $v$; w przeciwnym razie pobierz pole $f$ z~$v$.
+ \item Jeśli $id_f$ zawiera definicję typu pola, ustaw na jej podstawie typ pola $f$.
  \item Zwróć $f$.
 \end{enumerate}
 
