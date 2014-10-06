@@ -9,9 +9,6 @@
 \section{Składnia}
 %=======
 
-- że typy własne (id zmiast timeuuid), żeby było zrozumiałe
-
-
 \subsection{Encje i~ich pola}
 
 \begin{itemize}
@@ -55,6 +52,31 @@
   \end{itemize}
 \end{itemize}
 
+Składnia opisu encji została sformułowana tak, aby była jak najbardziej przystęna dla osoby niebędącej programistą.
+Po pierwsze, występują w~niej tylko dwa znaki specjalne: małpa i~dwukropek.
+Nie występują też w~niej żadne słowa kluczowe.
+
+Po drugie, informację o~kluczu danej encji czy typie danego pola wystarczy podać raz.
+Co więcej, można to zrobić przy dowolnym wystąpieniu danego identyfikatora.
+Pozwala to użytkownikowi na samodzielny wybór części opisu dziedziny, w~których zawrze te informacje - mogą to być na przykład najważniejze według niego widoki i~zdarzenia systemu.
+
+Po trzecie, typy pól encji nie są związane z~żadnym konkretnym językiem~(patrz:~\ref{sec:field_type_definition}).
+Zostały dobrane tak, aby osoba nieznająca języków programowania nie miała problemów z~ich nadawaniem.
+Zestaw typów pól encji obsługiwany przez język to:
+
+\begin{itemize}
+ \item $text$ - ciąg znaków; jego odpowiednikiem w~CQL jest również $text$, a~w~C\# - $string$;
+ \item $int$ - liczba całkowita; typ ten nazywa się tak samo zarówno w~CQL, jak i~w~C\#;
+ \item $id$ - unikalny identyfikator; jego odpowiednikiem w~CQL jest $timeuuid$, a~w~C\# - $Guid$.
+\end{itemize}
+
+Jak widać, zestaw typów jest niewielki i~przystępny.
+Konieczność używania nazw typów zaczerpniętych z~języka CQL lub C\# mogłaby zniechęcić docelowego użytkownika - w~szczególności typy oznaczające unikalny identyfikator mogłyby być trudne do zrozumienia i~zapamiętania.
+
+Użycie nazw typów niezależnych od języków, w~których tworzony jest system, ma jeszcze jedną zaletę z~punktu widzenia użytkownika, który nie jest programistą.
+Możliwe jest używanie tego samego zestawu typów dla wielu systemów, tworzonych w~różnych technologiach.
+Użytkownik może pamiętać tylko jeden zestaw typów i~nie musi znać technologii, w~której tworzony jest system, którego dziedzinę definiuje.
+
 
 \subsection{Zdarzenia}
 
@@ -76,7 +98,7 @@ Pojedyncza definicja zdarzenia jednoznacznie określa pojedyncze zdarzenie wchod
 
 \begin{itemize}
  \item sekcja definicji widoków następuje w~opisie dziedziny po linii o~treści ``\verb|Views:|'';
- \item definicja widoku to pojedyncze zdanie zawierające identyfikatory i~pola encji w~nim występujących;
+ \item definicja widoku to opis zawierający identyfikatory i~pola encji w~nim występujących;
  \item przykład: \verb|I can display @Post with @Post:Title and @Post:Content|;
  \item definicje kolejnych widoków są od siebie oddzielone pustymi liniami.
 \end{itemize}
@@ -87,6 +109,8 @@ Określa natomiast treść wyświetlaną na pojedynczym ekranie aplikajcji, co z
 Model zapytań będzie więc generowany stopniowo na podstawie analizy wszystkich definicji widoków zawartych w~opisie dziedziny.
 Po analizie pojedynczej definicji widoku będzie następować aktualizacja całej definicji modelu zapytań.
 
+Należy zwrócić uwagę na fakt, że opisy zdarzeń i~widoków przypominają zdania w~języku naturalnym.
+Znacząco zwiększa to przystępność języka dla osób niebędących programistami.
 
 
 %=======
