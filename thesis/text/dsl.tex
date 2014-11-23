@@ -123,7 +123,7 @@ przedstawia rysunek~\ref{fig:dsl:model_dsl}
 \input{figures/dsl/model_dsl}
 
 Należy zwrócić uwagę na czytelność i~zwięzłość tego opisu.
-Żaden z~przedstawionych wcześniej sposobów opisu dziedziny nie mógł pokazany w~całości na jednej stronie, podczas gdy powyższy opis mieści się bez problemu.
+Żaden z~przedstawionych wcześniej sposobów opisu dziedziny nie mógł być pokazany w~całości na jednej stronie, podczas gdy powyższy opis mieści się bez problemu.
 
 
 
@@ -135,7 +135,7 @@ Należy zwrócić uwagę na czytelność i~zwięzłość tego opisu.
  \item Stwórz pustą listę widoków $V$, pustą listę relacji $R$ i~pustą listę zdarzeń $E$.
  \item Dla każdej definicji widoku zawartej w~sekcji definicji widoków:
   \begin{enumerate}
-   \item Dla każdego identyfikatora $id$ encji występującego w~definicji widoku wykonaj algorytm przetwarzania identyfikatora encji.
+   \item Dla każdego identyfikatora $id$ encji występującego w~definicji widoku wykonaj \emph{Algorytm przetwarzania identyfikatora encji} (patrz:~\ref{sec:entity_id_processing}).
   \end{enumerate}
  
  \item Dla każdej definicji zdarzenia zawartej w~sekcji definicji zdarzeń:
@@ -143,51 +143,39 @@ Należy zwrócić uwagę na czytelność i~zwięzłość tego opisu.
    \item Stwórz zdarzenie $e$ o~nazwie utworzonej na podstawie nazwy podanej w~defnicji zdarzenia (np. ``PostPublishedEvent'' na podstawie nazwy ``Post published'').
    \item Dla każdego identyfikatora $id$ encji występującego w~opisie zdarzenia:
     \begin{enumerate}
-     \item Wykonaj algorytm przetwarzania identyfikatora encji, uzyskując widok $v$ i~pole $f$.
+     \item Wykonaj \emph{Algorytm przetwarzania identyfikatora encji}, uzyskując widok $v$ i~pole $f$.
      \item Dodaj $f$ do pól zdarzenia $e$.
     \end{enumerate}
    \item Dodaj $e$ do $E$.
   \end{enumerate}
   
- \item Dla każdej relacji ``wiele $v$ do jednego $v'$'' z~$R$, do pól $v$ dodaj wszystkie pola wchodzące w~skład klucza $v'$.
- 
- \item Dla każdej relacji $r$ ``jeden $v$ do wielu $v'$'' z~$R$:
-  \begin{enumerate}
-   \item Jeśli w~$R$ istnieje relacja ``jeden $v'$ do wielu $v$'':
-    \begin{itemize}
-     \item Stwórz nowy widok $v''$ o~nazwie utworzonej na podstawie nazw $v$ i~$v'$ (np. ``UserPost'' na podstawie relacji ``Jeden $User$ do wielu $Post$'').
-     \item Do pól $v''$ dodaj wszystkie pola wchodzące w~skład kluczy $v$ i~$v'$ i~ustaw je jako klucz $v''$.
-     \item Do pól $v''$ dodaj wszystkie pola należące do $r$.
-     \item Dodaj $v''$ do $V$.
-    \end{itemize}
-   \item W~przeciwnym razie, do pól $v'$ dodaj wszystkie pola wchodzące w~skład klucza $v$.
-  \end{enumerate}
+ \item Wykonaj \emph{Algorytm przetwarzania relacji} (patrz:~\ref{sec:relation_processing}).
 
-  \item Zwróć $V$ i~$E$.
+ \item Zwróć $V$ i~$E$.
 \end{enumerate}
 
 
-\subsection{Algorytm przetwarzania identyfikatora encji}
+\subsection{Algorytm przetwarzania identyfikatora encji} \label{sec:entity_id_processing}
 
 W~opsie algorytmu pominięto obsługę błędów składniowych.
 zwraca widok i pole
 
 \begin{enumerate}
- \item Jako parametry wejściowe przyjmij identyfikator $id$, listę dotychczas utworzonych widoków $V$ i~listę dotychczas utworzonych relacji $R$.
+ \item Jako parametry wejściowe przyjmij identyfikator encji $id$, listę dotychczas utworzonych widoków $V$ i~listę dotychczas utworzonych relacji $R$.
  \item Jeśli $V$ nie zawiera widoku o~nazwie podanej w~$id$, stwórz taki widok $v$ i~dodaj go do $V$; w przeciwnym razie pobierz widok $v$ z~$V$.
  \item Jeśli $id$ zawiera definicję klucza widoku:
   \begin{enumerate}
    \item Stwórz pustą listę pól $F$.
    \item Dla każdego identyfikatora pola $id_f$ podanego w~definicji klucza widoku:
     \begin{enumerate}
-     \item Wykonaj algorytm przetwarzania identyfikatora pola, uzyskując pole $f$.
+     \item Wykonaj \emph{Algorytm przetwarzania identyfikatora pola} (patrz:~\ref{sec:field_id_processing}), uzyskując pole $f$.
      \item Dodaj $f$ do $F$.
     \end{enumerate}
    \item Ustaw $F$ jako klucz $v$.
   \end{enumerate}
  \item Jeśli $id$ zawiera definicję pola widoku:
   \begin{enumerate}
-   \item Wykonaj algorytm przetwarzania identyfikatora pola, uzyskując pole $f$.
+   \item Wykonaj \emph{Algorytm przetwarzania identyfikatora pola}, uzyskując pole $f$.
    \item Zwróć $v$ i~$f$.
   \end{enumerate}
  \item Jeśli $id$ zawiera definicję relacji (``wiele do jednego'' lub ``jeden do wielu''):
@@ -201,15 +189,38 @@ zwraca widok i pole
 \end{enumerate}
 
 
-\subsection{Algorytm przetwarzania identyfikatora pola}
+\subsection{Algorytm przetwarzania identyfikatora pola} \label{sec:field_id_processing}
 
 zwraca pole
 
 \begin{enumerate}
- \item Jako parametry wejściowe przyjmij identyfikator $id_f$ i~widok $v$, do którego ono należy.
+ \item Jako parametry wejściowe przyjmij identyfikator pola $id_f$ i~widok $v$, do którego ono należy.
  \item Jeśli $v$ nie zawiera pola o~nazwie podanej w~$id_f$, stwórz takie pole $f$ i~dodaj je do $v$; w przeciwnym razie pobierz pole $f$ z~$v$.
  \item Jeśli $id_f$ zawiera definicję typu pola, ustaw na jej podstawie typ pola $f$.
  \item Zwróć $f$.
+\end{enumerate}
+
+
+\subsection{Algorytm przetwarzania relacji} \label{sec:relation_processing}
+
+nic nie zwraca, modyfikuje listę widoków
+
+\begin{enumerate}
+ \item Jako parametry wejściowe przyjmij listę dotychczas utworzonych widoków $V$ i~listę dotychczas utworzonych relacji $R$.
+ 
+ \item Dla każdej relacji ``wiele $v$ do jednego $v'$'' z~$R$, do pól $v$ dodaj wszystkie pola wchodzące w~skład klucza $v'$.
+ 
+ \item Dla każdej relacji $r$ ``jeden $v$ do wielu $v'$'' z~$R$:
+  \begin{enumerate}
+   \item Jeśli w~$R$ istnieje relacja ``jeden $v'$ do wielu $v$'':
+    \begin{itemize}
+     \item Stwórz nowy widok $v''$ o~nazwie utworzonej na podstawie nazw $v$ i~$v'$ (np. ``UserPost'' na podstawie relacji ``Jeden $User$ do wielu $Post$'').
+     \item Do pól $v''$ dodaj wszystkie pola wchodzące w~skład kluczy $v$ i~$v'$ i~ustaw je jako klucz $v''$.
+     \item Do pól $v''$ dodaj wszystkie pola należące do $r$.
+     \item Dodaj $v''$ do $V$.
+    \end{itemize}
+   \item W~przeciwnym razie, do pól $v'$ dodaj wszystkie pola wchodzące w~skład klucza $v$.
+  \end{enumerate}
 \end{enumerate}
 
 
