@@ -87,7 +87,7 @@ Użytkownik może pamiętać tylko jeden zestaw typów i~nie musi znać technolo
    \item nazwy zdarzenia,
    \item opisu zdarzenia, zawierającego identyfikatory i~pola encji wchodzących w~jego skład;
   \end{itemize}
- \item przykład: \verb|Post published: @Post with @Post:Content can be published|;
+ \item przykład: \verb|Post published: @Post with @Post:Content can be published.|;
  \item definicje kolejnych zdarzeń są od siebie oddzielone pustymi liniami.
 \end{itemize}
 
@@ -99,7 +99,7 @@ Pojedyncza definicja zdarzenia jednoznacznie określa pojedyncze zdarzenie wchod
 \begin{itemize}
  \item sekcja definicji widoków następuje w~opisie dziedziny po linii o~treści ``\verb|Views:|'';
  \item definicja widoku to opis zawierający identyfikatory i~pola encji w~nim występujących;
- \item przykład: \verb|I can display @Post with @Post:Title and @Post:Content|;
+ \item przykład: \verb|I can display @Post with @Post:Title and @Post:Content.|;
  \item definicje kolejnych widoków są od siebie oddzielone pustymi liniami.
 \end{itemize}
 
@@ -117,19 +117,37 @@ Znacząco zwiększa to przystępność języka dla osób niebędących programis
 \section{Przykład}
 %=======
 
-(patrz:~\ref{sec:sample_app})
+Przykład opisu dziedziny zapisanego przy użyciu prezentowanego języka przedstawia rysunek~\ref{fig:dsl:model_dsl}.
+Zawiera on opis wszystkich funkcjonalności przykładowego systemu, tzn. opis wszystkich zdarzeń i~widoków opisanych w~sekcji patrz:~\ref{sec:sample_app}.
 
-przedstawia rysunek~\ref{fig:dsl:model_dsl}
 \input{figures/dsl/model_dsl}
 
 Należy zwrócić uwagę na czytelność i~zwięzłość tego opisu.
-Żaden z~przedstawionych wcześniej sposobów opisu dziedziny nie mógł być pokazany w~całości na jednej stronie, podczas gdy powyższy opis mieści się bez problemu.
+Żaden z~przedstawionych wcześniej sposobów opisu dziedziny nie mógł być pokazany w~całości na jednej stronie, podczas gdy powyższy opis mieści się na jednej stronie mimo zawarcia w~nim pustych linii i~słów w~języku naturalnym.
 
 
 
 %=======
-\section{Algorytm}
+\section{Algorytm wyodrębnienia jednostek generacji z opisu dziedziny}
 %=======
+
+Algorytm wyodrębnienia jednostek generacji z opisu dziedziny, podobnie do algorytmu przedstawionego w~poprzednim rozdziale, analizuje opis dziedziny i~zwraca listy jednostek generacji (widoków i~zdarzeń) występujących w~systemie.
+
+
+\subsection{Pojęcie relacji}
+
+W~algorytmie wprowadzono pojęcie relacji.
+Reprezentuje ono fakt występowania pomiędzy dwiema encjami relacji ``jeden do wielu'' lub ``wiele do jednego''.
+Pojedyncza relacja przechowuje nazwę widoku nadrzędnego, nazwę widoku podrzędnego i~nazwy pól widoku nadrzędnego, do których odwołuje się widok podrzędny.
+
+Jeśli w~zbiorze relacji znajdą się relacje: ``jeden $X$ do wielu $Y$'' i~``wiele $X$ do jednego $Y$'', to uznaje się, że pomiędzy relacjami $X$ i~$Y$ występuje relacja ``wiele do wielu''.
+
+Zbiór zidentyfikowanych relacji jest analizowany w~ostatnim kroku algorytmu, a~przebieg i~cel tej analizy opisano w~sekcji~\ref{sec:relation_processing}.
+
+
+\subsection{Kroki algorytmu}
+
+Algorytm wyodrębnienia jednostek generacji z opisu dziedziny przebiega następująco:
 
 \begin{enumerate}
  \item Stwórz pustą listę widoków $V$, pustą listę relacji $R$ i~pustą listę zdarzeń $E$.
@@ -157,8 +175,11 @@ Należy zwrócić uwagę na czytelność i~zwięzłość tego opisu.
 
 \subsection{Algorytm przetwarzania identyfikatora encji} \label{sec:entity_id_processing}
 
-W~opsie algorytmu pominięto obsługę błędów składniowych.
-zwraca widok i pole
+Algorytm przetwarzania identyfikatora encji analizuje pojedynczy identyfikator encji w~celu utworzenia na jego podstawie nowego widoku lub dodania nowych pól do już istniejących widoków.
+Przetwarza on także klucze widoków i~typy pól encji.
+Wynikiem jego działania jest widok i~pole uzyskane na podstawie identyfikatora encji.
+
+Algorytm przebiega następująco (w~poniższym opsie pominięto obsługę błędów składniowych):
 
 \begin{enumerate}
  \item Jako parametry wejściowe przyjmij identyfikator encji $id$, listę dotychczas utworzonych widoków $V$ i~listę dotychczas utworzonych relacji $R$.
@@ -178,7 +199,7 @@ zwraca widok i pole
    \item Wykonaj \emph{Algorytm przetwarzania identyfikatora pola}, uzyskując pole $f$.
    \item Zwróć $v$ i~$f$.
   \end{enumerate}
- \item Jeśli $id$ zawiera definicję relacji (``wiele do jednego'' lub ``jeden do wielu''):
+ \item W~przeciwnym razie, jeśli $id$ zawiera definicję relacji (``wiele do jednego'' lub ``jeden do wielu''):
   \begin{enumerate}
    \item Rekurencyjnie wykonaj algorytm dla identyfikatora powiązaniej encji (wraz z~identyfikatorem jej klucza i~pola, jeśli zostały podane), uzyskując widok $v'$ i~pole $f'$.
    \item Jeśli $R$ nie zawiera relacji odpowiedniego typu pomiędzy $v$ i~$v'$, stwórz taką relację $r$ i~dodaj ją do $R$; w przeciwnym razie pobierz relację $r$ z~$R$.
@@ -191,7 +212,10 @@ zwraca widok i pole
 
 \subsection{Algorytm przetwarzania identyfikatora pola} \label{sec:field_id_processing}
 
-zwraca pole
+Algorytm przetwarzania identyfikatora pola analizuje identyfikator pojedynczego pola encji w~celu utworzenia na jego podstawie nowego pola widoku lub ustawienia typu już istniejącyego pola.
+Wynikiem jego działania jest pole uzyskane na podstawie identyfikatora.
+
+Algorytm przebiega następująco (w~poniższym opsie pominięto obsługę błędów składniowych):
 
 \begin{enumerate}
  \item Jako parametry wejściowe przyjmij identyfikator pola $id_f$ i~widok $v$, do którego ono należy.
