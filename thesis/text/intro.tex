@@ -1,1 +1,15 @@
 \chapter{Wstęp} \label{chap:intro}
+
+Celem praktycznej części niniejszej pracy jest opracowanie narzędzia pozwalającego w~jak największym stopniu unikać duplikacji podrzas tworzenia aplikacji.
+Narzędzie to będzie oparte o~mechanizmy generacji kodu źródłowego oraz innych artefaktów systemu.
+
+Generacja została wybrała jako rozwiązanie problemu duplikacji dlatego, że pozwala zredukować duplikację nie tylko w~kodzie źródłowym aplikacji, a~w~obrębie całego systemu.
+Co więcej, zastosowanie generacji u~podstawy systemu może zapobiec pojawianiu się duplikacji w~przyszłości - gdy pojawi się potrzeba stworzenia nowej funkcjonalności, nowego modułu aplikacji bądź nowego artefaktu systemu, programiści prawdopodobnie najpierw spróbują zaimplementować tę nową część systemu tak, aby była generowana na podstawie już istniejącej bazy.
+
+Należy zaznaczyć, że od narzędzia będącego celem pracy nie jest wymagana całkowita eliminacja duplikacji w~systemie.
+Główną postacią duplikacji, która będzie przedmiotem działania narzędzia jest duplikacja dziedziny aplikacji.
+Wybór padł na tę właśnie postać dlatego, że przejawia się ona w~największym zakresie systemu.
+Co więcej, użycie mechanizmów generacji nie przekreśla eliminacji innych postaci duplikacji.
+Przykładowo, skrypty powłoki automatyzujące czynności wykonywane przez programistów również mogą być generowane lub mogą działać na wygenerowanych plikach - wtedy tym łatwiej będą się dostosowywać do zmian w~systemie.
+Niektóre fragmenty kodu źródłowego logiki biznesowej lub testów jednostkowych aplikacji również mogą być generowane.
+Jednak uwaga poświęcona zostanie głównie definicji dziedziny aplikacji.
