@@ -1,15 +1,34 @@
 \chapter{DSL}
 
-- że ma być czytelne dla człowieka
-- że jak najbardziej business-friendly
-- że wynik taki sam jak dla opisu w poprzednim rozdziale
-- różnica tylko w opisie dziedziny i algorytmie wyodrębniania jednostek generacji (szablony i wszystko inne takie samo)
+W~poprzednim rozdziale przedstawiono uniwersalny sposób opisu dziedziny aplikacji (patrz: sekcja~\ref{sec:domain_descr_schema}).
+Sposób ten może się dobrze sprawdzać w~projektach, w~których całość systemu jest implemetowana i~utrzymywana przez programistów.
+Problemy z~jego użyciem mogą się natomiast pojawiać w~przypadkach, gdy w~proces implemetacji systemu włączone są osoby związane z~tzw. biznesem - menadżerowie i~klienci niebędący programistami.
+W~takich sytuacjach sposób opisu dziedziny aplikacji powinien być jak najbardziej przystępny (ang. \emph{business-friendly}) z~punktu widzenia tych osób.
+
+Aby spełnić to wymaganie, na potrzeby niektórych projektów tworzy się specjalne języki nazywane językami dziedzinowymi (ang. \emph{domain-specific language, DSL}).
+Języki te służą do opisu tych części systemu, które są tworzone przez wszystkie osoby biorące udział w~projekcie (nie tylko przez programistów).
+
+W~niniejszym rozdziale sformułowany zostanie taki język.
+Posłuży on jako język opisu dziedziny aplikacji.
+Język ten powinien:
+
+\begin{itemize}
+ \item przypominać język naturalny,
+ \item być czytelny dla osób niebędących programistami (np. zawierać jak najmniej słów kluczowych),
+ \item być możlwie zwięzły,
+ \item być dostosowany do przykładowego systemu (obługiwać wszystkie potrzebne typy danych i~jednostki generacji).
+\end{itemize}
+
+Stworzony język będzie stanowił alternatywę dla przedstawionego w~poprzednim rozdziale sposobu opisu dziedziny aplikacji - będzie więc wymagał zastosowania innego algorytmu wyodrębnienia jednostek generacji (patrz: sekcja~\ref{sec:dsl:gen_unit_extraction}).
+Wynik działania tego algorytmu będzie jednak taki sam jak algorytmu przestawionego w~poprzednim rozdziale, więc pozostałe elementy generatora (szablony generacji, organizcja plików wynikowych) nie będą wymagać zmian.
+Stanowi do dowód elastyczności generatora.
+
 
 %=======
-\section{Składnia}
+\section{Składnia języka}
 %=======
 
-Składnie języków DSL są opracowywane w~taki sposób, aby języki te były czytelne dla osób niebędących programistami - np. menadżerów czy klientów.
+Składnie języków DSL są opracowywane w~taki sposób, aby języki te były czytelne dla osób związanych z~biznesem, niebędących programistami.
 Składnia języka opracowanego na potrzeby niniejszej pracy jest dostosowana do dziedziny przykładowej aplikacji, a~przy tym jest czytelna i~zrozumiała.
 
 W~kolejnych sekcjach przestawiono zasady definicji encji, zdarzeń i~widoków systemu.
@@ -68,7 +87,7 @@ Po drugie, informację o~kluczu danej encji czy typie danego pola wystarczy poda
 Co więcej, można to zrobić przy dowolnym wystąpieniu danego identyfikatora.
 Pozwala to użytkownikowi na samodzielny wybór części opisu dziedziny, w~których zawrze te informacje - mogą to być na przykład najważniejze według niego widoki i~zdarzenia systemu.
 
-Po trzecie, typy pól encji nie są związane z~żadnym konkretnym językiem~(patrz:~\ref{sec:field_type_definition}).
+Po trzecie, typy pól encji nie są związane z~żadnym konkretnym językiem~(patrz: sekcja~\ref{sec:field_type_definition}).
 Zostały dobrane tak, aby osoba nieznająca języków programowania nie miała problemów z~ich nadawaniem.
 Zestaw typów pól encji obsługiwany przez język to:
 
@@ -130,7 +149,7 @@ Znacząco zwiększa to przystępność języka dla osób niebędących programis
 %=======
 
 Przykład opisu dziedziny zapisanego przy użyciu prezentowanego języka przedstawia rysunek~\ref{fig:dsl:model_dsl}.
-Zawiera on opis wszystkich funkcjonalności przykładowego systemu, tzn. opis wszystkich zdarzeń i~widoków opisanych w~sekcji patrz:~\ref{sec:sample_app}.
+Zawiera on opis wszystkich funkcjonalności przykładowego systemu, tzn. opis wszystkich zdarzeń i~widoków opisanych w~sekcji patrz: sekcja~\ref{sec:sample_app}.
 
 \input{figures/dsl/model_dsl}
 
@@ -140,7 +159,7 @@ Należy zwrócić uwagę na czytelność i~zwięzłość tego opisu.
 
 
 %=======
-\section{Algorytm wyodrębnienia jednostek generacji z opisu dziedziny}
+\section{Algorytm wyodrębnienia jednostek generacji z opisu dziedziny} \label{sec:dsl:gen_unit_extraction}
 %=======
 
 Algorytm wyodrębnienia jednostek generacji z opisu dziedziny, podobnie do algorytmu przedstawionego w~poprzednim rozdziale, analizuje opis dziedziny i~zwraca listy jednostek generacji (widoków i~zdarzeń) występujących w~systemie.
@@ -165,7 +184,7 @@ Algorytm wyodrębnienia jednostek generacji z opisu dziedziny przebiega następu
  \item Stwórz pustą listę widoków $V$, pustą listę relacji $R$ i~pustą listę zdarzeń $E$.
  \item Dla każdej definicji widoku zawartej w~sekcji definicji widoków:
   \begin{enumerate}
-   \item Dla każdego identyfikatora $id$ encji występującego w~definicji widoku wykonaj \emph{Algorytm przetwarzania identyfikatora encji} (patrz:~\ref{sec:entity_id_processing}).
+   \item Dla każdego identyfikatora $id$ encji występującego w~definicji widoku wykonaj \emph{Algorytm przetwarzania identyfikatora encji} (patrz: sekcja~\ref{sec:entity_id_processing}).
   \end{enumerate}
  
  \item Dla każdej definicji zdarzenia zawartej w~sekcji definicji zdarzeń:
@@ -179,7 +198,7 @@ Algorytm wyodrębnienia jednostek generacji z opisu dziedziny przebiega następu
    \item Dodaj $e$ do $E$.
   \end{enumerate}
   
- \item Wykonaj \emph{Algorytm przetwarzania relacji} (patrz:~\ref{sec:relation_processing}).
+ \item Wykonaj \emph{Algorytm przetwarzania relacji} (patrz: sekcja~\ref{sec:relation_processing}).
 
  \item Zwróć $V$ i~$E$.
 \end{enumerate}
@@ -201,7 +220,7 @@ Algorytm przebiega następująco (w~poniższym opsie pominięto obsługę błęd
    \item Stwórz pustą listę pól $F$.
    \item Dla każdego identyfikatora pola $id_f$ podanego w~definicji klucza widoku:
     \begin{enumerate}
-     \item Wykonaj \emph{Algorytm przetwarzania identyfikatora pola} (patrz:~\ref{sec:field_id_processing}), uzyskując pole $f$.
+     \item Wykonaj \emph{Algorytm przetwarzania identyfikatora pola} (patrz: sekcja~\ref{sec:field_id_processing}), uzyskując pole $f$.
      \item Dodaj $f$ do $F$.
     \end{enumerate}
    \item Ustaw $F$ jako klucz $v$.
