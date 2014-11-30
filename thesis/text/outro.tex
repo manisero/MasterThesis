@@ -1,5 +1,28 @@
 \chapter{Podsumowanie} \label{chap:outro}
 
+
+%=======
+\section{Ocena rozwiązania}
+%=======
+
 \begin{itemize}
- \item Wnioski
+ \item co dało się wygenerować, a czego nie
+ \item jakiej duplikacji udało się uniknąć
+ \item ile pracy wymagałoby dodanie nowej funkcjonalności (API, eksport do arkusza) - przykład?
+ \item jaką inną aplikację można wygenerować (przykład)
+ \item jak łatwo wprowadza się zmiany w dziedzinie aplikacji
+  \begin{itemize}
+   \item problem: jak obsłużyć zmiany struktury bazy danych? (migracje)
+  \end{itemize}
+\end{itemize}
+
+Generacji podlega znaczna część systemu, w~tym wszystkie pliki dotyczące bazy danych i~dokumentacji.
+Ręcznie należy zaimplementować:
+
+\begin{itemize}
+ \item dostęp do danych przechowywanych w~bazie danych;
+ \item procedury obsługi zdarzeń;
+ \item mechanizm zgłaszania zdarzeń, zapisywania ich w~dzienniku zdarzeń i~wywoływania procedur ich obsługi;
+ \item kod aplikacji webowej;
+ \item kod HTML stron serwisu;
 \end{itemize}
