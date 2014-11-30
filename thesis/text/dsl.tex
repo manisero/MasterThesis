@@ -20,7 +20,7 @@ Język ten powinien:
 \end{itemize}
 
 Stworzony język będzie stanowił alternatywę dla przedstawionego w~poprzednim rozdziale sposobu opisu dziedziny aplikacji - będzie więc wymagał zastosowania innego algorytmu wyodrębnienia jednostek generacji (patrz: sekcja~\ref{sec:dsl:gen_unit_extraction}).
-Wynik działania tego algorytmu będzie jednak taki sam jak algorytmu przestawionego w~poprzednim rozdziale, więc pozostałe elementy generatora (szablony generacji, organizcja plików wynikowych) nie będą wymagać zmian.
+Wynik działania tego algorytmu będzie jednak taki sam jak algorytmu przedstawionego w~poprzednim rozdziale, więc pozostałe elementy generatora (szablony generacji, organizcja plików wynikowych) nie będą wymagać zmian.
 Stanowi do dowód elastyczności generatora.
 
 
@@ -31,7 +31,7 @@ Stanowi do dowód elastyczności generatora.
 Składnie języków DSL są opracowywane w~taki sposób, aby języki te były czytelne dla osób związanych z~biznesem, niebędących programistami.
 Składnia języka opracowanego na potrzeby niniejszej pracy jest dostosowana do dziedziny przykładowej aplikacji, a~przy tym jest czytelna i~zrozumiała.
 
-W~kolejnych sekcjach przestawiono zasady definicji encji, zdarzeń i~widoków systemu.
+W~kolejnych sekcjach przedstawiono zasady definicji encji, zdarzeń i~widoków systemu.
 
 
 \subsection{Encje i~ich pola}
@@ -285,15 +285,22 @@ Przetwarzanie przebiega następująco:
 
 
 %=======
-\section{Kroki postępowania}
-%=======
-
-
-
-%=======
 \section{Podsumowanie}
 %=======
 
-- że wystarczający na potrzeby tego systemu
-- że gdyby pojedyncze pole miało więcej właściwości, to lipa
-- że bardzo business-friendly
+Sformułowany język pozwala na zapisanie dziedziny w~sposób zwięzły i~zrozumiały dla osób niebędących programistami.
+Jednocześnie, w~miarę rozwoju systemu, stworzony za jego pomocą opis można łatwo rozbudowywać o~dodatkowe zdarzenia i~widoki.
+Należy jednak zaznaczyć, że ten sposób opisu dziedziny aplikacji nie jest tak uniwersalny jak schemat przedstawiony w~sekcji~\ref{sec:domain_schema_definition}.
+
+Ogólny schemat postępowania podczas konstruowania generatora aplikacji z~wykorzystaniem DSL jest następujący:
+
+\begin{enumerate}
+ \item Sformułowanie wymagań funkcjonalnych aplikacji.
+ \item Określenie artefaktów systemu, w~których powielana jest wiedza na temat encji.
+ \item Zidentyfikowanie artefaktów równoważnych pod względem wykorzystywanej wiedzy i~wyznaczenie jednostek generacji, na podstawie których generowane będą te artefakty.
+ \item Sformułowanie języka DSL umożliwiającego zapisanie wymagań funkcjonalnych z~podziałem na jednostki generacji.
+ \item Zapisanie wymagań w~DSL.
+ \item Implementacja algorytmu wyodrębnienia jednostek generacji z~opisu dziedziny.
+ \item Stworzenie szablonów generacji każdego z~artefaktów systemu określonych w~punkcie~2.
+ \item Określenie organizacji plików wyjściowych generatora.
+\end{enumerate}
