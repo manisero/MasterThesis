@@ -290,12 +290,14 @@ Przetwarzanie przebiega następująco:
 
 Sformułowany język pozwala na zapisanie dziedziny w~sposób zwięzły i~zrozumiały dla osób niebędących programistami.
 Jednocześnie, w~miarę rozwoju systemu, stworzony za jego pomocą opis można łatwo rozbudowywać o~dodatkowe zdarzenia i~widoki.
-Należy jednak zaznaczyć, że ten sposób opisu dziedziny aplikacji nie jest tak uniwersalny jak schemat przedstawiony w~sekcji~\ref{sec:domain_schema_definition}.
+Warto jednak zaznaczyć, że ten sposób opisu dziedziny aplikacji nie jest tak uniwersalny jak schemat przedstawiony w~sekcji~\ref{sec:domain_schema_definition}.
 
+Należy też zwrócić uwagę na fakt, że język DSL skupia się bardziej na funkcjonalności systemu niż na jego dziedzinie.
+W~tym przypadku konstruowanie generatora aplikacji należy więc zacząć od zebrania wymagań funkcjonalnych generowanego systemu.
 Ogólny schemat postępowania podczas konstruowania generatora aplikacji z~wykorzystaniem DSL jest następujący:
 
 \begin{enumerate}
- \item Sformułowanie wymagań funkcjonalnych aplikacji.
+ \item Zebranie wymagań funkcjonalnych aplikacji.
  \item Określenie artefaktów systemu, w~których powielana jest wiedza na temat encji.
  \item Zidentyfikowanie artefaktów równoważnych pod względem wykorzystywanej wiedzy i~wyznaczenie jednostek generacji, na podstawie których generowane będą te artefakty.
  \item Sformułowanie języka DSL umożliwiającego zapisanie wymagań funkcjonalnych z~podziałem na jednostki generacji.
