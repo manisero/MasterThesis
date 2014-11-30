@@ -227,7 +227,11 @@ Algorytm przebiega następująco (w~poniższym opsie pominięto obsługę błęd
 
 \subsection{Algorytm przetwarzania relacji} \label{sec:relation_processing}
 
-nic nie zwraca, modyfikuje listę widoków
+Algorytm przetwarzania relacji analizuje relacje zidentyfikowane podczas analizy opisu dziedziny.
+Celem jego działania jest ustanowienie relacji ``jeden do wielu'' pomiędzy odpowiednimi widokami i~utworzenie nowych widoków reprezentujących relacje ``wiele do wielu''.
+
+Wynikiem działania algorytmu jest uzyskanie ostatecznej listy widoków systemu.
+Przetwarzanie przebiega następująco:
 
 \begin{enumerate}
  \item Jako parametry wejściowe przyjmij listę dotychczas utworzonych widoków $V$ i~listę dotychczas utworzonych relacji $R$.
@@ -236,7 +240,7 @@ nic nie zwraca, modyfikuje listę widoków
  
  \item Dla każdej relacji $r$ ``jeden $v$ do wielu $v'$'' z~$R$:
   \begin{enumerate}
-   \item Jeśli w~$R$ istnieje relacja ``jeden $v'$ do wielu $v$'':
+   \item Jeśli w~$R$ istnieje relacja ``wiele $v$ do wielu $v'$'':
     \begin{itemize}
      \item Stwórz nowy widok $v''$ o~nazwie utworzonej na podstawie nazw $v$ i~$v'$ (np. ``UserPost'' na podstawie relacji ``Jeden $User$ do wielu $Post$'').
      \item Do pól $v''$ dodaj wszystkie pola wchodzące w~skład kluczy $v$ i~$v'$ i~ustaw je jako klucz $v''$.
