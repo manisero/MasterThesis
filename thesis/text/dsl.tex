@@ -24,6 +24,7 @@ Wynik działania tego algorytmu będzie jednak taki sam jak algorytmu przedstawi
 Stanowi do dowód elastyczności generatora.
 
 
+
 %=======
 \section{Składnia języka}
 %=======
@@ -36,29 +37,29 @@ W~kolejnych sekcjach przedstawiono zasady definicji encji, zdarzeń i~widoków s
 
 \subsection{Encje i~ich pola}
 
-Zasady opisu encji są następujące:
+Składnia opisu encji, ich kluczy i~pól, a także relacji pomiędzy encjami jest następująca:
 
 \begin{itemize}
- \item nazwy encji poprzedzone są znakiem małpy:
+ \item nazwy encji poprzedza się znakiem małpy:
   \begin{itemize}
    \item przykład: \verb|@User|;
   \end{itemize}
   
- \item nazwy pól wchodzących w~skład klucza encji wymienione są w~jej identyfikatorze, w~nawiasach okrągłych bezpośrednio po nazwie encji:
+ \item nazwy pól wchodzących w~skład klucza encji wymienia się w~jej identyfikatorze, w~nawiasach okrągłych bezpośrednio po nazwie encji:
   \begin{itemize}
    \item przykład: \verb|@User(UserName)|,
-   \item nazwy pól wchodzących w~skład klucza złożonego oddzielone są przecinkami (bez spacji),
+   \item nazwy pól wchodzących w~skład klucza złożonego oddziela się przecinkami (bez spacji),
    \item klucz encji wystarczy zdefiniować w~jednym (dowolnym) wystąpieniu jej identyfikatora,
    \item w~opisie dziedziny nie mogą wystąpić dwie różne definicje klucza tej samej encji,
    \item definicja klucza encji musi wystąpić przy co najmniej jednym wystąpieniu jej identyfikatora;
   \end{itemize}
  
- \item pola należące do encji występują po jej identyfikatorze, oddzielone od niego znakiem dwukropka:
+ \item pole należące do encji podaje się po jej identyfikatorze, poprzedzając nazwę pola znakiem dwukropka:
   \begin{itemize}
    \item przykład: \verb|@User:FirstName|;
   \end{itemize}
   
- \item typ pola podany jest nawiasach kwadratowych bezpośrednio po nazwie pola
+ \item typ pola podaje się w~nawiasach kwadratowych bezpośrednio po nazwie pola
   \begin{itemize}
    \item przykłady: \verb|@Post(PostID[id])|, \verb|@Post:CommentsNumber[int]|,
    \item typ pola wystarczy zdefiniować przy jednym (dowolnym) wystąpieniu jego nazwy,
