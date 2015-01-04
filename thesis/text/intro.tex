@@ -1,20 +1,5 @@
 \chapter{Wstęp} \label{chap:intro}
 
-\begin{itemize}
- \item co będzie w pracy
-
- \item kryteria oceny:
-  \begin{itemize}
-   \item zapobieganie duplikacji
-   \item rozwiązanie ma być elastyczne
-   \item ma być business-friendly
-   \item będzie porównanie z UML
-  \end{itemize}
-  
- \item omówienie rozdziałów
-\end{itemize}
-
-
 Celem praktycznej części niniejszej pracy jest opracowanie narzędzia pozwalającego w~jak największym stopniu unikać duplikacji podrzas tworzenia aplikacji.
 Narzędzie to będzie oparte o~mechanizmy generacji kodu źródłowego oraz innych artefaktów systemu.
 
@@ -28,3 +13,67 @@ Co więcej, użycie mechanizmów generacji nie przekreśla eliminacji innych pos
 Przykładowo, skrypty powłoki automatyzujące czynności wykonywane przez programistów również mogą być generowane lub mogą działać na wygenerowanych plikach - wtedy tym łatwiej będą się dostosowywać do zmian w~systemie.
 Niektóre fragmenty kodu źródłowego logiki biznesowej lub testów jednostkowych aplikacji również mogą być generowane.
 Jednak uwaga poświęcona zostanie głównie definicji dziedziny aplikacji.
+
+
+
+%=======
+\section{Zakres pracy}
+%=======
+
+\begin{enumerate}
+ \item Omówienie zjawiska duplikacji:
+  \begin{enumerate}
+   \item przedstawienie rodzajów duplikacji,
+   \item podanie przyczyn i~skutków występowania duplikacji w~kodzie źródłowym aplikacji,
+   \item opisanie możliwych metod redukcji duplikacji,
+   \item wybór metody redukcji duplikacji, która zostanie użyta w~implementacji autorskiego rozwiązania:
+    \begin{itemize}
+     \item wybór metody, która pozwoli na usunięcie jak największej liczby rodzajów duplikacji,
+     \item omówienie wybranej metody: jej działania, możliwości i~dostępnych implementacji.
+    \end{itemize}
+  \end{enumerate}
+ 
+ \item Implementacja autorskiego rozwiązania redukującego duplikację:
+  \begin{itemize}
+   \item ogólne wymagania dotyczące rozwiązania:
+    \begin{itemize}
+     \item rozwiązanie powinno uniwersalne, tzn. nadawać się do zastosowania w~aplikacjach różnych typów,
+     \item rozwiązanie powinno być elastyczne, tzn. jego poszczególne komponenty powinny być wymienne,
+     \item rozwiązanie nie powinno mieć negatywnego wpływu na wydajność aplikaji, w~której zostanie zastosowane,
+    \end{itemize}
+   \item sformułowanie szczegółowych założeń dotyczących rozwiązania,
+   \item zaprojektowanie implementacji rozwiązania,
+   \item sformułowanie przykładu aplikacji, która posłuży do zbadania przydatności rozwiązania,
+   \item implementacja przykładowej aplikacji przy użyciu rozwiązania,
+   \item ocena osiągniętej implementacji pod kątem spełnienia założeń.
+  \end{itemize}
+ 
+ \item Próba rozszerzenia rozwiązania dla jak największej przydatności w~przykładowej aplikacji:
+  \begin{itemize}
+   \item wymagania dotyczące rozszerzenia rozwiązania:
+    \begin{itemize}
+     \item rozszerzenie nie musi być uniwersalne, tzn. może mieć zastosowanie tylko w~aplikacjach podobnych do przykładowej,
+     \item rozszerzenie powinno czynić rozwiązanie przyjazym biznesowi (ang. \emph{business-friendly}),
+    \end{itemize}
+   \item sformułowanie szczegółowych założeń dotyczących rozszerzenia rozwiązania,
+   \item implementacja rozszerzenia rozwiązania,
+   \item ocena osiągniętej implementacji pod kątem spełnienia założeń.
+  \end{itemize}
+  
+ \item Weryfikacja przydatności rozwiązania:
+  \begin{itemize}
+   \item ocena stopnia, w~jakim rozwiązanie redukuje duplikację,
+   \item ocena stopnia spełnienia ogólnych wymagań dotyczących rozwiązania,
+   \item przedstawienie kroków postępowania dla osiągnięgo rozwiązania,
+   \item porównanie tych kroków z~innym powszechnie stosowanym podejściem,
+   \item ocena możliwości rozszerzenia rozwiązania.
+  \end{itemize}
+
+\end{enumerate}
+
+
+
+%=======
+\section{Zawartość pracy}
+omówienie rozdziałów
+%=======
