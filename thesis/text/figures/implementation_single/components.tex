@@ -5,28 +5,46 @@
 \begin{umlcomponent}{NET}
  \begin{umlcomponent}[x=0,y=0]{Domain}
  \end{umlcomponent}
+ \umlnote[x=-4, y=0]{Domain}{
+  \begin{itemize}
+   \item klasy zdarzeń
+   \item klasy widoków
+  \end{itemize}
+ }
 
  \begin{umlcomponent}[x=4,y=0]{DataAccess}
  \end{umlcomponent}
+ \umlnote[x=8, y=0]{DataAccess}{
+  \begin{itemize}
+   \item Repository
+   \item Cassandra Client
+  \end{itemize}
+ }
 
  \begin{umlcomponent}[x=2,y=-4]{Logic}
  \end{umlcomponent}
  \umlVHVassemblyconnector[interface=a]{Logic}{Domain}
  \umlVHVassemblyconnector[interface=a]{Logic}{DataAccess}
+ \umlnote[x=-4, y=-4]{Logic}{
+  \begin{itemize}
+   \item EventQueue
+   \item interfejsy i~klasy procedur obsługi zdarzeń
+  \end{itemize}
+ }
  
  \begin{umlcomponent}[x=2,y=-8]{WebSite}
  \end{umlcomponent}
  \umlVHVassemblyconnector[interface=a]{WebSite}{Logic}
 \end{umlcomponent}
 
-\begin{umlcomponent}[x=9,y=0]{CQL}
+\begin{umlcomponent}[x=-3,y=-12]{CQL}
 \end{umlcomponent}
 
-\begin{umlcomponent}[x=9,y=-4]{Scripts}
+\begin{umlcomponent}[x=2,y=-12]{Scripts}
 \end{umlcomponent}
-\umlVHVassemblyconnector[interface=a]{Scripts}{CQL}
+\umlHVHassemblyconnector[interface=a]{CQL}{Scripts}
 
-\begin{umlcomponent}[x=9,y=-7]{Documentation}
+\begin{umlcomponent}[x=7,y=-12]{Documentation}
 \end{umlcomponent}
 
 
