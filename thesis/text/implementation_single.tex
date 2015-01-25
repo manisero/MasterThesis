@@ -71,6 +71,7 @@ Artefaktami generowanymi na podstawie opisu dziedziny aplikacji będą:
  \item skrypty DDL definiujące strukturę bazy danych;
  \item klasy wchodzące w~skład modelu zapytań (patrz: sekcja~\ref{sec:cqrs});
  \item klasy reprezentujące zdarzenia zachodzące w~systemie (patrz: sekcja~\ref{sec:event_sourcing});
+ \item interfejsy procedur obsługi zdarzeń (\emph{event handlers});
  \item klasy reprezentujące dane wyświetlane w~interfejsie użytkownika (\emph{view models}, patrz: sekcja~\ref{sec:multitier});
  \item dokumentację systemu w~formacie HTML zawierającą spis widoków należących do modelu zapytań;
  \item pomocnicze skrypty powłoki automatyzujące rutynowe czynności wykonywane przez programistów (patrz: sekcje~\ref{sec:tasks_dupl}, \ref{sec:tasks_scripts}).
@@ -327,6 +328,7 @@ Zgodnie z~listą generowanych artefaktów podaną w~sekcji~\ref{sec:generated_ar
  \item szablon generujący definicję rodziny kolumn bazy danych Cassandra na podstawie widoku (rysunek~\ref{fig:single:template_table});
  \item szablon generujący klasę widoku na podstawie widoku (rysunek~\ref{fig:single:template_class});
  \item szablon generujący klasę zdarzenia na podstawie zdarzenia;
+ \item szablon generujący interfejs procedury obsługi zdarzenia na podstawie zdarzenia; 
  \item szablon generujący model widoku (\emph{view model}) na podstawie widoku;
  \item szablon generujący plik HTML na podstawie zbioru widoków (rysunek~\ref{fig:single:template_docs});
  \item szablony generujące skrypty automatyzujące czynności wykonywane przez programistów:
