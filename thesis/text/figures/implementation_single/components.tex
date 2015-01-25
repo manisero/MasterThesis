@@ -3,17 +3,27 @@
 \begin{tikzpicture} 
 
 \begin{umlcomponent}{Dotnet}
- \begin{umlcomponent}[x=0,y=0]{Domain}
+ \begin{umlcomponent}{Domain}
+  \begin{umlcomponent}[x=0,y=2.3]{Views}
+  \end{umlcomponent}
+  \umlnote[x=-4.5, y=3, width=10em]{Views}{
+   \begin{itemize}
+    \item klasy widoków
+   \end{itemize}
+  }
+  
+  \begin{umlcomponent}[x=0,y=0]{Events}
+  \end{umlcomponent}
+  \umlnote[x=-4.5, y=0, width=10em]{Events}{
+   \begin{itemize}
+    \item klasy zdarzeń
+   \end{itemize}
+  }
  \end{umlcomponent}
- \umlnote[x=-4.5, y=0, width=10em]{Domain}{
-  \begin{itemize}
-   \item klasy zdarzeń
-   \item klasy widoków
-  \end{itemize}
- }
 
  \begin{umlcomponent}[x=4,y=0]{DataAccess}
  \end{umlcomponent}
+ \umlVHassemblyconnector[interface={\space}]{DataAccess}{Views}
  \umlnote[x=6.5, y=-3, width=10em]{DataAccess}{
   \begin{itemize}
    \item implementacja dostępu do bazy danych
@@ -44,27 +54,27 @@
  }
 \end{umlcomponent}
 
-\begin{umlcomponent}[x=-4,y=-11.5]{CQL}
+\begin{umlcomponent}[x=-4,y=-11]{CQL}
 \end{umlcomponent}
-\umlnote[x=-4, y=-14.5, width=10em]{CQL}{
+\umlnote[x=-4, y=-14, width=10em]{CQL}{
  \begin{itemize}
   \item skrypty DML
   \item skrypty DQL
  \end{itemize}
 }
 
-\begin{umlcomponent}[x=1,y=-11.5]{Scripts}
+\begin{umlcomponent}[x=1,y=-11]{Scripts}
 \end{umlcomponent}
 \umlHVHassemblyconnector[interface={\space}]{CQL}{Scripts}
-\umlnote[x=1, y=-14.5, width=10em]{Scripts}{
+\umlnote[x=1, y=-14, width=10em]{Scripts}{
  \begin{itemize}
   \item pomocnicze skrypty powłoki
  \end{itemize}
 }
 
-\begin{umlcomponent}[x=6,y=-11.5]{Documentation}
+\begin{umlcomponent}[x=6,y=-11]{Documentation}
 \end{umlcomponent}
-\umlnote[x=6, y=-14.5, width=10em]{Documentation}{
+\umlnote[x=6, y=-14, width=10em]{Documentation}{
  \begin{itemize}
   \item dokumentacja HTML
  \end{itemize}
