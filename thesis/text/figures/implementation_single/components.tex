@@ -5,7 +5,7 @@
 \begin{umlcomponent}{NET}
  \begin{umlcomponent}[x=0,y=0]{Domain}
  \end{umlcomponent}
- \umlnote[x=-4, y=0]{Domain}{
+ \umlnote[x=-4.5, y=0, width=10em]{Domain}{
   \begin{itemize}
    \item klasy zdarzeń
    \item klasy widoków
@@ -14,10 +14,9 @@
 
  \begin{umlcomponent}[x=4,y=0]{DataAccess}
  \end{umlcomponent}
- \umlnote[x=8, y=0]{DataAccess}{
+ \umlnote[x=6.5, y=-3, width=10em]{DataAccess}{
   \begin{itemize}
-   \item Repository
-   \item Cassandra Client
+   \item implementacja dostępu do bazy danych
   \end{itemize}
  }
 
@@ -25,16 +24,24 @@
  \end{umlcomponent}
  \umlVHVassemblyconnector[interface=a]{Logic}{Domain}
  \umlVHVassemblyconnector[interface=a]{Logic}{DataAccess}
- \umlnote[x=-4, y=-4]{Logic}{
+ \umlnote[x=-4.5, y=-4.5, width=10em]{Logic}{
   \begin{itemize}
    \item EventQueue
-   \item interfejsy i~klasy procedur obsługi zdarzeń
+   \item interfejsy procedur obsługi zdarzeń
+   \item klasy procedur obsługi zdarzeń
   \end{itemize}
  }
  
  \begin{umlcomponent}[x=2,y=-8]{WebSite}
  \end{umlcomponent}
- \umlVHVassemblyconnector[interface=a]{WebSite}{Logic}
+ \umlVHVassemblyconnector[interface=a]{Logic}{WebSite}
+ \umlnote[x=6.5, y=-7, width=10em]{WebSite}{
+  \begin{itemize}
+   \item kontrolery
+   \item widoki
+   \item modele widoków
+  \end{itemize}
+ }
 \end{umlcomponent}
 
 \begin{umlcomponent}[x=-3,y=-12]{CQL}
