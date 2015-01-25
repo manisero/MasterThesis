@@ -22,8 +22,8 @@
 
  \begin{umlcomponent}[x=2,y=-4]{Logic}
  \end{umlcomponent}
- \umlVHVassemblyconnector[interface=a]{Logic}{Domain}
- \umlVHVassemblyconnector[interface=a]{Logic}{DataAccess}
+ \umlVHVassemblyconnector[interface={\space}]{Logic}{Domain}
+ \umlVHVassemblyconnector[interface={\space}]{Logic}{DataAccess}
  \umlnote[x=-4.5, y=-4.5, width=10em]{Logic}{
   \begin{itemize}
    \item EventQueue
@@ -34,7 +34,7 @@
  
  \begin{umlcomponent}[x=2,y=-8]{WebSite}
  \end{umlcomponent}
- \umlVHVassemblyconnector[interface=a]{Logic}{WebSite}
+ \umlVHVassemblyconnector[interface={\space}]{Logic}{WebSite}
  \umlnote[x=6.5, y=-7, width=10em]{WebSite}{
   \begin{itemize}
    \item kontrolery
@@ -44,15 +44,30 @@
  }
 \end{umlcomponent}
 
-\begin{umlcomponent}[x=-3,y=-12]{CQL}
+\begin{umlcomponent}[x=-4,y=-11.5]{CQL}
 \end{umlcomponent}
+\umlnote[x=-4, y=-14.5, width=10em]{CQL}{
+ \begin{itemize}
+  \item implementacja dostępu do bazy danych
+ \end{itemize}
+}
 
-\begin{umlcomponent}[x=2,y=-12]{Scripts}
+\begin{umlcomponent}[x=1,y=-11.5]{Scripts}
 \end{umlcomponent}
-\umlHVHassemblyconnector[interface=a]{CQL}{Scripts}
+\umlHVHassemblyconnector[interface={\space}]{CQL}{Scripts}
+\umlnote[x=1, y=-14.5, width=10em]{Scripts}{
+ \begin{itemize}
+  \item implementacja dostępu do bazy danych
+ \end{itemize}
+}
 
-\begin{umlcomponent}[x=7,y=-12]{Documentation}
+\begin{umlcomponent}[x=6,y=-11.5]{Documentation}
 \end{umlcomponent}
+\umlnote[x=6, y=-14.5, width=10em]{Documentation}{
+ \begin{itemize}
+  \item implementacja dostępu do bazy danych
+ \end{itemize}
+}
 
 
 
