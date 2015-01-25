@@ -24,11 +24,11 @@
  \end{umlcomponent}
  \umlVHVassemblyconnector[interface={\space}]{Logic}{Domain}
  \umlVHVassemblyconnector[interface={\space}]{Logic}{DataAccess}
- \umlnote[x=-4.5, y=-4.5, width=10em]{Logic}{
+ \umlnote[x=-4.5, y=-5, width=10em]{Logic}{
   \begin{itemize}
-   \item EventQueue
    \item interfejsy procedur obsługi zdarzeń
    \item klasy procedur obsługi zdarzeń
+   \item implementacja dziennika zdarzeń
   \end{itemize}
  }
  
@@ -48,7 +48,8 @@
 \end{umlcomponent}
 \umlnote[x=-4, y=-14.5, width=10em]{CQL}{
  \begin{itemize}
-  \item implementacja dostępu do bazy danych
+  \item skrypty DML
+  \item skrypty DQL
  \end{itemize}
 }
 
@@ -57,7 +58,7 @@
 \umlHVHassemblyconnector[interface={\space}]{CQL}{Scripts}
 \umlnote[x=1, y=-14.5, width=10em]{Scripts}{
  \begin{itemize}
-  \item implementacja dostępu do bazy danych
+  \item pomocnicze skrypty powłoki
  \end{itemize}
 }
 
@@ -65,7 +66,7 @@
 \end{umlcomponent}
 \umlnote[x=6, y=-14.5, width=10em]{Documentation}{
  \begin{itemize}
-  \item implementacja dostępu do bazy danych
+  \item dokumentacja HTML
  \end{itemize}
 }
 
