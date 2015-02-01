@@ -291,7 +291,7 @@ Przetwarzanie przebiega następująco:
 %=======
 
 Użycie opracowanego języka DSL, oprócz zaangażowania osób niebędących programistami w~proces definiowania dziedziny systemu, zapewnia jeszcze jedną zaletę: ułatwia testowanie aplikacji.
-Scenariusze testowe mogą być oparte bezpośrednio na definicjach zdarzeń i~widoków zawartych w~opisie dziedziny aplikacji.
+Scenariusze testowe mogą być oparte bezpośrednio na definicjach zdarzeń i~widoków zawartych w~opisie jej dziedziny.
 
 Zestawy testów mogą być opracowywane ręcznie na podstawie tych definicji.
 Jednak lepszym rozwiązaniem, w~większym stopniu wykorzystującym możliwości generatora, byłoby włączenie scenariuszy testowych do zestawu generowanych artefaktów systemu.
@@ -301,9 +301,9 @@ Opracowanie takiego rozwiązania wykracza jednak poza zakres niniejszej pracy.
 Poniżej przedstawiono jedynie koncepcję jego implementacji:
 
 \begin{itemize}
- \item Algorytm wyodrębnienia jednostek generacji z~opisu dziedziny wyodrębnieniałby opisy scenariuszy testowych jako osobne jednostki generacji, 
- \item a~odpowiedni szablon generowałby na ich podstawie właściwe scenariusze.
- \item SpecFlow
+ \item algorytm wyodrębnienia jednostek generacji z~opisu dziedziny powinien zostać zmodyfikowany tak, aby wyodrębniał opisy scenariuszy testowych jako osobne jednostki generacji;
+ \item powinien powstać szablon generacji dedykowany scenariuszom testowym - generowałby on właściwe scenariusze na postawie ich opisów wyodrębnionych przez algorytm;
+ \item generowane scenariusze powinny być zapisane w~języku zrozumiałym dla wybranego narzędzia umożliwiającego automatyczne wykonywanie testów aplikacji, np. SpecFlow\footnote{SpecFlow - strona projektu: http://www.specflow.org/}.
 \end{itemize}
 
 
