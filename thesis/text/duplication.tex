@@ -284,3 +284,16 @@ Nie jest jednak dostępny pojedynczy, spójny sposób na wyeliminowanie duplikac
 Odpowiednim rozwiązaniem wydaje się być połączenie kilku z~wyżej przedstawionych sposobów.
 W~dalszej części pracy podjęta zostanie próba stworzenia takiego rozwiązania.
 Zostanie ono oparte o~generację kodu, a~głównym założeniem jest skonstruowanie go w~taki sposób, aby pozwolić na usunięcie jak największej liczby rodzajów duplikacji patrząc zarówno z~perspektywy ich postaci, jak i~przyczyn powstawania~(patrz: sekcja~\ref{sec:dupl_kinds}).
+
+Generacja została wybrana jako rozwiązanie problemu duplikacji dlatego, że pozwala zredukować duplikację nie tylko w~kodzie źródłowym aplikacji, a~w~obrębie całego systemu.
+Co więcej, użycie mechanizmów generacji nie przekreśla wykorzystania innych sposobów eliminacji duplikacji.
+Przykładowo, skrypty powłoki automatyzujące czynności wykonywane przez programistów również mogą być generowane lub mogą działać na wygenerowanych plikach - wtedy tym łatwiej będzie można je dostosowywać do zmian w~systemie.
+
+\begin{itemize}
+\item wniosek: żaden generator nie będzie jednocześnie bogaty w funkcjonalności i dobry dla każdego typu aplikacji
+ \item zatem: rozwiązanie podzielę na dwie części
+  \begin{itemize}
+   \item rdzeń narzędzia do generacji
+   \item generator aplikacji jednego typu
+  \end{itemize}
+\end{itemize}

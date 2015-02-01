@@ -22,3 +22,12 @@ Generacja została wybrana jako rozwiązanie problemu duplikacji dlatego, że po
 Co więcej, zastosowanie generacji u~podstawy systemu może zapobiec pojawianiu się duplikacji w~przyszłości - gdy pojawi się potrzeba stworzenia nowej funkcjonalności, nowego modułu aplikacji bądź nowego artefaktu systemu, programiści prawdopodobnie najpierw spróbują zaimplementować tę nową część systemu tak, aby była generowana na podstawie już istniejącej bazy.
 Co więcej, użycie mechanizmów generacji nie przekreśla eliminacji innych postaci duplikacji.
 Przykładowo, skrypty powłoki automatyzujące czynności wykonywane przez programistów również mogą być generowane lub mogą działać na wygenerowanych plikach - wtedy tym łatwiej będą się dostosowywać do zmian w~systemie.
+
+\begin{itemize}
+\item wniosek: żaden generator nie będzie jednocześnie bogaty w funkcjonalności i dobry dla każdego typu aplikacji
+ \item zatem: rozwiązanie podzielę na dwie części
+  \begin{itemize}
+   \item rdzeń narzędzia do generacji
+   \item generator aplikacji jednego typu
+  \end{itemize}
+\end{itemize}
