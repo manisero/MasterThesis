@@ -359,7 +359,17 @@ Zgodnie z~listą generowanych artefaktów podaną w~sekcji~\ref{sec:generated_ar
 %=======
 
 Wszystkie kroki generacji aplikacji zostały zaimplementowane.
-Dzięki temu generacji podlega znaczna część artefaktów systemu, które korzystają z~wiedzy dotyczącej jego dziedziny.
+Dzięki temu generacji podlega znaczna część artefaktów systemu (patrz: sekcja~\ref{sec:generated_artifacts}).
+Programistom pozostaje jedynie zaimplementowanie tych części systemu, które albo implementuje się raz (są generyczne), albo zawierają logikę biznesową, którą trudno zawrzeć w~opisie dziedziny systemu.
+Są to (patrz: rysunek~\ref{fig:single:components}):
+
+\begin{itemize}
+ \item dostęp do bazy danych (komponent $DataAccess$),
+ \item dziennik zdarzeń (komponent $Logic$),
+ \item klasy procedur obsługi zdarzeń (komponent $Logic$),
+ \item kontrolery (komponent $WebSite$),
+ \item widoki (komponent $WebSite$).
+\end{itemize}
 
 Należy zaznaczyć, że osiągnięta implementacja może posłużyć do wygenerowania aplikacji CQRS o~dziedzinach innych niż podana w~przykładzie.
 Co więcej, schemat opisu dziedziny aplikacji opracowany w~sekcji~\ref{sec:domain_schema_definition} może być wykorzystany do generowania aplikacji innego rodzaju, np. aplikacji o klasycznej architekturze trójwarstwowej, korzystającej z~bazy danych SQL.
