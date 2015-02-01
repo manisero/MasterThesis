@@ -372,7 +372,13 @@ Są to (patrz: rysunek~\ref{fig:single:components}):
 \end{itemize}
 
 Należy zaznaczyć, że osiągnięta implementacja generatora może posłużyć do wygenerowania aplikacji CQRS o~dziedzinach innych niż podana w~przykładzie.
-Co więcej, schemat opisu dziedziny aplikacji opracowany w~sekcji~\ref{sec:domain_schema_definition} może być wykorzystany do generowania aplikacji innego rodzaju, np. aplikacji o klasycznej architekturze trójwarstwowej, korzystającej z~bazy danych SQL.
+Co więcej, schemat opisu dziedziny aplikacji opracowany w~sekcji~\ref{sec:domain_schema_definition} może być wykorzystany do generowania aplikacji innego rodzaju niż przykładowa.
+Aby dostosować zachowanie generatora do potrzeb aplikacji, należy:
+
+\begin{itemize}
+ \item tak aby korzystał on z~bardziej zaawansowanych mechanizmów bazy Cassandra niż proste definicje rodzin kolumn i~indeksów - szablony generacji
+ \item aplikacji o klasycznej architekturze trójwarstwowej, korzystającej z~bazy danych SQL - algorytm wyodrębnienia jednostek generacji i szablony
+\end{itemize}
 
 Ogólny schemat postępowania podczas konstruowania generatora dowolnej aplikacji jest następujący:
 
