@@ -360,7 +360,7 @@ Zgodnie z~listą generowanych artefaktów podaną w~sekcji~\ref{sec:generated_ar
 
 Wszystkie kroki generacji aplikacji zostały zaimplementowane.
 Dzięki temu generacji podlega znaczna część artefaktów systemu (patrz: sekcja~\ref{sec:generated_artifacts}).
-Programistom pozostaje jedynie zaimplementowanie tych części systemu, które albo implementuje się raz (są generyczne), albo zawierają logikę biznesową, którą trudno zawrzeć w~opisie dziedziny systemu.
+Programistom pozostaje jedynie dostarczenie tych części aplikacji, których implementacja jest albo generyczna (nie jest powielona w~wielu komponentach), albo zależy od logiki biznesowej, którą trudno zawrzeć w~opisie dziedziny systemu.
 Są to (patrz: rysunek~\ref{fig:single:components}):
 
 \begin{itemize}
@@ -371,7 +371,7 @@ Są to (patrz: rysunek~\ref{fig:single:components}):
  \item widoki (komponent $WebSite$).
 \end{itemize}
 
-Należy zaznaczyć, że osiągnięta implementacja może posłużyć do wygenerowania aplikacji CQRS o~dziedzinach innych niż podana w~przykładzie.
+Należy zaznaczyć, że osiągnięta implementacja generatora może posłużyć do wygenerowania aplikacji CQRS o~dziedzinach innych niż podana w~przykładzie.
 Co więcej, schemat opisu dziedziny aplikacji opracowany w~sekcji~\ref{sec:domain_schema_definition} może być wykorzystany do generowania aplikacji innego rodzaju, np. aplikacji o klasycznej architekturze trójwarstwowej, korzystającej z~bazy danych SQL.
 
 Ogólny schemat postępowania podczas konstruowania generatora dowolnej aplikacji jest następujący:
