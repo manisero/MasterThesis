@@ -254,7 +254,7 @@ Takie rozwiązanie mogłoby być trudne w~utrzymaniu.
 
 
 %=======
-\section{Rozwiązanie: pojedynczy generator wszystkich artefaktów systemu}
+\section{Rozwiązanie: pojedynczy generator wszystkich artefaktów systemu} \label{sec:single_generator}
 %=======
 
 Przedstawione rozwiązania mają pewne wspólne wady.
@@ -289,11 +289,10 @@ Generacja została wybrana jako rozwiązanie problemu duplikacji dlatego, że po
 Co więcej, użycie mechanizmów generacji nie przekreśla wykorzystania innych sposobów eliminacji duplikacji.
 Przykładowo, skrypty powłoki automatyzujące czynności wykonywane przez programistów również mogą być generowane lub mogą działać na wygenerowanych plikach - wtedy tym łatwiej będzie można je dostosowywać do zmian w~systemie.
 
+Aby uniknąć problemów wymienionych w~sekcji~\ref{sec:single_generator}, jednym z~wymagań dotyczących rozwiązania będzie duża elastyczność.
+Zostanie ono zatem podzielone na dwie części:
+
 \begin{itemize}
-\item wniosek: żaden generator nie będzie jednocześnie bogaty w funkcjonalności i dobry dla każdego typu aplikacji
- \item zatem: rozwiązanie podzielę na dwie części
-  \begin{itemize}
-   \item rdzeń narzędzia do generacji
-   \item generator aplikacji jednego typu
-  \end{itemize}
+ \item rdzeń narzędzia generującego artefakty, definiujący kroki procesu generacji,
+ \item oparty na rdzeniu generator aplikacji konkretnego typu.
 \end{itemize}
