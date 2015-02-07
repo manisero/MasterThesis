@@ -1,18 +1,18 @@
 \chapter{Wstęp} \label{chap:intro}
 
-Celem niniejszej pracy magisterskiej jest opracowanie rozwiązania pozwalającego na zredukowanie duplikacji występującej w~kodzie źródłowym i~dokumentacji systemów informatycznych.
+Celem niniejszej pracy magisterskiej jest opracowanie rozwiązania ułatwiającego projektowanie i~implementację systemów wykorzystujących nowoczesną architekturę CQRS i~bazy danych NoSQL.
 Rozwiązanie to przyjmie postać narzędzia mającego zastosowanie w~projektach programistycznych.
 
-Podstawowym wymaganiem dotyczącym narzędzia jest jak największa redukcja duplikacji wybranego rodzaju.
-Pozostałe główne wymagania to elastyczność i~możliwość zastosowania w~aplikacjach różnego typu.
-Od narzędzia nie jest wymagana całkowita eliminacja duplikacji w~systemie.
+Podstawowym wymaganiem dotyczącym narzędzia jest zdolność wygenerowania znacznej części kodu źródłowego systemu, na potrzeby którego zostanie użyte.
+Generacja powinna odbywać się na podstawie czytelnego dla człowieka opisu dziedziny systemu.
+Składnia tego opisu powinna być na tyle łatwo zrozumiała dla człowieka, by w~jego tworzenie mogły zostać zaangażowane osoby niebędące programistami.
+Dzięki temu, opis będzie mógł być sformułowany na etapie projektowania systemu i~stanowić dokument, do którego odnosić się będą zarówno programiści, jak i~osoby związane z~biznesem.
 
-Praca zawiera podłoże teoretyczne, które stanowi podstawę dla implementacji narzędzia.
-Część praktyczna pracy obejmuje zaprojektowanie i~implementację narzędzia redukującego duplikację, a~także stworzenie przy jego pomocy przykładowej aplikacji.
+Wymagania drugorzędne stawiane generatorowi to zredukowanie duplikacji wiedzy występującej w~artefaktach systemu, a~także ułatwienie jego testowania.
+Od narzędzia nie jest wymagana generacja kompletnego kodu źródłowego systemu ani~całkowita eliminacja występującej w~nim duplikacji.
 
-W~trakcie prac nad narzędziem okazuje się, że jego stosowanie może mieć pozytywny wpływ na proces projektowania aplikacji tworzonych z~jego użyciem.
-Aspekt ten zostaje zgłębiony, a~przeprowadzone rozważania pozwalają na osiągnięcie rozwiązania, w~którym w~łatwy sposób zwiększony zostaje udział osób niebędących programistami w~procesie projektowania dziedziny tworzonej aplikacji.
-Rozwiązanie zostaje porównane z~podejściem szeroko stosowanym obecnie.
+Treść pracy zawiera podłoże teoretyczne, które stanowi podstawę dla implementacji rozwiązania.
+Część praktyczna pracy obejmuje zaprojektowanie i~implementację generatora, a~także stworzenie przy jego pomocy przykładowej aplikacji.
 
 
 
