@@ -8,19 +8,16 @@ To jej zostało poświęcone najwięcej uwagi.
 
 
 
-\begin{itemize}
- \item porównać proces modelowania UML, DSL i JSON
-\end{itemize}
-
-
-
 %=======
-\section{Ocena rozwiązania}
+\section{Weryfikacja przydatności rozwiązania}
 %=======
 
+\subsection{generacja}
+
+co dało się wygenerować, a czego nie
+rozwiązanie powinno skutecznie wspomagać implementację dziedziny aplikacji,
+
 \begin{itemize}
- \item co dało się wygenerować, a czego nie
- \item jakiej duplikacji udało się uniknąć
  \item ile pracy wymagałoby dodanie nowej funkcjonalności (API, eksport do arkusza) - przykład?
  \item jaką inną aplikację można wygenerować (przykład)
  \item jak łatwo wprowadza się zmiany w dziedzinie aplikacji
@@ -41,3 +38,49 @@ Ręcznie należy zaimplementować:
 \end{itemize}
 
 
+\subsection{opisanie, w~jaki sposób rozwiązanie wspomaga projetowanie i~implementację aplikacji}
+
+rozszerzenie powinno być oparte o~wykorzystanie języka DSL
+rozszerzenie powinno być przyjazne biznesowi (ang. \emph{business-friendly}),
+business-friendly, DLL
+można porównać proces modelowania UML, DSL i JSON
+przedstawienie kroków postępowania wymaganych do zastosowania osiągnięgo rozwiązania; ref do sekcji w impl i dsl
+
+\subsection{testowalność}
+
+rozszerzenie powinno ułatwiać proces testowania aplikacji, w~której zostanie zastosowane,
+ref do sekcji
+
+
+\subsection{redukcja duplikacji}
+
+jakiego rodzaju duplikacji udało się uniknąć
+
+
+\subsection{elastyczność}
+
+rozwiązanie powinno być elastyczne, tzn. jego poszczególne komponenty powinny być wymienne,
+komponenty wymienne
+można zastosować nie tylko do CQRS (ref do sekcji)
+dsl nie elastyczny, ale taka jego natura
+
+
+\subsection{wydajność}
+
+rozwiązanie nie powinno mieć negatywnego wpływu na wydajność aplikaji, w~której zostanie zastosowane;
+
+
+\subsection{ogółem}
+
+ocena stopnia spełnienia ogólnych wymagań dotyczących rozwiązania;
+
+
+
+%=======
+\section{Możliwości rozszerzenia rozwiązania}
+%=======
+
+ocena możliwości rozszerzenia rozwiązania; jest elastyczne więc spoko
+Generacja scenariuszy testowych
+Generacja elementów logiki biznesowej
+Integracja z~Turasem
