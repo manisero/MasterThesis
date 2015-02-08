@@ -77,21 +77,6 @@ ocena stopnia spełnienia ogólnych wymagań dotyczących rozwiązania;
 
 
 %=======
-\section{Wnioski}
-%=======
-
-Zaaplikowanie mechanizmu generacji artefaktów w~projekcie informatycznym redukuje duplikację, ułatwia utrzymywanie kodu, testowanie aplikacji.
-Nie szkodzi nawet to że generuje się tylko część artefaktów.
-
-Przeszkodą jest to, że ugenerycznić da się tylko część procesu generacji - sporo rzeczy jest specyficznych dla konkretnej aplikacji.
-W każdym razie w większych projektach na pewno warto poświęcić trochę wysiłku, opracować DSL i zaimplementować mechanizm, bo potem to się opłaci - tym bardziej, im bardziej system się rozrośnie.
-
-Przykład stworzonego DSL pokazuje, że w~proces projektowania można zaangażować osoby związane z~bisnesem, a~wynikiem wspólnej pracy może być dokument, do którego odnosić się będą programiści, testerzy i~biznes.
-Dokument ten może stanowić bardzo ważny i~przydatny element dokumentacji systemu.
-
-
-
-%=======
 \section{Możliwości rozwoju rozwiązania}
 %=======
 
@@ -101,7 +86,7 @@ Z~tego względu możliwości jego rozwijania są szerokie.
 Autor przewiduje dwa najbardziej obiecujące kierunki rozwoju:
 
 
-\subsection{Wzbogacenie funkcjonalności osiągniętego rozwiązania}
+\subsection{Wzbogacenie funkcjonalności}
 
 Oczywistym sposobem ulepszenia rozwiązania jest wbogacenie go o~nowe funkcjonalności.
 Sposób opisu dziedziny i~mechanizm generacji mogą zostać udoskonalone tak, aby generacji podlegała większa niż dotychczas część artefaktów systemu.
@@ -126,3 +111,19 @@ Integracja polegałaby na tym, że generator nie generowałby definicji rodzin k
 Powstałe rozwiązanie zredukowałoby liczbę szablonów generacji używanych przez generator, a~także zwalniałoby jego użytkowników z~obowiązku implementacji mechanizmu dostępu do bazy danych.
 Co więcej gwarantowałoby ono wysoką wydajność aplikacji w~obszarze komunikacji z~bazą danych.
 Tym samym powstałoby narzędzie, które jedynie na podstawie zrozumiałego dla człowieka opisu aplikacji jest w~stanie wygenerować system o~złożonej, nierelacyjnej strukturze przechowywanych danych.
+
+
+
+%=======
+\section{Wnioski}
+%=======
+
+Przeszkodą uniemożliwiającą osiągniecie uiwersalnego generatora jest to, że wspólna dla wszystkich aplikacji jest jedynie część procesu generacji.
+Wiele aspektów - takich jak sposób opisu dziedziny - jest specyficznych dla konkretnego systemu.
+
+Mimo to, w~większych projektach z~pewnością warto jest poświęcić wysiłek potrzebny na opracowanie języka DSL i zaimplementowanie mechanizmu generacji.
+W~dłuższej perspektywie okaże się to opłacalną decyzją - zaaplikowanie mechanizmu generacji artefaktów w~projekcie informatycznym pozwala zredukować duplikację, ułatwia utrzymywanie kodu i~testowanie aplikacji.
+Korzyści te są obecne nawet w~sytuacji, w~której  generacji podlega tylko część artefaktów systemu.
+
+Przykład stworzonego jęzka DSL pokazuje, że w~proces projektowania można zaangażować osoby związane z~bisnesem, a~wynikiem wspólnej pracy może być dokument, do którego odnosić się będą nie tylko programiści, lecz także testerzy i~pozostałe osoby związane z~projektem.
+Dokument ten może stanowić bardzo ważny i~przydatny element dokumentacji systemu.
