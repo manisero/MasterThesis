@@ -16,7 +16,22 @@ W~sekcji~\ref{sec:intro:scope} wymieniono wymagania dotyczące rozwiązania.
 Wszystkie wymagania zostały spełnione:
 
 
-\subsection{generacja}
+\subsection{Wsparcie procesu projektowania aplikacji i~przyjazność dla biznesu}
+
+Rozwiązanie wspiera proces projektowania dziedziny aplikacji.
+W~podstawowej wersji (patrz: rozdział~\ref{chap:implementation:single_type}) ułatwia projektantom i~programistom definicję i~utrzymywanie dziedziny aplikacji.
+
+W~wersji rozszerzonej, korzystającej z~języka DSL (patrz: rozdział~\ref{chap:dsl}) pozwala zaangażować w~proces projektowania dziedziny osoby związane z~biznesem.
+Ten sposób projektowania można porównać z~wykorzystaniem języka UML.
+DSL ma jednak tę zaletę, że przypomina język naturalny, dzięki czemu jest bardziej zrozumiały dla osób niebędących programistami.
+
+Kroki postępowania dla obu wersji przedstawiono w~sekcjach: \ref{sec:impl:summary} i~\ref{sec:dsl:summary}.
+
+
+\subsection{Wsparcie implementacji aplikacji}
+
+że postawiono na generację
+że super się nadaje do CQRS, bo generuje widoki i zdarzenia
 
 co dało się wygenerować, a czego nie
 rozwiązanie powinno skutecznie wspomagać implementację dziedziny aplikacji,
@@ -31,24 +46,7 @@ rozwiązanie powinno skutecznie wspomagać implementację dziedziny aplikacji,
 \end{itemize}
 
 Generacji podlega znaczna część systemu, w~tym wszystkie pliki dotyczące bazy danych i~dokumentacji.
-Ręcznie należy zaimplementować:
-
-\begin{itemize}
- \item dostęp do danych przechowywanych w~bazie danych;
- \item procedury obsługi zdarzeń;
- \item mechanizm zgłaszania zdarzeń, zapisywania ich w~dzienniku zdarzeń i~wywoływania procedur ich obsługi;
- \item kod aplikacji webowej;
- \item kod HTML stron serwisu;
-\end{itemize}
-
-
-\subsection{opisanie, w~jaki sposób rozwiązanie wspomaga projetowanie i~implementację aplikacji}
-
-rozszerzenie powinno być oparte o~wykorzystanie języka DSL
-rozszerzenie powinno być przyjazne biznesowi (ang. \emph{business-friendly}),
-business-friendly, DLL
-można porównać proces modelowania UML, DSL i JSON
-przedstawienie kroków postępowania wymaganych do zastosowania osiągnięgo rozwiązania; ref do sekcji w impl i dsl
+Ręcznie należy zaimplementować: - ref do sekcji
 
 
 \subsection{Wpływ na testowalność wygenerowanej aplikacji}
