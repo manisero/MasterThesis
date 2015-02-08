@@ -115,7 +115,6 @@ Treść pracy zawiera zbiór informacji teoretycznych dotyczących architektury 
 Opisuje także implementację generatora i~prezentuje jego działanie na przykładzie prostej aplikacji.
 
 
-
 \vspace*{\stretch{1}}
 
 \begin{center}
@@ -126,6 +125,16 @@ Opisuje także implementację generatora i~prezentuje jego działanie na przykł
 
 \textbf{Summary} \\
 
-TODO
+The goal of this thesis is to create a~tool which would support the process of design and implementation of applications based on CQRS architecture.
+The tool is required to take a description of a~domain of the system as an input and generate certain artifacts of the system as an output.
+The description should be human readable, so that it can be created by people who are not programmers.
+Additionally, the tool is required to reduce source code duplication within the generated system and to make the system easier to test.
+
+All the goals have been fullfilled - achieved solution makes it convenient to define and maintain the domian of the generated application.
+The generated artifacts are: source code (C\#), data definition scripts (Cassandra Query Language), shell scripts conducting database initialization, documentation (HTML).
+
+The thesis contains theoretical information regarding CQRS architecture, Event Sourcing pattern and Cassandra database.
+It also describes the implementation of the generator and presents its functionality by using it to generate a~simple application.
+
 
 \vspace*{\stretch{1}}
