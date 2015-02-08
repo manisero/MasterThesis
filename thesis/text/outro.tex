@@ -73,12 +73,15 @@ Temu rodzajowi duplikacji zostało poświęcone najwięcej uwagi - narzędzie po
 Autorytatywna wiedza na temat dziedziny aplikacji jest zawarta w~jednym miejscu: opisie systemu stanowiącym dane wejściowe generatora.
 
 
-\subsection{elastyczność}
+\subsection{Elastyczność generatora}
 
-rozwiązanie powinno być elastyczne, tzn. jego poszczególne komponenty powinny być wymienne,
-komponenty wymienne
-można zastosować nie tylko do CQRS (ref do sekcji)
-dsl nie elastyczny, ale taka jego natura
+Podczas implementacji rozwiązania wielokrotnie kładziono nacisk na jego elastyczność.
+Dzięki temu udało się osiągnąć wymienność kroków jego działania.
+
+Dowodem elastyczności generatora jest powodzenie implementacji rozszerzenia rozwiązania, tak aby wykorzystywało język DSL (patrz: rozdział~\ref{chap:dsl}).
+Implementacja ta wymagała modyfikacji jedynie dwóch kroków generacji aplikacji (sposobu opisu dziedziny i~algorytmu wyodrębnienia z~niego jednostek generacji).
+
+Co więcej, rdzeń generatora może być użyty do generacji aplikacji innych niż oparte na architekturze CQRS (patrz: sekcja~\ref{sec:impl:summary}).
 
 
 \subsection{Wpływ na wydajność wygenerowanej aplikacji}
