@@ -57,9 +57,20 @@ Zastosowanie języka DSL jako sposobu opisu dziedziny systemu pozwala ułatwić 
 Ułatwienie to zostało opisane w~sekcji~\ref{sec:dsl:testing}.
 
 
-\subsection{Redukcja duplikacji}
+\subsection{Redukcja duplikacji w~obrębie wygenerowanej aplikacji}
 
-jakiego rodzaju duplikacji udało się uniknąć
+Opracowane narzędzie pozwala zredukować wszystkie rodzaje duplikacji opisane w~sekcji~\ref{sec:dupl_kinds}:
+
+\subsubsection{Duplikacja czynności wykonywanych przez programistów}
+Narzędzie jest w~stanie generować skrypty powłoki automatyzujące niektóre czynności często wykonywane przez programistów, takie jak inicjalizacja struktury bazy danych.
+
+\subsubsection{Duplikacja kodu źródłowego aplikacji}
+Narzędzie generuje wiele fragmentów kodu, które mają identyczną strukturę, np. klasy zdarzeń, czy interfejsy procedur obsługi zdarzeń.
+Uwalnia to programistów od potrzebny powielania tych struktur.
+
+\subsubsection{Duplikacja opisu dziedziny aplikacji}
+Temu rodzajowi duplikacji zostało poświęcone najwięcej uwagi - narzędzie pozwala całkowicie go wyeliminować.
+Autorytatywna wiedza na temat dziedziny aplikacji jest zawarta w~jednym miejscu: opisie systemu stanowiącym dane wejściowe generatora.
 
 
 \subsection{elastyczność}
