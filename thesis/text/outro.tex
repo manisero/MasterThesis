@@ -28,25 +28,15 @@ DSL ma jednak tę zaletę, że przypomina język naturalny, dzięki czemu jest b
 Kroki postępowania dla obu wersji przedstawiono w~sekcjach: \ref{sec:impl:summary} i~\ref{sec:dsl:summary}.
 
 
-\subsection{Wsparcie implementacji aplikacji}
+\subsection{Wsparcie implementacji aplikacji i~przykład zastosowania}
 
-że postawiono na generację
-że super się nadaje do CQRS, bo generuje widoki i zdarzenia
+W~rozwiązaniu zastosowano mechanizm generacji, co przyśpiesza i~ułatwia proces implementacji wybranych komponentów aplikacji.
+Rozwiązanie to jest szególnie skuteczne dla aplikacji opartych o~architekturę CQRS, ponieważ zwalnia programistów z~obowiązku niezależnego utrzymywania dwóch osobnych modeli: modelu komend i~modelu zapytań.
 
-co dało się wygenerować, a czego nie
-rozwiązanie powinno skutecznie wspomagać implementację dziedziny aplikacji,
+Oprócz klas obiektów należących do tych modeli, generacji podlega znaczna część komponentów systemu, w~tym wszystkie pliki dotyczące bazy danych i~dokumentacji.
+Pełne zestawienie komponentów generowanych i~tych, które programiści powinni dostarczyć samodzielnie, znajduje się w~sekcjach \ref{sec:generated_artifacts} i~\ref{sec:impl:summary}.
 
-\begin{itemize}
- \item ile pracy wymagałoby dodanie nowej funkcjonalności (API, eksport do arkusza) - przykład?
- \item jaką inną aplikację można wygenerować (przykład)
- \item jak łatwo wprowadza się zmiany w dziedzinie aplikacji
-  \begin{itemize}
-   \item problem: jak obsłużyć zmiany struktury bazy danych? (migracje)
-  \end{itemize}
-\end{itemize}
-
-Generacji podlega znaczna część systemu, w~tym wszystkie pliki dotyczące bazy danych i~dokumentacji.
-Ręcznie należy zaimplementować: - ref do sekcji
+Dowodem skuteczności generatora jest użycie go w~celu wygenerowania komponentów przykładowej aplikacji (patrz: sekcja~\ref{sec:sample_app}).
 
 
 \subsection{Wpływ na testowalność wygenerowanej aplikacji}
