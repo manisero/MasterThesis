@@ -92,10 +92,29 @@ Dokument ten może stanowić bardzo ważny i~przydatny element dokumentacji syst
 
 
 %=======
-\section{Możliwości rozszerzenia rozwiązania}
+\section{Możliwości rozwoju rozwiązania}
 %=======
 
 ocena możliwości rozszerzenia rozwiązania; jest elastyczne więc spoko
+
+Dwa kierunki rozwoju:
+
+
+\subsection{Wzbogacenie funkcjonalności osiągnięgo rozwiązania}
+
 Generacja scenariuszy testowych
 Generacja elementów logiki biznesowej
-Integracja z~Turasem
+
+
+\subsection{Integracja rozwiązania z~innymi narzędziami}
+
+Alternatywnym kierunkiem rozwoju rozwiązania może być jego integracja z~innymi istniejącymi narzędziami wspomagającymi projektowanie lub implementację aplikacji opartych na architekturze CQRS lub korzystających z~bazy danych Cassandra.
+
+Takie narzędzie powstało w~ramach pracy magisterskiej pt. ``Mechanizm modelowania danych i~mapowania obiektowego dla Apache Cassandry'' autorstwa mgr inż. Jakuba Turka, obronionej w~październiku 2014 roku.
+Służy ono do modelowania i~generowania struktury rodzin kolumn bazy danych Cassandra na podstawie klas obiektów należących do dziedziny aplikacji.
+Zapewnia także mechanizm mapownia pomiędzy obiektami a~danymi przechowywanymi w~bazie danych.
+
+Integracja polegałaby na tym, że generator nie generowałby definicji rodzin kolumn, a~zamiast tego posługiwałby się wspomnianym mechanizmem modelowania.
+Powstałe rozwiązanie zredukowałoby liczbę szablonów generacji używanych przez generator, a~także zwalniałoby jego użytkowników z~obowiązku implementacji mechanizmu dostępu do bazy danych.
+Co więcej gwarantowałoby ono wysoką wydajność aplikacji w~obszarze komunikacji z~bazą danych.
+Tym samym powstałoby narzędzie, które jedynie na podstawie zrozumiałego dla człowieka opisu aplikacji jest w~stanie wygenerować system o~złożonej, nierelacyjnej strukturze przechowywanych danych.
