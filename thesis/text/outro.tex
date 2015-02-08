@@ -95,19 +95,26 @@ Dokument ten może stanowić bardzo ważny i~przydatny element dokumentacji syst
 \section{Możliwości rozwoju rozwiązania}
 %=======
 
-Elastyczność rozwiązania sprawia, że możliwości jego rozwijania są szerokie.
-ocena możliwości rozszerzenia rozwiązania; jest elastyczne więc spoko
+Elastyczność rozwiązania pozwala na jego łatwą modyfikację.
+Z~tego względu możliwości jego rozwijania są szerokie.
 
-Dwa kierunki rozwoju:
-
-
-\subsection{Wzbogacenie funkcjonalności osiągnięgo rozwiązania}
-
-Generacja scenariuszy testowych
-Generacja elementów logiki biznesowej
+Autor przewiduje dwa najbardziej obiecujące kierunki rozwoju:
 
 
-\subsection{Integracja rozwiązania z~innymi narzędziami}
+\subsection{Wzbogacenie funkcjonalności osiągniętego rozwiązania}
+
+Oczywistym sposobem ulepszenia rozwiązania jest wbogacenie go o~nowe funkcjonalności.
+Sposób opisu dziedziny i~mechanizm generacji mogą zostać udoskonalone tak, aby generacji podlegała większa niż dotychczas część artefaktów systemu.
+
+W~pierwszej kolejności zaimplementowane powinny być następujące funkcjonalności:
+
+\begin{itemize}
+ \item generacja scenariuszy testowych (patrz: sekcja~\ref{sec:dsl:testing}),
+ \item generacja elementów logiki biznesowej (np. klas procedur obsługi zdarzeń, patrz: sekcja~\ref{sec:impl:summary}).
+\end{itemize}
+
+
+\subsection{Integracja rozwiązania z~innym narzędziem}
 
 Alternatywnym kierunkiem rozwoju rozwiązania może być jego integracja z~innymi istniejącymi narzędziami wspomagającymi projektowanie lub implementację aplikacji opartych na architekturze CQRS lub korzystających z~bazy danych Cassandra.
 
