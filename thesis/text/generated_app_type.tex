@@ -1,11 +1,13 @@
 \chapter{Architektura CQRS} \label{chap:generated_app_type}
 
-Po zebraniu założeń dotyczących rdzenia narzędzia generującego aplikacje, nadszedł czas na wybór typu aplikacji, które będą generowane przez narzędzie.
+Narzędzie będące przedmiotem niniejszej pracy ma na celu wspomaganie tworzenia aplikacji opartych o~architekturę CQRS.
+Architektura ta dobrze współgra z~wzorcem EventSourcing i~bazami danych typu NoSQL.
+Poniżej przybliżono wymienione pojęcia i~zasady ich wzajemnej współpracy, jak również przedstawiono uzasadanienie wyboru tej właśnie architektury.
 
 
 
 %=======
-\section{Wybór typu aplikacji}
+\section{Wybór architektury}
 %=======
 
 Narzędzie będzie generować taki typ aplikacji, aby można było ocenić, na ile eliminuje ono duplikację wiedzy o~systemie.
