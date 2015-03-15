@@ -87,8 +87,11 @@
   - Co dało się wygenerować, a co nie
   - Jakiej duplikacji udało się uniknąć
   - jak łatwo wprowadza się zmiany w aplikacji
+   - z tym będzie problem: jak obsłużyć zmiany schematu?
   - ile pracy wymagałoby dodanie nowej funkcjonalności (API, eksport) - przykład?
   - jaką inną aplikację można wygenerować (przykład)
+
+- Implementacja migracji schematu
 
 - Wnioski
 
